@@ -11,7 +11,6 @@
     </div>
     <div class="listview__main" ref="main">
       <list-view-filterbar
-        class="listview__filterbar"
         :filter-buttons="filterButtons"
         :filters="filters"
         :filter-model="filterModel"
@@ -218,6 +217,7 @@ export default {
 .listview {
   background-color: #f0f2f5;
   min-height: 100vh;
+  min-width: 600px;
   overflow: auto;
 
   &__header {
@@ -239,74 +239,8 @@ export default {
 
   &__main {
     margin: 16px 16px 0;
-    padding: 10px;
+    padding: 16px;
     background-color: #fff;
-  }
-
-  &__filterbar {
-    margin-bottom: -6px;
-
-    &::after {
-      content: '';
-      display: table;
-      clear: both;
-    }
-
-    .filterbar__buttons,
-    .filterbar__form-submit,
-    .form-item {
-      > * {
-        margin: 0;
-      }
-      display: inline-block;
-      margin: 0 10px 16px 0;
-      position: relative;
-    }
-    .filterbar__buttons button {
-      line-height: 30px;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    .filterbar__buttons {
-      float: left;
-      margin-bottom: 10px;
-    }
-    .filterbar__form-submit {
-      float: right;
-      margin: 0;
-    }
-    .filterbar__items {
-      display: block;
-    }
-    .form-item {
-      &__label {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%) scale(.9);
-        z-index: 0;
-        font-size: 12px;
-        background-color: #fff;
-        padding: 0 .2em;
-        line-height: 12px;
-        color: #999;
-        opacity: 0;
-        transition: top .2s, opacity .2s;
-
-        &-active {
-          top: -2px;
-          opacity: 1;
-          z-index: 1;
-        }
-      }
-      .el-form-item__content {
-        display: block;
-      }
-      .el-date-editor.el-input,
-      .el-date-editor.el-input__inner {
-        width: auto;
-      }
-    }
   }
 
   &__page {

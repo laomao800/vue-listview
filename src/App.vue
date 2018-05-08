@@ -139,6 +139,7 @@ export default {
         {
           type: 'dateRange',
           model: 'dateRange',
+          label: '日期范围',
           componentProps: {
             placeholder: '活动时间',
             rangeSeparator: '至',

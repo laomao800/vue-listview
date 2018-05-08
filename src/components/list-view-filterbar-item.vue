@@ -52,3 +52,38 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.filterbar__items {
+  display: block;
+}
+.form-item {
+  &__label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%) scale(.9);
+    z-index: 0;
+    font-size: 12px;
+    background-color: #fff;
+    padding: 0 .2em;
+    line-height: 12px;
+    color: #999;
+    opacity: 0;
+    transition: top .2s, opacity .2s;
+
+    &-active {
+      top: -2px;
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+  .el-form-item__content {
+    display: block;
+  }
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
+    width: auto;
+  }
+}
+</style>
