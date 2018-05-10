@@ -11,9 +11,12 @@
     </div>
     <div class="listview__main" ref="main">
       <list-view-filterbar
+        v-if="filterButtons.length > 0 || filters.length > 0"
+        ref="filterbar"
         :filter-buttons="filterButtons"
         :filters="filters"
         :filter-model="filterModel"
+        :filterbar-fold.sync="filterbarFold"
         @submit="handleFilterSubmit"
       />
 
@@ -89,6 +92,7 @@ export default {
       maxHeight: null,
       contentHeight: null,
       filterModel,
+      filterbarFold: true,
       loading: false,
       data: [],
       total: 1,
@@ -115,6 +119,9 @@ export default {
     },
     fitToWindowHeight () {
       this.initLayout()
+    },
+    filterbarFold () {
+      this.updateLayout()
     }
   },
 
@@ -158,6 +165,12 @@ export default {
       }
     },
     async updateLayout () {
+      // filterbar
+      if (this.$refs.filterbar) {
+        this.$refs.filterbar.updateLayout()
+      }
+
+      // 主要内容区域高度尺寸更新
       await this.$nextTick()
       if (this.height) {
         this.maxHeight = this.$el.getBoundingClientRect().height
@@ -217,7 +230,7 @@ export default {
 .listview {
   background-color: #f0f2f5;
   min-height: 100vh;
-  min-width: 600px;
+  // min-width: 600px;
   overflow: auto;
 
   &__header {
@@ -239,7 +252,7 @@ export default {
 
   &__main {
     margin: 16px 16px 0;
-    padding: 16px;
+    padding: 16px 16px 10px;
     background-color: #fff;
   }
 

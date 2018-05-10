@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .filterbar__items {
   display: block;
 }

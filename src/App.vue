@@ -20,14 +20,13 @@
       :filter-buttons="filterButtons"
       :filter-model="filterModel"
       :filters="filters"
-      :filters-more="filtersMore"
       @filter-submit="handleFilterSubmit"
 
       :page-sizes="[20, 50, 100]"
       :page-size="20"
     >
       <template slot-scope="props">
-        <!-- <pre :style="{ height: `${props.height}px`, background: '#ddd', overflow: 'auto' }">{{ props }}</pre> -->
+        <!-- <pre :style="{ height: `${props.height}px`, background: '#ddd', overflow: 'auto', margin: 0 }">{{ props }}</pre> -->
         <el-table
           ref="contentTable"
           :data="props.data"
@@ -102,7 +101,6 @@ export default {
       // Input Select Cascader TimePicker DatePicker DateTimePicker
       filters: [
         {
-          type: 'hidden',
           model: 'hidden',
           value: 'hidden text'
         },
@@ -147,8 +145,7 @@ export default {
             endPlaceholder: '结束日期'
           }
         }
-      ],
-      filtersMore: []
+      ]
     }
   },
 
