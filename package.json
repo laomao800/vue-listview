@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "deepmerge": "^2.1.0",
     "element-ui": "^2.3.7",
+    "express-delay": "^0.2.0",
     "get-value": "^3.0.1",
     "has-values": "^2.0.1",
     "lodash": "^4.17.10",
@@ -21,10 +22,10 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-rc.2",
-    "@vue/cli-plugin-eslint": "^3.0.0-rc.2",
-    "@vue/cli-service": "^3.0.0-rc.2",
-    "@vue/eslint-config-standard": "^3.0.0-rc.2",
+    "@vue/cli-plugin-babel": "^3.0.0-rc.10",
+    "@vue/cli-plugin-eslint": "^3.0.0-rc.10",
+    "@vue/cli-service": "^3.0.0-rc.10",
+    "@vue/eslint-config-standard": "^3.0.0-rc.10",
     "babel-plugin-component": "^1.1.1",
     "express": "^4.16.3",
     "less": "^2.7.3",

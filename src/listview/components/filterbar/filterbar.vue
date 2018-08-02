@@ -9,40 +9,87 @@
       :inline="true"
       size="small"
       submit.native.prevent>
-      <div class="filterbar__buttons">
+      <!-- 操作按钮区域 -->
+      <div
+        v-if="filterButtons.length > 0"
+        class="filterbar__buttons">
         <el-form-item>
-          <render-vnode
-            v-for="(button, index) in filterButtons"
-            :key="index"
-            :vnode="button"
-          />
+          <template v-for="(button, index) in filterButtons">
+            <v-node
+              v-if="isVNode(button)"
+              :key="index"
+              :node="button" />
+            <el-dropdown
+              v-else-if="button.children"
+              :key="index"
+              :type="button.type"
+              :split-button="button.splitButton"
+              :trigger="button.trigger || 'click'">
+              <template v-if="button.splitButton">
+                <i
+                  v-if="button.icon"
+                  :class="button.icon"/>
+                {{ button.content }}
+              </template>
+              <template v-else>
+                <el-button
+                  :type="button.type"
+                  :icon="button.icon"
+                  @click="button.click"
+                >{{ button.content }}</el-button>
+              </template>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="(child, index) in button.children"
+                  :key="index"
+                  @click.native="child.click">
+                  {{ child.content }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-button
+              v-else
+              :key="index"
+              :type="button.type"
+              :icon="button.icon"
+              @click="button.click"
+            >{{ button.content }}</el-button>
+          </template>
         </el-form-item>
       </div>
+
+      <!-- 提交、重置按钮区域 -->
       <div
         ref="submit"
         :class="[
           'filterbar__submit',
-          { 'filterbar__submit--hasmore': filterbarHasMore }
+          { 'filterbar__submit--nomore': !filterbarHasMore }
         ]"
       >
-        <div :style="{ transform: `translateX(${submitOffset}px)` }">
+        <div
+          :style="{ transform: `translateX(${submitOffset}px)` }"
+          class="filterbar__submit-btn">
           <el-form-item>
+            <slot name="prepend-filterbar-submit" />
             <el-button
               type="primary"
               @click="handleFilterSubmit">搜索</el-button>
             <el-button @click="handleFilterReset">重置</el-button>
+            <slot name="append-filterbar-submit" />
           </el-form-item>
         </div>
         <el-button
           :icon="filterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
           type="primary"
-          class="filterbar__form-more-btn"
+          class="filterbar__submit-more"
           @click="togglerFilterbar"
         />
       </div>
+
+      <!-- 搜索栏控件区域 -->
       <filter-form
         ref="filterForm"
-        :schema="filterSchema"
+        :fields="filterFields"
         :model="filterModel"
         class="filterbar__form"
       />
@@ -51,20 +98,22 @@
 </template>
 
 <script>
-import RenderVnode from './components/render-vnode.js'
-import FilterForm from './components/filter-form.vue'
+import VNode from '@/components/v-node.js'
+import FilterForm from './filter-form.vue'
+import { isVNode } from '@/utils/utils.js'
 
 export default {
   name: 'FilterBar',
 
   components: {
-    RenderVnode,
+    VNode,
     FilterForm
   },
 
   props: {
+    // TODO: validator
     filterButtons: { type: Array, default: () => [] },
-    filterSchema: { type: Array, default: () => [] },
+    filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
     filterbarFold: { type: Boolean, default: false }
   },
@@ -87,13 +136,15 @@ export default {
   },
 
   methods: {
+    isVNode,
+
     handleFilterSubmit() {
       this.$emit('filter-submit', this.filterModel)
     },
 
     handleFilterReset() {
       const model = this.filterModel
-      this.filterSchema.forEach(field => {
+      this.filterFields.forEach(field => {
         const name = field.model
         if (name && model.hasOwnProperty(name)) {
           const value = model[name]
@@ -120,13 +171,14 @@ export default {
       if (allFields.length > 1) {
         let lastFilterTop = allFields[0].getBoundingClientRect().top
         let lastFilterIndex = -1
-        for (const index in allFields) {
-          const formItemTop = allFields[index].getBoundingClientRect().top
+        for (let i = 0; i < allFields.length; i++) {
+          // debugger
+          const formItemTop = allFields[i].getBoundingClientRect().top
           if (lastFilterTop !== formItemTop) {
             break
           }
           lastFilterTop = formItemTop
-          lastFilterIndex = index
+          lastFilterIndex = i
         }
         this.topRightFilterIndex = lastFilterIndex
         await this.$nextTick()
@@ -138,6 +190,7 @@ export default {
       const allFields = this.getAllFields()
       let offset = 0
       if (this.topRightFilterIndex >= 0) {
+        // debugger
         const lastItem = allFields[this.topRightFilterIndex]
         const { x, width } = lastItem.getBoundingClientRect()
         offset = x + width - this.$refs.submit.getBoundingClientRect().x
@@ -150,10 +203,12 @@ export default {
 </script>
 
 <style lang="less">
+@filter-gap-size: 10px;
+
 .list-view__filterbar {
-  padding-top: 16px;
-  margin-top: -16px;
-  margin-bottom: 16px;
+  padding-top: @filter-gap-size;
+  margin-top: -@filter-gap-size;
+  margin-bottom: @filter-gap-size;
 
   &::after {
     display: table;
@@ -189,17 +244,22 @@ export default {
 
   .filterbar__buttons {
     float: left;
+
+    .el-button + .el-dropdown {
+      margin-left: @filter-gap-size;
+    }
   }
 
   .filterbar__buttons,
   .filterbar__field {
     position: relative;
     display: inline-block;
-    margin: 0 10px 16px 0;
+    margin: 0 10px @filter-gap-size 0;
+    vertical-align: top;
   }
 
   .filterbar__form {
-    margin-bottom: -16px;
+    margin-bottom: -@filter-gap-size;
   }
 
   .filterbar__submit {
@@ -207,19 +267,24 @@ export default {
     float: right;
     margin: 0;
 
-    .filterbar__form-more-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      display: none;
+    &-btn {
+      display: inline-block;
+    }
+    &-more {
+      // position: absolute;
+      // top: 0;
+      // right: 0;
+      // display: inline-block;
       width: 40px;
       padding: 0;
+      margin-left: 10px;
       line-height: 30px;
     }
-    &--hasmore {
+
+    &--nomore {
       padding-right: 50px;
-      .filterbar__form-more-btn {
-        display: inline-block;
+      .filterbar__submit-more {
+        display: none;
       }
     }
   }

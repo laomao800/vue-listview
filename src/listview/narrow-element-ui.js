@@ -17,7 +17,12 @@ const neededComponents = [
   'TimePicker',
   'Cascader',
   'Table',
-  'TableColumn'
+  'TableColumn',
+  'Dropdown',
+  'DropdownMenu',
+  'DropdownItem',
+  'Breadcrumb',
+  'BreadcrumbItem'
 ]
 
 neededComponents.forEach(name => {

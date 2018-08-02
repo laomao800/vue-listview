@@ -8,6 +8,6 @@ module.exports = app => {
   // 将 tests/mock-api/routes 下的所有 mock 路由配置注册在 mockPath 路径下
   const mockPath = '/mock'
   fs.readdirSync(path.join(__dirname, 'routes')).forEach(routeFileName => {
-    app.use(mockPath, require(`./routes/${routeFileName}`))
+    app.use(mockPath, require(`./routes/${routeFileName}`)(app))
   })
 }

@@ -1,12 +1,15 @@
 <template>
-  <div v-if="schema.length > 0">
+  <div v-if="fields.length > 0">
     <div
-      v-for="(field, index) in schema"
-      v-if="getFieldCmpName(field)"
+      v-for="(field, index) in fields"
+      v-if="isVNode(field) || getFieldCmpName(field)"
       ref="field"
       :key="index"
       class="filterbar__field">
-      <el-form-item>
+      <v-node
+        v-if="isVNode(field)"
+        :node="field" />
+      <el-form-item v-else>
         <transition
           v-if="field.label"
           name="label-trans">
@@ -30,24 +33,29 @@
 
 <script>
 import { camelCase, zipObject } from 'lodash'
-import fieldComponents from './fields'
 import hasValues from 'has-values'
+import fieldComponents from '@/components/fields'
+import VNode from '@/components/v-node.js'
+import { isVNode } from '@/utils/utils.js'
 
 const componentKeys = Object.keys(fieldComponents)
 const fieldKeys = componentKeys.map(key => camelCase(key.replace(/^field/, '')))
-const validFields = zipObject(fieldKeys, componentKeys)
+const fieldMaps = zipObject(fieldKeys, componentKeys)
 
 export default {
   name: 'FilterForm',
 
-  components: fieldComponents,
+  components: {
+    ...fieldComponents,
+    VNode
+  },
 
   props: {
     model: {
       type: Object,
       default: () => ({})
     },
-    schema: {
+    fields: {
       type: Array,
       default: () => []
     }
@@ -55,13 +63,15 @@ export default {
 
   data() {
     return {
-      validFields
+      fieldMaps
     }
   },
 
   methods: {
+    isVNode,
     getFieldCmpName(field) {
-      return validFields[field.type]
+      const type = camelCase(field.type)
+      return fieldMaps[type]
     },
     getFieldValue(field) {
       return this.model[field.model]
@@ -85,6 +95,7 @@ export default {
   font-size: 12px;
   line-height: 12px;
   color: #999;
+  white-space: nowrap;
   background-color: #fff;
   opacity: 1;
   transform: translateY(-50%) scale(0.9);

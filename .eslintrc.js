@@ -5,9 +5,6 @@ module.exports = {
     'plugin:vue/recommended',
     // https://github.com/standard/standard/blob/master/docs/RULES-zhcn.md
     'standard'
-    // https://github.com/prettier/eslint-config-prettier
-    // 'prettier',
-    // 'prettier/standard'
   ],
   rules: {
     // Turn off 'space-before-function-paren' for prettier
@@ -22,13 +19,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/api/**/*'],
-      rules: {
-        camelcase: 0
-      }
-    },
-    {
-      files: ['src/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
+      files: ['src/**/*', 'dev/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
       excludedFiles: 'app.config.js',
       parserOptions: {
         parser: 'babel-eslint',
