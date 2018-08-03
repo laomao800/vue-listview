@@ -14,11 +14,7 @@
   // ===
   "files.exclude": {
     "**/*.log": true,
-    "**/*.log*": true,
-    "**/dist": true,
-    "**/dist-archive": true,
-    "**/coverage": true,
-    "**/.vuepress/dist": false
+    "**/*.log*": true
   },
   "files.associations": {
     ".markdownlintrc": "jsonc"

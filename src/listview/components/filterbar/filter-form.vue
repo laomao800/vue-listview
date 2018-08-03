@@ -32,15 +32,17 @@
 </template>
 
 <script>
-import { camelCase, zipObject } from 'lodash'
+import _ from 'lodash'
 import hasValues from 'has-values'
 import fieldComponents from '@/components/fields'
 import VNode from '@/components/v-node.js'
 import { isVNode } from '@/utils/utils.js'
 
 const componentKeys = Object.keys(fieldComponents)
-const fieldKeys = componentKeys.map(key => camelCase(key.replace(/^field/, '')))
-const fieldMaps = zipObject(fieldKeys, componentKeys)
+const fieldKeys = componentKeys.map(key =>
+  _.camelCase(key.replace(/^field/, ''))
+)
+const fieldMaps = _.zipObject(fieldKeys, componentKeys)
 
 export default {
   name: 'FilterForm',
@@ -70,7 +72,7 @@ export default {
   methods: {
     isVNode,
     getFieldCmpName(field) {
-      const type = camelCase(field.type)
+      const type = _.camelCase(field.type)
       return fieldMaps[type]
     },
     getFieldValue(field) {

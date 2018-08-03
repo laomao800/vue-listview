@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --report --target lib --name listview src/index.js ",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -27,10 +27,12 @@
     "@vue/cli-service": "^3.0.0-rc.10",
     "@vue/eslint-config-standard": "^3.0.0-rc.10",
     "babel-plugin-component": "^1.1.1",
+    "babel-plugin-lodash": "^3.3.4",
     "express": "^4.16.3",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "lint-staged": "^6.0.0",
+    "lodash-webpack-plugin": "^0.11.5",
     "mockjs": "^1.0.1-beta3",
     "stylelint": "^9.2.1",
     "stylelint-config-css-modules": "^1.2.0",
