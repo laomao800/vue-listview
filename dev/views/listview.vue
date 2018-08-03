@@ -1,5 +1,7 @@
 <template>
   <div class="main">
+
+    <!-- eslint-disable vue/attributes-order -->
     <listview
       :header-title="'演示列表'"
       :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
@@ -18,6 +20,11 @@
       :filter-buttons="filterButtons"
       :filter-fields="filterFields"
       :filter-model="filterModel"
+
+      :table-columns="tableColumns"
+      :table-props="tableProps"
+      :table-events="tableEvents"
+      :table-selection.sync="tableSelection"
 
       :use-page="true"
       :page-sizes="[20, 50, 100]"
@@ -184,7 +191,105 @@ export default {
             }
           ]
         }
-      ]
+      ],
+
+      tableSelection: [],
+      tableColumns: [
+        // { type: 'selection', width: 50, align: 'center' },
+        {
+          label: '自定义标签',
+          prop: 'sku',
+          width: 100,
+          align: 'center',
+          fixed: true
+        },
+        {
+          label: '产品名称',
+          prop: 'name',
+          width: 200,
+          align: 'center',
+          fixed: true
+        },
+        {
+          label: '操作',
+          width: 150,
+          align: 'center',
+          fixed: true,
+          defaultSlot: prop => {
+            return (
+              <div>
+                <el-button
+                  on-click={e => e.stopPropagation()}
+                  style="padding:4px 8px"
+                  size="mini"
+                  type="success"
+                >
+                  审核
+                </el-button>
+                <el-button
+                  on-click={e => e.stopPropagation()}
+                  style="padding:4px 8px"
+                  size="mini"
+                  type="danger"
+                >
+                  删除
+                </el-button>
+              </div>
+            )
+          }
+        },
+        { label: '销售员', prop: 'seller', align: 'center' },
+        { label: '仓库', prop: 'warehouse', align: 'center' },
+        { label: '零售价格', prop: 'sale_price', align: 'center' },
+        {
+          label: '折扣率',
+          align: 'center',
+          formatter: row => row.discount.toFixed(2)
+        },
+        {
+          label: '折后价',
+          align: 'center',
+          formatter: row => (row.discount * row.sale_price).toFixed(2)
+        },
+        {
+          label: '折扣时间',
+          align: 'center',
+          children: [
+            { label: '折扣开始', prop: 'date', align: 'center' },
+            { label: '折扣结束', prop: 'date', align: 'center' }
+          ]
+        },
+        { label: '数量', prop: 'quantity', align: 'center' },
+        {
+          label: '是否启用',
+          align: 'center',
+          defaultSlot: prop => {
+            if (prop.row.enable) {
+              return <div style="color:#67c23a">启用</div>
+            } else {
+              return <div style="color:#f56c6c">禁用</div>
+            }
+          }
+        },
+        { label: '创建人', prop: 'seller', align: 'center' },
+        { label: '创建时间', prop: 'date', align: 'center' },
+        {
+          label: '最后修改',
+          align: 'center',
+          children: [
+            { label: '修改人', prop: 'seller', align: 'center' },
+            { label: '修改时间', prop: 'date', align: 'center' }
+          ]
+        }
+      ],
+      tableProps: {
+        size: 'small',
+        border: false
+      },
+      tableEvents: {
+        rowClick(val) {},
+        selectionChange(val) {}
+      }
     }
   },
 

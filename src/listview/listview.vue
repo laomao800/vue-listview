@@ -8,7 +8,8 @@
 
     <listview-header
       :title="headerTitle"
-      :nav="headerNav" />
+      :nav="headerNav"
+    />
 
     <div
       ref="main"
@@ -40,50 +41,32 @@
             :content-loading="contentLoading"
             :content-data="contentData"
           >
-            <!-- eslint-disable vue/attributes-order vue/max-attributes-per-line -->
             <el-table
               ref="contentTable"
               :data="contentData.items"
               :height="contentHeight"
               :style="{ width: '100%' }"
               :row-class-name="contentTableRowClassName"
-              border
-              stripe
-              size="small"
-              class="data-content__table"
+              v-bind="validTableProps"
+              @selection-change="handleTableSelectionChange"
               @row-click="handleRowClick"
-              @selection-change="handleListSelectionChange">
-              <el-table-column type="selection" width="50" align="center" prop="id" />
-              <el-table-column label="自定义标签" prop="sku" align="center" width="100" fixed />
-              <el-table-column label="产品名称" prop="name" width="200" fixed />
-              <el-table-column label="操作" width="150" align="center" fixed>
-                <template slot-scope="prop">
-                  <el-button style="padding:4px 8px" size="mini" type="success">审核</el-button>
-                  <el-button style="padding:4px 8px" size="mini" type="danger">删除</el-button>
-                </template>
-              </el-table-column>
-              <el-table-column label="销售员" prop="seller" align="center" />
-              <el-table-column label="仓库" prop="warehouse" align="center" />
-              <el-table-column label="零售价格" prop="sale_price" align="center" />
-              <el-table-column label="折扣率" prop="discount" align="center" :formatter="(row) => row.discount.toFixed(2)" />
-              <el-table-column label="折后价" align="center" :formatter="(row) => (row.discount * row.sale_price).toFixed(2)" />
-              <el-table-column label="折扣时间" align="center">
-                <el-table-column label="折扣开始" prop="date" align="center" />
-                <el-table-column label="折扣结束" prop="date" align="center" />
-              </el-table-column>
-              <el-table-column label="数量" prop="quantity" align="center" />
-              <el-table-column label="是否启用" prop="enable" align="center">
-                <template slot-scope="prop">
-                  <div v-if="prop.row.enable" size="mini" type="success">启用</div>
-                  <div v-else size="mini" type="danger">禁用</div>
-                </template>
-              </el-table-column>
-              <el-table-column label="创建人" prop="seller" align="center" />
-              <el-table-column label="创建时间" prop="date" align="center" />
-              <el-table-column label="最后修改" align="center">
-                <el-table-column label="修改人" prop="seller" align="center" />
-                <el-table-column label="修改时间" prop="date" align="center" />
-              </el-table-column>
+              v-on="validTableEvents"
+            >
+
+              <el-table-column
+                v-if="tableSelectEnable"
+                type="selection"
+                width="50"
+                align="center"
+              />
+
+              <template v-for="(column, index) in tableColumns">
+                <v-node
+                  :key="index"
+                  :node="renderTableColumn(column)"
+                />
+              </template>
+
             </el-table>
           </slot>
         </div>
@@ -108,10 +91,12 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import axios from 'axios'
 import get from 'get-value'
-import Filterbar from './components/filterbar'
-import ListviewHeader from './components/listview-header.vue'
+import VNode from '@/components/v-node'
+import Filterbar from '@/listview/components/filterbar'
+import ListviewHeader from '@/listview/components/listview-header.vue'
 
 const service = axios.create()
 
@@ -119,6 +104,7 @@ export default {
   name: 'Listview',
 
   components: {
+    VNode,
     Filterbar,
     ListviewHeader
   },
@@ -134,8 +120,8 @@ export default {
     fullWindow: { type: Boolean, default: true },
     contentMinHeight: {
       type: Number,
-      default: 200,
-      validator: value => value > 0
+      default: 0,
+      validator: value => value >= 0
     },
 
     // Data request
@@ -168,6 +154,13 @@ export default {
     },
     filterModel: { type: Object, default: () => ({}) },
 
+    // Table
+    tableColumns: { type: Array, default: () => [] },
+    tableProps: { type: Object, default: () => ({}) },
+    tableEvents: { type: Object, default: () => ({}) },
+    tableSelectEnable: { type: Boolean, default: true },
+    tableSelection: { type: Array, default: () => [] },
+
     // Pager
     usePage: { type: Boolean, default: true },
     pageSizes: { type: Array, default: () => [20, 50, 100] },
@@ -184,7 +177,7 @@ export default {
         items: [],
         total: 1
       },
-      listSelection: [],
+      internalListSelection: [],
       currentPage: 1,
       currentPageSize: this.pageSize
     }
@@ -211,6 +204,19 @@ export default {
         return height ? `${height}px` : false
       }
       return false
+    },
+    validTableEvents() {
+      // 对传入的 tableEvents 的 key 统一作一次转换为横线分隔格式，
+      // 以支持传入驼峰写法的事件名
+      return _.mapKeys(this.tableEvents, (value, key) => _.kebabCase(key))
+    },
+    validTableProps() {
+      const defaultProps = {
+        size: 'small',
+        border: true,
+        stripe: true
+      }
+      return _.merge(defaultProps, this.tableProps)
     }
   },
 
@@ -357,14 +363,35 @@ export default {
     },
 
     // Table
-    handleRowClick(row) {
+    handleRowClick(row, event) {
       this.$refs.contentTable.toggleRowSelection(row)
     },
-    handleListSelectionChange(val) {
-      this.listSelection = val
+    handleTableSelectionChange(val) {
+      this.internalListSelection = val
+      this.$emit('update:tableSelection', this.internalListSelection)
     },
     contentTableRowClassName(row) {
-      return this.listSelection.indexOf(row.row) > -1 ? 'row-selected' : ''
+      return this.tableSelection.indexOf(row.row) > -1 ? 'row--selected' : ''
+    },
+    renderTableColumn(tableColumn) {
+      const _createColumn = column => {
+        const { defaultSlot, children, ...props } = column
+
+        const VNodeData = { props }
+        if (defaultSlot) {
+          VNodeData.scopedSlots = {
+            default: defaultSlot
+          }
+        }
+
+        const VNodeChildren = Array.isArray(children)
+          ? children.map(child => _createColumn(child))
+          : null
+
+        return this.$createElement('el-table-column', VNodeData, VNodeChildren)
+      }
+
+      return _createColumn(tableColumn)
     },
 
     // Pagination
@@ -385,6 +412,10 @@ export default {
 .listview {
   overflow: auto;
   background-color: #f0f2f5;
+
+  .el-table .el-table__body tr.el-table__row.row--selected td {
+    background-color: #ffd;
+  }
 
   &__main {
     padding: 10px;
