@@ -10,7 +10,7 @@ module.exports = app => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header(
       'Access-Control-Allow-Headers',
-      'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild'
+      'Content-Type, Content-Length, Authorization, Accept, X-Requested-With'
     )
     res.header(
       'Access-Control-Allow-Methods',
@@ -24,7 +24,7 @@ module.exports = app => {
     }
   })
 
-  router.post('/listview', (request, response) => {
+  router.post('/listview', (req, res) => {
     const data = Mock.mock({
       'items|20': [
         {
@@ -42,9 +42,24 @@ module.exports = app => {
       ],
       total: '@integer(20, 30)'
     })
-    const isError = !!request.body.error
-    const responseData = isError ? errorWrap(data) : successWrap(data)
-    return response.json(responseData)
+    const responseData = successWrap(data)
+    return res.json(responseData)
+  })
+
+  router.all('/listview-empty', (req, res) => {
+    const responseData = successWrap({
+      items: [],
+      total: 0
+    })
+    return res.json(responseData)
+  })
+
+  router.all('/listview-error', (req, res) => {
+    return res.json(errorWrap('演示接口返回错误信息'))
+  })
+
+  router.all('/500', (req, res) => {
+    return res.status(500).json(errorWrap('演示接口返回 500 错误信息'))
   })
 
   return router
