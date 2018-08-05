@@ -41,11 +41,6 @@
     "stylelint-config-standard": "^18.2.0",
     "vue-template-compiler": "^2.5.13"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "lint-staged": {
     "*.js": [
       "vue-cli-service lint",
