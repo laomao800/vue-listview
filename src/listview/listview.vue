@@ -135,11 +135,29 @@ export default {
     transformContentData: {
       type: Function,
       default(responseData) {
-        return {
-          items: get(responseData, 'result.items') || [],
-          total: get(responseData, 'result.total') || 0
-        }
+        let items
+        let itemsKey = 'result.items'
+        try {
+          itemsKey = this.contentDataMap.items.toString()
+        } catch (e) {}
+        items = get(responseData, itemsKey) || []
+
+        let total
+        let totalKey = 'result.total'
+        try {
+          totalKey = this.contentDataMap.total.toString()
+        } catch (e) {}
+        total = get(responseData, totalKey) || 0
+
+        return { items, total }
       }
+    },
+    contentDataMap: {
+      type: Object,
+      default: () => ({
+        items: 'result.items',
+        total: 'result.total'
+      })
     },
 
     // Filterbar
