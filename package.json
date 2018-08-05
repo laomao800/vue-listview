@@ -1,10 +1,10 @@
 {
-  "name": "bg-pps-vue-list-view",
+  "name": "bg-pps-vue-listview",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --report --target lib --name listview src/index.js ",
+    "build": "vue-cli-service build --report --target lib --name listview src/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

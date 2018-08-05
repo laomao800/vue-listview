@@ -11,7 +11,7 @@ module.exports = {
     }
   },
 
-  productionSourceMap: !IS_PROD,
+  productionSourceMap: false,
 
   css: {
     sourceMap: !IS_PROD,
@@ -33,6 +33,7 @@ module.exports = {
     if (IS_PROD) {
       config.plugins.push(new LodashModuleReplacementPlugin())
     }
+    // TODO: externals element-ui
   },
 
   devServer: {
