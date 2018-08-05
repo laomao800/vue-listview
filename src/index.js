@@ -1,3 +1,8 @@
-import Listview from '@/listview'
+import Vue from 'vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import ListView from '@/listview'
 
-export default Listview
+Vue.use(ElementUI)
+
+export default ListView

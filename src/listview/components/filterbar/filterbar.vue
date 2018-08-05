@@ -258,6 +258,12 @@ export default {
     vertical-align: top;
   }
 
+  .filterbar__field {
+    .el-input__inner {
+      vertical-align: top;
+    }
+  }
+
   .filterbar__form {
     margin-bottom: -@filter-gap-size;
   }

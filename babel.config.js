@@ -1,3 +1,22 @@
+const plugins = [
+  // Support async/await
+  // https://babeljs.io/docs/plugins/transform-runtime/
+  [
+    '@babel/transform-runtime',
+    { helpers: true, polyfill: false, regenerator: true }
+  ]
+]
+
+if (process.env.BUILD_MODE !== 'component') {
+  plugins.push([
+    'component',
+    {
+      libraryName: 'element-ui',
+      styleLibraryName: 'theme-chalk'
+    }
+  ])
+}
+
 module.exports = {
   presets: [
     [
@@ -9,21 +28,7 @@ module.exports = {
       }
     ]
   ],
-  plugins: [
-    // Support async/await
-    // https://babeljs.io/docs/plugins/transform-runtime/
-    [
-      '@babel/transform-runtime',
-      { helpers: true, polyfill: false, regenerator: true }
-    ],
-    [
-      'component',
-      {
-        libraryName: 'element-ui',
-        styleLibraryName: 'theme-chalk'
-      }
-    ]
-  ],
+  plugins,
   env: {
     test: {
       presets: [

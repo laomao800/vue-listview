@@ -2,9 +2,16 @@
   "name": "bg-pps-vue-listview",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/listview-component.common.js",
+  "files": [
+    "src",
+    "dist/*.js"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --report --target lib --name listview src/index.js",
+    "build": "rimraf dist&npm run build:component&npm run build:with-ele-ui",
+    "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --report --target lib --name listview-component src/index.component.js",
+    "build:with-ele-ui": "vue-cli-service build --no-clean --report --target lib --name listview src/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -28,12 +35,14 @@
     "@vue/eslint-config-standard": "^3.0.0-rc.10",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-lodash": "^3.3.4",
+    "cross-env": "^5.2.0",
     "express": "^4.16.3",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "lint-staged": "^6.0.0",
     "lodash-webpack-plugin": "^0.11.5",
     "mockjs": "^1.0.1-beta3",
+    "rimraf": "^2.6.2",
     "stylelint": "^9.2.1",
     "stylelint-config-css-modules": "^1.2.0",
     "stylelint-config-prettier": "^3.2.0",

@@ -1,10 +1,4 @@
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-
-const IS_PROD = process.env.NODE_ENV === 'production'
-
 module.exports = {
-  baseUrl: './',
-
   pages: {
     index: {
       entry: 'dev/main.js'
@@ -14,8 +8,8 @@ module.exports = {
   productionSourceMap: false,
 
   css: {
-    sourceMap: !IS_PROD,
-    extract: false
+    sourceMap: process.env.NODE_ENV !== 'production',
+    extract: process.env.BUILD_MODE !== 'component'
   },
 
   chainWebpack: config => {
@@ -30,10 +24,13 @@ module.exports = {
   },
 
   configureWebpack: config => {
-    if (IS_PROD) {
-      config.plugins.push(new LodashModuleReplacementPlugin())
+    const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+    config.plugins.push(new LodashModuleReplacementPlugin())
+
+    if (process.env.BUILD_MODE === 'component') {
+      config.externals = config.externals || {} // for webpack inspect
+      config.externals['element-ui'] = 'ELEMENT'
     }
-    // TODO: externals element-ui
   },
 
   devServer: {
