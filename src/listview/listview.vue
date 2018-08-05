@@ -40,6 +40,7 @@
             :content-height="contentHeight"
             :content-loading="contentLoading"
             :content-data="contentData"
+            :content-message="internalContentMessage"
           >
             <el-table
               ref="contentTable"
@@ -52,6 +53,24 @@
               @row-click="handleRowClick"
               v-on="validTableEvents"
             >
+
+              <template
+                v-if="internalContentMessage"
+                slot="empty">
+                <div
+                  :class="[
+                    'content-message',
+                    { [`content-message--${internalContentMessage.type}`]: internalContentMessage.type }
+                  ]"
+                >
+                  <div
+                    v-if="internalContentMessage.icon"
+                    class="content-message--icon">
+                    <i :class="internalContentMessage.icon"/>
+                  </div>
+                  <div class="content-message--message">{{ internalContentMessage.message }}</div>
+                </div>
+              </template>
 
               <el-table-column
                 v-if="tableSelectEnable"
@@ -98,7 +117,7 @@ import VNode from '@/components/v-node'
 import Filterbar from '@/listview/components/filterbar'
 import ListviewHeader from '@/listview/components/listview-header.vue'
 
-const service = axios.create()
+const axiosService = axios.create()
 
 export default {
   name: 'Listview',
@@ -159,6 +178,27 @@ export default {
         total: 'result.total'
       })
     },
+    validateResponse: {
+      type: Function,
+      default(response) {
+        try {
+          return response.data.is_success
+        } catch (e) {
+          return false
+        }
+      }
+    },
+    resolveRequestErrorMessage: {
+      type: Function,
+      default(response) {
+        try {
+          return response.data.error_info.msg
+        } catch (e) {
+          return '未知错误'
+        }
+      }
+    },
+    contentMessage: { type: Object, default: () => ({}) },
 
     // Filterbar
     filterButtons: { type: Array, default: () => [] },
@@ -195,6 +235,7 @@ export default {
         items: [],
         total: 1
       },
+      internalContentMessage: null,
       internalListSelection: [],
       currentPage: 1,
       currentPageSize: this.pageSize
@@ -363,9 +404,18 @@ export default {
           requestConfig.data = requestData
         }
         try {
-          const response = await service(requestConfig)
-          responseData = response.data
-        } catch (e) {}
+          const response = await axiosService(requestConfig)
+          if (this.validateResponse(response)) {
+            responseData = response.data
+          } else {
+            this.setContentMessage(
+              this.resolveRequestErrorMessage(response),
+              'error'
+            )
+          }
+        } catch (e) {
+          this.setContentMessage(e.message, 'error')
+        }
       }
 
       this.contentLoading = false
@@ -411,6 +461,21 @@ export default {
 
       return _createColumn(tableColumn)
     },
+    setContentMessage(message = '', type) {
+      const iconMap = {
+        success: 'el-icon-success',
+        warning: 'el-icon-warning',
+        info: 'el-icon-info',
+        error: 'el-icon-error'
+      }
+      const icon = iconMap[type] || null
+
+      this.internalContentMessage = {
+        type,
+        icon,
+        message
+      }
+    },
 
     // Pagination
     handleSizeChange(pageSize) {
@@ -443,6 +508,39 @@ export default {
 
   &__content {
     overflow: auto;
+  }
+
+  .content-message {
+    display: flex;
+    padding: 15px 20px;
+    line-height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #ddd;
+
+    &--icon {
+      margin-right: 10px;
+      font-size: 24px;
+    }
+
+    &--message {
+      font-size: 14px;
+    }
+
+    &--success .content-message--icon {
+      color: #6ac243;
+    }
+
+    &--warning .content-message--icon {
+      color: #f90;
+    }
+
+    &--info .content-message--icon {
+      color: #459ffc;
+    }
+
+    &--error .content-message--icon {
+      color: #f56c6c;
+    }
   }
 
   &__page {
