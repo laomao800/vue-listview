@@ -136,7 +136,7 @@ export default {
 
     // Layout
     height: { type: [String, Number], default: null },
-    fullWindow: { type: Boolean, default: true },
+    fullHeight: { type: Boolean, default: true },
     contentMinHeight: {
       type: Number,
       default: 0,
@@ -258,7 +258,7 @@ export default {
       return paginationHeight
     },
     fixedHeight() {
-      if (!this.fullWindow) {
+      if (this.height) {
         const height = parseInt(this.height, 10)
         return height ? `${height}px` : false
       }
@@ -283,7 +283,7 @@ export default {
     height() {
       this.initLayout()
     },
-    fullWindow() {
+    fullHeight() {
       this.initLayout()
     },
     filterbarFold() {
@@ -311,7 +311,7 @@ export default {
     },
 
     addResizeHandler() {
-      if (this.fullWindow || this.height) {
+      if (this.fullHeight || this.height) {
         window.addEventListener('resize', this.updateContentHeight)
       }
       window.addEventListener('resize', this.updateFilterbarLayout)
@@ -334,10 +334,10 @@ export default {
      * 主要内容区域高度尺寸更新
      */
     async updateContentHeight() {
-      if (this.fullWindow) {
-        this.maxHeight = window.innerHeight
-      } else if (this.height) {
+      if (this.height) {
         this.maxHeight = this.$el.getBoundingClientRect().height
+      } else if (this.fullHeight) {
+        this.maxHeight = window.innerHeight
       } else {
         this.maxHeight = null
         this.contentHeight = this.contentMinHeight
