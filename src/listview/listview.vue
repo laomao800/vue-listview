@@ -374,10 +374,10 @@ export default {
     async requestData() {
       this.contentLoading = true
 
-      let responseData
+      let responseData = null
       if (this.requestHandler) {
         responseData = await this.requestHandler()
-      } else {
+      } else if (this.requestUrl) {
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
         this._requestCancelToken && this._requestCancelToken()
 
@@ -459,7 +459,8 @@ export default {
         return this.$createElement('el-table-column', VNodeData, VNodeChildren)
       }
 
-      return _createColumn(tableColumn)
+      // TODO: tableColumn validator
+      return _.isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },
     setContentMessage(message = '', type) {
       const iconMap = {
