@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-
     <!-- eslint-disable vue/attributes-order -->
     <listview
       :header-title="'演示列表'"
@@ -34,14 +33,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import Listview from '../../dist/listview-component.common.js'
-Vue.use(ElementUI)
-
-// import Listview from '../../dist/listview.common.js'
-// import '../../dist/listview.css'
+import Listview from '../../dist/listview.common.js'
+import '../../dist/listview.css'
 
 export default {
   name: 'ListviewPage',
