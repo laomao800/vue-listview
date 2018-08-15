@@ -35,14 +35,14 @@
                 <el-button
                   :type="button.type"
                   :icon="button.icon"
-                  @click="button.click"
+                  @click="button.click || null"
                 >{{ button.content }}</el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
                   v-for="(child, index) in button.children"
                   :key="index"
-                  @click.native="child.click">
+                  @click.native="child.click || null">
                   {{ child.content }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -52,7 +52,7 @@
               :key="index"
               :type="button.type"
               :icon="button.icon"
-              @click="button.click"
+              @click="button.click || null"
             >{{ button.content }}</el-button>
           </template>
         </el-form-item>
@@ -163,7 +163,7 @@ export default {
 
     getAllFields() {
       const filterForm = this.$refs['filterForm']
-      return filterForm ? filterForm.$refs.field : []
+      return filterForm ? filterForm.$refs.field || [] : []
     },
 
     async updateLayout(from) {
