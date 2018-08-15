@@ -24,7 +24,9 @@
               :key="index"
               :type="button.type"
               :split-button="button.splitButton"
-              :trigger="button.trigger || 'click'">
+              :trigger="button.trigger || 'click'"
+              placement="bottom"
+            >
               <template v-if="button.splitButton">
                 <i
                   v-if="button.icon"
@@ -36,7 +38,7 @@
                   :type="button.type"
                   :icon="button.icon"
                   @click="button.click || null"
-                >{{ button.content }}</el-button>
+                >{{ button.content }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
@@ -245,7 +247,8 @@ export default {
   .filterbar__buttons {
     float: left;
 
-    .el-button + .el-dropdown {
+    .el-button + .el-dropdown,
+    .el-dropdown + .el-dropdown {
       margin-left: @filter-gap-size;
     }
   }
