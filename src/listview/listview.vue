@@ -201,15 +201,9 @@ export default {
     contentMessage: { type: Object, default: () => ({}) },
 
     // Filterbar
+    // TODO: validator
     filterButtons: { type: Array, default: () => [] },
-    filterFields: {
-      type: Array,
-      default: () => [],
-      validator(val) {
-        // TODO: filter field validator
-        return true
-      }
-    },
+    filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
 
     // Table
