@@ -23,6 +23,15 @@ module.exports = {
       .tap(() => ({
         plugins: ['lodash']
       }))
+    config.module.rule('md').test(/\.md$/)
+    config.module
+      .rule('md')
+      .use('html-loader')
+      .loader('html-loader')
+    config.module
+      .rule('md')
+      .use('markdown-loader')
+      .loader('markdown-loader')
   },
 
   configureWebpack: config => {

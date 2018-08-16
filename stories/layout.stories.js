@@ -1,8 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/vue'
 import { withKnobs, number } from '@storybook/addon-knobs/vue'
+import { withReadme } from 'storybook-readme'
 
-import Listview from '@/'
+import Readme from '../docs/layout.md'
 
 const filterButtons = [
   {
@@ -34,20 +35,20 @@ const tableColumns = [
   }
 ]
 
-const stories = storiesOf('整体尺寸', module)
+const stories = storiesOf('布局', module)
 stories.addDecorator(withKnobs)
+stories.addDecorator(withReadme(Readme))
 
 stories.add(
   '默认铺满屏幕高度',
   () => ({
-    components: { Listview },
     template: `
-    <Listview
-      :filter-buttons="filterButtons"
-      :filter-fields="filterFields"
-      :table-columns="tableColumns"
-    />
-  `,
+      <Listview
+        :filter-buttons="filterButtons"
+        :filter-fields="filterFields"
+        :table-columns="tableColumns"
+      />
+    `,
     data: () => ({
       filterButtons,
       filterFields,
@@ -62,15 +63,14 @@ stories.add(
   () => {
     const height = number('height', 300)
     return {
-      components: { Listview },
       template: `
-      <Listview
-        height="${height}"
-        :filter-buttons="filterButtons"
-        :filter-fields="filterFields"
-        :table-columns="tableColumns"
-      />
-    `,
+        <Listview
+          height="${height}"
+          :filter-buttons="filterButtons"
+          :filter-fields="filterFields"
+          :table-columns="tableColumns"
+        />
+      `,
       data: () => ({
         filterButtons,
         filterFields,
@@ -78,12 +78,16 @@ stories.add(
       })
     }
   },
-  { notes: '通过设置 <code>height</code> 属性可指定 Listview 整体高度' }
+  {
+    notes:
+      '指定组件垂直高度，尺寸包括顶部搜索栏，底部页码，页面外圈留白装饰区域。'
+  }
 )
 
-stories.add('自动高度', () => ({
-  components: { Listview },
-  template: `
+stories.add(
+  '自动高度',
+  () => ({
+    template: `
     <Listview
       :fullHeight="false"
       :filter-buttons="filterButtons"
@@ -91,9 +95,13 @@ stories.add('自动高度', () => ({
       :table-columns="tableColumns"
     />
   `,
-  data: () => ({
-    filterButtons,
-    filterFields,
-    tableColumns
-  })
-}))
+    data: () => ({
+      filterButtons,
+      filterFields,
+      tableColumns
+    })
+  }),
+  {
+    notes: 'fullHeight 为 false 则会根据内容尺寸自动往下方撑开高度'
+  }
+)
