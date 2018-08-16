@@ -145,6 +145,7 @@ export default {
     },
 
     handleFilterReset() {
+      this.$emit('filter-reset', this.filterModel)
       const model = this.filterModel
       this.filterFields.forEach(field => {
         const name = field.model
