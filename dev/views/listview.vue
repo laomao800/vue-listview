@@ -33,8 +33,7 @@
 </template>
 
 <script>
-import Listview from '../../dist/listview.common.js'
-import '../../dist/listview.css'
+import Listview from '@/'
 
 export default {
   name: 'ListviewPage',
@@ -195,7 +194,6 @@ export default {
 
       tableSelection: [],
       tableColumns: [
-        // { type: 'selection', width: 50, align: 'center' },
         {
           label: '自定义标签',
           prop: 'sku',
