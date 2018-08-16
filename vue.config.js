@@ -9,7 +9,9 @@ module.exports = {
 
   css: {
     sourceMap: process.env.NODE_ENV !== 'production',
-    extract: process.env.BUILD_MODE !== 'component'
+    extract:
+      process.env.NODE_ENV === 'production' &&
+      process.env.BUILD_MODE !== 'component'
   },
 
   chainWebpack: config => {

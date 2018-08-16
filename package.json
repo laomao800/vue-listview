@@ -2,16 +2,14 @@
   "name": "bg-pps-vue-listview",
   "version": "0.1.0",
   "private": true,
-  "main": "dist/listview-component.common.js",
-  "files": [
-    "dist/*.js"
-  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rimraf dist&npm run build:component&npm run build:with-ele-ui",
+    "lint": "vue-cli-service lint",
     "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --report --target lib --name listview-component src/index.component.js",
     "build:with-ele-ui": "vue-cli-service build --no-clean --report --target lib --name listview src/index.js",
-    "lint": "vue-cli-service lint"
+    "serve:storybook": "vue-cli-service serve:storybook -p 6006",
+    "build:storybook": "vue-cli-service build:storybook"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -26,6 +24,11 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^4.0.0-alpha.16",
+    "@storybook/addon-knobs": "^3.4.10",
+    "@storybook/addon-links": "^4.0.0-alpha.16",
+    "@storybook/addon-notes": "^4.0.0-alpha.16",
+    "@storybook/addon-options": "^4.0.0-alpha.16",
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
     "@vue/cli-service": "^3.0.0",
@@ -45,8 +48,13 @@
     "stylelint-config-prettier": "^3.2.0",
     "stylelint-config-recess-order": "^2.0.0",
     "stylelint-config-standard": "^18.2.0",
+    "vue-cli-plugin-storybook": "^0.4.3",
     "vue-template-compiler": "^2.5.17"
   },
+  "main": "dist/listview-component.common.js",
+  "files": [
+    "dist/*.js"
+  ],
   "lint-staged": {
     "*.js": [
       "vue-cli-service lint",
