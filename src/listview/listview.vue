@@ -138,9 +138,9 @@ export default {
     height: { type: [String, Number], default: null },
     fullHeight: { type: Boolean, default: true },
     contentMinHeight: {
-      type: Number,
+      type: [String, Number],
       default: 100,
-      validator: value => value >= 0
+      validator: value => parseInt(value, 10) >= 0
     },
 
     // Data request
@@ -338,7 +338,7 @@ export default {
         this.maxHeight = window.innerHeight
       } else {
         this.maxHeight = null
-        this.contentHeight = this.contentMinHeight
+        this.contentHeight = parseInt(this.contentMinHeight, 10)
       }
 
       if (this.maxHeight) {
