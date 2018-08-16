@@ -139,7 +139,7 @@ export default {
     fullHeight: { type: Boolean, default: true },
     contentMinHeight: {
       type: Number,
-      default: 0,
+      default: 100,
       validator: value => value >= 0
     },
 
@@ -501,7 +501,7 @@ export default {
 
   &__main {
     padding: 10px;
-    margin: 10px 10px 0;
+    margin: 5px;
     background-color: #fff;
   }
 
