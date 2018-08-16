@@ -9,7 +9,9 @@
     "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --report --target lib --name listview-component src/index.component.js",
     "build:with-ele-ui": "vue-cli-service build --no-clean --report --target lib --name listview src/index.js",
     "serve:storybook": "vue-cli-service serve:storybook -p 6006",
-    "build:storybook": "vue-cli-service build:storybook"
+    "build:storybook": "vue-cli-service build:storybook",
+    "docs": "vuepress dev docs",
+    "docs:build": "cross-env DOC_MODE=build vuepress build docs"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -52,7 +54,8 @@
     "stylelint-config-recess-order": "^2.0.0",
     "stylelint-config-standard": "^18.2.0",
     "vue-cli-plugin-storybook": "^0.4.3",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "vuepress": "^0.14.2"
   },
   "main": "dist/listview-component.common.js",
   "files": [
