@@ -308,7 +308,9 @@ export default {
       if (this.fullHeight || this.height) {
         window.addEventListener('resize', this.updateContentHeight)
       }
-      window.addEventListener('resize', this.updateFilterbarLayout)
+      if (this.filterFields.length > 0) {
+        window.addEventListener('resize', this.updateFilterbarLayout)
+      }
     },
 
     removeResizeHandler() {
@@ -321,7 +323,9 @@ export default {
      */
     updateLayout() {
       this.updateContentHeight()
-      this.updateFilterbarLayout()
+      if (this.filterFields.length > 0) {
+        this.updateFilterbarLayout()
+      }
     },
 
     /**

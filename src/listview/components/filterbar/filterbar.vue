@@ -170,7 +170,7 @@ export default {
 
     async updateLayout(from) {
       const allFields = this.getAllFields()
-      if (allFields.length > 1) {
+      if (allFields.length > 0) {
         let lastFilterTop = allFields[0].getBoundingClientRect().top
         let lastFilterIndex = -1
         for (let i = 0; i < allFields.length; i++) {
