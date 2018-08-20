@@ -26,7 +26,7 @@
               :split-button="button.splitButton"
               :trigger="button.trigger || 'click'"
               placement="bottom"
-              @click="resolveClickEvent(button)"
+              @click="resolveClickEvent(button, $event)"
             >
               <template v-if="button.splitButton">
                 <i
@@ -38,14 +38,14 @@
                 <el-button
                   :type="button.type"
                   :icon="button.icon"
-                  @click="resolveClickEvent(button)"
+                  @click="resolveClickEvent(button, $event)"
                 >{{ button.content }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
                   v-for="(child, index) in button.children"
                   :key="index"
-                  @click.native="resolveClickEvent(child)">
+                  @click.native="resolveClickEvent(child, $event)">
                   {{ child.content }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -110,8 +110,9 @@
 <script>
 import _ from 'lodash'
 import VNode from '@/components/v-node.js'
-import FilterForm from './filter-form.vue'
 import { isVNode } from '@/utils/utils.js'
+import { getFieldComponentName } from '@/components/fields'
+import FilterForm from './filter-form.vue'
 
 export default {
   name: 'FilterBar',
@@ -134,6 +135,7 @@ export default {
   data() {
     return {
       internalFilterbarFold: true,
+      validFilterFields: [],
       topRightFilterIndex: -1,
       submitOffset: 0
     }
@@ -141,10 +143,9 @@ export default {
 
   computed: {
     filterbarHasMore() {
-      const allFields = this.getAllFields()
       return (
-        this.topRightFilterIndex &&
-        this.topRightFilterIndex < allFields.length - 1
+        this.topRightFilterIndex >= 0 &&
+        this.topRightFilterIndex < this.validFilterFields.length - 1
       )
     },
     showFilterbarSubmit() {
@@ -156,10 +157,14 @@ export default {
       )
     },
     noneFields() {
-      // const allFields = this.getAllFields()
-      // return allFields.length === 0
-      return this.filterFields.length === 0
+      return this.validFilterFields.length === 0
     }
+  },
+
+  created() {
+    this.validFilterFields = this.filterFields.filter(field => {
+      return isVNode(field) || getFieldComponentName(field.type)
+    })
   },
 
   mounted() {
@@ -178,6 +183,11 @@ export default {
   methods: {
     isVNode,
 
+    getAllFieldsDom() {
+      const filterForm = this.$refs['filterForm']
+      return filterForm ? filterForm.$refs.field || [] : []
+    },
+
     resolveClickEvent(item, $event) {
       if (item && item.click && _.isFunction(item.click)) {
         return item.click($event)
@@ -189,7 +199,6 @@ export default {
     },
 
     handleFilterReset() {
-      this.$emit('filter-reset', this.filterModel)
       const model = this.filterModel
       this.filterFields.forEach(field => {
         const name = field.model
@@ -202,6 +211,7 @@ export default {
           }
         }
       })
+      this.$emit('filter-reset', this.filterModel)
     },
 
     togglerFilterbar() {
@@ -209,13 +219,8 @@ export default {
       this.$emit('update:filterbarFold', this.internalFilterbarFold)
     },
 
-    getAllFields() {
-      const filterForm = this.$refs['filterForm']
-      return filterForm ? filterForm.$refs.field || [] : []
-    },
-
     async updateLayout(from) {
-      const allFields = this.getAllFields()
+      const allFields = this.getAllFieldsDom()
       if (allFields.length > 0) {
         let lastFilterTop = allFields[0].getBoundingClientRect().top
         let lastFilterIndex = -1
@@ -235,7 +240,7 @@ export default {
     },
 
     updateSubmitOffset() {
-      const allFields = this.getAllFields()
+      const allFields = this.getAllFieldsDom()
       let offset = 0
       if (this.topRightFilterIndex >= 0) {
         // debugger
@@ -296,7 +301,7 @@ export default {
     .el-button + .el-dropdown,
     .el-dropdown + .el-button,
     .el-dropdown + .el-dropdown,
-    .el-form-item__content > * {
+    .el-form-item__content > *:not(:nth-child(1)) {
       margin-left: @filter-gap-size;
     }
   }
@@ -323,6 +328,7 @@ export default {
     position: relative;
     float: right;
     margin: 0;
+    margin-bottom: 10px;
 
     &-btn {
       display: inline-block;

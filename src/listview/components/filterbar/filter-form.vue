@@ -2,7 +2,6 @@
   <div v-if="fields.length > 0">
     <div
       v-for="(field, index) in fields"
-      v-if="isVNode(field) || getFieldCmpName(field)"
       ref="field"
       :key="index"
       class="filterbar__field">
@@ -18,7 +17,7 @@
             class="filterbar__field-label">{{ field.label }}</div>
         </transition>
         <component
-          :is="getFieldCmpName(field)"
+          :is="getFieldComponentName(field.type)"
           :model="model"
           :field="field"
           v-bind="{
@@ -32,17 +31,10 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import hasValues from 'has-values'
-import fieldComponents from '@/components/fields'
+import fieldComponents, { getFieldComponentName } from '@/components/fields'
 import VNode from '@/components/v-node.js'
 import { isVNode } from '@/utils/utils.js'
-
-const componentKeys = Object.keys(fieldComponents)
-const fieldKeys = componentKeys.map(key =>
-  _.camelCase(key.replace(/^field/, ''))
-)
-const fieldMaps = _.zipObject(fieldKeys, componentKeys)
 
 export default {
   name: 'FilterForm',
@@ -63,18 +55,9 @@ export default {
     }
   },
 
-  data() {
-    return {
-      fieldMaps
-    }
-  },
-
   methods: {
     isVNode,
-    getFieldCmpName(field) {
-      const type = _.camelCase(field.type)
-      return fieldMaps[type]
-    },
+    getFieldComponentName,
     getFieldValue(field) {
       return this.model[field.model]
     },
