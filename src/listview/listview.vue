@@ -142,7 +142,7 @@ export default {
     fullHeight: { type: Boolean, default: true },
     contentMinHeight: {
       type: [String, Number],
-      default: 100,
+      default: 160,
       validator: value => parseInt(value, 10) >= 0
     },
 
