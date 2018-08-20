@@ -20,6 +20,8 @@
         :filter-fields="filterFields"
         :filter-model="filterModel"
         :filterbar-fold.sync="filterbarFold"
+        :show-filter-submit="showFilterSearch"
+        :show-filter-reset="showFilterReset"
         @filter-submit="handleFilterSubmit"
       >
         <template slot="append-filterbar-submit">
@@ -131,6 +133,7 @@ export default {
   inheritAttrs: false,
 
   props: {
+    // Header
     headerTitle: { type: String, default: '' },
     headerNav: { type: Array, default: () => [] },
 
@@ -205,6 +208,8 @@ export default {
     filterButtons: { type: Array, default: () => [] },
     filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
+    showFilterSearch: { type: Boolean, default: true },
+    showFilterReset: { type: Boolean, default: true },
 
     // Table
     tableColumns: { type: Array, default: () => [] },
@@ -253,14 +258,14 @@ export default {
     },
     fixedHeight() {
       if (this.height) {
+        const isPercent = /\d+%/.test(this.height)
         const height = parseInt(this.height, 10)
-        return height ? `${height}px` : false
+        return height ? (isPercent ? `${height}%` : `${height}px`) : false
       }
       return false
     },
     validTableEvents() {
-      // 对传入的 tableEvents 的 key 统一作一次转换为横线分隔格式，
-      // 以支持传入驼峰写法的事件名
+      // 对传入的 tableEvents 的 key 统一转换为横线分隔格式
       return _.mapKeys(this.tableEvents, (value, key) => _.kebabCase(key))
     },
     validTableProps() {
@@ -293,7 +298,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.removeResizeHandler()
+    window.removeEventListener('resize', this.updateContentHeight)
   },
 
   methods: {
@@ -301,21 +306,10 @@ export default {
       // 需要 nextTick 等待 filterbar 渲染后再开始更新布局
       await this.$nextTick()
       this.updateLayout()
-      this.addResizeHandler()
-    },
-
-    addResizeHandler() {
-      if (this.fullHeight || this.height) {
+      // addResizeHandler
+      if (this.fullHeight) {
         window.addEventListener('resize', this.updateContentHeight)
       }
-      if (this.filterFields.length > 0) {
-        window.addEventListener('resize', this.updateFilterbarLayout)
-      }
-    },
-
-    removeResizeHandler() {
-      window.removeEventListener('resize', this.updateContentHeight)
-      window.removeEventListener('resize', this.updateFilterbarLayout)
     },
 
     /**
@@ -323,13 +317,11 @@ export default {
      */
     updateLayout() {
       this.updateContentHeight()
-      if (this.filterFields.length > 0) {
-        this.updateFilterbarLayout()
-      }
+      this.updateFilterbarLayout()
     },
 
     /**
-     * 主要内容区域高度尺寸更新
+     * 更新主要内容区域高度尺寸
      */
     async updateContentHeight() {
       if (this.height) {
@@ -356,6 +348,9 @@ export default {
       }
     },
 
+    /**
+     * 更新 filterbar “搜索” 按钮位置信息
+     */
     async updateFilterbarLayout() {
       // 在 filterbar 展开一瞬间会出现滚动条，
       // 直接 updateLayout 会出现滚动条宽度尺寸的偏差，
@@ -364,7 +359,6 @@ export default {
       this.$refs.filterbar.updateLayout()
     },
 
-    // Filter
     handleFilterSubmit() {
       this.requestData()
     },
@@ -428,7 +422,9 @@ export default {
       this.contentData = contentData
     },
 
-    // Table
+    /**
+     * Table
+     */
     handleRowClick(row, event) {
       this.$refs.contentTable.toggleRowSelection(row)
     },
@@ -476,7 +472,9 @@ export default {
       }
     },
 
-    // Pagination
+    /**
+     * Pagination
+     */
     handleSizeChange(pageSize) {
       this.currentPageSize = pageSize
       this.currentPage = 1
@@ -493,7 +491,6 @@ export default {
 <style lang="less">
 .listview {
   overflow: auto;
-  background-color: #f0f2f5;
 
   .el-table .el-table__body tr.el-table__row.row--selected td {
     background-color: #ffd;
@@ -501,8 +498,8 @@ export default {
 
   &__main {
     padding: 10px;
-    margin: 5px;
     background-color: #fff;
+    border: 5px solid #f0f2f5;
   }
 
   &__content {

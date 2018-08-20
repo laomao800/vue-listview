@@ -2,7 +2,7 @@
   <div
     :class="[
       'list-view__filterbar',
-      { 'list-view__filterbar--fold': filterbarFold }
+      { 'list-view__filterbar--fold': internalFilterbarFold }
     ]"
   >
     <el-form
@@ -26,6 +26,7 @@
               :split-button="button.splitButton"
               :trigger="button.trigger || 'click'"
               placement="bottom"
+              @click="resolveClickEvent(button)"
             >
               <template v-if="button.splitButton">
                 <i
@@ -37,14 +38,14 @@
                 <el-button
                   :type="button.type"
                   :icon="button.icon"
-                  @click="button.click || null"
+                  @click="resolveClickEvent(button)"
                 >{{ button.content }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
                   v-for="(child, index) in button.children"
                   :key="index"
-                  @click.native="child.click || null">
+                  @click.native="resolveClickEvent(child)">
                   {{ child.content }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -54,7 +55,7 @@
               :key="index"
               :type="button.type"
               :icon="button.icon"
-              @click="button.click || null"
+              @click="resolveClickEvent(button, $event)"
             >{{ button.content }}</el-button>
           </template>
         </el-form-item>
@@ -62,10 +63,14 @@
 
       <!-- 提交、重置按钮区域 -->
       <div
+        v-if="showFilterbarSubmit"
         ref="submit"
         :class="[
           'filterbar__submit',
-          { 'filterbar__submit--nomore': !filterbarHasMore }
+          {
+            'filterbar__submit--nomore': !filterbarHasMore,
+            'filterbar__submit--onleft': noneFields
+          }
         ]"
       >
         <div
@@ -74,14 +79,17 @@
           <el-form-item>
             <slot name="prepend-filterbar-submit" />
             <el-button
+              v-if="showFilterSearch"
               type="primary"
-              @click="handleFilterSubmit">搜索</el-button>
-            <el-button @click="handleFilterReset">重置</el-button>
+              @click="handleFilterSearch">搜索</el-button>
+            <el-button
+              v-if="showFilterReset"
+              @click="handleFilterReset">重置</el-button>
             <slot name="append-filterbar-submit" />
           </el-form-item>
         </div>
         <el-button
-          :icon="filterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
+          :icon="internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
           type="primary"
           class="filterbar__submit-more"
           @click="togglerFilterbar"
@@ -100,6 +108,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import VNode from '@/components/v-node.js'
 import FilterForm from './filter-form.vue'
 import { isVNode } from '@/utils/utils.js'
@@ -117,11 +126,14 @@ export default {
     filterButtons: { type: Array, default: () => [] },
     filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
-    filterbarFold: { type: Boolean, default: false }
+    filterbarFold: { type: Boolean, default: true },
+    showFilterSearch: { type: Boolean, default: true },
+    showFilterReset: { type: Boolean, default: true }
   },
 
   data() {
     return {
+      internalFilterbarFold: true,
       topRightFilterIndex: -1,
       submitOffset: 0
     }
@@ -134,13 +146,45 @@ export default {
         this.topRightFilterIndex &&
         this.topRightFilterIndex < allFields.length - 1
       )
+    },
+    showFilterbarSubmit() {
+      return (
+        this.showFilterSearch ||
+        this.showFilterReset ||
+        this.$slots['prepend-filterbar-submit'] ||
+        this.$slots['append-filterbar-submit']
+      )
+    },
+    noneFields() {
+      // const allFields = this.getAllFields()
+      // return allFields.length === 0
+      return this.filterFields.length === 0
     }
+  },
+
+  mounted() {
+    this.internalFilterbarFold = this.filterbarFold
+
+    this.updateLayout()
+    if (!this.noneFields) {
+      window.addEventListener('resize', this.updateLayout)
+    }
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateLayout)
   },
 
   methods: {
     isVNode,
 
-    handleFilterSubmit() {
+    resolveClickEvent(item, $event) {
+      if (item && item.click && _.isFunction(item.click)) {
+        return item.click($event)
+      }
+    },
+
+    handleFilterSearch() {
       this.$emit('filter-submit', this.filterModel)
     },
 
@@ -161,7 +205,8 @@ export default {
     },
 
     togglerFilterbar() {
-      this.$emit('update:filterbarFold', !this.filterbarFold)
+      this.internalFilterbarFold = !this.internalFilterbarFold
+      this.$emit('update:filterbarFold', this.internalFilterbarFold)
     },
 
     getAllFields() {
@@ -249,7 +294,9 @@ export default {
     float: left;
 
     .el-button + .el-dropdown,
-    .el-dropdown + .el-dropdown {
+    .el-dropdown + .el-button,
+    .el-dropdown + .el-dropdown,
+    .el-form-item__content > * {
       margin-left: @filter-gap-size;
     }
   }
@@ -280,11 +327,16 @@ export default {
     &-btn {
       display: inline-block;
     }
+    &-btn .el-form-item__content > * {
+      display: inline-block;
+      margin-left: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
     &-more {
-      // position: absolute;
-      // top: 0;
-      // right: 0;
-      // display: inline-block;
       width: 40px;
       padding: 0;
       margin-left: 10px;
@@ -293,9 +345,14 @@ export default {
 
     &--nomore {
       padding-right: 50px;
+
       .filterbar__submit-more {
         display: none;
       }
+    }
+
+    &--onleft {
+      float: inherit;
     }
   }
 }
