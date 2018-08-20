@@ -1,49 +1,19 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/vue'
-import { withKnobs, number } from '@storybook/addon-knobs/vue'
+import { action } from '@storybook/addon-actions'
+import { withKnobs, number, boolean } from '@storybook/addon-knobs/vue'
 import { withReadme } from 'storybook-readme'
-
+import { filterButtons, filterFields, tableColumns } from './props.js'
 import Readme from '../docs/layout.md'
 
-const filterButtons = [
-  {
-    type: 'success',
-    icon: 'el-icon-circle-plus-outline',
-    content: '添加'
-  }
-]
-const filterFields = [
-  {
-    type: 'text',
-    model: 'name',
-    label: '文本字段',
-    componentProps: { 'suffix-icon': 'el-icon-date' }
-  }
-]
-const tableColumns = [
-  {
-    label: '自定义标签',
-    prop: 'sku',
-    width: 100,
-    align: 'center'
-  },
-  {
-    label: '产品名称',
-    prop: 'name',
-    width: 200,
-    align: 'center'
-  }
-]
-
-const stories = storiesOf('布局', module)
+const stories = storiesOf('整体布局', module)
 stories.addDecorator(withKnobs)
 stories.addDecorator(withReadme(Readme))
 
 stories.add(
-  '默认铺满屏幕高度',
+  '1. 默认铺满屏幕高度',
   () => ({
     template: `
-      <Listview
+      <listview
         :filter-buttons="filterButtons"
         :filter-fields="filterFields"
         :table-columns="tableColumns"
@@ -59,18 +29,25 @@ stories.add(
 )
 
 stories.add(
-  '指定高度',
+  '2. 指定高度',
   () => {
-    const height = number('height', 300)
+    const height = number('height (指定高度)', 300)
+    const fullHeight = boolean('fullHeight (垂直满屏)', true)
+    const contentMinHeight = number('contentMinHeight (内容区域最小高度)', 100)
     return {
       template: `
-        <Listview
+        <listview
           height="${height}"
+          :fullHeight="${fullHeight}"
+          :contentMinHeight="${contentMinHeight}"
           :filter-buttons="filterButtons"
           :filter-fields="filterFields"
           :table-columns="tableColumns"
         />
       `,
+      mounted() {
+        action('mounted')(this)
+      },
       data: () => ({
         filterButtons,
         filterFields,
@@ -85,10 +62,10 @@ stories.add(
 )
 
 stories.add(
-  '自动高度',
+  '3. 自动高度',
   () => ({
     template: `
-    <Listview
+    <listview
       :fullHeight="false"
       :filter-buttons="filterButtons"
       :filter-fields="filterFields"
