@@ -63,7 +63,6 @@
 
       <!-- 提交、重置按钮区域 -->
       <div
-        v-if="showFilterbarSubmit"
         ref="submit"
         :class="[
           'filterbar__submit',
@@ -146,16 +145,21 @@ export default {
         this.topRightFilterIndex < this.filterFields.length - 1
       )
     },
-    showFilterbarSubmit() {
-      return (
-        this.showFilterSearch ||
-        this.showFilterReset ||
-        this.$slots['prepend-filterbar-submit'] ||
-        this.$slots['append-filterbar-submit']
-      )
-    },
     noneFields() {
       return this.filterFields.length === 0
+    }
+  },
+
+  watch: {
+    showFilterSearch() {
+      this.updateLayout()
+    },
+    showFilterReset() {
+      this.updateLayout()
+    },
+    filterbarFold() {
+      this.internalFilterbarFold = this.filterbarFold
+      this.updateLayout()
     }
   },
 
@@ -203,7 +207,8 @@ export default {
       this.$emit('update:filterbarFold', this.internalFilterbarFold)
     },
 
-    async updateLayout(from) {
+    async updateLayout() {
+      await this.$nextTick()
       const allFields = this.getAllFieldsDom()
       if (allFields.length > 0) {
         let lastFilterTop = allFields[0].getBoundingClientRect().top
@@ -218,7 +223,6 @@ export default {
           lastFilterIndex = i
         }
         this.topRightFilterIndex = lastFilterIndex
-        await this.$nextTick()
         this.updateSubmitOffset()
       }
     },
@@ -230,8 +234,8 @@ export default {
         // debugger
         const lastItem = allFields[this.topRightFilterIndex]
         const { x, width } = lastItem.getBoundingClientRect()
-        offset = x + width - this.$refs.submit.getBoundingClientRect().x
-        offset = Math.min(0, offset + 10)
+        offset = x + width - this.$refs.submit.getBoundingClientRect().x + 10
+        offset = Math.min(0, offset)
       }
       this.searchBtnOffset = offset
     }
@@ -317,6 +321,10 @@ export default {
     &-btn {
       display: inline-block;
 
+      // stylelint-disable-next-line
+      .el-form-item__content > * {
+        transition: inherit;
+      }
       .el-form-item__content > *:not(:nth-child(1)) {
         display: inline-block;
         margin-left: 10px;

@@ -149,7 +149,7 @@ export default {
     },
 
     // Data request
-    autoload: { type: Boolean, default: true },
+    autoLoad: { type: Boolean, default: true },
     requestUrl: { type: String, default: '' },
     requestType: { type: String, default: 'get' },
     requestConfig: { type: Object, default: () => ({}) },
@@ -302,7 +302,7 @@ export default {
 
   mounted() {
     this.initLayout()
-    if (this.autoload) {
+    if (this.autoLoad) {
       this.requestData()
     }
   },
