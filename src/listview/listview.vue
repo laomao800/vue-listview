@@ -17,7 +17,7 @@
       <filterbar
         ref="filterbar"
         :filter-buttons="filterButtons"
-        :filter-fields="filterFields"
+        :filter-fields="validFilterFields"
         :filter-model="filterModel"
         :filterbar-fold.sync="filterbarFold"
         :show-filter-submit="showFilterSearch"
@@ -115,6 +115,8 @@
 import _ from 'lodash'
 import axios from 'axios'
 import get from 'get-value'
+import { isVNode } from '@/utils/utils.js'
+import { getFieldComponentName } from '@/components/fields'
 import VNode from '@/components/v-node'
 import Filterbar from '@/listview/components/filterbar'
 import ListviewHeader from '@/listview/components/listview-header.vue'
@@ -229,6 +231,7 @@ export default {
       maxHeight: null,
       contentHeight: null,
       filterbarFold: true,
+      validFilterFields: [],
       contentLoading: false,
       contentData: {
         items: [],
@@ -246,7 +249,8 @@ export default {
       const mainEl = this.$refs.main
       const bottomOffset =
         parseInt(getComputedStyle(mainEl)['padding-bottom'], 10) +
-        parseInt(getComputedStyle(mainEl)['margin-bottom'], 10)
+        parseInt(getComputedStyle(mainEl)['margin-bottom'], 10) +
+        parseInt(getComputedStyle(mainEl)['border-bottom-width'], 10)
       return bottomOffset
     },
     paginationHeight() {
@@ -290,6 +294,12 @@ export default {
     }
   },
 
+  created() {
+    this.validFilterFields = this.filterFields.filter(field => {
+      return isVNode(field) || getFieldComponentName(field.type)
+    })
+  },
+
   mounted() {
     this.initLayout()
     if (this.autoload) {
@@ -299,16 +309,25 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener('resize', this.updateContentHeight)
+    window.removeEventListener('resize', this.updateFilterbarLayout)
   },
 
   methods: {
     async initLayout() {
+      console.log('initLayout')
       // 需要 nextTick 等待 filterbar 渲染后再开始更新布局
       await this.$nextTick()
       this.updateLayout()
-      // addResizeHandler
+
       if (this.fullHeight) {
         window.addEventListener('resize', this.updateContentHeight)
+      } else {
+        window.removeEventListener('resize', this.updateContentHeight)
+      }
+      if (this.validFilterFields.length > 0) {
+        window.addEventListener('resize', this.updateFilterbarLayout)
+      } else {
+        window.removeEventListener('resize', this.updateFilterbarLayout)
       }
     },
 
@@ -324,7 +343,7 @@ export default {
      * 更新主要内容区域高度尺寸
      */
     async updateContentHeight() {
-      if (this.height) {
+      if (this.fixedHeight) {
         this.maxHeight = this.$el.getBoundingClientRect().height
       } else if (this.fullHeight) {
         this.maxHeight = window.innerHeight

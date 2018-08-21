@@ -74,7 +74,7 @@
         ]"
       >
         <div
-          :style="{ transform: `translateX(${submitOffset}px)` }"
+          :style="{ transform: `translateX(${searchBtnOffset}px)` }"
           class="filterbar__submit-btn">
           <el-form-item>
             <slot name="prepend-filterbar-submit" />
@@ -111,7 +111,6 @@
 import _ from 'lodash'
 import VNode from '@/components/v-node.js'
 import { isVNode } from '@/utils/utils.js'
-import { getFieldComponentName } from '@/components/fields'
 import FilterForm from './filter-form.vue'
 
 export default {
@@ -135,9 +134,8 @@ export default {
   data() {
     return {
       internalFilterbarFold: true,
-      validFilterFields: [],
       topRightFilterIndex: -1,
-      submitOffset: 0
+      searchBtnOffset: 0
     }
   },
 
@@ -145,7 +143,7 @@ export default {
     filterbarHasMore() {
       return (
         this.topRightFilterIndex >= 0 &&
-        this.topRightFilterIndex < this.validFilterFields.length - 1
+        this.topRightFilterIndex < this.filterFields.length - 1
       )
     },
     showFilterbarSubmit() {
@@ -157,27 +155,13 @@ export default {
       )
     },
     noneFields() {
-      return this.validFilterFields.length === 0
+      return this.filterFields.length === 0
     }
-  },
-
-  created() {
-    this.validFilterFields = this.filterFields.filter(field => {
-      return isVNode(field) || getFieldComponentName(field.type)
-    })
   },
 
   mounted() {
     this.internalFilterbarFold = this.filterbarFold
-
     this.updateLayout()
-    if (!this.noneFields) {
-      window.addEventListener('resize', this.updateLayout)
-    }
-  },
-
-  beforeDestroy() {
-    window.removeEventListener('resize', this.updateLayout)
   },
 
   methods: {
@@ -249,7 +233,7 @@ export default {
         offset = x + width - this.$refs.submit.getBoundingClientRect().x
         offset = Math.min(0, offset + 10)
       }
-      this.submitOffset = offset
+      this.searchBtnOffset = offset
     }
   }
 }
@@ -332,13 +316,10 @@ export default {
 
     &-btn {
       display: inline-block;
-    }
-    &-btn .el-form-item__content > * {
-      display: inline-block;
-      margin-left: 10px;
 
-      &:first-child {
-        margin-left: 0;
+      .el-form-item__content > *:not(:nth-child(1)) {
+        display: inline-block;
+        margin-left: 10px;
       }
     }
 
