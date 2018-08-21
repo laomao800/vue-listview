@@ -23,15 +23,14 @@ configureViewport({
 
 setOptions({
   name: `PPS Vue Listview v${version}`,
-  url: 'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview',
-  addonPanelInRight: false
+  url: 'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview'
+  // addonPanelInRight: false
 })
 addDecorator(withNotes)
 
-const req = require.context('../stories', true, /.stories.js$/)
-
 function loadStories() {
-  req.keys().forEach(filename => req(filename))
+  require('../stories/layout.stories')
+  require('../stories/filterbar.stories')
 }
 
 configure(loadStories, module)
