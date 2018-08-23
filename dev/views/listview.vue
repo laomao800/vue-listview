@@ -4,9 +4,9 @@
     <listview
       :header-title="'演示列表'"
       :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
-      :autoload="true"
+      :autoload="false"
       :request-url="'/mock/listview'"
-      :request-type="'post'"
+      :request-method="'post'"
       :request-config="{
         'withCredencials': true,
         'headers': {

@@ -2,7 +2,9 @@
   <div
     v-if="title || nav.length > 0"
     class="listview__header">
-    <h1 class="listview__title">{{ title }}</h1>
+    <h1
+      v-if="title"
+      class="listview__title">{{ title }}</h1>
     <el-breadcrumb
       separator="/"
       class="listview__breadcrumb">

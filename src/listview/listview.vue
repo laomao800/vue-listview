@@ -59,19 +59,19 @@
               <template
                 v-if="internalContentMessage"
                 slot="empty">
-                <div
+                <span
                   :class="[
                     'content-message',
                     { [`content-message--${internalContentMessage.type}`]: internalContentMessage.type }
                   ]"
                 >
-                  <div
+                  <span
                     v-if="internalContentMessage.icon"
                     class="content-message--icon">
                     <i :class="internalContentMessage.icon"/>
-                  </div>
-                  <div class="content-message--message">{{ internalContentMessage.message }}</div>
-                </div>
+                  </span>
+                  <span class="content-message--message">{{ internalContentMessage.message }}</span>
+                </span>
               </template>
 
               <el-table-column
@@ -123,6 +123,21 @@ import ListviewHeader from '@/listview/components/listview-header.vue'
 
 const axiosService = axios.create()
 
+function transformContentData(data = {}, dataMap = {}) {
+  const result = {}
+  const keysMap = Object.keys(dataMap)
+
+  keysMap.forEach(key => {
+    try {
+      const dataKey = key.toString()
+      const dataValue = get(data, dataMap[key])
+      result[dataKey] = dataValue
+    } catch (e) {}
+  })
+
+  return result
+}
+
 export default {
   name: 'Listview',
 
@@ -149,33 +164,17 @@ export default {
     },
 
     // Data request
-    autoLoad: { type: Boolean, default: true },
+    autoload: { type: Boolean, default: true },
     requestUrl: { type: String, default: '' },
-    requestType: { type: String, default: 'get' },
+    requestMethod: { type: String, default: 'get' },
     requestConfig: { type: Object, default: () => ({}) },
+
+    // Adv request
     requestHandler: { type: Function, default: null },
     transformRequestData: { type: Function, default: null },
+
+    // Adv response
     transformResponseData: { type: Function, default: null },
-    transformContentData: {
-      type: Function,
-      default(responseData) {
-        let items
-        let itemsKey = 'result.items'
-        try {
-          itemsKey = this.contentDataMap.items.toString()
-        } catch (e) {}
-        items = get(responseData, itemsKey) || []
-
-        let total
-        let totalKey = 'result.total'
-        try {
-          totalKey = this.contentDataMap.total.toString()
-        } catch (e) {}
-        total = get(responseData, totalKey) || 0
-
-        return { items, total }
-      }
-    },
     contentDataMap: {
       type: Object,
       default: () => ({
@@ -183,6 +182,9 @@ export default {
         total: 'result.total'
       })
     },
+
+    // Request error handler
+    contentMessage: { type: [Object, String], default: null },
     validateResponse: {
       type: Function,
       default(response) {
@@ -203,7 +205,6 @@ export default {
         }
       }
     },
-    contentMessage: { type: Object, default: () => ({}) },
 
     // Filterbar
     // TODO: validator
@@ -235,7 +236,7 @@ export default {
       contentLoading: false,
       contentData: {
         items: [],
-        total: 1
+        total: 0
       },
       internalContentMessage: null,
       internalListSelection: [],
@@ -245,6 +246,9 @@ export default {
   },
 
   computed: {
+    /**
+     * 内容区域垂直铺满屏幕后需要减去的距离，包括了可能的装饰性留白的内外边距尺寸
+     */
     contentBottomOffset() {
       const mainEl = this.$refs.main
       const bottomOffset =
@@ -253,6 +257,10 @@ export default {
         parseInt(getComputedStyle(mainEl)['border-bottom-width'], 10)
       return bottomOffset
     },
+
+    /**
+     * 页码区域所占高度，用于计算内容高度
+     */
     paginationHeight() {
       const paginationEl = this.$refs.pagination
       const paginationHeight = paginationEl
@@ -260,6 +268,10 @@ export default {
         : 0
       return paginationHeight
     },
+
+    /**
+     * 如果为固定高度布局，则会返回能直接用于 css height 的值
+     */
     fixedHeight() {
       if (this.height) {
         const isPercent = /\d+%/.test(this.height)
@@ -268,10 +280,18 @@ export default {
       }
       return false
     },
+
+    /**
+     * 对传入的 tableEvents 的 key 统一转换为横线分隔格式
+     */
     validTableEvents() {
-      // 对传入的 tableEvents 的 key 统一转换为横线分隔格式
       return _.mapKeys(this.tableEvents, (value, key) => _.kebabCase(key))
     },
+
+    /**
+     * 直接 v-bind 到 <el-table> 上与默认配置重名的属性会失效，
+     * 因此通过 computed 合并所需的 props
+     */
     validTableProps() {
       const defaultProps = {
         size: 'small',
@@ -295,14 +315,25 @@ export default {
   },
 
   created() {
+    // 过滤有效的 filterFields ，只支持预设的字段或者 VNode
     this.validFilterFields = this.filterFields.filter(field => {
       return isVNode(field) || getFieldComponentName(field.type)
     })
+
+    // 初始化提示信息
+    if (this.contentMessage) {
+      if (typeof this.contentMessage === 'string') {
+        this.setContentMessage(this.contentMessage)
+      } else if (_.isPlainObject(this.contentMessage)) {
+        const { type, message } = this.contentMessage
+        this.setContentMessage(message, type)
+      }
+    }
   },
 
   mounted() {
     this.initLayout()
-    if (this.autoLoad) {
+    if (this.autoload) {
       this.requestData()
     }
   },
@@ -314,7 +345,6 @@ export default {
 
   methods: {
     async initLayout() {
-      console.log('initLayout')
       // 需要 nextTick 等待 filterbar 渲染后再开始更新布局
       await this.$nextTick()
       this.updateLayout()
@@ -386,34 +416,43 @@ export default {
       this.contentLoading = true
 
       let responseData = null
+
+      // 请求参数合并转换
+      const payloadData = _.cloneDeep(this.filterModel)
+      if (this.usePage) {
+        payloadData.page = this.currentPage
+        payloadData.pageSize = this.pageSize
+      }
+      const requestData = this.transformRequestData
+        ? this.transformRequestData(payloadData)
+        : payloadData
+
       if (this.requestHandler) {
-        responseData = await this.requestHandler()
+        // 自定义请求方法
+        responseData = await this.requestHandler(requestData)
       } else if (this.requestUrl) {
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
         this._requestCancelToken && this._requestCancelToken()
 
-        const payloadData = {
-          ...this.filterModel,
-          page: this.currentPage,
-          pageSize: this.pageSize
-        }
-        const requestData = this.transformRequestData
-          ? this.transformRequestData(payloadData)
-          : payloadData
-
-        const requestConfig = {
-          ...this.requestConfig,
+        // 构造 Axios 请求 requestConfig
+        const internalRequestMethod =
+          this.requestConfig.method || this.requestMethod
+        const internalRequestConfig = {
           url: this.requestUrl,
-          method: this.requestType,
-          cancelToken: new axios.CancelToken(cancel => {
-            this._requestCancelToken = cancel
-          })
+          method: internalRequestMethod
         }
-        if (requestConfig === 'get') {
-          requestConfig.params = requestData
+        if (internalRequestMethod === 'get') {
+          internalRequestConfig.params = requestData
         } else {
-          requestConfig.data = requestData
+          internalRequestConfig.data = requestData
         }
+
+        const requestConfig = _.merge(internalRequestConfig, this.requestConfig)
+        // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
+        requestConfig.cancelToken = new axios.CancelToken(cancel => {
+          this._requestCancelToken = cancel
+        })
+
         try {
           const response = await axiosService(requestConfig)
           if (this.validateResponse(response)) {
@@ -434,9 +473,10 @@ export default {
       const contentResponse = this.transformResponseData
         ? this.transformResponseData(responseData)
         : responseData
-      const contentData = this.transformContentData
-        ? this.transformContentData(contentResponse)
-        : contentResponse
+      const contentData = transformContentData(
+        contentResponse,
+        this.contentDataMap
+      )
 
       this.contentData = contentData
     },
@@ -523,6 +563,11 @@ export default {
 
   &__content {
     overflow: auto;
+
+    .el-table__empty-text {
+      width: auto;
+      max-width: 50%;
+    }
   }
 
   .content-message {
@@ -533,12 +578,16 @@ export default {
     box-shadow: 0 0 15px #ddd;
 
     &--icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       margin-right: 10px;
       font-size: 24px;
     }
 
     &--message {
       font-size: 14px;
+      text-align: left;
     }
 
     &--success .content-message--icon {
