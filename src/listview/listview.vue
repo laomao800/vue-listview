@@ -20,15 +20,15 @@
         :filter-fields="validFilterFields"
         :filter-model="filterModel"
         :filterbar-fold.sync="filterbarFold"
-        :show-filter-submit="showFilterSearch"
+        :show-filter-search="showFilterSearch"
         :show-filter-reset="showFilterReset"
         @filter-submit="handleFilterSubmit"
       >
-        <template slot="append-filterbar-submit">
-          <slot name="append-filterbar-submit" />
-        </template>
         <template slot="prepend-filterbar-submit">
           <slot name="prepend-filterbar-submit" />
+        </template>
+        <template slot="append-filterbar-submit">
+          <slot name="append-filterbar-submit" />
         </template>
       </filterbar>
 
@@ -309,6 +309,12 @@ export default {
     fullHeight() {
       this.initLayout()
     },
+    showFilterSearch() {
+      this.initLayout()
+    },
+    showFilterReset() {
+      this.initLayout()
+    },
     filterbarFold() {
       this.updateLayout()
     }
@@ -412,6 +418,11 @@ export default {
       this.requestData()
     },
 
+    // 供外部使用的短别名
+    search() {
+      this.requestData()
+    },
+
     async requestData() {
       this.contentLoading = true
 
@@ -457,6 +468,7 @@ export default {
           const response = await axiosService(requestConfig)
           if (this.validateResponse(response)) {
             responseData = response.data
+            this.setContentMessage(null) // 清空错误信息
           } else {
             this.setContentMessage(
               this.resolveRequestErrorMessage(response),
@@ -473,10 +485,9 @@ export default {
       const contentResponse = this.transformResponseData
         ? this.transformResponseData(responseData)
         : responseData
-      const contentData = transformContentData(
-        contentResponse,
-        this.contentDataMap
-      )
+      const contentData = this.contentDataMap
+        ? transformContentData(contentResponse, this.contentDataMap)
+        : contentResponse
 
       this.contentData = contentData
     },
@@ -496,12 +507,12 @@ export default {
     },
     renderTableColumn(tableColumn) {
       const _createColumn = column => {
-        const { defaultSlot, children, ...props } = column
+        const { render, children, ...props } = column
 
         const VNodeData = { props }
-        if (defaultSlot) {
+        if (render) {
           VNodeData.scopedSlots = {
-            default: defaultSlot
+            default: render
           }
         }
 
@@ -516,6 +527,10 @@ export default {
       return _.isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },
     setContentMessage(message = '', type) {
+      if (message === null) {
+        this.internalContentMessage = null
+        return
+      }
       const iconMap = {
         success: 'el-icon-success',
         warning: 'el-icon-warning',
