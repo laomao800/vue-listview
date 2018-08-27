@@ -4,17 +4,16 @@
     <listview
       :header-title="'演示列表'"
       :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
-      :autoload="false"
-      :request-url="'/mock/listview'"
-      :request-method="'post'"
+
+      :autoload="true"
+      request-url="/mock/listview"
+      request-method="post"
       :request-config="{
-        'withCredencials': true,
-        'headers': {
-          'foo': 'bar'
+        withCredencials: true,
+        headers: {
+          foo: 'bar'
         }
       }"
-      :transform-request-data="(data) => data"
-      :transform-response-data="(res) => res"
 
       :filter-buttons="filterButtons"
       :filter-fields="filterFields"
@@ -48,13 +47,13 @@ export default {
         {
           type: 'success',
           icon: 'el-icon-circle-plus-outline',
-          content: '添加',
+          text: '添加',
           click: this.showAddModal
         },
         {
           type: 'danger',
           icon: 'el-icon-remove-outline',
-          content: '批量删除',
+          text: '批量删除',
           click() {
             alert('delete')
           }
@@ -62,7 +61,7 @@ export default {
         {
           type: 'primary',
           icon: 'el-icon-circle-plus-outline',
-          content: '下拉按钮',
+          text: '下拉按钮',
           trigger: 'click',
           splitButton: true,
           click() {
@@ -70,13 +69,14 @@ export default {
           },
           children: [
             {
-              content: '菜单1',
+              icon: 'el-icon-circle-plus-outline',
+              text: '菜单1',
               click() {
                 alert(1)
               }
             },
             {
-              content: '菜单2',
+              text: '菜单2',
               click() {
                 alert(2)
               }
@@ -116,7 +116,7 @@ export default {
           ]
         },
         {
-          type: 'multiple-Select',
+          type: 'multipleSelect',
           model: 'multipleSelect',
           label: '多选字段',
           options: [
@@ -139,7 +139,7 @@ export default {
         {
           type: 'timeSelect',
           model: 'timeSelect',
-          label: '固定时间'
+          label: '固定时间选项'
         },
         {
           type: 'timePicker',
@@ -213,7 +213,7 @@ export default {
           width: 150,
           align: 'center',
           fixed: true,
-          defaultSlot: prop => {
+          render: prop => {
             return (
               <div>
                 <el-button
@@ -261,7 +261,7 @@ export default {
         {
           label: '是否启用',
           align: 'center',
-          defaultSlot: prop => {
+          render: prop => {
             if (prop.row.enable) {
               return <div style="color:#67c23a">启用</div>
             } else {
@@ -282,7 +282,7 @@ export default {
       ],
       tableProps: {
         size: 'small',
-        border: false
+        border: true
       },
       tableEvents: {
         rowClick(val) {},
