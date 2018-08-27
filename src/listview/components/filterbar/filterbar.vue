@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="showFilterButtons || showFilterSubmit || showFilterFields"
     :class="[
       'list-view__filterbar',
       { 'list-view__filterbar--fold': internalFilterbarFold }
@@ -11,7 +12,7 @@
       submit.native.prevent>
       <!-- 操作按钮区域 -->
       <div
-        v-if="filterButtons.length > 0"
+        v-if="showFilterButtons"
         class="filterbar__buttons">
         <el-form-item>
           <template v-for="(button, index) in filterButtons">
@@ -20,7 +21,7 @@
               :key="index"
               :node="button" />
             <el-dropdown
-              v-else-if="button.children"
+              v-else-if="Array.isArray(button.children)"
               :key="index"
               :type="button.type"
               :split-button="button.splitButton"
@@ -32,21 +33,24 @@
                 <i
                   v-if="button.icon"
                   :class="button.icon"/>
-                {{ button.content }}
+                {{ button.text }}
               </template>
               <template v-else>
                 <el-button
                   :type="button.type"
                   :icon="button.icon"
                   @click="resolveClickEvent(button, $event)"
-                >{{ button.content }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
+                >{{ button.text }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
                   v-for="(child, index) in button.children"
                   :key="index"
                   @click.native="resolveClickEvent(child, $event)">
-                  {{ child.content }}
+                  <i
+                    v-if="child.icon"
+                    :class="child.icon" />
+                  {{ child.text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -56,13 +60,14 @@
               :type="button.type"
               :icon="button.icon"
               @click="resolveClickEvent(button, $event)"
-            >{{ button.content }}</el-button>
+            >{{ button.text }}</el-button>
           </template>
         </el-form-item>
       </div>
 
       <!-- 提交、重置按钮区域 -->
       <div
+        v-if="showFilterSubmit"
         ref="submit"
         :class="[
           'filterbar__submit',
@@ -97,6 +102,7 @@
 
       <!-- 搜索栏控件区域 -->
       <filter-form
+        v-if="showFilterFields"
         ref="filterForm"
         :fields="filterFields"
         :model="filterModel"
@@ -139,6 +145,20 @@ export default {
   },
 
   computed: {
+    showFilterButtons() {
+      return this.filterButtons.length > 0
+    },
+    showFilterFields() {
+      return this.filterFields.length > 0
+    },
+    showFilterSubmit() {
+      return (
+        this.showFilterSearch ||
+        this.showFilterReset ||
+        this.$slots['prepend-filterbar-submit'] ||
+        this.$slots['append-filterbar-submit']
+      )
+    },
     filterbarHasMore() {
       return (
         this.topRightFilterIndex >= 0 &&
@@ -268,10 +288,15 @@ export default {
       width: 1em;
     }
 
+    height: 30px;
     padding-top: 0;
     padding-bottom: 0;
     line-height: 30px;
     vertical-align: top;
+
+    span:empty {
+      display: none;
+    }
   }
 
   .filterbar__buttons,
@@ -323,10 +348,10 @@ export default {
 
       // stylelint-disable-next-line
       .el-form-item__content > * {
+        display: inline-block;
         transition: inherit;
       }
       .el-form-item__content > *:not(:nth-child(1)) {
-        display: inline-block;
         margin-left: 10px;
       }
     }
