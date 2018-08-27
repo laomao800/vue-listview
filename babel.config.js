@@ -7,7 +7,10 @@ const plugins = [
   ]
 ]
 
-if (process.env.BUILD_MODE !== 'component') {
+if (
+  process.env.NODE_ENV === 'production' &&
+  process.env.BUILD_MODE !== 'component'
+) {
   plugins.push([
     'component',
     {
@@ -41,7 +44,8 @@ module.exports = {
             modules: 'commonjs'
           }
         ]
-      ]
+      ],
+      plugins: ['require-context-hook']
     }
   }
 }
