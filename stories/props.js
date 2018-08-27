@@ -2,48 +2,48 @@ import { action } from '@storybook/addon-actions'
 
 export const filterButtonsFull = [
   {
-    content: 'default',
+    text: 'default',
     click: action('click:button-default')
   },
   {
     type: 'primary',
     icon: 'el-icon-edit',
-    content: 'primary',
+    text: 'primary',
     click: action('click:button-primary')
   },
   {
     type: 'success',
     icon: 'el-icon-check',
-    content: 'success',
+    text: 'success',
     click: action('click:button-success')
   },
   {
     type: 'info',
     icon: 'el-icon-message',
-    content: 'info',
+    text: 'info',
     click: action('click:button-info')
   },
   {
     type: 'warning',
     icon: 'el-icon-star-off',
-    content: 'warning',
+    text: 'warning',
     click: action('click:button-warning')
   },
   {
     type: 'danger',
     icon: 'el-icon-delete',
-    content: 'danger',
+    text: 'danger',
     click: action('click:button-danger')
   },
   {
     type: 'primary',
     icon: 'el-icon-circle-plus-outline',
-    content: '下拉按钮1',
+    text: '下拉按钮1',
     splitButton: true,
     click: action('click:button-dropdown1'),
     children: [
-      { content: '菜单1', click: action('click:button-dropdown1-sub1') },
-      { content: '菜单2', click: action('click:button-dropdown1-sub2') }
+      { text: '菜单1', click: action('click:button-dropdown1-sub1') },
+      { text: '菜单2', click: action('click:button-dropdown1-sub2') }
     ]
   },
   {
@@ -185,7 +185,7 @@ export const tableColumns = [
     width: 150,
     align: 'center',
     fixed: true,
-    defaultSlot: prop => {
+    render: prop => {
       return (
         <div>
           <el-button
@@ -233,7 +233,7 @@ export const tableColumns = [
   {
     label: '是否启用',
     align: 'center',
-    defaultSlot: prop => {
+    render: prop => {
       if (prop.row.enable) {
         return <div style="color:#67c23a">启用</div>
       } else {
