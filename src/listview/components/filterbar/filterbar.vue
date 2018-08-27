@@ -9,7 +9,7 @@
     <el-form
       :inline="true"
       size="small"
-      submit.native.prevent>
+      @submit.native.prevent>
       <!-- 操作按钮区域 -->
       <div
         v-if="showFilterButtons"
@@ -96,7 +96,7 @@
           :icon="internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
           type="primary"
           class="filterbar__submit-more"
-          @click="togglerFilterbar"
+          @click="toggleFilterbar"
         />
       </div>
 
@@ -222,7 +222,7 @@ export default {
       this.$emit('filter-reset', this.filterModel)
     },
 
-    togglerFilterbar() {
+    toggleFilterbar() {
       this.internalFilterbarFold = !this.internalFilterbarFold
       this.$emit('update:filterbarFold', this.internalFilterbarFold)
     },
