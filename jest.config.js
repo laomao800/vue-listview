@@ -20,7 +20,8 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest'
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|less)$': '<rootDir>/tests/unit/__mocks__/styleMock.js'
   },
   snapshotSerializers: ['jest-serializer-vue'],
   coverageDirectory: '<rootDir>/tests/unit/coverage',
