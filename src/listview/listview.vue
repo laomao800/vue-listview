@@ -252,9 +252,9 @@ export default {
     contentBottomOffset() {
       const mainEl = this.$refs.main
       const bottomOffset =
-        parseInt(getComputedStyle(mainEl)['padding-bottom'], 10) +
-        parseInt(getComputedStyle(mainEl)['margin-bottom'], 10) +
-        parseInt(getComputedStyle(mainEl)['border-bottom-width'], 10)
+        (parseInt(getComputedStyle(mainEl)['padding-bottom'], 10) || 0) +
+        (parseInt(getComputedStyle(mainEl)['margin-bottom'], 10) || 0) +
+        (parseInt(getComputedStyle(mainEl)['border-bottom-width'], 10) || 0)
       return bottomOffset
     },
 
@@ -388,7 +388,7 @@ export default {
         this.contentHeight = parseInt(this.contentMinHeight, 10)
       }
 
-      if (this.maxHeight) {
+      if (this.maxHeight !== null) {
         // 有可能是 filterbar 的展开与缩起，引发的 update ，
         // 需要 nextTick 等待界面变化后再计算布局
         await this.$nextTick()
