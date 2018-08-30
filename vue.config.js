@@ -42,6 +42,11 @@ module.exports = {
       config.externals = config.externals || {} // for webpack inspect
       config.externals['element-ui'] = 'ELEMENT'
     }
+
+    const version = process.env.VERSION || require('./package.json').version
+    const banner = `PPS Vue Listview v${version}`
+    const webpack = require('webpack')
+    config.plugins.push(new webpack.BannerPlugin(banner))
   },
 
   devServer: {
