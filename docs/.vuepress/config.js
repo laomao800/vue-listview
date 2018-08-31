@@ -1,12 +1,12 @@
 const path = require('path')
-const pkgConfig = require('../../package.json')
+const version = process.env.VERSION || require('../../package.json').version
 
 const base =
   process.env.DOC_MODE === 'build' ? '/pps/bg-pps-vue-listview-doc/' : '/'
 
 module.exports = {
   base,
-  title: `PPS Vue Listview v${pkgConfig.version}`,
+  title: `PPS Vue Listview v${version}`,
   configureWebpack: (config, isServer) => {
     return {
       resolve: {
