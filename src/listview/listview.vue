@@ -120,6 +120,11 @@ import { getFieldComponentName } from '@/components/fields'
 import VNode from '@/components/v-node'
 import Filterbar from '@/listview/components/filterbar'
 import ListviewHeader from '@/listview/components/listview-header.vue'
+import {
+  camelCaseObjectKey,
+  snakeCaseObjectKey,
+  pascalCaseObjectKey
+} from '@/utils/utils'
 
 const axiosService = axios.create()
 
@@ -168,6 +173,12 @@ export default {
     requestUrl: { type: String, default: '' },
     requestMethod: { type: String, default: 'get' },
     requestConfig: { type: Object, default: () => ({}) },
+    requestDataKeyCase: {
+      type: String,
+      default: null,
+      validator: value =>
+        ['camelCase', 'snakeCase', 'pascalCase'].indexOf(value) > -1
+    },
 
     // Adv request
     requestHandler: { type: Function, default: null },
@@ -429,11 +440,28 @@ export default {
       let responseData = null
 
       // 请求参数合并转换
-      const payloadData = _.cloneDeep(this.filterModel)
+      let payloadData = _.cloneDeep(this.filterModel)
       if (this.usePage) {
-        payloadData.page = this.currentPage
-        payloadData.pageSize = this.pageSize
+        payloadData.page_index = this.currentPage
+        payloadData.page_size = this.pageSize
       }
+
+      // 请求参数 key 拼写方法转换
+      if (this.requestDataKeyCase) {
+        switch (this.requestDataKeyCase) {
+          case 'camelCase':
+            payloadData = camelCaseObjectKey(payloadData)
+            break
+          case 'snakeCase':
+            payloadData = snakeCaseObjectKey(payloadData)
+            break
+          case 'pascalCase':
+            payloadData = pascalCaseObjectKey(payloadData)
+            break
+        }
+      }
+
+      // 自定义请求参数转换方法
       const requestData = this.transformRequestData
         ? this.transformRequestData(payloadData)
         : payloadData

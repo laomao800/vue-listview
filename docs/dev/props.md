@@ -189,6 +189,22 @@ sidebarDepth: 2
 
 兼容 Axios 的所有 [`requestConfig`](https://github.com/axios/axios#request-config) 配置，除了 `cancelToken` 。
 
+### requestDataKeyCase
+
+- type: `String`
+- default: null
+- 可选值： `camelCase` , `snakeCase` , `pascalCase`
+
+请求参数拼写转换方案，默认不转换。
+
+针对不同版本的接口参数拼写方案，可简单设置该值自动转换所有提交的参数。如果这种简单转换方案不满足，可使用 [transformRequestData](#transformrequestdata) 进行自定义转换。
+
+| 参数       | 示例                       |
+| ---------- | -------------------------- |
+| camelCase  | `pageIndex` , `pageSize`   |
+| snakeCase  | `page_index` , `page_size` |
+| pascalCase | `PageIndex` , `PageSize`   |
+
 ## 错误处理
 
 ### validateResponse
@@ -257,7 +273,7 @@ sidebarDepth: 2
 - type: `Function(requestData)`
 - default: `null`
 
-该方法可对接口发起请求参数在发送前作最后的更改。参数 `requestData` 包含搜索栏的所有数据，如果有开启分页还会包含 `page` 和 `pageSize` 。
+该方法可对接口发起请求参数在发送前作最后的更改。参数 `requestData` 包含搜索栏的所有数据，如果有开启分页还会包含 `page_index` 和 `page_size` 。
 
 ### transformResponseData
 
