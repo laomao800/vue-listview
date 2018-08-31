@@ -239,12 +239,6 @@ sidebarDepth: 2
 
 ## 数据请求 - 高级配置
 
-::: tip 说明
-
-除非接口参数、响应格式有特殊需求，常规场景使用一般无需更改这一小节内的配置。
-
-:::
-
 如果对于数据接口请求在发送前、接受后有特殊的处理流程，或者接口数据格式与规范不一致，可通过以下几个参数对数据进行加工处理，内部处理流程为：
 
 <!-- ./request-flow.puml -->
@@ -267,8 +261,12 @@ sidebarDepth: 2
 
 ### transformResponseData
 
-- type: `Function`
+- type: `Function(requestData)`
 - default: `null`
+
+对原始响应数据的加工方法，接收原始响应数据，处理后方法返回值会交由给 `contentDataMap` 进行映射。
+
+一般用于接口响应的数据无法简单一次映射到需要的数据（如需要根据条件重组、聚合）时，可使用该配置项。
 
 ### contentDataMap
 
