@@ -1,14 +1,9 @@
 <template>
   <el-time-picker
     :placeholder="field.label"
-    :clearable="true"
     :disabled="field.disabled"
-    :style="{ width: '200px' }"
-    :is-range="true"
-    :start-placeholder="'开始时间'"
-    :end-placeholder="'结束时间'"
     v-model="value"
-    v-bind="field.componentProps"
+    v-bind="mergedProps"
   />
 </template>
 
@@ -18,6 +13,18 @@ import fieldMixin from '../field-mixin'
 export default {
   name: 'FieldTimeRange',
 
-  mixins: [fieldMixin]
+  mixins: [fieldMixin],
+
+  data() {
+    return {
+      defaultProps: {
+        clearable: true,
+        style: { width: '200px' },
+        isRange: true,
+        startPlaceholder: '开始时间',
+        endPlaceholder: '结束时间'
+      }
+    }
+  }
 }
 </script>

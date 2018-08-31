@@ -1,11 +1,9 @@
 <template>
   <el-time-picker
     :placeholder="field.label"
-    :clearable="true"
     :disabled="field.disabled"
-    :style="{ width: '120px' }"
     v-model="value"
-    v-bind="field.componentProps"
+    v-bind="mergedProps"
   />
 </template>
 
@@ -15,6 +13,15 @@ import fieldMixin from '../field-mixin'
 export default {
   name: 'FieldTimePicker',
 
-  mixins: [fieldMixin]
+  mixins: [fieldMixin],
+
+  data() {
+    return {
+      defaultProps: {
+        clearable: true,
+        style: { width: '120px' }
+      }
+    }
+  }
 }
 </script>

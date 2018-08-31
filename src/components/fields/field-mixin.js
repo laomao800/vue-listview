@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import get from 'get-value'
 
 export default {
@@ -16,6 +17,15 @@ export default {
         const schema = this.field.model
         this.$set(model, schema, newVal)
       }
+    },
+    mergedProps() {
+      const defaultProps = _.isPlainObject(this.defaultProps)
+        ? this.defaultProps
+        : {}
+      const componentProps = _.isPlainObject(this.field.componentProps)
+        ? this.field.componentProps
+        : {}
+      return _.merge(defaultProps, componentProps)
     }
   }
 }

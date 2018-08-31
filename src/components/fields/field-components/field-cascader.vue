@@ -1,13 +1,10 @@
 <template>
   <el-cascader
     :placeholder="field.label"
-    :clearable="true"
     :disabled="field.disabled"
-    :style="{ width: '180px' }"
-    :expand-trigger="'hover'"
     :options="field.options"
     v-model="value"
-    v-bind="field.componentProps"
+    v-bind="mergedProps"
   />
 </template>
 
@@ -17,6 +14,16 @@ import fieldMixin from '../field-mixin'
 export default {
   name: 'FieldCascader',
 
-  mixins: [fieldMixin]
+  mixins: [fieldMixin],
+
+  data() {
+    return {
+      defaultProps: {
+        clearable: true,
+        style: { width: '180px' },
+        expandTrigger: 'hover'
+      }
+    }
+  }
 }
 </script>

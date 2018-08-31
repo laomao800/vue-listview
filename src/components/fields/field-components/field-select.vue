@@ -1,16 +1,16 @@
 <template>
   <el-select
     :placeholder="field.label"
-    :clearable="true"
     :disabled="field.disabled"
-    :style="{ width: '180px' }"
     v-model="value"
-    v-bind="field.componentProps">
-    <el-option
-      v-for="(option, index) in field.options"
-      :key="index"
-      v-bind="option"
-    />
+    v-bind="mergedProps">
+    <template v-if="Array.isArray(field.options)">
+      <el-option
+        v-for="(option, index) in field.options"
+        :key="index"
+        v-bind="option"
+      />
+    </template>
   </el-select>
 </template>
 
@@ -20,6 +20,15 @@ import fieldMixin from '../field-mixin'
 export default {
   name: 'FieldSelect',
 
-  mixins: [fieldMixin]
+  mixins: [fieldMixin],
+
+  data() {
+    return {
+      defaultProps: {
+        clearable: true,
+        style: { width: '180px' }
+      }
+    }
+  }
 }
 </script>
