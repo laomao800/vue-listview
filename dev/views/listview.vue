@@ -8,12 +8,6 @@
       :autoload="true"
       request-url="/mock/listview"
       request-method="post"
-      :request-config="{
-        withCredencials: true,
-        headers: {
-          foo: 'bar'
-        }
-      }"
 
       :filter-buttons="filterButtons"
       :filter-fields="filterFields"

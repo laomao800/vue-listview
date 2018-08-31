@@ -157,6 +157,8 @@ sidebarDepth: 2
 
 每次发起请求会自动将 [filterModel](#filtermodel) 中的数据作为参数提交。
 
+默认开启 `withCredentials: true` ，如需关闭请配置 [requestConfig](#requestconfig) 。
+
 :::
 
 ### autoload

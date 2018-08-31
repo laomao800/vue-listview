@@ -446,13 +446,13 @@ export default {
         this._requestCancelToken && this._requestCancelToken()
 
         // 构造 Axios 请求 requestConfig
-        const internalRequestMethod =
-          this.requestConfig.method || this.requestMethod
         const internalRequestConfig = {
           url: this.requestUrl,
-          method: internalRequestMethod
+          method: this.requestConfig.method || this.requestMethod,
+          withCredentials: true
         }
-        if (internalRequestMethod === 'get') {
+        // 提前合并以获取 method 用于判断附加请求参数
+        if (internalRequestConfig.method === 'get') {
           internalRequestConfig.params = requestData
         } else {
           internalRequestConfig.data = requestData

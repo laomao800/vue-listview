@@ -4,7 +4,7 @@
 
 ## search()
 
-发起数据请求。
+发起数据请求。请求默认开启 `withCredentials: true` ，如需关闭请配置 [Props requestConfig](/dev/props.md#requestconfig) 。
 
 ## setContentMessage(message, type)
 
