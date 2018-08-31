@@ -278,6 +278,7 @@ export default {
   }
 
   &--fold {
+    box-sizing: content-box;
     height: 32px;
     overflow: hidden;
   }
@@ -288,10 +289,10 @@ export default {
       width: 1em;
     }
 
-    height: 30px;
+    height: 32px;
     padding-top: 0;
     padding-bottom: 0;
-    line-height: 30px;
+    line-height: 32px;
     vertical-align: top;
 
     span:empty {
@@ -308,6 +309,18 @@ export default {
     }
   }
 
+  .filterbar__buttons,
+  .filterbar__field {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px @filter-gap-size 0;
+    vertical-align: top;
+
+    .el-form-item__content > * {
+      vertical-align: top;
+    }
+  }
+
   .filterbar__buttons {
     float: left;
 
@@ -316,20 +329,6 @@ export default {
     .el-dropdown + .el-dropdown,
     .el-form-item__content > *:not(:nth-child(1)) {
       margin-left: @filter-gap-size;
-    }
-  }
-
-  .filterbar__buttons,
-  .filterbar__field {
-    position: relative;
-    display: inline-block;
-    margin: 0 10px @filter-gap-size 0;
-    vertical-align: top;
-  }
-
-  .filterbar__field {
-    .el-input__inner {
-      vertical-align: top;
     }
   }
 

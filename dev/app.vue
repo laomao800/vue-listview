@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import './views/common.less'
+
 export default {
   name: 'App'
 }

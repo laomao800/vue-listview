@@ -139,7 +139,7 @@ export default {
         {
           type: 'timeSelect',
           model: 'timeSelect',
-          label: '固定时间选项'
+          label: '固定时间'
         },
         {
           type: 'timePicker',

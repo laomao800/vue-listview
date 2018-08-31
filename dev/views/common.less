@@ -1,0 +1,54 @@
+// stylelint-disable selector-max-type
+@color-primary: #409eff;
+
+body {
+  background-color: #fff;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body,
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', SimSun, sans-serif;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: @color-primary;
+
+  &:hover {
+    color: darken(@color-primary, 15);
+  }
+
+  &:focus,
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
