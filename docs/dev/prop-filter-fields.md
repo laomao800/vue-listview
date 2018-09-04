@@ -83,6 +83,74 @@
 
 也支持直接传入 JSX ，但注意通过这种形式传入的表单元素所包含的值不会包含在提交参数内，<mark>需要自行将需要提交的数据在合适的时间点写入给 [`filterModel`](/dev/props.md#filtermodel) ，或者通过 [`transformRequestData`](/dev/props.md#transformrequestdata) 来附加包含相应的数据</mark>。
 
+```jsx
+export default {
+  data() {
+    return {
+      filterModel: {
+        jsx: 'text from data'
+      },
+      filterButtons: [
+        {
+        // 如果需要渲染本实例内的数据，可使用 render 属性。需要注意 `render` 对内部 this 指向有要求，因此需要通过以下的形式定义：
+          render: () => {
+            return (
+              <input
+                value={this.filterModel.jsx}
+                on-input={e => (this.filterModel.jsx = e.target.value)}
+              />
+            )
+          }
+        },
+
+        // 或
+        {
+          render: function() {
+            return (
+              <input
+                value={this.text}
+                on-input={e => (this.text = e.target.value)}
+              />
+            )
+          }.bind(this)
+        },
+
+        // 也支持使用 label 设置顶部的字段说明装饰元素，但需要注意需要设置 model 以及 filterModel 内有相匹配的属性，如果是自定义组件需要自行实现写入值的逻辑。
+        {
+          label: 'jsx',
+          model: 'jsx',
+          render: () => {
+            return (
+              <input
+                value={this.filterModel.jsx}
+                on-input={e => (this.filterModel.jsx = e.target.value)}
+              />
+            )
+          }
+        },
+
+        // 或者可以简写成
+        () => (
+          <input
+            value={this.text}
+            on-input={e => (this.text = e.target.value)}
+          />
+        ),
+
+        // 对于只需要绑定事件的场景，可以简写成以下的形式。
+        // 注意：由于 JSX 解析后 this 指向会改变，因此如果需要立即使用本实例自身数据（如输出数据到内容）的时候，不能用下面这种形式。
+        <button on-click={this.showDialog}>JSX 按钮</button>,
+        <button on-click={() => this.showDialog(this.text)}>JSX 按钮</button>
+      ]
+    }
+  },
+  methods: {
+    showDialog(text) {}
+  }
+  // ...
+}
+```
+
 [text]: http://element.eleme.io/#/zh-CN/component/input
 [select]: http://element.eleme.io/#/zh-CN/component/select
 [multiple-select]: http://element.eleme.io/#/zh-CN/component/select#ji-chu-duo-xuan

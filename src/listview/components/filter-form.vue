@@ -5,17 +5,23 @@
       ref="field"
       :key="index"
       class="filterbar__field">
+      <transition
+        v-if="field.label"
+        name="label-trans">
+        <div
+          v-if="showFieldLabel(field)"
+          class="filterbar__field-label">{{ field.label }}</div>
+      </transition>
       <v-node
-        v-if="isVNode(field)"
+        v-if="isFunction(field)"
+        :node="field()" />
+      <v-node
+        v-else-if="field.render"
+        :node="field.render()" />
+      <v-node
+        v-else-if="isVNode(field)"
         :node="field" />
       <el-form-item v-else>
-        <transition
-          v-if="field.label"
-          name="label-trans">
-          <div
-            v-if="showFieldLabel(field)"
-            class="filterbar__field-label">{{ field.label }}</div>
-        </transition>
         <component
           :is="getFieldComponentName(field.type)"
           :model="model"
@@ -31,6 +37,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import hasValues from 'has-values'
 import fieldComponents, { getFieldComponentName } from '@/components/fields'
 import VNode from '@/components/v-node.js'
@@ -57,10 +64,15 @@ export default {
 
   methods: {
     isVNode,
+
+    isFunction: _.isFunction,
+
     getFieldComponentName,
+
     getFieldValue(field) {
       return this.model[field.model]
     },
+
     showFieldLabel(field) {
       const value = this.getFieldValue(field)
       // hasValues(null) -> true ，所以需要和 value 同时判断

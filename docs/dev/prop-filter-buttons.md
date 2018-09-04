@@ -88,19 +88,49 @@ export default {
 
 在有子菜单的情况下，可控制触发按钮是否呈现为左右分裂式。
 
+### render
+
+- type: `Function`
+- default: `undefined`
+
+可直接 return 一个 JSX ，具体使用方式可以参考下方 JSX 小节。
+
 ## JSX
 
-支持以 JSX 的形式传入：
+支持以 JSX 的形式传入，有多种写法支持不同的使用场景：
 
 ```jsx
 export default {
   data() {
     return {
-      filterButtons: [<button on-click={this.showAddModal}>JSX 按钮</button>]
+      text: 'text from data',
+      filterButtons: [
+        // 如果需要渲染本实例内的数据，可使用 render 属性。需要注意 `render` 对内部 this 指向有要求，因此需要通过以下的形式定义：
+        {
+          render: () => {
+            return <button>{this.text}</button>
+          }
+        },
+
+        // 或
+        {
+          render: function() {
+            return <button>{this.text}</button>
+          }.bind(this)
+        },
+
+        // 或者可以简写成
+        () => <button>{this.text}</button>,
+
+        // 对于只需要绑定事件的场景，可以简写成以下的形式。
+        // 注意：由于 JSX 解析后 this 指向会改变，因此如果需要立即使用本实例自身数据（如输出数据到内容）的时候，不能用下面这种形式。
+        <button on-click={this.showDialog}>JSX 按钮</button>,
+        <button on-click={() => this.showDialog(this.text)}>JSX 按钮</button>
+      ]
     }
   },
   methods: {
-    showDialog() {}
+    showDialog(text) {}
   }
   // ...
 }

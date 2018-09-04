@@ -17,7 +17,15 @@
         <el-form-item>
           <template v-for="(button, index) in filterButtons">
             <v-node
-              v-if="isVNode(button)"
+              v-if="isFunction(button)"
+              :key="index"
+              :node="button()" />
+            <v-node
+              v-else-if="button.render"
+              :key="index"
+              :node="button.render()" />
+            <v-node
+              v-else-if="isVNode(button)"
               :key="index"
               :node="button" />
             <el-dropdown
@@ -73,7 +81,7 @@
           'filterbar__submit',
           {
             'filterbar__submit--nomore': !filterbarHasMore,
-            'filterbar__submit--onleft': noneFields
+            'filterbar__submit--onleft': isNoneFields
           }
         ]"
       >
@@ -104,7 +112,7 @@
       <filter-form
         v-if="showFilterFields"
         ref="filterForm"
-        :fields="filterFields"
+        :fields="validFilterFields"
         :model="filterModel"
         class="filterbar__form"
       />
@@ -116,6 +124,7 @@
 import _ from 'lodash'
 import VNode from '@/components/v-node.js'
 import { isVNode } from '@/utils/utils.js'
+import { getFieldComponentName } from '@/components/fields'
 import FilterForm from './filter-form.vue'
 
 export default {
@@ -145,11 +154,25 @@ export default {
   },
 
   computed: {
+    validFilterFields() {
+      return this.filterFields.filter(field => {
+        // 过滤有效的 filterFields ，只支持预设的字段、或包含 render 函数或 VNode
+        return (
+          _.isFunction(field) ||
+          _.isFunction(field.render) ||
+          isVNode(field) ||
+          getFieldComponentName(field.type)
+        )
+      })
+    },
+    isNoneFields() {
+      return this.validFilterFields.length === 0
+    },
     showFilterButtons() {
       return this.filterButtons.length > 0
     },
     showFilterFields() {
-      return this.filterFields.length > 0
+      return this.validFilterFields.length > 0
     },
     showFilterSubmit() {
       return (
@@ -162,11 +185,8 @@ export default {
     filterbarHasMore() {
       return (
         this.topRightFilterIndex >= 0 &&
-        this.topRightFilterIndex < this.filterFields.length - 1
+        this.topRightFilterIndex < this.validFilterFields.length - 1
       )
-    },
-    noneFields() {
-      return this.filterFields.length === 0
     }
   },
 
@@ -190,6 +210,7 @@ export default {
 
   methods: {
     isVNode,
+    isFunction: _.isFunction,
 
     getAllFieldsDom() {
       const filterForm = this.$refs['filterForm']

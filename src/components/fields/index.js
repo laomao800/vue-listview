@@ -22,6 +22,9 @@ const fieldKeys = componentNames.map(key =>
 )
 const fieldKeysMap = _.zipObject(fieldKeys, componentNames)
 function getFieldComponentName(key) {
+  if (!key) {
+    return false
+  }
   const fieldKey = _.camelCase(key)
   return fieldKeysMap[fieldKey]
 }

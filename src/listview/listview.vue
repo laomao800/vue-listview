@@ -17,7 +17,7 @@
       <filterbar
         ref="filterbar"
         :filter-buttons="filterButtons"
-        :filter-fields="validFilterFields"
+        :filter-fields="filterFields"
         :filter-model="filterModel"
         :filterbar-fold.sync="filterbarFold"
         :show-filter-search="showFilterSearch"
@@ -115,10 +115,8 @@
 import _ from 'lodash'
 import axios from 'axios'
 import get from 'get-value'
-import { isVNode } from '@/utils/utils.js'
-import { getFieldComponentName } from '@/components/fields'
 import VNode from '@/components/v-node'
-import Filterbar from '@/listview/components/filterbar'
+import Filterbar from '@/listview/components/filterbar.vue'
 import ListviewHeader from '@/listview/components/listview-header.vue'
 import {
   camelCaseObjectKey,
@@ -243,7 +241,6 @@ export default {
       maxHeight: null,
       contentHeight: null,
       filterbarFold: true,
-      validFilterFields: [],
       contentLoading: false,
       contentData: {
         items: [],
@@ -332,11 +329,6 @@ export default {
   },
 
   created() {
-    // 过滤有效的 filterFields ，只支持预设的字段或者 VNode
-    this.validFilterFields = this.filterFields.filter(field => {
-      return isVNode(field) || getFieldComponentName(field.type)
-    })
-
     // 初始化提示信息
     if (this.contentMessage) {
       if (typeof this.contentMessage === 'string') {
@@ -371,7 +363,10 @@ export default {
       } else {
         window.removeEventListener('resize', this.updateContentHeight)
       }
-      if (this.validFilterFields.length > 0) {
+
+      const validFilterFields = this.$refs.filterbar.validFilterFields.length
+
+      if (validFilterFields.length > 0) {
         window.addEventListener('resize', this.updateFilterbarLayout)
       } else {
         window.removeEventListener('resize', this.updateFilterbarLayout)

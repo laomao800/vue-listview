@@ -1,9 +1,10 @@
 export default {
+  functional: true,
   name: 'VNode',
   props: {
     node: {}
   },
-  render() {
-    return this.node
+  render(h, context) {
+    return context.props.node
   }
 }
