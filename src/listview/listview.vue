@@ -196,7 +196,7 @@ export default {
     contentMessage: { type: [Object, String], default: null },
     validateResponse: {
       type: Function,
-      default(response) {
+      default: /* istanbul ignore next */ function(response) {
         try {
           return response.data.is_success
         } catch (e) {
@@ -206,7 +206,7 @@ export default {
     },
     resolveRequestErrorMessage: {
       type: Function,
-      default(response) {
+      default: /* istanbul ignore next */ function(response) {
         try {
           return response.data.error_info.msg
         } catch (e) {
@@ -293,6 +293,7 @@ export default {
      * 对传入的 tableEvents 的 key 统一转换为横线分隔格式
      */
     validTableEvents() {
+      /* istanbul ignore next */
       return _.mapKeys(this.tableEvents, (value, key) => _.kebabCase(key))
     },
 
@@ -311,19 +312,19 @@ export default {
   },
 
   watch: {
-    height() {
+    height: /* istanbul ignore next */ function() {
       this.initLayout()
     },
-    fullHeight() {
+    fullHeight: /* istanbul ignore next */ function() {
       this.initLayout()
     },
-    showFilterSearch() {
+    showFilterSearch: /* istanbul ignore next */ function() {
       this.initLayout()
     },
-    showFilterReset() {
+    showFilterReset: /* istanbul ignore next */ function() {
       this.initLayout()
     },
-    filterbarFold() {
+    filterbarFold: /* istanbul ignore next */ function() {
       this.updateLayout()
     }
   },
@@ -347,7 +348,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeDestroy: /* istanbul ignore next */ function() {
     window.removeEventListener('resize', this.updateContentHeight)
     window.removeEventListener('resize', this.updateFilterbarLayout)
   },
@@ -358,6 +359,7 @@ export default {
       await this.$nextTick()
       this.updateLayout()
 
+      /* istanbul ignore next */
       if (this.fullHeight) {
         window.addEventListener('resize', this.updateContentHeight)
       } else {
@@ -399,6 +401,7 @@ export default {
         // 需要 nextTick 等待界面变化后再计算布局
         await this.$nextTick()
         const contentEl = this.$refs.content
+        /* istanbul ignore next */
         const contentTop = contentEl ? contentEl.getBoundingClientRect().top : 0
         const restHeight =
           this.maxHeight -
@@ -549,7 +552,7 @@ export default {
       // TODO: tableColumn validator
       return _.isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },
-    setContentMessage(message = '', type) {
+    setContentMessage(message = '', type = null) {
       if (message === null) {
         this.internalContentMessage = null
         return
@@ -560,7 +563,7 @@ export default {
         info: 'el-icon-info',
         error: 'el-icon-error'
       }
-      const icon = iconMap[type] || null
+      const icon = type ? iconMap[type] || null : null
 
       this.internalContentMessage = {
         type,

@@ -23,6 +23,7 @@ const fieldKeys = componentNames.map(key =>
 const fieldKeysMap = _.zipObject(fieldKeys, componentNames)
 function getFieldComponentName(key) {
   if (!key) {
+    /* istanbul ignore next */
     return false
   }
   const fieldKey = _.camelCase(key)

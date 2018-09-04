@@ -27,6 +27,7 @@ function transformObjectKey(object = {}, transformCase) {
   }
 
   if (!transformFunction) {
+    /* istanbul ignore next */
     return object
   } else {
     return _.transform(

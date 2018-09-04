@@ -15,8 +15,8 @@
     "docs:build": "cross-env DOC_MODE=build vuepress build docs",
     "docs:deploy": "node scripts/docs-deploy.js",
     "test:unit": "vue-cli-service test:unit",
-    "test:unit:cover": "vue-cli-service test:unit --coverage",
-    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change"
+    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
+    "test:unit:cover": "vue-cli-service test:unit --coverage"
   },
   "dependencies": {
     "axios": "^0.18.0",

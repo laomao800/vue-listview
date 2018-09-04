@@ -25,6 +25,11 @@ module.exports = {
   },
   snapshotSerializers: ['jest-serializer-vue'],
   coverageDirectory: '<rootDir>/tests/unit/coverage',
-  collectCoverageFrom: ['src/**/*.{js,vue}'],
+  collectCoverageFrom: [
+    'src/**/*.{js,vue}',
+    '!src/components/fields/**/*',
+    '!src/index.js',
+    '!src/index.component.js'
+  ],
   testURL: `http://localhost:${process.env.MOCK_API_PORT}`
 }

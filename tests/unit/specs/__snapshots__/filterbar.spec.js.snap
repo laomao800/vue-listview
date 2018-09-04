@@ -1,0 +1,433 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filterbar - SearchButton & ResetButton ResetButton 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <!---->
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <!---->
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - SearchButton & ResetButton ResetButton 2`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <!---->
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - SearchButton & ResetButton SearchButton 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <!---->
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <!---->
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - SearchButton & ResetButton SearchButton 2`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <!---->
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - SearchButton & ResetButton Slots 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <!---->
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <div>prepend-filterbar-submit</div>
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <div>append-filterbar-submit</div>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - filterButtons JSX 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <div class="filterbar__buttons">
+      <div class="el-form-item el-form-item--small">
+        <!---->
+        <div class="el-form-item__content">
+          <button>button</button><strong>strong</strong>
+          <!---->
+        </div>
+      </div>
+    </div>
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - filterButtons 带下拉按钮渲染 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <div class="filterbar__buttons">
+      <div class="el-form-item el-form-item--small">
+        <!---->
+        <div class="el-form-item__content">
+          <div class="el-dropdown">
+            <div class="el-button-group">
+              <button type="button" class="el-button el-button--primary el-button--small">
+                <!---->
+                <!----><span><i class="el-icon-circle-plus-outline"></i>
+              下拉按钮1
+             </span></button>
+              <button type="button" class="el-button el-button--primary el-button--small el-dropdown__caret-button" aria-haspopup="list">
+                <!---->
+                <!----><span><i class="el-dropdown__icon el-icon-arrow-down"></i></span></button>
+            </div>
+            <ul class="el-dropdown-menu el-popper" style="display: none;" name="el-zoom-in-top">
+              <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
+                菜单1
+              </li>
+              <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
+                菜单2
+              </li>
+            </ul>
+          </div>
+          <div class="el-dropdown">
+            <button type="button" class="el-button el-button--primary el-button--small el-dropdown-selfdefine" aria-haspopup="list" role="button" tabindex="0">
+              <!---->
+              <!----><span>下拉按钮2<i class="el-icon-arrow-down el-icon--right"></i></span></button>
+            <ul class="el-dropdown-menu el-popper" style="display: none;" name="el-zoom-in-top">
+              <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
+                菜单1
+              </li>
+              <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
+                菜单2
+              </li>
+            </ul>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </div>
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - filterButtons 普通按钮渲染 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <div class="filterbar__buttons">
+      <div class="el-form-item el-form-item--small">
+        <!---->
+        <div class="el-form-item__content">
+          <button type="button" class="el-button el-button--default el-button--small">
+            <!---->
+            <!----><span>default</span></button>
+          <button type="button" class="el-button el-button--text el-button--small">
+            <!---->
+            <!----><span>text</span></button>
+          <button type="button" class="el-button el-button--primary el-button--small">
+            <!---->
+            <i class="el-icon-edit"></i><span>primary</span></button>
+          <button type="button" class="el-button el-button--success el-button--small">
+            <!---->
+            <i class="el-icon-check"></i><span>success</span></button>
+          <button type="button" class="el-button el-button--info el-button--small">
+            <!---->
+            <i class="el-icon-message"></i><span>info</span></button>
+          <button type="button" class="el-button el-button--warning el-button--small">
+            <!---->
+            <i class="el-icon-star-off"></i><span>warning</span></button>
+          <button type="button" class="el-button el-button--danger el-button--small">
+            <!---->
+            <i class="el-icon-delete"></i><span>danger</span></button>
+          <!---->
+        </div>
+      </div>
+    </div>
+    <div class="filterbar__submit filterbar__submit--nomore filterbar__submit--onleft">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <!---->
+  </form>
+</div>
+`;
+
+exports[`filterbar - filterFields FilterForm JSX 1`] = `
+<div class="list-view__filterbar list-view__filterbar--fold">
+  <form class="el-form el-form--inline">
+    <!---->
+    <div class="filterbar__submit filterbar__submit--nomore">
+      <div class="filterbar__submit-btn" style="transform: translateX(0px);">
+        <div class="el-form-item el-form-item--small">
+          <!---->
+          <div class="el-form-item__content">
+            <button type="button" class="el-button el-button--primary el-button--small">
+              <!---->
+              <!----><span>搜索</span></button>
+            <button type="button" class="el-button el-button--default el-button--small">
+              <!---->
+              <!----><span>重置</span></button>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <button type="button" class="el-button filterbar__submit-more el-button--primary">
+        <!---->
+        <i class="el-icon-caret-bottom"></i>
+        <!---->
+      </button>
+    </div>
+    <div class="filterbar__form">
+      <div class="filterbar__field">
+        <!---->
+        <button>button</button>
+      </div>
+      <div class="filterbar__field">
+        <!----><strong>strong</strong></div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段类型 1`] = `
+<div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldtext-stub model="[object Object]" field="[object Object]"></fieldtext-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldtext-stub model="[object Object]" field="[object Object]"></fieldtext-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldselect-stub model="[object Object]" field="[object Object]"></fieldselect-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldmultipleselect-stub model="[object Object]" field="[object Object]"></fieldmultipleselect-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fielddate-stub model="[object Object]" field="[object Object]"></fielddate-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fielddaterange-stub model="[object Object]" field="[object Object]"></fielddaterange-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldtimeselect-stub model="[object Object]" field="[object Object]"></fieldtimeselect-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldtimepicker-stub model="[object Object]" field="[object Object]"></fieldtimepicker-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldtimepickerrange-stub model="[object Object]" field="[object Object]"></fieldtimepickerrange-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fielddatetime-stub model="[object Object]" field="[object Object]"></fielddatetime-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fielddatetimerange-stub model="[object Object]" field="[object Object]"></fielddatetimerange-stub>
+    </elformitem-stub>
+  </div>
+  <div class="filterbar__field">
+    <!---->
+    <elformitem-stub inlinemessage="" showmessage="true">
+      <fieldcascader-stub model="[object Object]" field="[object Object]"></fieldcascader-stub>
+    </elformitem-stub>
+  </div>
+</div>
+`;
