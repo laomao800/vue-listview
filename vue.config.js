@@ -1,4 +1,6 @@
 module.exports = {
+  baseUrl: '',
+
   pages: {
     index: {
       entry: 'dev/main.js'
@@ -9,9 +11,7 @@ module.exports = {
 
   css: {
     sourceMap: process.env.NODE_ENV !== 'production',
-    extract:
-      process.env.NODE_ENV === 'production' &&
-      process.env.BUILD_MODE !== 'component'
+    extract: false
   },
 
   chainWebpack: config => {
@@ -35,6 +35,11 @@ module.exports = {
   },
 
   configureWebpack: config => {
+    // 关闭 webpack 性能警告
+    config.performance = {
+      hints: false
+    }
+
     const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
     config.plugins.push(new LodashModuleReplacementPlugin())
 
