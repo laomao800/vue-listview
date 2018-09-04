@@ -2,8 +2,9 @@ const path = require('path')
 const fs = require('fs')
 const ftpConfigFile = path.join(__dirname, './ftp.local.js')
 
-console.log(fs.existsSync(ftpConfigFile))
-if (fs.existsSync(ftpConfigFile)) {
+if (!fs.existsSync(ftpConfigFile)) {
+  console.error(`[Error] ${ftpConfigFile} is not exists.`)
+} else {
   const ftpConfig = require(ftpConfigFile)
   const FtpDeploy = require('ftp-deploy')
   const deployService = new FtpDeploy()
