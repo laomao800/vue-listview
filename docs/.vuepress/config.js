@@ -48,7 +48,7 @@ module.exports = {
       {
         text: 'Changelog',
         link:
-          'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/CHANGELOG.md'
+          'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/src/develop/CHANGELOG.md'
       },
       {
         text: '仓库地址',
