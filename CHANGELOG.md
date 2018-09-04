@@ -1,3 +1,21 @@
+# 1.0.0-alpha.2 (2018-09-04)
+
+### Change
+
+- 关闭 css extract ，无需再单独引入 listview.css ([de67c24](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/de67c24))
+
+### Features
+
+- filterButtons, filterFields 支持 render() 属性 ([fbd4043](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/fbd4043))
+
+### Documentation
+
+- 增加 changelog ([d4212b3](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/d4212b3))
+
+### Tests
+
+- 增加单元测试文件 ([285709e](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/285709e))
+
 # 1.0.0-alpha.1 (2018-08-31)
 
 ### Change
