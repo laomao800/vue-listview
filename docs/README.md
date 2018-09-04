@@ -60,7 +60,16 @@ export default {
 ### UMD
 
 ```html
-<!-- TODO: -->
+<div id="app">
+  <listview />
+</div>
+<script src="https://vuejs.org/js/vue.min.js"></script>
+<script src="./listview.umd.min.js"></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+  })
+</script>
 ```
 
 ## 基本配置
@@ -89,7 +98,7 @@ export default {
 
 - `listview.common.js`
 
-  包含 listview 功能和 Element-UI 完整库
+  包含 listview 功能和 Element-UI + css 完整库
 
 - `listview.umd.js`
 
@@ -98,7 +107,3 @@ export default {
 - `listview.umd.min.js`
 
   同上的 UMD 压缩版本
-
-- `listview.css`
-
-  包含 listview 和 Element-UI 的所有样式（内置在 js 文件内 font 路径会失效，暂时独立一个文件）
