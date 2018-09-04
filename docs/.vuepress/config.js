@@ -6,7 +6,12 @@ const base =
 
 module.exports = {
   base,
-  title: `PPS Vue Listview v${version}`,
+  locales: {
+    '/': {
+      lang: 'zh-CN',
+      title: `PPS Vue Listview v${version}`
+    }
+  },
   configureWebpack: (config, isServer) => {
     return {
       resolve: {
@@ -39,6 +44,11 @@ module.exports = {
           { text: 'Slots', link: '/dev/slots.md' },
           { text: 'Methods', link: '/dev/methods.md' }
         ]
+      },
+      {
+        text: 'Changelog',
+        link:
+          'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/CHANGELOG.md'
       },
       {
         text: '仓库地址',
