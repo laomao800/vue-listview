@@ -5,6 +5,7 @@
     :options="field.options"
     v-model="value"
     v-bind="mergedProps"
+    v-on="mergedEvents"
   />
 </template>
 

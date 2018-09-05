@@ -11,13 +11,14 @@
 
 以下为所有类型都共有的属性配置：
 
-| 参数           | 类型    | 说明                                                                      |
-| -------------- | ------- | ------------------------------------------------------------------------- |
-| type           | String  | 字段类型                                                                  |
-| model          | String  | 提交时字段的 key 名                                                       |
-| label          | String  | 字段中文说明                                                              |
-| disabled       | Boolean | 是否禁用                                                                  |
-| componentProps | Object  | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops) |
+| 参数           | 类型    | 说明                                                                         |
+| -------------- | ------- | ---------------------------------------------------------------------------- |
+| type           | String  | 字段类型                                                                     |
+| model          | String  | 提交时字段的 key 名                                                          |
+| label          | String  | 字段中文说明                                                                 |
+| disabled       | Boolean | 是否禁用                                                                     |
+| componentProps | Object  | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
+| componentProps | Object  | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
 
 #### `type` 字段类型可选值
 
@@ -64,8 +65,8 @@
 
 ### componentProps
 
-- type: `Array`
-- default: `[]`
+- type: `Object`
+- default: `{}`
 
 除了上面封装的“公共配置”和“私有配置”，如果针对不同字段组件有不同的参数配置，可以查阅[各自对应 Element-UI 组件](#type-字段类型可选值)支持的 props 后，使用 `componentProps` 来直接传入，例：
 
@@ -78,6 +79,13 @@
   }
 },
 ```
+
+### componentEvents
+
+- type: `Object`
+- default: `{}`
+
+可传入[各自对应 Element-UI 组件](#type-字段类型可选值)的 Events 。
 
 ## JSX
 

@@ -26,6 +26,11 @@ export default {
         ? this.field.componentProps
         : {}
       return _.merge(defaultProps, componentProps)
+    },
+    mergedEvents() {
+      return _.isPlainObject(this.field.componentEvents)
+        ? this.field.componentEvents
+        : {}
     }
   }
 }

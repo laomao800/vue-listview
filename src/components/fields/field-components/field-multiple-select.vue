@@ -3,7 +3,9 @@
     :placeholder="field.label"
     :disabled="field.disabled"
     v-model="value"
-    v-bind="mergedProps">
+    v-bind="mergedProps"
+    v-on="mergedEvents"
+  >
     <template v-if="Array.isArray(field.options)">
       <el-option
         v-for="(option, index) in field.options"

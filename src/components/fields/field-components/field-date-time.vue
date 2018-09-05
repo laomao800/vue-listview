@@ -4,6 +4,7 @@
     :disabled="field.disabled"
     v-model="value"
     v-bind="mergedProps"
+    v-on="mergedEvents"
   />
 </template>
 
