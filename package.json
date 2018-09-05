@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "rimraf dist&npm run build:component&npm run build:with-ele-ui",
+    "build": "rimraf dist&npm run build:component&npm run build:full",
     "lint": "vue-cli-service lint",
     "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --report --target lib --name listview-component src/index.component.js",
-    "build:with-ele-ui": "vue-cli-service build --no-clean --report --target lib --name listview src/index.js",
+    "build:full": "vue-cli-service build --no-clean --report --target lib --name listview src/index.js",
     "release": "node scripts/release.js",
     "serve:storybook": "vue-cli-service serve:storybook -p 6006",
     "build:storybook": "vue-cli-service build:storybook",
