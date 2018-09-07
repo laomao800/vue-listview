@@ -1,3 +1,20 @@
+# 1.0.0-alpha.4 (2018-09-07)
+
+### Features
+
+- 搜索、重置按钮分别增加触发 filter-submit, filter-reset 事件
+
+# 1.0.0-alpha.3 (2018-09-05)
+
+### Features
+
+- **field:** 增加 componentEvents 可传入组件事件
+- 通过浏览器 script 引入组件情况下自动 install
+
+### Documentation
+
+- 完善文档演示代码
+
 # 1.0.0-alpha.2 (2018-09-04)
 
 ### Change
