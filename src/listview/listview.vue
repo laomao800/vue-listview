@@ -23,6 +23,7 @@
         :show-filter-search="showFilterSearch"
         :show-filter-reset="showFilterReset"
         @filter-submit="handleFilterSubmit"
+        @filter-reset="handleFilterReset"
       >
         <template slot="prepend-filterbar-submit">
           <slot name="prepend-filterbar-submit" />
@@ -425,6 +426,11 @@ export default {
 
     handleFilterSubmit() {
       this.requestData()
+      this.$emit('filter-submit')
+    },
+
+    handleFilterReset() {
+      this.$emit('filter-reset')
     },
 
     // 供外部使用的短别名
