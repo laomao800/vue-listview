@@ -470,6 +470,11 @@ export default {
         ? this.transformRequestData(payloadData)
         : payloadData
 
+      if (requestData === false) {
+        this.contentLoading = false
+        return
+      }
+
       if (this.requestHandler) {
         // 自定义请求方法
         responseData = await this.requestHandler(requestData)
