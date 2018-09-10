@@ -275,7 +275,7 @@ sidebarDepth: 2
 
 该方法可对接口发起请求参数在发送前作最后的更改。参数 `requestData` 包含搜索栏的所有数据，如果有开启分页还会包含 `page_index` 和 `page_size` 。
 
-如果改方法显式的返回 `false` 则会阻止提交，可用于发起请求前进行参数验证等。
+如果该方法显式的返回 `false` 则会阻止提交，可用于发起请求前进行参数验证等。
 
 ### transformResponseData
 
