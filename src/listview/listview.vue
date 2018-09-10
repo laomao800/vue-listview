@@ -447,7 +447,7 @@ export default {
       let payloadData = _.cloneDeep(this.filterModel)
       if (this.usePage) {
         payloadData.page_index = this.currentPage
-        payloadData.page_size = this.pageSize
+        payloadData.page_size = this.currentPageSize
       }
 
       // 请求参数 key 拼写方法转换
