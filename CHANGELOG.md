@@ -1,3 +1,19 @@
+# 1.0.0-alpha.6 (2018-09-10)
+
+### Features
+
+- transformRequestData 返回 false 可阻止请求发出 ([452bbc5](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/452bbc5))
+
+# 1.0.0-alpha.5 (2018-09-10)
+
+### Change
+
+- prop resolveRequestErrorMessage 更名为 resolveResponseErrorMessage ([1644eb7](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/1644eb7))
+
+### Bug Fixes
+
+- 修复翻页操作 page_size 参数错误 ([c1fca14](http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/commit/c1fca14))
+
 # 1.0.0-alpha.4 (2018-09-07)
 
 ### Features
