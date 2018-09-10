@@ -224,7 +224,7 @@ sidebarDepth: 2
 
 验证接口响应是否成功。若接口响应格式字段有差异，可修改该配置，如果无需错误处理可直接返回 `true` 。
 
-### resolveRequestErrorMessage
+### resolveResponseErrorMessage
 
 - type: `Function`
 - default:
@@ -239,7 +239,7 @@ sidebarDepth: 2
   }
   ```
 
-在 `validateResponse` 返回 `false` 表示请求失败后，会调用 `resolveRequestErrorMessage` 解析错误提示信息。
+在 `validateResponse` 返回 `false` 表示请求失败后，会调用 `resolveResponseErrorMessage` 解析错误提示信息。
 
 - 【默认表格样式】错误信息会出现在表格内容区域内
 - 【自定义 slot 】数据挂载在 slot-scope 的 `content-message` 属性上。

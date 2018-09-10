@@ -205,7 +205,7 @@ export default {
         }
       }
     },
-    resolveRequestErrorMessage: {
+    resolveResponseErrorMessage: {
       type: Function,
       default: /* istanbul ignore next */ function(response) {
         try {
@@ -503,7 +503,7 @@ export default {
             this.setContentMessage(null) // 清空错误信息
           } else {
             this.setContentMessage(
-              this.resolveRequestErrorMessage(response),
+              this.resolveResponseErrorMessage(response),
               'error'
             )
           }
