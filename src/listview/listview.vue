@@ -470,6 +470,7 @@ export default {
         ? this.transformRequestData(payloadData)
         : payloadData
 
+      // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
       if (requestData === false) {
         this.contentLoading = false
         return
@@ -503,6 +504,7 @@ export default {
 
         try {
           const response = await axiosService(requestConfig)
+          this.contentLoading = false
           if (this.validateResponse(response)) {
             responseData = response.data
             this.setContentMessage(null) // 清空错误信息
@@ -512,21 +514,25 @@ export default {
               'error'
             )
           }
-        } catch (e) {
-          this.setContentMessage(e.message, 'error')
+        } catch (error) {
+          if (!axios.isCancel(error)) {
+            this.setContentMessage(error.message, 'error')
+            this.contentLoading = false
+          }
         }
       }
 
-      this.contentLoading = false
+      // 若为取消操作则不赋值至内容中
+      if (responseData) {
+        const contentResponse = this.transformResponseData
+          ? this.transformResponseData(responseData)
+          : responseData
+        const contentData = this.contentDataMap
+          ? transformContentData(contentResponse, this.contentDataMap)
+          : contentResponse
 
-      const contentResponse = this.transformResponseData
-        ? this.transformResponseData(responseData)
-        : responseData
-      const contentData = this.contentDataMap
-        ? transformContentData(contentResponse, this.contentDataMap)
-        : contentResponse
-
-      this.contentData = contentData
+        this.contentData = contentData
+      }
     },
 
     /**
