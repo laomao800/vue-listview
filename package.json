@@ -1,5 +1,5 @@
 {
-  "name": "bg-pps-vue-listview",
+  "name": "@pps/vue-listview",
   "version": "1.0.0-alpha.6",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "docs": "vuepress dev docs",
     "docs:build": "cross-env DOC_MODE=build vuepress build docs",
     "docs:deploy": "node scripts/docs-deploy.js",
+    "docs:release": "npm run docs:build & npm run docs:deploy",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
     "test:unit:cover": "vue-cli-service test:unit --coverage"

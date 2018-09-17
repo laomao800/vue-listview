@@ -23,7 +23,7 @@ configureViewport({
 
 setOptions({
   name: `PPS Vue Listview v${version}`,
-  url: 'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview'
+  url: 'http://192.168.1.122:3000/pps-fe/vue-listview'
   // addonPanelInRight: false
 })
 addDecorator(withNotes)

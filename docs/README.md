@@ -11,11 +11,11 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 ## 安装
 
 ```bash
-npm i -S bg-pps-vue-listview
+npm i -S @pps/vue-listview
 
 # OR
 
-yarn add bg-pps-vue-listview
+yarn add @pps/vue-listview
 ```
 
 ## 使用
@@ -33,7 +33,7 @@ yarn add bg-pps-vue-listview
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Listview from 'bg-pps-vue-listview'
+import Listview from '@pps/vue-listview'
 
 Vue.use(ElementUI)
 Vue.use(Listview)
@@ -47,7 +47,7 @@ Vue.use(Listview)
 </template>
 
 <script>
-import Listview from 'bg-pps-vue-listview'
+import Listview from '@pps/vue-listview'
 
 export default {
   components: {

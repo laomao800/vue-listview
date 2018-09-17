@@ -1,8 +1,7 @@
 const path = require('path')
 const version = process.env.VERSION || require('../../package.json').version
 
-const base =
-  process.env.DOC_MODE === 'build' ? '/pps/bg-pps-vue-listview-doc/' : '/'
+const base = process.env.DOC_MODE === 'build' ? '/pps/vue-listview-doc/' : '/'
 
 module.exports = {
   base,
@@ -48,11 +47,11 @@ module.exports = {
       {
         text: 'Changelog',
         link:
-          'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview/src/develop/CHANGELOG.md'
+          'http://192.168.1.122:3000/pps-fe/vue-listview/src/develop/CHANGELOG.md'
       },
       {
         text: '仓库地址',
-        link: 'http://192.168.1.122:3000/pps-fe/bg-pps-vue-listview'
+        link: 'http://192.168.1.122:3000/pps-fe/vue-listview'
       }
     ],
     sidebar: [

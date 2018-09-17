@@ -14,13 +14,13 @@ if (!fs.existsSync(ftpConfigFile)) {
     user: ftpConfig.user,
     password: ftpConfig.password,
     localRoot: path.join(__dirname, '../docs/.vuepress/dist'),
-    remoteRoot: '/pps/bg-pps-vue-listview-doc',
+    remoteRoot: '/pps/vue-listview-doc',
     include: ['**/*'],
     exclude: []
   }
 
   deployService
     .deploy(config)
-    .then(res => console.log('finished'))
+    .then(res => console.log('Documentation deploy finished.'))
     .catch(err => console.log(err))
 }
