@@ -1,3 +1,10 @@
+# 1.0.0-alpha.7 (2018-09-18)
+
+### Bug Fixes
+
+- 修复多次请求互相取消时出现空白错误信息 ([31a1bd5](http://192.168.1.122:3000/pps-fe/vue-listview/commit/31a1bd5))
+- 修复 paginationHeight 高度获取无效导致重置布局失效问题 ([32957e2](http://192.168.1.122:3000/pps-fe/vue-listview/commit/32957e2))
+
 # 1.0.0-alpha.6 (2018-09-10)
 
 ### Features
