@@ -268,17 +268,6 @@ export default {
     },
 
     /**
-     * 页码区域所占高度，用于计算内容高度
-     */
-    paginationHeight() {
-      const paginationEl = this.$refs.pagination
-      const paginationHeight = paginationEl
-        ? paginationEl.getBoundingClientRect().height
-        : 0
-      return paginationHeight
-    },
-
-    /**
      * 如果为固定高度布局，则会返回能直接用于 css height 的值
      */
     fixedHeight() {
@@ -404,11 +393,12 @@ export default {
         const contentEl = this.$refs.content
         /* istanbul ignore next */
         const contentTop = contentEl ? contentEl.getBoundingClientRect().top : 0
+        const paginationHeight = this.getPaginationHeight()
         const restHeight =
           this.maxHeight -
           contentTop -
           this.contentBottomOffset -
-          this.paginationHeight
+          paginationHeight
         this.contentHeight = Math.max(restHeight, this.contentMinHeight)
       }
     },
@@ -600,6 +590,17 @@ export default {
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage
       this.requestData()
+    },
+
+    /**
+     * 获取页码区域所占高度，用于计算内容高度
+     */
+    getPaginationHeight() {
+      const paginationEl = this.$refs.pagination
+      const paginationHeight = paginationEl
+        ? paginationEl.getBoundingClientRect().height
+        : 0
+      return paginationHeight
     }
   }
 }
