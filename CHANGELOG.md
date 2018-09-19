@@ -34,10 +34,6 @@
 - **field:** 增加 componentEvents 可传入组件事件
 - 通过浏览器 script 引入组件情况下自动 install
 
-### Documentation
-
-- 完善文档演示代码
-
 # 1.0.0-alpha.2 (2018-09-04)
 
 ### Change
@@ -47,14 +43,6 @@
 ### Features
 
 - filterButtons, filterFields 支持 render() 属性 ([fbd4043](http://192.168.1.122:3000/pps-fe/vue-listview/commit/fbd4043))
-
-### Documentation
-
-- 增加 changelog ([d4212b3](http://192.168.1.122:3000/pps-fe/vue-listview/commit/d4212b3))
-
-### Tests
-
-- 增加单元测试文件 ([285709e](http://192.168.1.122:3000/pps-fe/vue-listview/commit/285709e))
 
 # 1.0.0-alpha.1 (2018-08-31)
 
@@ -71,7 +59,3 @@
 
 - 增加 requestDataKeyCase 可进行简单的配置请求参数拼写方案 ([b4edbc807](http://192.168.1.122:3000/pps-fe/vue-listview/commit/b4edbc807))
 - add release scripts ([7868764af](http://192.168.1.122:3000/pps-fe/vue-listview/commit/7868764af))
-
-### Documentation
-
-- 文档补充 transformResponseData ([59d571d11](http://192.168.1.122:3000/pps-fe/vue-listview/commit/59d571d11))
