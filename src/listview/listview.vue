@@ -356,7 +356,7 @@ export default {
         window.removeEventListener('resize', this.updateContentHeight)
       }
 
-      const validFilterFields = this.$refs.filterbar.validFilterFields.length
+      const validFilterFields = this.$refs.filterbar.validFilterFields
 
       if (validFilterFields.length > 0) {
         window.addEventListener('resize', this.updateFilterbarLayout)

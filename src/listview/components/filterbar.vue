@@ -334,7 +334,7 @@ export default {
   .filterbar__field {
     position: relative;
     display: inline-block;
-    margin: 0 10px @filter-gap-size 0;
+    margin: 0 @filter-gap-size @filter-gap-size 0;
     vertical-align: top;
 
     .el-form-item__content > * {
@@ -344,12 +344,14 @@ export default {
 
   .filterbar__buttons {
     float: left;
+    margin-right: 0;
 
     .el-button + .el-dropdown,
     .el-dropdown + .el-button,
     .el-dropdown + .el-dropdown,
-    .el-form-item__content > *:not(:nth-child(1)) {
-      margin-left: @filter-gap-size;
+    .el-form-item__content > * {
+      margin-right: @filter-gap-size;
+      margin-left: 0;
     }
   }
 
