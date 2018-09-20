@@ -360,7 +360,6 @@ export default {
   }
 
   .filterbar__submit {
-    position: relative;
     float: right;
     margin: 0;
     margin-bottom: 10px;
