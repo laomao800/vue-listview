@@ -1,4 +1,4 @@
-/*! PPS Vue Listview v1.0.0-alpha.8 */
+/*! PPS Vue Listview v1.0.0-alpha.9 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
@@ -7222,7 +7222,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, "\n.listview{overflow:auto\n}\n.listview .el-table .el-table__body tr.el-table__row.row--selected td{background-color:#ffd\n}\n.listview__main{background-color:#fff;border:5px solid #f0f2f5;padding:10px\n}\n.listview__content{overflow:auto\n}\n.listview__content .el-table__empty-text{max-width:50%;width:auto\n}\n.listview .content-message{border-radius:5px;box-shadow:0 0 15px #ddd;display:flex;line-height:30px;padding:15px 20px\n}\n.listview .content-message--icon{display:flex;flex-direction:column;font-size:24px;justify-content:center;margin-right:10px\n}\n.listview .content-message--message{font-size:14px;text-align:left\n}\n.listview .content-message--success .content-message--icon{color:#6ac243\n}\n.listview .content-message--warning .content-message--icon{color:#f90\n}\n.listview .content-message--info .content-message--icon{color:#459ffc\n}\n.listview .content-message--error .content-message--icon{color:#f56c6c\n}\n.listview__page{padding-top:10px\n}\n.listview .el-pagination.is-background .btn-next,.listview .el-pagination.is-background .btn-prev,.listview .el-pagination.is-background .el-pager li{margin:0 8px 0 0\n}\n.listview .el-pagination.is-background .el-select .el-input{margin:0\n}\n.listview .el-table--border .el-table-column--selection .cell{padding-left:10px;padding-right:10px\n}", ""]);
+exports.push([module.i, "\n.listview{overflow:auto\n}\n.listview .el-table .el-table__body tr.el-table__row.row--selected td{background-color:#ffd\n}\n.listview__main{background-color:#fff;border:5px solid #f0f2f5;padding:10px\n}\n.listview__content{overflow:auto\n}\n.listview__content .el-table__empty-text{max-width:50%;width:auto\n}\n.listview .content-message{border-radius:5px;box-shadow:0 0 15px #ddd;display:flex;line-height:30px;padding:15px 20px\n}\n.listview .content-message--icon{display:flex;flex-direction:column;font-size:24px;justify-content:center;margin-right:10px\n}\n.listview .content-message--message{font-size:14px;text-align:left\n}\n.listview .content-message--success .content-message--icon{color:#6ac243\n}\n.listview .content-message--warning .content-message--icon{color:#f90\n}\n.listview .content-message--info .content-message--icon{color:#459ffc\n}\n.listview .content-message--error .content-message--icon{color:#f56c6c\n}\n.listview .table-column--single-selection .el-radio__label{display:none\n}\n.listview__page{padding-top:10px\n}\n.listview .el-pagination.is-background .btn-next,.listview .el-pagination.is-background .btn-prev,.listview .el-pagination.is-background .el-pager li{margin:0 8px 0 0\n}\n.listview .el-pagination.is-background .el-select .el-input{margin:0\n}\n.listview .el-table--border .el-table-column--selection .cell{padding-left:10px;padding-right:10px\n}", ""]);
 
 // exports
 
@@ -9678,7 +9678,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, "\n.list-view__filterbar{margin-bottom:10px;margin-top:-10px;padding-top:10px\n}\n.list-view__filterbar:after{clear:both;content:\"\";display:table\n}\n.list-view__filterbar--fold{box-sizing:content-box;height:32px;overflow:hidden\n}\n.list-view__filterbar .el-button{height:32px;line-height:32px;padding-bottom:0;padding-top:0;vertical-align:top\n}\n.list-view__filterbar .el-button [class*=\" el-icon-\"],.list-view__filterbar .el-button [class^=el-icon-]{width:1em\n}\n.list-view__filterbar .el-button span:empty{display:none\n}\n.list-view__filterbar .filterbar__buttons .el-form-item,.list-view__filterbar .filterbar__buttons>*,.list-view__filterbar .filterbar__form .el-form-item,.list-view__filterbar .filterbar__form>*,.list-view__filterbar .filterbar__submit .el-form-item,.list-view__filterbar .filterbar__submit>*{margin:0\n}\n.list-view__filterbar .filterbar__buttons,.list-view__filterbar .filterbar__field{display:inline-block;margin:0 10px 10px 0;position:relative;vertical-align:top\n}\n.list-view__filterbar .filterbar__buttons .el-form-item__content>*,.list-view__filterbar .filterbar__field .el-form-item__content>*{vertical-align:top\n}\n.list-view__filterbar .filterbar__buttons{float:left;margin-right:0\n}\n.list-view__filterbar .filterbar__buttons .el-button+.el-dropdown,.list-view__filterbar .filterbar__buttons .el-dropdown+.el-button,.list-view__filterbar .filterbar__buttons .el-dropdown+.el-dropdown,.list-view__filterbar .filterbar__buttons .el-form-item__content>*{margin-left:0;margin-right:10px\n}\n.list-view__filterbar .filterbar__form{margin-bottom:-10px\n}\n.list-view__filterbar .filterbar__submit{float:right;margin:0 0 10px;position:relative\n}\n.list-view__filterbar .filterbar__submit-btn{display:inline-block\n}\n.list-view__filterbar .filterbar__submit-btn .el-form-item__content>*{display:inline-block;transition:inherit\n}\n.list-view__filterbar .filterbar__submit-btn .el-form-item__content>:not(:first-child){margin-left:10px\n}\n.list-view__filterbar .filterbar__submit-more{line-height:30px;margin-left:10px;padding:0;width:40px\n}\n.list-view__filterbar .filterbar__submit--nomore{padding-right:50px\n}\n.list-view__filterbar .filterbar__submit--nomore .filterbar__submit-more{display:none\n}\n.list-view__filterbar .filterbar__submit--onleft{float:inherit\n}", ""]);
+exports.push([module.i, "\n.list-view__filterbar{margin-bottom:10px;margin-top:-10px;padding-top:10px\n}\n.list-view__filterbar:after{clear:both;content:\"\";display:table\n}\n.list-view__filterbar--fold{box-sizing:content-box;height:32px;overflow:hidden\n}\n.list-view__filterbar .el-button{height:32px;line-height:32px;padding-bottom:0;padding-top:0;vertical-align:top\n}\n.list-view__filterbar .el-button [class*=\" el-icon-\"],.list-view__filterbar .el-button [class^=el-icon-]{width:1em\n}\n.list-view__filterbar .el-button span:empty{display:none\n}\n.list-view__filterbar .filterbar__buttons .el-form-item,.list-view__filterbar .filterbar__buttons>*,.list-view__filterbar .filterbar__form .el-form-item,.list-view__filterbar .filterbar__form>*,.list-view__filterbar .filterbar__submit .el-form-item,.list-view__filterbar .filterbar__submit>*{margin:0\n}\n.list-view__filterbar .filterbar__buttons,.list-view__filterbar .filterbar__field{display:inline-block;margin:0 10px 10px 0;position:relative;vertical-align:top\n}\n.list-view__filterbar .filterbar__buttons .el-form-item__content>*,.list-view__filterbar .filterbar__field .el-form-item__content>*{vertical-align:top\n}\n.list-view__filterbar .filterbar__buttons{float:left;margin-right:0\n}\n.list-view__filterbar .filterbar__buttons .el-button+.el-dropdown,.list-view__filterbar .filterbar__buttons .el-dropdown+.el-button,.list-view__filterbar .filterbar__buttons .el-dropdown+.el-dropdown,.list-view__filterbar .filterbar__buttons .el-form-item__content>*{margin-left:0;margin-right:10px\n}\n.list-view__filterbar .filterbar__form{margin-bottom:-10px\n}\n.list-view__filterbar .filterbar__submit{float:right;margin:0 0 10px\n}\n.list-view__filterbar .filterbar__submit-btn{display:inline-block\n}\n.list-view__filterbar .filterbar__submit-btn .el-form-item__content>*{display:inline-block;transition:inherit\n}\n.list-view__filterbar .filterbar__submit-btn .el-form-item__content>:not(:first-child){margin-left:10px\n}\n.list-view__filterbar .filterbar__submit-more{line-height:30px;margin-left:10px;padding:0;width:40px\n}\n.list-view__filterbar .filterbar__submit--nomore{padding-right:50px\n}\n.list-view__filterbar .filterbar__submit--nomore .filterbar__submit-more{display:none\n}\n.list-view__filterbar .filterbar__submit--onleft{float:inherit\n}", ""]);
 
 // exports
 
@@ -10082,19 +10082,21 @@ var setPublicPath = __webpack_require__("1eb2");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"c28c421c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/listview.vue?vue&type=template&id=7ed0d105&
-var listviewvue_type_template_id_7ed0d105_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"c28c421c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/listview.vue?vue&type=template&id=c7495f70&
+var listviewvue_type_template_id_c7495f70_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
     minHeight: _vm.fixedHeight && 'inherit'
   })},[_c('listview-header',{attrs:{"title":_vm.headerTitle,"nav":_vm.headerNav}}),_c('div',{ref:"main",staticClass:"listview__main"},[_c('filterbar',{ref:"filterbar",attrs:{"filter-buttons":_vm.filterButtons,"filter-fields":_vm.filterFields,"filter-model":_vm.filterModel,"filterbar-fold":_vm.filterbarFold,"show-filter-search":_vm.showFilterSearch,"show-filter-reset":_vm.showFilterReset},on:{"update:filterbarFold":function($event){_vm.filterbarFold=$event},"filter-submit":_vm.handleFilterSubmit,"filter-reset":_vm.handleFilterReset}},[_c('template',{slot:"prepend-filterbar-submit"},[_vm._t("prepend-filterbar-submit")],2),_c('template',{slot:"append-filterbar-submit"},[_vm._t("append-filterbar-submit")],2)],2),_c('div',{directives:[{name:"loading",rawName:"v-loading",value:(_vm.contentLoading),expression:"contentLoading"}]},[_c('div',{ref:"content",staticClass:"listview__content",style:({ height: (_vm.contentHeight + "px") })},[_vm._t("default",[_c('el-table',_vm._g(_vm._b({ref:"contentTable",style:({ width: '100%' }),attrs:{"data":_vm.contentData.items,"height":_vm.contentHeight,"row-class-name":_vm.contentTableRowClassName},on:{"selection-change":_vm.handleTableSelectionChange,"row-click":_vm.handleRowClick}},'el-table',_vm.validTableProps,false),_vm.validTableEvents),[(_vm.internalContentMessage)?_c('template',{slot:"empty"},[_c('span',{class:[
                   'content-message',
                   ( _obj = {}, _obj[("content-message--" + (_vm.internalContentMessage.type))] = _vm.internalContentMessage.type, _obj )
-                ]},[(_vm.internalContentMessage.icon)?_c('span',{staticClass:"content-message--icon"},[_c('i',{class:_vm.internalContentMessage.icon})]):_vm._e(),_c('span',{staticClass:"content-message--message"},[_vm._v(_vm._s(_vm.internalContentMessage.message))])])]):_vm._e(),(_vm.tableSelectEnable)?_c('el-table-column',{attrs:{"type":"selection","width":"50","align":"center"}}):_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{filterModel:_vm.filterModel,contentHeight:_vm.contentHeight,contentLoading:_vm.contentLoading,contentData:_vm.contentData,contentMessage:_vm.internalContentMessage})],2),(_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',{attrs:{"total":_vm.contentData.total,"current-page":_vm.currentPage,"page-sizes":_vm.pageSizes,"page-size":_vm.pageSize,"background":"","layout":"total, sizes, prev, pager, next, jumper"},on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}})],1):_vm._e()])],1)],1)
+                ]},[(_vm.internalContentMessage.icon)?_c('span',{staticClass:"content-message--icon"},[_c('i',{class:_vm.internalContentMessage.icon})]):_vm._e(),_c('span',{staticClass:"content-message--message"},[_vm._v(_vm._s(_vm.internalContentMessage.message))])])]):_vm._e(),(_vm.tableSelectEnable === 'single')?_c('el-table-column',{attrs:{"fixed":_vm.tableColumns.some(function (col) { return col.fixed; }),"resizable":false,"width":"50","align":"center","class-name":"table-column--single-selection"},scopedSlots:_vm._u([{key:"default",fn:function(ref){
+                var row = ref.row;
+return [_c('el-radio',{attrs:{"value":_vm.tableSelection.indexOf(row) > -1 ? '' : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, $event); })($event)}}})]}}])}):(!!_vm.tableSelectEnable)?_c('el-table-column',{attrs:{"type":"selection","width":"50","align":"center"}}):_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{filterModel:_vm.filterModel,contentHeight:_vm.contentHeight,contentLoading:_vm.contentLoading,contentData:_vm.contentData,contentMessage:_vm.internalContentMessage})],2),(_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',{attrs:{"total":_vm.contentData.total,"current-page":_vm.currentPage,"page-sizes":_vm.pageSizes,"page-size":_vm.pageSize,"background":"","layout":"total, sizes, prev, pager, next, jumper"},on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}})],1):_vm._e()])],1)],1)
 var _obj;}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/listview.vue?vue&type=template&id=7ed0d105&
+// CONCATENATED MODULE: ./src/listview/listview.vue?vue&type=template&id=c7495f70&
 
 // EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("4521");
@@ -10218,8 +10220,8 @@ var get_value_default = /*#__PURE__*/__webpack_require__.n(get_value);
     return context.props.node;
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"c28c421c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/components/filterbar.vue?vue&type=template&id=7ef7356e&
-var filterbarvue_type_template_id_7ef7356e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"c28c421c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/components/filterbar.vue?vue&type=template&id=66a8c102&
+var filterbarvue_type_template_id_66a8c102_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
     'list-view__filterbar',
     { 'list-view__filterbar--fold': _vm.internalFilterbarFold }
   ]},[_c('el-form',{attrs:{"inline":true,"size":"small"},nativeOn:{"submit":function($event){$event.preventDefault();}}},[(_vm.showFilterButtons)?_c('div',{staticClass:"filterbar__buttons"},[_c('el-form-item',[_vm._l((_vm.filterButtons),function(button,index){return [(_vm.isFunction(button))?_c('v-node',{key:index,attrs:{"node":button()}}):(button.render)?_c('v-node',{key:index,attrs:{"node":button.render()}}):(_vm.isVNode(button))?_c('v-node',{key:index,attrs:{"node":button}}):(Array.isArray(button.children))?_c('el-dropdown',{key:index,attrs:{"type":button.type,"split-button":button.splitButton,"trigger":button.trigger || 'click',"placement":"bottom"},on:{"click":function($event){_vm.resolveClickEvent(button, $event)}}},[(button.splitButton)?[(button.icon)?_c('i',{class:button.icon}):_vm._e(),_vm._v("\n              "+_vm._s(button.text)+"\n            ")]:[_c('el-button',{attrs:{"type":button.type,"icon":button.icon},on:{"click":function($event){_vm.resolveClickEvent(button, $event)}}},[_vm._v(_vm._s(button.text)),_c('i',{staticClass:"el-icon-arrow-down el-icon--right"})])],_c('el-dropdown-menu',{attrs:{"slot":"dropdown"},slot:"dropdown"},_vm._l((button.children),function(child,index){return _c('el-dropdown-item',{key:index,nativeOn:{"click":function($event){_vm.resolveClickEvent(child, $event)}}},[(child.icon)?_c('i',{class:child.icon}):_vm._e(),_vm._v("\n                "+_vm._s(child.text)+"\n              ")])}))],2):_c('el-button',{key:index,attrs:{"type":button.type,"icon":button.icon},on:{"click":function($event){_vm.resolveClickEvent(button, $event)}}},[_vm._v(_vm._s(button.text))])]})],2)],1):_vm._e(),(_vm.showFilterSubmit)?_c('div',{ref:"submit",class:[
@@ -10229,10 +10231,10 @@ var filterbarvue_type_template_id_7ef7356e_render = function () {var _vm=this;va
           'filterbar__submit--onleft': _vm.isNoneFields
         }
       ]},[_c('div',{staticClass:"filterbar__submit-btn",style:({ transform: ("translateX(" + _vm.searchBtnOffset + "px)") })},[_c('el-form-item',[_vm._t("prepend-filterbar-submit"),(_vm.showFilterSearch)?_c('el-button',{attrs:{"type":"primary"},on:{"click":_vm.handleFilterSearch}},[_vm._v("搜索")]):_vm._e(),(_vm.showFilterReset)?_c('el-button',{on:{"click":_vm.handleFilterReset}},[_vm._v("重置")]):_vm._e(),_vm._t("append-filterbar-submit")],2)],1),_c('el-button',{staticClass:"filterbar__submit-more",attrs:{"icon":_vm.internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top',"type":"primary"},on:{"click":_vm.toggleFilterbar}})],1):_vm._e(),(_vm.showFilterFields)?_c('filter-form',{ref:"filterForm",staticClass:"filterbar__form",attrs:{"fields":_vm.validFilterFields,"model":_vm.filterModel}}):_vm._e()],1)],1):_vm._e()}
-var filterbarvue_type_template_id_7ef7356e_staticRenderFns = []
+var filterbarvue_type_template_id_66a8c102_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/components/filterbar.vue?vue&type=template&id=7ef7356e&
+// CONCATENATED MODULE: ./src/listview/components/filterbar.vue?vue&type=template&id=66a8c102&
 
 // EXTERNAL MODULE: ./node_modules/lodash/isFunction.js
 var isFunction = __webpack_require__("9520");
@@ -10718,8 +10720,8 @@ var filterbarvue_type_style_index_0_lang_less_ = __webpack_require__("5b26");
 
 var filterbar_component = Object(componentNormalizer["a" /* default */])(
   components_filterbarvue_type_script_lang_js_,
-  filterbarvue_type_template_id_7ef7356e_render,
-  filterbarvue_type_template_id_7ef7356e_staticRenderFns,
+  filterbarvue_type_template_id_66a8c102_render,
+  filterbarvue_type_template_id_66a8c102_staticRenderFns,
   false,
   null,
   null,
@@ -10991,7 +10993,7 @@ function transformContentData() {
       }
     },
     tableSelectEnable: {
-      type: Boolean,
+      type: [Boolean, String],
       default: true
     },
     tableSelection: {
@@ -11422,6 +11424,11 @@ function transformContentData() {
      * Table
      */
     handleRowClick: function handleRowClick(row, event) {
+      // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
+      if (this.tableSelectEnable === 'single') {
+        this.$refs.contentTable.store.states.selection = [];
+      }
+
       this.$refs.contentTable.toggleRowSelection(row);
     },
     handleTableSelectionChange: function handleTableSelectionChange(val) {
@@ -11520,7 +11527,7 @@ var listviewvue_type_style_index_0_lang_less_ = __webpack_require__("15de");
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   listview_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_7ed0d105_render,
+  listviewvue_type_template_id_c7495f70_render,
   staticRenderFns,
   false,
   null,
