@@ -135,10 +135,10 @@ sidebarDepth: 2
 
 ### tableSelectEnable
 
-- type: `Boolean`
+- type: `Boolean|String`
 - default: `true`
 
-是否开启表格行选择功能。
+是否开启表格行选择功能。传入 `'single'` 为表格单选效果。
 
 ### tableSelection
 

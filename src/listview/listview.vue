@@ -76,7 +76,24 @@
               </template>
 
               <el-table-column
-                v-if="tableSelectEnable"
+                v-if="tableSelectEnable === 'single'"
+                :fixed="tableColumns.some(col => col.fixed)"
+                :resizable="false"
+                width="50"
+                align="center"
+                class-name="table-column--single-selection"
+              >
+                <template slot-scope="{ row }">
+                  <el-radio
+                    :value="tableSelection.indexOf(row) > -1 ? '' : false"
+                    label=""
+                    @click.native.stop.prevent="($event) => handleRowClick(row, $event)"
+                  />
+                </template>
+              </el-table-column>
+
+              <el-table-column
+                v-else-if="!!tableSelectEnable"
                 type="selection"
                 width="50"
                 align="center"
@@ -228,7 +245,7 @@ export default {
     tableColumns: { type: Array, default: () => [] },
     tableProps: { type: Object, default: () => ({}) },
     tableEvents: { type: Object, default: () => ({}) },
-    tableSelectEnable: { type: Boolean, default: true },
+    tableSelectEnable: { type: [Boolean, String], default: true },
     tableSelection: { type: Array, default: () => [] },
 
     // Pager
@@ -529,6 +546,10 @@ export default {
      * Table
      */
     handleRowClick(row, event) {
+      // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
+      if (this.tableSelectEnable === 'single') {
+        this.$refs.contentTable.store.states.selection = []
+      }
       this.$refs.contentTable.toggleRowSelection(row)
     },
     handleTableSelectionChange(val) {
@@ -664,6 +685,10 @@ export default {
     &--error .content-message--icon {
       color: #f56c6c;
     }
+  }
+
+  .table-column--single-selection .el-radio__label {
+    display: none;
   }
 
   &__page {
