@@ -47,9 +47,9 @@ export default {
         {
           type: 'danger',
           icon: 'el-icon-remove-outline',
-          text: '批量删除',
-          click() {
-            alert('delete')
+          text: '查看已选',
+          click: () => {
+            alert(JSON.stringify(this.tableSelection))
           }
         },
         {
