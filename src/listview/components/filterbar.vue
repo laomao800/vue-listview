@@ -35,7 +35,7 @@
               :split-button="button.splitButton"
               :trigger="button.trigger || 'click'"
               placement="bottom"
-              @click="resolveClickEvent(button, $event)"
+              @click="applyButtonClick(button, $event)"
             >
               <template v-if="button.splitButton">
                 <i
@@ -47,14 +47,14 @@
                 <el-button
                   :type="button.type"
                   :icon="button.icon"
-                  @click="resolveClickEvent(button, $event)"
+                  @click="applyButtonClick(button, $event)"
                 >{{ button.text }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
                   v-for="(child, index) in button.children"
                   :key="index"
-                  @click.native="resolveClickEvent(child, $event)">
+                  @click.native="applyButtonClick(child, $event)">
                   <i
                     v-if="child.icon"
                     :class="child.icon" />
@@ -67,7 +67,8 @@
               :key="index"
               :type="button.type"
               :icon="button.icon"
-              @click="resolveClickEvent(button, $event)"
+              :loading="applyButtonLoading(button)"
+              @click="applyButtonClick(button, $event)"
             >{{ button.text }}</el-button>
           </template>
         </el-form-item>
@@ -217,9 +218,15 @@ export default {
       return filterForm ? filterForm.$refs.field || [] : []
     },
 
-    resolveClickEvent(item, $event) {
-      if (item && item.click && _.isFunction(item.click)) {
+    applyButtonClick(item, $event) {
+      if (item && _.isFunction(item.click)) {
         return item.click($event)
+      }
+    },
+
+    applyButtonLoading(item) {
+      if (item && _.isFunction(item.loading)) {
+        return item.loading()
       }
     },
 
