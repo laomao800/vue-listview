@@ -327,6 +327,10 @@ export default {
       display: none;
     }
   }
+  .el-input-group__append,
+  .el-input-group__prepend {
+    padding: 0 10px;
+  }
 
   .filterbar__buttons,
   .filterbar__submit,

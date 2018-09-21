@@ -31,6 +31,9 @@ export default {
       return _.isPlainObject(this.field.componentEvents)
         ? this.field.componentEvents
         : {}
+    },
+    componentSlots() {
+      return this.field.componentSlots || {}
     }
   }
 }

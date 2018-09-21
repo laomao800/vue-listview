@@ -11,14 +11,15 @@
 
 以下为所有类型都共有的属性配置：
 
-| 参数           | 类型    | 说明                                                                         |
-| -------------- | ------- | ---------------------------------------------------------------------------- |
-| type           | String  | 字段类型                                                                     |
-| model          | String  | 提交时字段的 key 名                                                          |
-| label          | String  | 字段中文说明                                                                 |
-| disabled       | Boolean | 是否禁用                                                                     |
-| componentProps | Object  | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
-| componentProps | Object  | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
+| 参数            | 类型    | 说明                                                                         |
+| --------------- | ------- | ---------------------------------------------------------------------------- |
+| type            | String  | 字段类型                                                                     |
+| model           | String  | 提交时字段的 key 名                                                          |
+| label           | String  | 字段中文说明                                                                 |
+| disabled        | Boolean | 是否禁用                                                                     |
+| componentProps  | Object  | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
+| componentEvents | Object  | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
+| componentSlots  | Object  | 可传入各自组件支持的 slots ，具体可查看 [componentSlots](#componentslots)    |
 
 #### `type` 字段类型可选值
 
@@ -43,7 +44,7 @@
 - type: `Array`
 - default: `[]`
 
-除了以上公共属性，针对一下几种选择类型的字段，还有 `options` 属性可以方便配置选项值：
+对于 `select` , `multipleSelect` , `cascader` 字段，可通过 `options` 属性配置选项值：
 
 #### `select`
 
@@ -62,6 +63,25 @@
 #### `cascader`
 
 支持属性和 [Cascader - options](http://element.eleme.io/#/zh-CN/component/cascader#attributes) 相同。
+
+### componentSlots
+
+- type: `Object`
+- default: `{}`
+
+该配置目前仅对于 `text` 类型字段有效，可通过添加组件支持的 slot 名 `prepend` `append` 为文本框添加前置或后置附加元素，支持 JSX：
+
+```js
+{
+  type: 'text',
+  componentSlots: {
+    prepend: '$',
+    append: '$'
+    // prepend: <strong>$</strong>,
+    // append: <strong>$</strong>
+  },
+},
+```
 
 ### componentProps
 
@@ -100,7 +120,7 @@ export default {
       },
       filterButtons: [
         {
-        // 如果需要渲染本实例内的数据，可使用 render 属性。需要注意 `render` 对内部 this 指向有要求，因此需要通过以下的形式定义：
+          // 如果需要渲染本实例内的数据，可使用 render 属性。需要注意 `render` 对内部 this 指向有要求，因此需要通过以下的形式定义：
           render: () => {
             return (
               <input
