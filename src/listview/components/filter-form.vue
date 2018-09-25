@@ -76,7 +76,7 @@ export default {
     showFieldLabel(field) {
       const value = this.getFieldValue(field)
       // hasValues(null) -> true ，所以需要和 value 同时判断
-      return value && hasValues(value)
+      return value !== null && hasValues(value)
     }
   }
 }

@@ -331,6 +331,10 @@ export default {
   .el-input-group__prepend {
     padding: 0 10px;
   }
+  .el-form-item__label {
+    padding: 0 0 0 2px;
+    margin-right: -4px;
+  }
 
   .filterbar__buttons,
   .filterbar__submit,

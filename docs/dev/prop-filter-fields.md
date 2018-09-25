@@ -27,7 +27,9 @@
 
 | type            | 说明         | 对应 Element-UI 组件                 |
 | --------------- | ------------ | ------------------------------------ |
+| label           | 文本标签     | 纯文本，无对应组件                   |
 | text            | 文本字段     | [Text][text]                         |
+| number          | 数字输入     | [Number][number]                     |
 | select          | 单选         | [Select][select]                     |
 | multipleSelect  | 多选         | [MultipleSelect][multiple-select]    |
 | date            | 日期选择     | [Date][date]                         |
@@ -180,6 +182,7 @@ export default {
 ```
 
 [text]: http://element.eleme.io/#/zh-CN/component/input
+[number]: http://element.eleme.io/#/zh-CN/component/input-number
 [select]: http://element.eleme.io/#/zh-CN/component/select
 [multiple-select]: http://element.eleme.io/#/zh-CN/component/select#ji-chu-duo-xuan
 [date]: http://element.eleme.io/#/zh-CN/component/date-picker#xuan-ze-ri
