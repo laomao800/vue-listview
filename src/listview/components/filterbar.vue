@@ -94,6 +94,7 @@
             <el-button
               v-if="showFilterSearch"
               type="primary"
+              icon="el-icon-search"
               @click="handleFilterSearch">搜索</el-button>
             <el-button
               v-if="showFilterReset"
