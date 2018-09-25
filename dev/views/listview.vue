@@ -37,6 +37,7 @@ export default {
 
   data() {
     return {
+      loadingSelection: false,
       filterButtons: [
         {
           type: 'success',
@@ -48,8 +49,19 @@ export default {
           type: 'danger',
           icon: 'el-icon-remove-outline',
           text: '查看已选',
+          loading: this.getLoadingSelection,
           click: () => {
-            alert(JSON.stringify(this.tableSelection))
+            if (this.tableSelection.length < 1) {
+              this.$message.error('请至少选择一条数据')
+            } else {
+              this.loadingSelection = true
+              setTimeout(() => {
+                this.$message.success(
+                  JSON.stringify(this.tableSelection.map(row => row.sku))
+                )
+                this.loadingSelection = false
+              }, 500)
+            }
           }
         },
         {
@@ -70,6 +82,7 @@ export default {
               }
             },
             {
+              icon: 'el-icon-remove-outline',
               text: '菜单2',
               click() {
                 alert(2)
@@ -88,15 +101,27 @@ export default {
           type: 'text',
           model: 'name',
           label: '文本字段',
+          componentSlots: {
+            prepend: '$',
+            append: '$'
+          },
           componentProps: {
             'suffix-icon': 'el-icon-date'
           }
         },
         {
           type: 'text',
-          model: 'name2',
+          model: 'disabled',
           label: '禁用文本',
           disabled: true
+        },
+        {
+          type: 'label',
+          label: '数字'
+        },
+        {
+          type: 'number',
+          model: 'number'
         },
         {
           type: 'select',
@@ -291,6 +316,9 @@ export default {
     },
     handleFilterSubmit(data) {
       console.log('filter', data)
+    },
+    getLoadingSelection() {
+      return this.loadingSelection
     }
   }
 }
