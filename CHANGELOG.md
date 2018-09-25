@@ -1,3 +1,23 @@
+# 1.0.0-alpha.10 (2018-09-25)
+
+### Features
+
+- filterField 新增 label 、 number 2 种类型 ([41c3d41](http://192.168.1.122:3000/pps-fe/vue-listview/commit/41c3d41))
+- filterField 增加 componentSlots 配置属性用于配置字段组件 slot ([28e28d9](http://192.168.1.122:3000/pps-fe/vue-listview/commit/28e28d9))
+- filterButtons 支持 loading 属性 （仅支持通过 methods 返回 loading 状态） ([46035df](http://192.168.1.122:3000/pps-fe/vue-listview/commit/46035df))
+
+# 1.0.0-alpha.9 (2018-09-20)
+
+### Features
+
+- 表格增加单选模式 ([e2a6e78](http://192.168.1.122:3000/pps-fe/vue-listview/commit/e2a6e78))
+
+# 1.0.0-alpha.8 (2018-09-19)
+
+### Bug Fixes
+
+- 修复重设窗口大小时 filterbar 计算位置错误问题 ([e1c31cb](http://192.168.1.122:3000/pps-fe/vue-listview/commit/e1c31cb))
+
 # 1.0.0-alpha.7 (2018-09-18)
 
 ### Bug Fixes
