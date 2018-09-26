@@ -486,6 +486,7 @@ export default {
       if (this.requestHandler) {
         // 自定义请求方法
         responseData = await this.requestHandler(requestData)
+        this.contentLoading = false
       } else if (this.requestUrl) {
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
         this._requestCancelToken && this._requestCancelToken()

@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { successWrap, errorWrap } = require('../utils')
 const Mock = require('mockjs')
-var delay = require('express-delay')
+const delay = require('express-delay')
 
 module.exports = app => {
   app.use(delay(200, 1000))
