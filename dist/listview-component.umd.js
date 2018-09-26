@@ -1,4 +1,4 @@
-/*! PPS Vue Listview v1.0.0-alpha.10 */
+/*! PPS Vue Listview v1.0.0-alpha.11 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
@@ -10338,8 +10338,8 @@ var setPublicPath = __webpack_require__("1eb2");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"c28c421c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/listview.vue?vue&type=template&id=c7495f70&
-var listviewvue_type_template_id_c7495f70_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"c28c421c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/listview.vue?vue&type=template&id=10bebd58&
+var listviewvue_type_template_id_10bebd58_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
     minHeight: _vm.fixedHeight && 'inherit'
   })},[_c('listview-header',{attrs:{"title":_vm.headerTitle,"nav":_vm.headerNav}}),_c('div',{ref:"main",staticClass:"listview__main"},[_c('filterbar',{ref:"filterbar",attrs:{"filter-buttons":_vm.filterButtons,"filter-fields":_vm.filterFields,"filter-model":_vm.filterModel,"filterbar-fold":_vm.filterbarFold,"show-filter-search":_vm.showFilterSearch,"show-filter-reset":_vm.showFilterReset},on:{"update:filterbarFold":function($event){_vm.filterbarFold=$event},"filter-submit":_vm.handleFilterSubmit,"filter-reset":_vm.handleFilterReset}},[_c('template',{slot:"prepend-filterbar-submit"},[_vm._t("prepend-filterbar-submit")],2),_c('template',{slot:"append-filterbar-submit"},[_vm._t("append-filterbar-submit")],2)],2),_c('div',{directives:[{name:"loading",rawName:"v-loading",value:(_vm.contentLoading),expression:"contentLoading"}]},[_c('div',{ref:"content",staticClass:"listview__content",style:({ height: (_vm.contentHeight + "px") })},[_vm._t("default",[_c('el-table',_vm._g(_vm._b({ref:"contentTable",style:({ width: '100%' }),attrs:{"data":_vm.contentData.items,"height":_vm.contentHeight,"row-class-name":_vm.contentTableRowClassName},on:{"selection-change":_vm.handleTableSelectionChange,"row-click":_vm.handleRowClick}},'el-table',_vm.validTableProps,false),_vm.validTableEvents),[(_vm.internalContentMessage)?_c('template',{slot:"empty"},[_c('span',{class:[
@@ -10352,7 +10352,7 @@ var _obj;}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/listview.vue?vue&type=template&id=c7495f70&
+// CONCATENATED MODULE: ./src/listview/listview.vue?vue&type=template&id=10bebd58&
 
 // EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("4521");
@@ -11515,7 +11515,7 @@ function transformContentData() {
 
               case 18:
                 if (!this.requestHandler) {
-                  _context4.next = 24;
+                  _context4.next = 25;
                   break;
                 }
 
@@ -11524,12 +11524,13 @@ function transformContentData() {
 
               case 21:
                 responseData = _context4.sent;
-                _context4.next = 41;
+                this.contentLoading = false;
+                _context4.next = 42;
                 break;
 
-              case 24:
+              case 25:
                 if (!this.requestUrl) {
-                  _context4.next = 41;
+                  _context4.next = 42;
                   break;
                 }
 
@@ -11554,11 +11555,11 @@ function transformContentData() {
                 requestConfig.cancelToken = new axios_default.a.CancelToken(function (cancel) {
                   _this._requestCancelToken = cancel;
                 });
-                _context4.prev = 30;
-                _context4.next = 33;
+                _context4.prev = 31;
+                _context4.next = 34;
                 return axiosService(requestConfig);
 
-              case 33:
+              case 34:
                 response = _context4.sent;
                 this.contentLoading = false;
 
@@ -11569,19 +11570,19 @@ function transformContentData() {
                   this.setContentMessage(this.resolveResponseErrorMessage(response), 'error');
                 }
 
-                _context4.next = 41;
+                _context4.next = 42;
                 break;
 
-              case 38:
-                _context4.prev = 38;
-                _context4.t1 = _context4["catch"](30);
+              case 39:
+                _context4.prev = 39;
+                _context4.t1 = _context4["catch"](31);
 
                 if (!axios_default.a.isCancel(_context4.t1)) {
                   this.setContentMessage(_context4.t1.message, 'error');
                   this.contentLoading = false;
                 }
 
-              case 41:
+              case 42:
                 // 若为取消操作则不赋值至内容中
                 if (responseData) {
                   contentResponse = this.transformResponseData ? this.transformResponseData(responseData) : responseData;
@@ -11589,12 +11590,12 @@ function transformContentData() {
                   this.contentData = contentData;
                 }
 
-              case 42:
+              case 43:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[30, 38]]);
+        }, _callee4, this, [[31, 39]]);
       }));
 
       return function requestData() {
@@ -11709,7 +11710,7 @@ var listviewvue_type_style_index_0_lang_less_ = __webpack_require__("15de");
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   listview_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_c7495f70_render,
+  listviewvue_type_template_id_10bebd58_render,
   staticRenderFns,
   false,
   null,
