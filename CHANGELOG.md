@@ -1,3 +1,16 @@
+# 1.0.0-alpha.12 (2018-09-29)
+
+### Bug Fixes
+
+- 点击搜索栏页码重置回第一页 ([6d31b0a](http://192.168.1.122:3000/pps-fe/vue-listview/commit/6d31b0a))
+- 搜索时提交前先过滤掉条件中的无效数据 ([64a2b02](http://192.168.1.122:3000/pps-fe/vue-listview/commit/64a2b02))
+
+# 1.0.0-alpha.11 (2018-09-26)
+
+### Bug Fixes
+
+- fix: 修复自动以 requestHandler 时 loading 状态不消失问题 ([5e8b26b](http://192.168.1.122:3000/pps-fe/vue-listview/commit/5e8b26b))
+
 # 1.0.0-alpha.10 (2018-09-25)
 
 ### Features
