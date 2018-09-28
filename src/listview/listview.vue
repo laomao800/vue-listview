@@ -452,6 +452,10 @@ export default {
 
       // 请求参数合并转换
       let payloadData = _.cloneDeep(this.filterModel)
+      // 删除搜索条件中的无效数据
+      payloadData = _.omitBy(payloadData, val => {
+        return val === null || val === undefined || val === '' || _.isEmpty(val)
+      })
       if (this.usePage) {
         payloadData.page_index = this.currentPage
         payloadData.page_size = this.currentPageSize
