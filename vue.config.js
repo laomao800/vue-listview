@@ -41,7 +41,12 @@ module.exports = {
     }
 
     const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-    config.plugins.push(new LodashModuleReplacementPlugin())
+    config.plugins.push(
+      new LodashModuleReplacementPlugin({
+        collections: true,
+        shorthands: true
+      })
+    )
 
     if (process.env.BUILD_MODE === 'component') {
       config.externals = config.externals || {} // for webpack inspect
