@@ -10,6 +10,23 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 
 ## 安装
 
+::: danger 安装
+
+由于该库暂未发布，暂时无法通过 npm 命令安装，请先直接使用仓库内 `dist/` 目录下的文件。将对应文件复制到项目内，并在 babel 编译中排除该文件即可。如：
+
+`/public/vue-listview/listview-component.common.js`
+
+```js
+// vue.config.js
+// ...
+chainWebpack: config => {
+  config.module.rule('js').exclude.add(/public/)
+}
+// ...
+```
+
+:::
+
 ```bash
 npm i -S @pps/vue-listview
 
