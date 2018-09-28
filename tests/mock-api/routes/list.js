@@ -40,7 +40,7 @@ module.exports = app => {
           'enable|1': true
         }
       ],
-      total: '@integer(20, 30)'
+      total: 80
     })
     const responseData = successWrap(data)
     return res.json(responseData)
