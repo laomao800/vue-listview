@@ -456,7 +456,12 @@ export default {
       let payloadData = _.cloneDeep(this.filterModel)
       // 删除搜索条件中的无效数据
       payloadData = _.omitBy(payloadData, val => {
-        return val === null || val === undefined || val === '' || _.isEmpty(val)
+        return (
+          val === null ||
+          val === undefined ||
+          val === '' ||
+          ((Array.isArray(val) || _.isPlainObject(val)) && _.isEmpty(val))
+        )
       })
       if (this.usePage) {
         payloadData.page_index = this.currentPage
