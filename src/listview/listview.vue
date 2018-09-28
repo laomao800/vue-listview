@@ -432,6 +432,8 @@ export default {
     },
 
     handleFilterSubmit() {
+      // 点击搜索栏搜索按钮时复位至第一页
+      this.currentPage = 1
       this.requestData()
       this.$emit('filter-submit')
     },
