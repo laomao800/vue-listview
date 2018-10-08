@@ -25,6 +25,9 @@ module.exports = app => {
   })
 
   router.post('/listview', (req, res) => {
+    if (req.body.error) {
+      return res.json(errorWrap('演示接口返回错误信息'))
+    }
     const data = Mock.mock({
       'items|20': [
         {

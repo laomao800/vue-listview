@@ -99,6 +99,11 @@ export default {
       filterFields: [
         {
           type: 'text',
+          model: 'error',
+          label: '接口错误'
+        },
+        {
+          type: 'text',
           model: 'name',
           label: '文本字段',
           componentSlots: {
