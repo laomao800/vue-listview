@@ -1,4 +1,4 @@
-/*! PPS Vue Listview v1.0.0-alpha.12 */
+/*! PPS Vue Listview v1.0.0-alpha.13 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -11630,8 +11630,8 @@ var setPublicPath = __webpack_require__("1eb2");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"182a0205-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/listview.vue?vue&type=template&id=134f9d3c&
-var listviewvue_type_template_id_134f9d3c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"182a0205-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/listview.vue?vue&type=template&id=c55e70a2&
+var listviewvue_type_template_id_c55e70a2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
     minHeight: _vm.fixedHeight && 'inherit'
   })},[_c('listview-header',{attrs:{"title":_vm.headerTitle,"nav":_vm.headerNav}}),_c('div',{ref:"main",staticClass:"listview__main"},[_c('filterbar',{ref:"filterbar",attrs:{"filter-buttons":_vm.filterButtons,"filter-fields":_vm.filterFields,"filter-model":_vm.filterModel,"filterbar-fold":_vm.filterbarFold,"show-filter-search":_vm.showFilterSearch,"show-filter-reset":_vm.showFilterReset},on:{"update:filterbarFold":function($event){_vm.filterbarFold=$event},"filter-submit":_vm.handleFilterSubmit,"filter-reset":_vm.handleFilterReset}},[_c('template',{slot:"prepend-filterbar-submit"},[_vm._t("prepend-filterbar-submit")],2),_c('template',{slot:"append-filterbar-submit"},[_vm._t("append-filterbar-submit")],2)],2),_c('div',{directives:[{name:"loading",rawName:"v-loading",value:(_vm.contentLoading),expression:"contentLoading"}]},[_c('div',{ref:"content",staticClass:"listview__content",style:({ height: (_vm.contentHeight + "px") })},[_vm._t("default",[_c('el-table',_vm._g(_vm._b({ref:"contentTable",style:({ width: '100%' }),attrs:{"data":_vm.contentData.items,"height":_vm.contentHeight,"row-class-name":_vm.contentTableRowClassName},on:{"selection-change":_vm.handleTableSelectionChange,"row-click":_vm.handleRowClick}},'el-table',_vm.validTableProps,false),_vm.validTableEvents),[(_vm.internalContentMessage)?_c('template',{slot:"empty"},[_c('span',{class:[
@@ -11644,7 +11644,7 @@ var _obj;}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/listview.vue?vue&type=template&id=134f9d3c&
+// CONCATENATED MODULE: ./src/listview/listview.vue?vue&type=template&id=c55e70a2&
 
 // EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("4521");
@@ -12891,14 +12891,16 @@ function transformContentData() {
                 }
 
               case 43:
-                // 若为取消操作则不赋值至内容中
+                contentResponse = null;
+
                 if (responseData) {
                   contentResponse = this.transformResponseData ? this.transformResponseData(responseData) : responseData;
-                  contentData = this.contentDataMap ? transformContentData(contentResponse, this.contentDataMap) : contentResponse;
-                  this.contentData = contentData;
                 }
 
-              case 44:
+                contentData = this.contentDataMap ? transformContentData(contentResponse, this.contentDataMap) : contentResponse;
+                this.contentData = contentData;
+
+              case 47:
               case "end":
                 return _context4.stop();
             }
@@ -13018,7 +13020,7 @@ var listviewvue_type_style_index_0_lang_less_ = __webpack_require__("15de");
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   listview_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_134f9d3c_render,
+  listviewvue_type_template_id_c55e70a2_render,
   staticRenderFns,
   false,
   null,
