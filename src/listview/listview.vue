@@ -541,17 +541,17 @@ export default {
         }
       }
 
-      // 若为取消操作则不赋值至内容中
+      let contentResponse = null
       if (responseData) {
-        const contentResponse = this.transformResponseData
+        contentResponse = this.transformResponseData
           ? this.transformResponseData(responseData)
           : responseData
-        const contentData = this.contentDataMap
-          ? transformContentData(contentResponse, this.contentDataMap)
-          : contentResponse
-
-        this.contentData = contentData
       }
+      const contentData = this.contentDataMap
+        ? transformContentData(contentResponse, this.contentDataMap)
+        : contentResponse
+
+      this.contentData = contentData
     },
 
     /**
