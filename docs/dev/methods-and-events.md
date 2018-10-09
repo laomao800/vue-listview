@@ -4,9 +4,11 @@
 
 `<listview />` 实例上有可能需要被外部调用的方法，一些只在内部使用的方法略过。
 
-### search()
+### search(keepInPage = false)
 
 发起数据请求。请求默认开启 `withCredentials: true` ，如需关闭请配置 [Props: requestConfig](/dev/props.md#requestconfig) 。
+
+参数 `keepInPage` 默认为 `false` ，传入 `true` 可以保留当前页码重新请求数据，可用于操作数据后的当页刷新。
 
 ### setContentMessage(message, type)
 

@@ -447,7 +447,11 @@ export default {
     },
 
     // 供外部使用的短别名
-    search() {
+    search(keepInPage = false) {
+      if (!keepInPage) {
+        // 复位至第一页
+        this.currentPage = 1
+      }
       this.requestData()
     },
 
