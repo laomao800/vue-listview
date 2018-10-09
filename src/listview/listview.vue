@@ -457,6 +457,7 @@ export default {
 
     async requestData() {
       if (!this.requestHandler && !this.requestUrl) {
+        // eslint-disable-next-line no-console
         console.warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
         return
       }
