@@ -1,38 +1,101 @@
 <template>
   <div class="main">
     <!-- eslint-disable vue/attributes-order -->
-    <listview
-      :header-title="'演示列表'"
-      :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
+    <listview-container
+      :header-title="'演示列表容器'"
+      :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]">
+      <listview
+        :header-title="'演示列表1'"
 
-      :autoload="true"
-      request-url="/mock/listview"
-      request-method="post"
+        :autoload="true"
+        request-url="/mock/listview"
+        request-method="post"
 
-      :filter-buttons="filterButtons"
-      :filter-fields="filterFields"
-      :filter-model="filterModel"
+        :filter-buttons="filterButtons"
+        :filter-fields="filterFields"
+        :filter-model="filterModel"
 
-      :table-columns="tableColumns"
-      :table-props="tableProps"
-      :table-events="tableEvents"
-      :table-selection.sync="tableSelection"
+        :table-columns="tableColumns"
+        :table-props="tableProps"
+        :table-events="tableEvents"
+        :table-selection.sync="tableSelection"
 
-      :use-page="true"
-      :page-sizes="[20, 50, 100]"
-      :page-size="20"
-    />
+        :use-page="true"
+        :page-sizes="[20, 50, 100]"
+        :page-size="20"
+      />
+      <listview
+        :header-title="'演示列表2'"
+
+        :autoload="true"
+        request-url="/mock/listview"
+        request-method="post"
+
+        :filter-buttons="filterButtons"
+        :filter-fields="filterFields2"
+        :filter-model="filterModel2"
+
+        :table-columns="tableColumns"
+        :table-props="tableProps"
+        :table-events="tableEvents"
+        :table-selection.sync="tableSelection"
+
+        :use-page="true"
+        :page-sizes="[20, 50, 100]"
+        :page-size="20"
+      >
+        <template slot-scope="{ contentData, contentMessage }">
+          <el-alert
+            v-if="contentMessage"
+            :title="contentMessage.message"
+            :type="contentMessage.type"
+            :closable="false"
+            center
+            show-icon/>
+          <ul
+            v-else
+            class="item-list">
+            <li
+              v-for="(item, index) in contentData.items"
+              :key="index"
+            >
+              <div class="item">
+                <div class="thumb">
+                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIBAMAAABfdrOtAAAAG1BMVEXMzMwAAACZmZkzMzMZGRlmZmZMTEyysrJ/f3/9S/GQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABrklEQVR4nO3UT0/CMBjH8ccx2I56IF6nkHglQoxHnX/gSKIvwBi9TyWel7gX7tP2GQpEE4revp+EluX3ZN3ariIAAAAAAAAAAAAAAAAA8JvjwrXZsb94Ldbj5HtgVdtKJuPLuXbX4xu9Gl5N5qv54GrSXwZWtbVeIdmt3qSQtwdJSsnOVvNHkcUyCFVxjiqZaTeTtBb/W5UctkGoipMW+YV2H9Jom4828tICq4rTqXtuJV7kWdtsX5tuoc17m59bYFVx9qpOrV1anburqf50DSRbTsyhhMCq4gZpdMK06xSluzp1jS7xorZYZykEVhU3yCw8Xqd2LxGeOp9+vUhaSwisKmqM7mhzEGma5c3u5A8GaarN6ZJuv43zqew+XcnUHu/bwusX+NQu8LCS3Rde11jWt7Burby0Z3D9rls491v2QtxnNpT2Y9St1RQ+b9yTh8CqItz713dbqZS0lrA8bmv5V5Cunz0LQtX2emEJhrU/IGd2QPb0pjJw/8LSWBCqtnd0oObuxHeH+GD9qE9c3G8Dq4qWnfju9ae9EwKrAgAAAAAAAAAAAAAAAPAfPgFZpkiD9I8rfAAAAABJRU5ErkJggg==">
+                </div>
+                <div class="info">
+                  <div class="sku">{{ item.sku }}</div>
+                  <div class="name">{{ item.name }}</div>
+                </div>
+                <div class="action">
+                  <el-button
+                    size="mini"
+                    type="success"
+                  >审核</el-button>
+                  <el-button
+                    size="mini"
+                    type="danger"
+                  >删除</el-button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </template>
+      </listview>
+    </listview-container>
   </div>
 </template>
 
 <script>
 import Listview from '@/'
+import ListviewContainer from '@/listview-container'
 
 export default {
   name: 'ListviewPage',
 
   components: {
-    Listview
+    Listview,
+    ListviewContainer
   },
 
   data() {
@@ -95,12 +158,14 @@ export default {
       filterModel: {
         hidden: 'hidden'
       },
+      filterModel2: {},
 
       filterFields: [
         {
-          type: 'text',
+          type: 'select',
           model: 'error',
-          label: '接口错误'
+          label: '接口错误',
+          options: [{ label: '触发500错误', value: 1 }]
         },
         {
           type: 'text',
@@ -213,6 +278,14 @@ export default {
               ]
             }
           ]
+        }
+      ],
+      filterFields2: [
+        {
+          type: 'select',
+          model: 'error',
+          label: '接口错误',
+          options: [{ label: '触发500错误', value: 1 }]
         }
       ],
 
@@ -328,3 +401,55 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.item-list {
+  padding: 0;
+  padding-bottom: 1px;
+  margin: 0;
+  overflow: hidden;
+  list-style: none;
+
+  li {
+    box-sizing: border-box;
+    float: left;
+    width: 12.5%;
+    padding: 10px;
+    margin: 0 -1px -1px 0;
+    border: 1px solid #ddd;
+
+    .thumb img {
+      width: 100%;
+    }
+
+    .info {
+      padding: 5px;
+
+      .sku {
+        font-size: 12px;
+        color: #999;
+      }
+      .name {
+        height: 1.6em;
+        overflow: hidden;
+        font-size: 14px;
+        line-height: 1.6em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .action {
+      button {
+        padding: 4px 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1360px) {
+  .item-list li {
+    width: 20%;
+  }
+}
+</style>
