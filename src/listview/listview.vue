@@ -134,8 +134,8 @@ import _ from 'lodash'
 import axios from 'axios'
 import get from 'get-value'
 import VNode from '@/components/v-node'
+import ListviewHeader from '@/components/listview-header.vue'
 import Filterbar from '@/listview/components/filterbar.vue'
-import ListviewHeader from '@/listview/components/listview-header.vue'
 import {
   camelCaseObjectKey,
   snakeCaseObjectKey,
@@ -394,6 +394,10 @@ export default {
      * 更新主要内容区域高度尺寸
      */
     async updateContentHeight() {
+      if (this._inactive) {
+        // 在 listview-container 中，不是当前视图不触发重算
+        return
+      }
       if (this.fixedHeight) {
         this.maxHeight = this.$el.getBoundingClientRect().height
       } else if (this.fullHeight) {
@@ -448,10 +452,10 @@ export default {
     },
 
     async requestData() {
-      this.contentLoading = true
-
-      let responseData = null
-
+      if (!this.requestHandler && !this.requestUrl) {
+        console.warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
+        return
+      }
       // 请求参数合并转换
       let payloadData = _.cloneDeep(this.filterModel)
       // 删除搜索条件中的无效数据
@@ -494,11 +498,14 @@ export default {
         return
       }
 
+      let responseData = null
       if (this.requestHandler) {
+        this.contentLoading = true
         // 自定义请求方法
         responseData = await this.requestHandler(requestData)
         this.contentLoading = false
       } else if (this.requestUrl) {
+        this.contentLoading = true
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
         this._requestCancelToken && this._requestCancelToken()
 
@@ -647,8 +654,13 @@ export default {
     background-color: #ffd;
   }
 
+  .el-table th {
+    background: #f5f7fa;
+  }
+
   &__main {
     padding: 10px;
+    padding-bottom: 5px;
     background-color: #fff;
     border: 5px solid #f0f2f5;
   }
@@ -704,7 +716,7 @@ export default {
   }
 
   &__page {
-    padding-top: 10px;
+    padding-top: 5px;
   }
 
   // Element-ui overwrite
