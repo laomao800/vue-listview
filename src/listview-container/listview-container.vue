@@ -58,7 +58,9 @@ export default {
   computed: {
     childListviews() {
       return this.$slots.default.filter(
-        slot => slot.componentOptions.tag === 'listview'
+        slot =>
+          slot.componentOptions &&
+          slot.componentOptions.Ctor.extendOptions.name === 'Listview'
       )
     },
     childListviewTitles() {
