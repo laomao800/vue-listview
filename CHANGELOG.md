@@ -1,3 +1,16 @@
+# 1.0.0-alpha.14 (2018-10-09)
+
+### Features
+
+- 增加 listview-container ([0d6cba6](http://192.168.1.122:3000/pps-fe/vue-listview/commit/0d6cba6))
+- search(keepInPage) 增加 keepInPage 控制数据请求保留在当前页码 ([25563d4](http://192.168.1.122:3000/pps-fe/vue-listview/commit/25563d4))
+
+# 1.0.0-alpha.13 (2018-10-08)
+
+### Bug Fixes
+
+- 修复接口报错不显示错误信息问题 ([ef63c0d](http://192.168.1.122:3000/pps-fe/vue-listview/commit/ef63c0d))
+
 # 1.0.0-alpha.12 (2018-09-29)
 
 ### Bug Fixes
