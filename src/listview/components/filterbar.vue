@@ -9,7 +9,9 @@
     <el-form
       :inline="true"
       size="small"
-      @submit.native.prevent>
+      @submit.native.prevent
+      @keydown.native.enter="handleFilterSearch"
+    >
       <!-- 操作按钮区域 -->
       <div
         v-if="showFilterButtons"
