@@ -1,6 +1,6 @@
 {
   "name": "@pps/vue-listview",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.15",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
