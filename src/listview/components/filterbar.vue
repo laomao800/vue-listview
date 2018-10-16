@@ -69,7 +69,6 @@
               :key="index"
               :type="button.type"
               :icon="button.icon"
-              :loading="applyButtonLoading(button)"
               @click="applyButtonClick(button, $event)"
             >{{ button.text }}</el-button>
           </template>
@@ -224,12 +223,6 @@ export default {
     applyButtonClick(item, $event) {
       if (item && _.isFunction(item.click)) {
         return item.click($event)
-      }
-    },
-
-    applyButtonLoading(item) {
-      if (item && _.isFunction(item.loading)) {
-        return item.loading()
       }
     },
 
