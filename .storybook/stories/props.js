@@ -37,9 +37,7 @@ export const filterButtonsFull = [
   },
   {
     type: 'primary',
-    icon: 'el-icon-circle-plus-outline',
-    text: '下拉按钮1',
-    splitButton: true,
+    text: '下拉按钮',
     click: action('click:button-dropdown1'),
     children: [
       { text: '菜单1', click: action('click:button-dropdown1-sub1') },
@@ -48,11 +46,12 @@ export const filterButtonsFull = [
   },
   {
     type: 'primary',
-    content: '下拉按钮2',
+    text: '分裂下拉',
+    splitButton: true,
     click: action('click:button-dropdown2'),
     children: [
-      { content: '菜单1', click: action('click:button-dropdown2-sub1') },
-      { content: '菜单2', click: action('click:button-dropdown2-sub2') }
+      { text: '菜单1', click: action('click:button-dropdown2-sub1') },
+      { text: '菜单2', click: action('click:button-dropdown2-sub2') }
     ]
   }
 ]
@@ -68,6 +67,10 @@ export const filterFieldsFull = [
     model: 'name2',
     label: '禁用文本',
     disabled: true
+  },
+  {
+    type: 'number',
+    model: 'number'
   },
   {
     type: 'select',
@@ -154,16 +157,16 @@ export const filterFieldsFull = [
         ]
       }
     ]
+  },
+  {
+    type: 'label',
+    label: '文本标签'
   }
 ]
 
 export const filterButtons = [filterButtonsFull[2], filterButtonsFull[5]]
 
-export const filterFields = [
-  filterFieldsFull[0],
-  filterFieldsFull[2],
-  filterFieldsFull[4]
-]
+export const filterFields = [filterFieldsFull[0], filterFieldsFull[4]]
 
 export const tableColumns = [
   {
