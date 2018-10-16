@@ -8,6 +8,9 @@ Vue.use(ElementUI)
 
 Listview.install = function() {
   Vue.component(Listview.name, Listview)
+}
+
+ListviewContainer.install = function() {
   Vue.component(ListviewContainer.name, ListviewContainer)
 }
 
@@ -17,3 +20,4 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default Listview
+export { Listview, ListviewContainer }

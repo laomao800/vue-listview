@@ -87,8 +87,7 @@
 </template>
 
 <script>
-import Listview from '@/'
-import ListviewContainer from '@/listview-container'
+import { Listview, ListviewContainer } from '@/'
 
 export default {
   name: 'ListviewPage',
