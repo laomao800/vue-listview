@@ -122,6 +122,16 @@ export default {
         // 或者可以简写成
         () => <button>{this.text}</button>,
 
+        // 如果按钮需要有 loading 状态也可以通过这种形式定义
+        () => (
+          <el-button
+            loading={this.btnLoading}
+            on-click={(this.btnLoading = true)}
+          >
+            导出
+          </el-button>
+        ),
+
         // 对于只需要绑定事件的场景，可以简写成以下的形式。
         // 注意：由于 JSX 解析后 this 指向会改变，因此如果需要立即使用本实例自身数据（如输出数据到内容）的时候，不能用下面这种形式。
         <button on-click={this.showDialog}>JSX 按钮</button>,

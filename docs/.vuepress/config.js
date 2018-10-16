@@ -41,8 +41,13 @@ module.exports = {
           { text: 'Prop: filterFields', link: '/dev/prop-filter-fields.md' },
           { text: 'Prop: tableColumns', link: '/dev/prop-table-columns.md' },
           { text: 'Slots', link: '/dev/slots.md' },
-          { text: 'Methods', link: '/dev/methods.md' }
+          { text: 'Methods & Events', link: '/dev/methods-and-events.md' }
         ]
+      },
+      {
+        text: 'Demo',
+        link:
+          'http://192.168.1.102:801/pps/vue-listview-doc/storybook/index.html'
       },
       {
         text: 'Changelog',
