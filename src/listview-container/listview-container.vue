@@ -45,8 +45,7 @@ export default {
 
   props: {
     headerTitle: { type: String, default: '' },
-    headerNav: { type: Array, default: () => [] },
-    lazy: { type: Boolean, default: false }
+    headerNav: { type: Array, default: () => [] }
   },
 
   data() {
