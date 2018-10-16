@@ -70,7 +70,8 @@ module.exports = {
           ['/dev/prop-filter-fields.md', 'Prop: filterFields'],
           ['/dev/prop-table-columns.md', 'Prop: tableColumns'],
           ['/dev/slots.md', 'Slots'],
-          ['/dev/methods-and-events.md', 'Methods & Events']
+          ['/dev/methods-and-events.md', 'Methods & Events'],
+          ['/dev/listview-container.md', 'Listview Container']
         ]
       }
     ]
