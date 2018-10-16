@@ -11,6 +11,7 @@
     "release": "node scripts/release.js",
     "storybook:serve": "vue-cli-service serve:storybook -p 6006",
     "storybook:build": "vue-cli-service build:storybook -o .storybook/dist",
+    "storybook:deploy": "npm run storybook:build & node scripts/storybook-deploy.js",
     "docs:serve": "vuepress dev docs",
     "docs:build": "cross-env DOC_MODE=build vuepress build docs",
     "docs:deploy": "npm run docs:build & node scripts/docs-deploy.js",

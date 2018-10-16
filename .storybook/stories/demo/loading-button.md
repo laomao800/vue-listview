@@ -40,7 +40,8 @@ export default {
       this.exportBtnLoading = true
       // 一些异步操作...
 
-      // 注意这里如果是后端接口直接返回文件（如 excel 文件）等，由于响应的非 xml 类型，因此就算用 iframe 打开也无法触发事件，这种情况只能简单用定时器修改 loading 状态
+      // 注意这里如果是后端接口直接返回文件（如 excel 文件）等，由于响应的非 xml 类型，
+      // 因此就算用 iframe 打开也无法触发事件，这种情况只能简单用定时器修改 loading 状态
       setTimeout(() => {
         this.exportBtnLoading = false
       }, 2000)
