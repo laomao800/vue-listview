@@ -348,8 +348,13 @@ export default {
     margin: 0 @filter-gap-size @filter-gap-size 0;
     vertical-align: top;
 
-    .el-form-item__content > * {
-      vertical-align: top;
+    .el-form-item__content {
+      > *,
+      > .el-input .el-input__inner,
+      > .el-select .el-input__inner,
+      > .el-cascader .el-input__inner {
+        vertical-align: top;
+      }
     }
   }
 
