@@ -8072,6 +8072,10 @@ lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
 
+lodash.toarray@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.npmjs.org/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
+
 lodash.transform@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/lodash.transform/-/lodash.transform-4.6.0.tgz#12306422f63324aed8483d3f38332b5f670547a0"
@@ -8255,6 +8259,13 @@ markdown-loader@^3.0.0:
     loader-utils "^1.1.0"
     marked "^0.4.0"
 
+markdown-loader@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/markdown-loader/-/markdown-loader-4.0.0.tgz#502eb94f5db1673beb1721bed82dac9e1d333b9a"
+  dependencies:
+    loader-utils "^1.1.0"
+    marked "^0.5.0"
+
 markdown-table@^1.1.0:
   version "1.1.2"
   resolved "https://registry.npmjs.org/markdown-table/-/markdown-table-1.1.2.tgz#c78db948fa879903a41bce522e3b96f801c63786"
@@ -8262,6 +8273,10 @@ markdown-table@^1.1.0:
 marked@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmjs.org/marked/-/marked-0.4.0.tgz#9ad2c2a7a1791f10a852e0112f77b571dce10c66"
+
+marked@^0.5.0:
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/marked/-/marked-0.5.1.tgz#062f43b88b02ee80901e8e8d8e6a620ddb3aa752"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -8673,6 +8688,12 @@ node-cache@^4.1.1:
   dependencies:
     clone "2.x"
     lodash "4.x"
+
+node-emoji@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.npmjs.org/node-emoji/-/node-emoji-1.8.1.tgz#6eec6bfb07421e2148c75c6bba72421f8530a826"
+  dependencies:
+    lodash.toarray "^4.4.0"
 
 node-fetch@^1.0.1:
   version "1.7.3"
@@ -11447,14 +11468,15 @@ stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
 
-storybook-readme@^4.0.0-beta1:
-  version "4.0.0-beta1"
-  resolved "https://registry.npmjs.org/storybook-readme/-/storybook-readme-4.0.0-beta1.tgz#0f5bbd5a6d01be86aec16cb7b02b2614d4f5c8f1"
+storybook-readme@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/storybook-readme/-/storybook-readme-4.0.1.tgz#e7dcf5908c77d2094057729850442f5daf4ffcf9"
   dependencies:
     html-loader "^0.5.5"
     lodash "^4.17.4"
-    markdown-loader "^3.0.0"
-    marked "^0.4.0"
+    markdown-loader "^4.0.0"
+    marked "^0.5.0"
+    node-emoji "1.8.1"
     prismjs "^1.9.0"
     string-raw "^1.0.1"
 
