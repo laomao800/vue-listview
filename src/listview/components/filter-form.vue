@@ -4,23 +4,31 @@
       v-for="(field, index) in fields"
       ref="field"
       :key="index"
-      class="filterbar__field">
+      class="filterbar__field"
+    >
       <transition
         v-if="field.label"
-        name="label-trans">
+        name="label-trans"
+      >
         <div
           v-if="showFieldLabel(field)"
-          class="filterbar__field-label">{{ field.label }}</div>
+          class="filterbar__field-label"
+        >
+          {{ field.label }}
+        </div>
       </transition>
       <v-node
         v-if="isFunction(field)"
-        :node="field()" />
+        :node="field()"
+      />
       <v-node
         v-else-if="field.render"
-        :node="field.render()" />
+        :node="field.render()"
+      />
       <v-node
         v-else-if="isVNode(field)"
-        :node="field" />
+        :node="field"
+      />
       <el-form-item v-else>
         <component
           :is="getFieldComponentName(field.type)"

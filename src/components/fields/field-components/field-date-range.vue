@@ -1,8 +1,8 @@
 <template>
   <el-date-picker
+    v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
-    v-model="value"
     v-bind="mergedProps"
     v-on="mergedEvents"
   />

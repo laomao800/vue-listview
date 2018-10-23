@@ -1,9 +1,9 @@
 <template>
   <el-cascader
+    v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
     :options="field.options"
-    v-model="value"
     v-bind="mergedProps"
     v-on="mergedEvents"
   />

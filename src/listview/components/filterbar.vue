@@ -15,21 +15,25 @@
       <!-- 操作按钮区域 -->
       <div
         v-if="showFilterButtons"
-        class="filterbar__buttons">
+        class="filterbar__buttons"
+      >
         <el-form-item>
           <template v-for="(button, index) in filterButtons">
             <v-node
               v-if="isFunction(button)"
               :key="index"
-              :node="button()" />
+              :node="button()"
+            />
             <v-node
               v-else-if="button.render"
               :key="index"
-              :node="button.render()" />
+              :node="button.render()"
+            />
             <v-node
               v-else-if="isVNode(button)"
               :key="index"
-              :node="button" />
+              :node="button"
+            />
             <el-dropdown
               v-else-if="Array.isArray(button.children)"
               :key="index"
@@ -42,7 +46,8 @@
               <template v-if="button.splitButton">
                 <i
                   v-if="button.icon"
-                  :class="button.icon"/>
+                  :class="button.icon"
+                />
                 {{ button.text }}
               </template>
               <template v-else>
@@ -50,16 +55,18 @@
                   :type="button.type"
                   :icon="button.icon"
                   @click="applyButtonClick(button, $event)"
-                >{{ button.text }}<i class="el-icon-arrow-down el-icon--right"/></el-button>
+                >{{ button.text }}<i class="el-icon-arrow-down el-icon--right" /></el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
-                  v-for="(child, index) in button.children"
-                  :key="index"
-                  @click.native="applyButtonClick(child, $event)">
+                  v-for="(child, childIndex) in button.children"
+                  :key="childIndex"
+                  @click.native="applyButtonClick(child, $event)"
+                >
                   <i
                     v-if="child.icon"
-                    :class="child.icon" />
+                    :class="child.icon"
+                  />
                   {{ child.text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -89,17 +96,24 @@
       >
         <div
           :style="{ transform: `translateX(${searchBtnOffset}px)` }"
-          class="filterbar__submit-btn">
+          class="filterbar__submit-btn"
+        >
           <el-form-item>
             <slot name="prepend-filterbar-submit" />
             <el-button
               v-if="showFilterSearch"
               type="primary"
               icon="el-icon-search"
-              @click="handleFilterSearch">搜索</el-button>
+              @click="handleFilterSearch"
+            >
+              搜索
+            </el-button>
             <el-button
               v-if="showFilterReset"
-              @click="handleFilterReset">重置</el-button>
+              @click="handleFilterReset"
+            >
+              重置
+            </el-button>
             <slot name="append-filterbar-submit" />
           </el-form-item>
         </div>

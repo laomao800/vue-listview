@@ -1,17 +1,25 @@
 <template>
   <div
     v-if="title || nav.length > 0"
-    class="listview__header">
+    class="listview__header"
+  >
     <h1
       v-if="title"
-      class="listview__title">{{ title }}</h1>
+      class="listview__title"
+    >
+      {{ title }}
+    </h1>
     <el-breadcrumb
       separator="/"
-      class="listview__breadcrumb">
+      class="listview__breadcrumb"
+    >
       <el-breadcrumb-item
         v-for="(item, index) in nav"
         :key="index"
-        :to="item.to">{{ item.text }}</el-breadcrumb-item>
+        :to="item.to"
+      >
+        {{ item.text }}
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>

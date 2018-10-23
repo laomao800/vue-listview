@@ -4,7 +4,8 @@
       height: fixedHeight,
       minHeight: fixedHeight && 'inherit'
     }"
-    class="listview">
+    class="listview"
+  >
 
     <listview-header
       :title="headerTitle"
@@ -13,7 +14,8 @@
 
     <div
       ref="main"
-      class="listview__main">
+      class="listview__main"
+    >
       <filterbar
         ref="filterbar"
         :filter-buttons="filterButtons"
@@ -37,7 +39,8 @@
         <div
           ref="content"
           :style="{ height: `${contentHeight}px` }"
-          class="listview__content">
+          class="listview__content"
+        >
           <slot
             :filter-model="filterModel"
             :content-height="contentHeight"
@@ -59,7 +62,8 @@
 
               <template
                 v-if="internalContentMessage"
-                slot="empty">
+                slot="empty"
+              >
                 <span
                   :class="[
                     'content-message',
@@ -68,8 +72,9 @@
                 >
                   <span
                     v-if="internalContentMessage.icon"
-                    class="content-message--icon">
-                    <i :class="internalContentMessage.icon"/>
+                    class="content-message--icon"
+                  >
+                    <i :class="internalContentMessage.icon" />
                   </span>
                   <span class="content-message--message">{{ internalContentMessage.message }}</span>
                 </span>
@@ -113,7 +118,8 @@
         <div
           v-if="usePage"
           ref="pagination"
-          class="listview__page">
+          class="listview__page"
+        >
           <el-pagination
             :total="contentData.total"
             :current-page="currentPage"
@@ -122,7 +128,8 @@
             background
             layout="total, sizes, prev, pager, next, jumper"
             @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"/>
+            @current-change="handleCurrentChange"
+          />
         </div>
       </div>
     </div>

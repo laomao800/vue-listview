@@ -19,13 +19,14 @@
 
     <div class="listview-container__content">
       <keep-alive>
-        <v-node-cmp
-          v-for="(item, index) in childListviews"
-          v-if="index === activeTab"
-          ref="listviewChild"
-          :key="index"
-          :node="item"
-        />
+        <template v-for="(item, index) in childListviews">
+          <v-node-cmp
+            v-if="index === activeTab"
+            ref="listviewChild"
+            :key="index"
+            :node="item"
+          />
+        </template>
       </keep-alive>
     </div>
   </div>
