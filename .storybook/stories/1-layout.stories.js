@@ -54,3 +54,27 @@ stories.add(
     filterFields: filterFieldsFull
   })
 )
+
+stories.add('6. 多列表切换', () => ({
+  template: `
+      <listview-container
+        header-title="演示列表"
+        :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
+      >
+        <listview v-bind="props1" header-title="列表1" />
+        <listview v-bind="props2" header-title="列表2" />
+      </listview-container>
+    `,
+  data: () => ({
+    props1: {
+      filterButtons,
+      filterFields,
+      tableColumns
+    },
+    props2: {
+      filterButtons,
+      filterFields: filterFieldsFull,
+      tableColumns
+    }
+  })
+}))

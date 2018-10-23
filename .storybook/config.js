@@ -4,9 +4,10 @@ import { setOptions } from '@storybook/addon-options'
 import _ from 'lodash'
 import { version } from '../package.json'
 import 'normalize.css'
-import Listview from '@/'
+import { Listview, ListviewContainer } from '@/'
 
 Vue.use(Listview)
+Vue.use(ListviewContainer)
 
 setOptions({
   name: `PPS Vue Listview v${version}`,
