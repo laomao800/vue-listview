@@ -4,7 +4,7 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 
 界面预览：
 
-![预览](/preview.png)
+![预览](./assets/preview.png)
 
 默认为表格类列表页，也可通过 [Slot](/dev/slots.md) 实现自定义列表布局。
 
