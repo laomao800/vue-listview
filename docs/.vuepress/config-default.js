@@ -6,7 +6,7 @@ module.exports = {
   locales: {
     '/': {
       lang: 'zh-CN',
-      title: `PPS Vue Listview v${version}`
+      title: `Vue Listview v${version}`
     }
   },
   configureWebpack: (config, isServer) => {

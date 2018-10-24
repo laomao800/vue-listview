@@ -10,9 +10,7 @@ Vue.use(Listview)
 Vue.use(ListviewContainer)
 
 setOptions({
-  name: `PPS Vue Listview v${version}`,
-  url: 'http://192.168.1.122:3000/pps-fe/vue-listview'
-  // addonPanelInRight: false
+  name: `Vue Listview v${version}`
 })
 
 function loadStories() {

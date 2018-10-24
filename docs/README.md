@@ -1,4 +1,4 @@
-# PPS Vue Listview
+# Vue Listview
 
 Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) ，可用于生成列表类的页面布局的 Vue 组件。
 
