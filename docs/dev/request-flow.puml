@@ -20,34 +20,34 @@ endif
 
 if "requestHandler ?" then
   -left->[No] "对 requestUrl 发出请求\n携带参数 requestData"
-  if "validateResponse(response) 验证通过"
-    -->[Yes] ===RESPONSE===
-  else
-    -->[No] "resolveRequestErrorMessage(response) \n获取错误信息并显示"
-    -->(*)
-  endif
+  --> ===RESPONSE===
 else
   -->[Yes] "requestHandler(requestData)"
   --> ===RESPONSE===
 endif
 
---> "获取到原始响应数据 responseData"
-
-if "transformResponseData ?" then
-  -->[No] "直接使用 responseData"
-  --> ===TRANS_RES===
+if "validateResponse(response) 验证通过"
+  -->[No] "resolveRequestErrorMessage(response) \n获取错误信息并显示"
+  -->(*)
 else
-  -right->[Yes] "responseData = transformResponseData(responseData)"
-  --> ===TRANS_RES===
+  -->[Yes] "获取到原始响应数据 responseData"
+  if "transformResponseData ?" then
+    -right->[No] "直接使用 responseData"
+    --> ===TRANS_RES===
+  else
+    -->[Yes] "responseData = transformResponseData(responseData)"
+    --> ===TRANS_RES===
+  endif
 endif
 
 --> "使用 contentDataMap 映射 responseData\n生成最终数据 contentData"
 
 if "使用自定义 slot ?" then
-  -->[Yes] "挂载在 slot-scope 的 content-data "
--->(*)
-else
   -->[No] "渲染表格视图"
--->(*)
+  -->(*)
+else
+  -->[Yes] "挂载在 slot-scope 的 content-data "
+  -->(*)
 endif
+
 @enduml
