@@ -119,7 +119,7 @@ export default {
           }.bind(this)
         },
 
-        // 或者可以简写成
+        // 或者可以简写成（推荐）
         () => <button>{this.text}</button>,
 
         // 如果按钮需要有 loading 状态也可以通过这种形式定义
@@ -132,8 +132,8 @@ export default {
           </el-button>
         ),
 
-        // 对于只需要绑定事件的场景，可以简写成以下的形式。
-        // 注意：由于 JSX 解析后 this 指向会改变，因此如果需要立即使用本实例自身数据（如输出数据到内容）的时候，不能用下面这种形式。
+        // 对于非立即使用数据（输出数据到界面）的时候，如只在事件绑定内使用数据，
+        // 也可直接简写返回 JSX 内容无需通过函数包装。
         <button on-click={this.showDialog}>JSX 按钮</button>,
         <button on-click={() => this.showDialog(this.text)}>JSX 按钮</button>
       ]
