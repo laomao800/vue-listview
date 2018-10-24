@@ -14,7 +14,9 @@
           { 'listview-container__tab--active': index === activeTab }
         ]"
         @click="activeTab = index"
-      >{{ title || '未命名' }}</span>
+      >
+        {{ title || '未命名' }}
+      </span>
     </div>
 
     <div class="listview-container__content">

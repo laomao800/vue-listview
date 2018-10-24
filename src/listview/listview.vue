@@ -6,7 +6,6 @@
     }"
     class="listview"
   >
-
     <listview-header
       :title="headerTitle"
       :nav="headerNav"
@@ -59,7 +58,6 @@
               @row-click="handleRowClick"
               v-on="validTableEvents"
             >
-
               <template
                 v-if="internalContentMessage"
                 slot="empty"
@@ -110,7 +108,6 @@
                   :node="renderTableColumn(column)"
                 />
               </template>
-
             </el-table>
           </slot>
         </div>

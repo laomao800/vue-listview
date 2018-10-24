@@ -3,7 +3,8 @@
     <!-- eslint-disable vue/attributes-order -->
     <listview-container
       :header-title="'演示列表容器'"
-      :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]">
+      :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
+    >
       <listview
         :header-title="'演示列表1'"
 
@@ -51,10 +52,12 @@
             :type="contentMessage.type"
             :closable="false"
             center
-            show-icon/>
+            show-icon
+          />
           <ul
             v-else
-            class="item-list">
+            class="item-list"
+          >
             <li
               v-for="(item, index) in contentData.items"
               :key="index"
@@ -71,11 +74,15 @@
                   <el-button
                     size="mini"
                     type="success"
-                  >审核</el-button>
+                  >
+                    审核
+                  </el-button>
                   <el-button
                     size="mini"
                     type="danger"
-                  >删除</el-button>
+                  >
+                    删除
+                  </el-button>
                 </div>
               </div>
             </li>

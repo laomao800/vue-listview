@@ -55,7 +55,9 @@
                   :type="button.type"
                   :icon="button.icon"
                   @click="applyButtonClick(button, $event)"
-                >{{ button.text }}<i class="el-icon-arrow-down el-icon--right" /></el-button>
+                >
+                  {{ button.text }}<i class="el-icon-arrow-down el-icon--right" />
+                </el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
@@ -77,7 +79,9 @@
               :type="button.type"
               :icon="button.icon"
               @click="applyButtonClick(button, $event)"
-            >{{ button.text }}</el-button>
+            >
+              {{ button.text }}
+            </el-button>
           </template>
         </el-form-item>
       </div>
@@ -332,10 +336,6 @@ export default {
     padding-bottom: 0;
     line-height: 32px;
     vertical-align: top;
-
-    span:empty {
-      display: none;
-    }
   }
   .el-input-group__append,
   .el-input-group__prepend {
