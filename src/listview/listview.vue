@@ -136,32 +136,16 @@
 <script>
 import _ from 'lodash'
 import axios from 'axios'
-import get from 'get-value'
 import VNode from '@/components/v-node'
 import ListviewHeader from '@/components/listview-header.vue'
 import Filterbar from '@/listview/components/filterbar.vue'
 import {
+  dataMapping,
+  parseSizeWithUnit,
   camelCaseObjectKey,
   snakeCaseObjectKey,
   pascalCaseObjectKey
 } from '@/utils/utils'
-
-const axiosService = axios.create()
-
-function transformContentData(data = {}, dataMap = {}) {
-  const result = {}
-  const keysMap = Object.keys(dataMap)
-
-  keysMap.forEach(key => {
-    try {
-      const dataKey = key.toString()
-      const dataValue = get(data, dataMap[key])
-      result[dataKey] = dataValue
-    } catch (e) {}
-  })
-
-  return result
-}
 
 export default {
   name: 'Listview',
@@ -292,12 +276,7 @@ export default {
      * 如果为固定高度布局，则会返回能直接用于 css height 的值
      */
     fixedHeight() {
-      if (this.height) {
-        const isPercent = /\d+%/.test(this.height)
-        const height = parseInt(this.height, 10)
-        return height ? (isPercent ? `${height}%` : `${height}px`) : false
-      }
-      return false
+      return parseSizeWithUnit(this.height)
     },
 
     /**
@@ -327,6 +306,9 @@ export default {
       this.initLayout()
     },
     fullHeight: /* istanbul ignore next */ function() {
+      this.initLayout()
+    },
+    filterFields: /* istanbul ignore next */ function() {
       this.initLayout()
     },
     showFilterSearch: /* istanbul ignore next */ function() {
@@ -537,6 +519,7 @@ export default {
         })
 
         try {
+          const axiosService = axios.create()
           response = await axiosService(requestConfig)
         } catch (error) {
           if (!axios.isCancel(error)) {
@@ -556,7 +539,7 @@ export default {
           ? this.transformResponseData(responseData)
           : responseData
         const contentData = this.contentDataMap
-          ? transformContentData(contentResponse, this.contentDataMap)
+          ? dataMapping(contentResponse, this.contentDataMap)
           : contentResponse
         this.contentData = contentData
       } else {
