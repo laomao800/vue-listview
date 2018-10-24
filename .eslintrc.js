@@ -10,7 +10,21 @@ module.exports = {
     // https://github.com/prettier/prettier/issues/3847
     'space-before-function-paren': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/max-attributes-per-line': [
+      2,
+      {
+        singleline: 2,
+        multiline: {
+          max: 1,
+          allowFirstLine: false
+        }
+      }
+    ],
+    'vue/multiline-html-element-content-newline': 'error',
+    'vue/no-spaces-around-equal-signs-in-attribute': 'error',
+    // 'vue/script-indent': ['error', 2, { baseIndent: 0 }],
+    'vue/no-unused-components': false
   },
   overrides: [
     {

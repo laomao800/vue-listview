@@ -5161,6 +5161,12 @@ eslint-plugin-vue@^4.5.0:
   dependencies:
     vue-eslint-parser "^2.0.3"
 
+eslint-plugin-vue@^5.0.0-beta.3:
+  version "5.0.0-beta.3"
+  resolved "http://registry.npm.taobao.org/eslint-plugin-vue/download/eslint-plugin-vue-5.0.0-beta.3.tgz#f3fa9f109b76e20fc1e45a71ce7c6d567118924e"
+  dependencies:
+    vue-eslint-parser "^3.2.1"
+
 eslint-scope@3.7.1:
   version "3.7.1"
   resolved "https://registry.npmjs.org/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
@@ -12532,6 +12538,17 @@ vue-eslint-parser@^2.0.3:
     espree "^3.5.2"
     esquery "^1.0.0"
     lodash "^4.17.4"
+
+vue-eslint-parser@^3.2.1:
+  version "3.2.2"
+  resolved "https://registry.npmjs.org/vue-eslint-parser/-/vue-eslint-parser-3.2.2.tgz#47c971ee4c39b0ee7d7f5e154cb621beb22f7a34"
+  dependencies:
+    debug "^3.1.0"
+    eslint-scope "^4.0.0"
+    eslint-visitor-keys "^1.0.0"
+    espree "^4.0.0"
+    esquery "^1.0.1"
+    lodash "^4.17.10"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.0"
