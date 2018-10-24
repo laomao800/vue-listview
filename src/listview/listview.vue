@@ -510,48 +510,37 @@ export default {
         return
       }
 
-      let responseData = null
+      this.contentLoading = true
+
+      let response
       if (this.requestHandler) {
-        this.contentLoading = true
         // 自定义请求方法
-        responseData = await this.requestHandler(requestData)
-        this.contentLoading = false
+        response = await this.requestHandler(requestData)
       } else if (this.requestUrl) {
-        this.contentLoading = true
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
         this._requestCancelToken && this._requestCancelToken()
 
         // 构造 Axios 请求 requestConfig
-        const internalRequestConfig = {
+        const _requestConfig = {
           url: this.requestUrl,
           method: this.requestConfig.method || this.requestMethod,
           withCredentials: true
         }
         // 提前合并以获取 method 用于判断附加请求参数
-        if (internalRequestConfig.method === 'get') {
-          internalRequestConfig.params = requestData
+        if (_requestConfig.method === 'get') {
+          _requestConfig.params = requestData
         } else {
-          internalRequestConfig.data = requestData
+          _requestConfig.data = requestData
         }
 
-        const requestConfig = _.merge(internalRequestConfig, this.requestConfig)
+        const requestConfig = _.merge(_requestConfig, this.requestConfig)
         // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
         requestConfig.cancelToken = new axios.CancelToken(cancel => {
           this._requestCancelToken = cancel
         })
 
         try {
-          const response = await axiosService(requestConfig)
-          this.contentLoading = false
-          if (this.validateResponse(response)) {
-            responseData = response.data
-            this.setContentMessage(null) // 清空错误信息
-          } else {
-            this.setContentMessage(
-              this.resolveResponseErrorMessage(response),
-              'error'
-            )
-          }
+          response = await axiosService(requestConfig)
         } catch (error) {
           if (!axios.isCancel(error)) {
             this.setContentMessage(error.message, 'error')
@@ -560,17 +549,25 @@ export default {
         }
       }
 
-      let contentResponse = null
-      if (responseData) {
-        contentResponse = this.transformResponseData
+      this.contentLoading = false
+
+      // change: 自定义 requestHandler 与内置请求响应都通过验证流程
+      if (this.validateResponse(response)) {
+        this.setContentMessage(null) // 清空错误信息
+        const responseData = response.data
+        const contentResponse = this.transformResponseData
           ? this.transformResponseData(responseData)
           : responseData
+        const contentData = this.contentDataMap
+          ? transformContentData(contentResponse, this.contentDataMap)
+          : contentResponse
+        this.contentData = contentData
+      } else {
+        this.setContentMessage(
+          this.resolveResponseErrorMessage(response),
+          'error'
+        )
       }
-      const contentData = this.contentDataMap
-        ? transformContentData(contentResponse, this.contentDataMap)
-        : contentResponse
-
-      this.contentData = contentData
     },
 
     /**
