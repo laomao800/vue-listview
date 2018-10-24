@@ -43,6 +43,8 @@ module.exports = {
       }
     ],
     // Allow CSS module keywords beginning with `@`
-    'at-rule-no-unknown': null
+    'at-rule-no-unknown': null,
+    'no-duplicate-selectors': null,
+    'no-descending-specificity': null
   }
 }
