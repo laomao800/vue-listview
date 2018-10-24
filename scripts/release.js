@@ -45,20 +45,21 @@ const release = async () => {
 
   if (yes) {
     await execa('npm', ['run', 'build'], { stdio: 'inherit' })
-    await execa('npm', ['run', 'docs:deploy'], { stdio: 'inherit' })
     await execa('git', ['add', 'dist'], { stdio: 'inherit' })
     await execa('git', ['commit', '-m', `build: build ${version}`], {
+      stdio: 'inherit'
+    })
+    await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
+    await execa('npm', ['run', 'storybook:build'], { stdio: 'inherit' })
+    await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
+    await execa('git', ['commit', '-m', `build: docs ${version}`], {
       stdio: 'inherit'
     })
     await execa(
       'npm',
       ['version', version, '-m', `build: release ${version}`],
-      {
-        stdio: 'inherit'
-      }
+      { stdio: 'inherit' }
     )
-    // 在 npm version 后执行以供 storybook 获取到正确 version 值
-    await execa('npm', ['run', 'storybook:deploy'], { stdio: 'inherit' })
   }
 }
 

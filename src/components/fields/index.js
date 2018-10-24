@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-// 导入本目录下所有以 `field` 开头的 .vue 文件
+// 导入 field-components 目录下所有以 `field` 开头的 .vue 文件
 const requireFiles = require.context(
   './field-components',
   true,

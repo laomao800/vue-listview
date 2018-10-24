@@ -4,53 +4,32 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 
 界面预览：
 
-![预览](./assets/preview.png)
+![预览](./preview.png)
 
 默认为表格类列表页，也可通过 [Slot](/dev/slots.md) 实现自定义列表布局。
 
 ## 安装
 
-::: danger 安装
-
-由于该库暂未发布，暂时无法通过 npm 命令安装，请先直接使用仓库内 `dist/` 目录下的文件。将对应文件复制到项目内，并在 babel 编译中排除该文件即可。如：
-
-`/public/vue-listview/listview-component.common.js`
-
-```js
-// vue.config.js
-// ...
-chainWebpack: config => {
-  config.module.rule('js').exclude.add(/public/)
-}
-// ...
-```
-
-:::
-
 ```bash
-npm i -S @pps/vue-listview
+npm i -S @laomao800/vue-listview
 
 # OR
 
-yarn add @pps/vue-listview
+yarn add @laomao800/vue-listview
 ```
 
 ## 使用
 
-::: tip 说明
-
-由于内部实现是基于 Element-UI ，因此在使用前在项目中确保已经有安装了 Element-UI 。
-
-:::
-
 ### 全局注册
+
+**直接 import 的文件为不包含 Element-UI 的 `listview-component` 文件，需确保项目内已有 Element-UI。**
 
 ```js
 // main.js
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Listview from '@pps/vue-listview'
+import Listview from '@laomao800/vue-listview'
 
 Vue.use(ElementUI)
 Vue.use(Listview)
@@ -64,7 +43,7 @@ Vue.use(Listview)
 </template>
 
 <script>
-import Listview from '@pps/vue-listview'
+import Listview from '@laomao800/vue-listview'
 
 export default {
   components: {
@@ -81,7 +60,7 @@ export default {
   <listview />
 </div>
 <script src="https://vuejs.org/js/vue.min.js"></script>
-<script src="./listview.umd.min.js"></script>
+<script src="{PATH TO LISTVIEW}/listview.umd.min.js"></script>
 <script>
   var app = new Vue({
     el: '#app',

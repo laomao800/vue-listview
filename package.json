@@ -1,23 +1,35 @@
 {
-  "name": "@pps/vue-listview",
+  "name": "@laomao800/vue-listview",
   "version": "1.0.0-alpha.15",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "rimraf dist&npm run build:component&npm run build:full",
     "lint": "vue-cli-service lint",
+    "release": "node scripts/release.js",
+    "release:private": "node scripts/release-private.js",
+    "gh-pages:prepare": "npm run docs:build & npm run storybook:build",
+    "gh-pages:release": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
+    "build": "rimraf dist&npm run build:component&npm run build:full",
     "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --target lib --name listview-component src/index.component.js",
     "build:full": "vue-cli-service build --no-clean --target lib --name listview src/index.js",
-    "release": "node scripts/release.js",
-    "storybook:serve": "vue-cli-service serve:storybook -p 6006",
-    "storybook:build": "vue-cli-service build:storybook -o .storybook/dist",
-    "storybook:deploy": "npm run storybook:build & node scripts/storybook-deploy.js",
     "docs:serve": "vuepress dev docs",
-    "docs:build": "cross-env DOC_MODE=build vuepress build docs",
-    "docs:deploy": "npm run docs:build & node scripts/docs-deploy.js",
+    "docs:build": "vuepress build docs",
+    "storybook:serve": "vue-cli-service serve:storybook -p 6006",
+    "storybook:build": "vue-cli-service build:storybook -o docs/.vuepress/dist/storybook",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
     "test:unit:cover": "vue-cli-service test:unit --coverage"
+  },
+  "author": "laomao800 <laomao800@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laomao800/vue-listview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/laomao800/vue-listview/issues"
   },
   "dependencies": {
     "axios": "^0.18.0",
