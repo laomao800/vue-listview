@@ -14,7 +14,7 @@
       class="listview__breadcrumb"
     >
       <el-breadcrumb-item
-        v-for="(item, index) in nav"
+        v-for="(item, index) in internalNav"
         :key="index"
         :to="item.to"
       >
@@ -25,12 +25,36 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   name: 'ListviewHeader',
 
   props: {
     title: { type: String, default: '' },
     nav: { type: Array, default: () => [] }
+  },
+
+  computed: {
+    internalNav() {
+      const validNav = []
+      this.nav.forEach(nav => {
+        let text, to
+        if (typeof nav === 'string' && !!nav) {
+          text = nav
+        } else if (_.isPlainObject(nav)) {
+          text = nav.text
+          to = nav.to
+        }
+        if (text) {
+          validNav.push({
+            text,
+            to
+          })
+        }
+      })
+      return validNav
+    }
   }
 }
 </script>
