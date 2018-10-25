@@ -22,10 +22,10 @@
 
 ## Events
 
-## filter-submit
+### filter-submit
 
 点击搜索栏“搜索”按钮后触发。
 
-## filter-reset
+### filter-reset
 
 点击搜索栏“重置”按钮后触发。
