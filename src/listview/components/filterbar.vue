@@ -77,6 +77,7 @@
               v-else
               :key="index"
               :type="button.type"
+              :plain="button.plain"
               :icon="button.icon"
               @click="applyButtonClick(button, $event)"
             >

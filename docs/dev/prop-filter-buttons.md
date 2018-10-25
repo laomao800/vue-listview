@@ -21,6 +21,13 @@
 
 按钮图标，可直接使用 [Element UI icon](http://element.eleme.io/#/zh-CN/component/icon) 内的值。该值仅直接输出于 `class` 属性上，因此有其他字体图标的使用需要，如 `font-awesome` 可自行于项目中引入使用即可。
 
+### plain
+
+- type: `Boolean`
+- default: `false`
+
+是否显示为线框按钮样式。
+
 ### text
 
 - type: `String`
