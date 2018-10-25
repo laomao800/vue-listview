@@ -380,6 +380,7 @@ export default {
     .el-dropdown + .el-button,
     .el-dropdown + .el-dropdown,
     .el-form-item__content > * {
+      display: inline-block;
       margin-right: @filter-gap-size;
       margin-left: 0;
     }
