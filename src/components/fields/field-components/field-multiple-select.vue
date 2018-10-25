@@ -28,6 +28,7 @@ export default {
     return {
       defaultProps: {
         clearable: true,
+        filterable: true,
         style: { width: '180px' },
         multiple: true,
         collapseTags: true
