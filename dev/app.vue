@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <router-view :key="$route.fullPath" />
+    <listview-page />
   </div>
 </template>
 
 <script>
 import './views/common.less'
+import ListviewPage from './views/listview'
 
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    ListviewPage
+  }
 }
 </script>
 
