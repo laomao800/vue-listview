@@ -16,9 +16,6 @@
     "**/*.log": true,
     "**/*.log*": true
   },
-  "files.associations": {
-    ".markdownlintrc": "jsonc"
-  },
   // ===
   // Event Triggers
   // ===
@@ -58,9 +55,5 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
-  },
-  "markdownlint.config": {
-    "MD013": false,
-    "MD030": false
   }
 }
