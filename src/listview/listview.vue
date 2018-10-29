@@ -204,7 +204,7 @@ export default {
       type: Function,
       default: /* istanbul ignore next */ function(response) {
         try {
-          return response.data.is_success
+          return response.is_success
         } catch (e) {
           return false
         }
@@ -214,7 +214,7 @@ export default {
       type: Function,
       default: /* istanbul ignore next */ function(response) {
         try {
-          return response.data.error_info.msg
+          return response.error_info.msg
         } catch (e) {
           return '未知错误'
         }
@@ -520,7 +520,8 @@ export default {
 
         try {
           const axiosService = axios.create()
-          response = await axiosService(requestConfig)
+          const res = await axiosService(requestConfig)
+          response = res.data
         } catch (error) {
           if (!axios.isCancel(error)) {
             this.setContentMessage(error.message, 'error')
@@ -534,10 +535,9 @@ export default {
       // change: 自定义 requestHandler 与内置请求响应都通过验证流程
       if (this.validateResponse(response)) {
         this.setContentMessage(null) // 清空错误信息
-        const responseData = response.data
         const contentResponse = this.transformResponseData
-          ? this.transformResponseData(responseData)
-          : responseData
+          ? this.transformResponseData(response)
+          : response
         const contentData = this.contentDataMap
           ? dataMapping(contentResponse, this.contentDataMap)
           : contentResponse
