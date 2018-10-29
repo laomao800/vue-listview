@@ -4,16 +4,16 @@ exports[`layout contentMinHeight 1`] = `
 <div class="listview" style="height: 200px; min-height: inherit;">
   <listviewheader-stub title="" nav=""></listviewheader-stub>
   <div class="listview__main">
-    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"></filterbar-stub>
+    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"><template></template> <template></template></filterbar-stub>
     <div>
       <div class="listview__content" style="height: 500px;">
-        <eltable-stub size="small" fit="true" stripe="true" border="true" showheader="true" rowclassname="function () { [native code] }" selectonindeterminate="true" style="width: 100%;" height="500">
+        <eltable-stub data="" size="small" fit="true" stripe="true" border="true" showheader="true" rowclassname="function () { [native code] }" selectonindeterminate="true" style="width: 100%;" height="500">
           <!---->
           <eltablecolumn-stub type="selection" width="50" resizable="true" align="center" filtermultiple="true" sortorders="ascending,descending,"></eltablecolumn-stub>
         </eltable-stub>
       </div>
       <div class="listview__page">
-        <elpagination-stub pagesize="20" pagercount="7" currentpage="1" layout="total, sizes, prev, pager, next, jumper" pagesizes="20,50,100" background="true"></elpagination-stub>
+        <elpagination-stub pagesize="20" total="0" pagercount="7" currentpage="1" layout="total, sizes, prev, pager, next, jumper" pagesizes="20,50,100" background="true"></elpagination-stub>
       </div>
     </div>
   </div>
@@ -26,34 +26,46 @@ exports[`layout listview header nav 1`] = `
 <div class="listview__header">
   <!---->
   <elbreadcrumb-stub separator="/" separatorclass="" class="listview__breadcrumb">
-    <elbreadcrumbitem-stub to="/home">home</elbreadcrumbitem-stub>
-    <elbreadcrumbitem-stub to="/list">list</elbreadcrumbitem-stub>
+    <elbreadcrumbitem-stub to="/home">
+      home
+    </elbreadcrumbitem-stub>
+    <elbreadcrumbitem-stub to="/list">
+      list
+    </elbreadcrumbitem-stub>
   </elbreadcrumb-stub>
 </div>
 `;
 
 exports[`layout listview header title & nav 1`] = `
 <div class="listview__header">
-  <h1 class="listview__title">headerTitle</h1>
+  <h1 class="listview__title">
+    headerTitle
+  </h1>
   <elbreadcrumb-stub separator="/" separatorclass="" class="listview__breadcrumb">
-    <elbreadcrumbitem-stub to="/home">home</elbreadcrumbitem-stub>
-    <elbreadcrumbitem-stub to="/list">list</elbreadcrumbitem-stub>
+    <elbreadcrumbitem-stub to="/home">
+      home
+    </elbreadcrumbitem-stub>
+    <elbreadcrumbitem-stub to="/list">
+      list
+    </elbreadcrumbitem-stub>
   </elbreadcrumb-stub>
 </div>
 `;
 
 exports[`layout listview header title 1`] = `
 <div class="listview__header">
-  <h1 class="listview__title">headerTitle</h1>
+  <h1 class="listview__title">
+    headerTitle
+  </h1>
   <elbreadcrumb-stub separator="/" separatorclass="" class="listview__breadcrumb"></elbreadcrumb-stub>
 </div>
 `;
 
 exports[`layout pager 1`] = `
-<div class="listview" style="min-height: false;">
+<div class="listview">
   <listviewheader-stub title="" nav=""></listviewheader-stub>
   <div class="listview__main">
-    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"></filterbar-stub>
+    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"><template></template> <template></template></filterbar-stub>
     <div>
       <div class="listview__content">
         <eltable-stub data="" size="small" fit="true" stripe="true" border="true" showheader="true" rowclassname="function () { [native code] }" selectonindeterminate="true" style="width: 100%;">
@@ -68,10 +80,10 @@ exports[`layout pager 1`] = `
 `;
 
 exports[`layout specify height 1`] = `
-<div class="listview" style="min-height: false;">
+<div class="listview">
   <listviewheader-stub title="" nav=""></listviewheader-stub>
   <div class="listview__main">
-    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"></filterbar-stub>
+    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"><template></template> <template></template></filterbar-stub>
     <div>
       <div class="listview__content">
         <eltable-stub data="" size="small" fit="true" stripe="true" border="true" showheader="true" rowclassname="function () { [native code] }" selectonindeterminate="true" style="width: 100%;">
@@ -86,10 +98,10 @@ exports[`layout specify height 1`] = `
 `;
 
 exports[`layout specify height 2`] = `
-<div class="listview" style="min-height: inherit; height: 500px; min-height: inherit;">
+<div class="listview" style="height: 500px; min-height: inherit;">
   <listviewheader-stub title="" nav=""></listviewheader-stub>
   <div class="listview__main">
-    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"></filterbar-stub>
+    <filterbar-stub filterbuttons="" filterfields="" filtermodel="[object Object]" filterbarfold="true" showfiltersearch="true" showfilterreset="true"><template></template> <template></template></filterbar-stub>
     <div>
       <div class="listview__content">
         <eltable-stub data="" size="small" fit="true" stripe="true" border="true" showheader="true" rowclassname="function () { [native code] }" selectonindeterminate="true" style="width: 100%;">

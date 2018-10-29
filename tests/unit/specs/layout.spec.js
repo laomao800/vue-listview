@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import Listview from '@/index.js'
-import ListviewHeader from '@/listview/components/listview-header'
+import ListviewHeader from '@/components/listview-header'
 
 describe('layout', () => {
   describe('listview header', () => {
