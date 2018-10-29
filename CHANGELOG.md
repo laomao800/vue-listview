@@ -1,107 +1,191 @@
-# 1.0.0-alpha.14 (2018-10-09)
+# [1.0.0-alpha.16](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2018-10-29)
 
-### Features
-
-- 增加 listview-container ([0d6cba6](http://192.168.1.122:3000/pps-fe/vue-listview/commit/0d6cba6))
-- search(keepInPage) 增加 keepInPage 控制数据请求保留在当前页码 ([25563d4](http://192.168.1.122:3000/pps-fe/vue-listview/commit/25563d4))
-
-# 1.0.0-alpha.13 (2018-10-08)
 
 ### Bug Fixes
 
-- 修复接口报错不显示错误信息问题 ([ef63c0d](http://192.168.1.122:3000/pps-fe/vue-listview/commit/ef63c0d))
+* update eslint-plugin-vue to 5.0.0-beta.3 ([6b772cb](https://github.com/laomao800/vue-listview/commit/6b772cb))
+* update storybook-readme ([1cd6d81](https://github.com/laomao800/vue-listview/commit/1cd6d81))
+* 修正 lint 错误 ([5fea1cf](https://github.com/laomao800/vue-listview/commit/5fea1cf))
+* 修正测试用例及 snapshots ([d39a880](https://github.com/laomao800/vue-listview/commit/d39a880))
 
-# 1.0.0-alpha.12 (2018-09-29)
+
+### Features
+
+* filterButton 支持 plain 类型 ([59a4bb7](https://github.com/laomao800/vue-listview/commit/59a4bb7))
+* headerNav 支持只传入 string 类型 ([625f8ff](https://github.com/laomao800/vue-listview/commit/625f8ff))
+* 搜索栏 select 与 multiple-select 默认开启搜索功能 ([dbff66e](https://github.com/laomao800/vue-listview/commit/dbff66e))
+
+
+
+# [1.0.0-alpha.15](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2018-10-16)
+
+
+### Features
+
+* 搜索栏回车触发搜索操作 ([12e11d1](https://github.com/laomao800/vue-listview/commit/12e11d1))
+* **storybook:** 添加 storybook 演示 ([d5c8978](https://github.com/laomao800/vue-listview/commit/d5c8978))
+
+
+
+# [1.0.0-alpha.14](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2018-10-10)
+
+
+### Features
+
+* listview-container ([0d6cba6](https://github.com/laomao800/vue-listview/commit/0d6cba6))
+* search(keepInPage) 增加 keepInPage 控制数据请求保留在当前页码 ([25563d4](https://github.com/laomao800/vue-listview/commit/25563d4))
+
+
+
+# [1.0.0-alpha.13](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2018-10-08)
+
 
 ### Bug Fixes
 
-- 点击搜索栏页码重置回第一页 ([6d31b0a](http://192.168.1.122:3000/pps-fe/vue-listview/commit/6d31b0a))
-- 搜索时提交前先过滤掉条件中的无效数据 ([64a2b02](http://192.168.1.122:3000/pps-fe/vue-listview/commit/64a2b02))
+* 修复接口报错不显示错误信息问题 ([ef63c0d](https://github.com/laomao800/vue-listview/commit/ef63c0d))
 
-# 1.0.0-alpha.11 (2018-09-26)
 
-### Bug Fixes
 
-- fix: 修复自动以 requestHandler 时 loading 状态不消失问题 ([5e8b26b](http://192.168.1.122:3000/pps-fe/vue-listview/commit/5e8b26b))
+# [1.0.0-alpha.12](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2018-09-28)
 
-# 1.0.0-alpha.10 (2018-09-25)
-
-### Features
-
-- filterField 新增 label 、 number 2 种类型 ([41c3d41](http://192.168.1.122:3000/pps-fe/vue-listview/commit/41c3d41))
-- filterField 增加 componentSlots 配置属性用于配置字段组件 slot ([28e28d9](http://192.168.1.122:3000/pps-fe/vue-listview/commit/28e28d9))
-- filterButtons 支持 loading 属性 （仅支持通过 methods 返回 loading 状态） ([46035df](http://192.168.1.122:3000/pps-fe/vue-listview/commit/46035df))
-
-# 1.0.0-alpha.9 (2018-09-20)
-
-### Features
-
-- 表格增加单选模式 ([e2a6e78](http://192.168.1.122:3000/pps-fe/vue-listview/commit/e2a6e78))
-
-# 1.0.0-alpha.8 (2018-09-19)
 
 ### Bug Fixes
 
-- 修复重设窗口大小时 filterbar 计算位置错误问题 ([e1c31cb](http://192.168.1.122:3000/pps-fe/vue-listview/commit/e1c31cb))
+* 搜索时提交前先过滤掉条件中的无效数据 ([6424222](https://github.com/laomao800/vue-listview/commit/6424222))
+* 搜索时提交前先过滤掉条件中的无效数据 ([64a2b02](https://github.com/laomao800/vue-listview/commit/64a2b02))
+* 点击搜索栏页码重置回第一页 ([6d31b0a](https://github.com/laomao800/vue-listview/commit/6d31b0a))
 
-# 1.0.0-alpha.7 (2018-09-18)
 
-### Bug Fixes
 
-- 修复多次请求互相取消时出现空白错误信息 ([31a1bd5](http://192.168.1.122:3000/pps-fe/vue-listview/commit/31a1bd5))
-- 修复 paginationHeight 高度获取无效导致重置布局失效问题 ([32957e2](http://192.168.1.122:3000/pps-fe/vue-listview/commit/32957e2))
+# [1.0.0-alpha.11](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2018-09-26)
 
-# 1.0.0-alpha.6 (2018-09-10)
-
-### Features
-
-- transformRequestData 返回 false 可阻止请求发出 ([452bbc5](http://192.168.1.122:3000/pps-fe/vue-listview/commit/452bbc5))
-
-# 1.0.0-alpha.5 (2018-09-10)
-
-### Change
-
-- prop resolveRequestErrorMessage 更名为 resolveResponseErrorMessage ([1644eb7](http://192.168.1.122:3000/pps-fe/vue-listview/commit/1644eb7))
 
 ### Bug Fixes
 
-- 修复翻页操作 page_size 参数错误 ([c1fca14](http://192.168.1.122:3000/pps-fe/vue-listview/commit/c1fca14))
+* 修复自动以 requestHandler 时 loading 状态不消失问题 ([5e8b26b](https://github.com/laomao800/vue-listview/commit/5e8b26b))
 
-# 1.0.0-alpha.4 (2018-09-07)
 
-### Features
 
-- 搜索、重置按钮分别增加触发 filter-submit, filter-reset 事件
+# [1.0.0-alpha.10](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2018-09-25)
 
-# 1.0.0-alpha.3 (2018-09-05)
 
 ### Features
 
-- **field:** 增加 componentEvents 可传入组件事件
-- 通过浏览器 script 引入组件情况下自动 install
+* filterButtons 支持 loading 属性 （仅支持通过 methods 返回 loading 状态） ([46035df](https://github.com/laomao800/vue-listview/commit/46035df))
+* filterField 增加 componentSlots 配置属性用于配置字段组件 slot ([28e28d9](https://github.com/laomao800/vue-listview/commit/28e28d9))
+* filterField 新增 label 、 number 2 种类型 ([41c3d41](https://github.com/laomao800/vue-listview/commit/41c3d41))
 
-# 1.0.0-alpha.2 (2018-09-04)
 
-### Change
 
-- 关闭 css extract ，无需再单独引入 listview.css ([de67c24](http://192.168.1.122:3000/pps-fe/vue-listview/commit/de67c24))
+# [1.0.0-alpha.9](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2018-09-20)
 
-### Features
-
-- filterButtons, filterFields 支持 render() 属性 ([fbd4043](http://192.168.1.122:3000/pps-fe/vue-listview/commit/fbd4043))
-
-# 1.0.0-alpha.1 (2018-08-31)
-
-### Change
-
-- withCredentials 默认修改为 true ([d1aecc1f6](http://192.168.1.122:3000/pps-fe/vue-listview/commit/d1aecc1f6))
 
 ### Bug Fixes
 
-- **style:** 修复 filterbar 在原项目 css reset 下样式错误 ([49732789f](http://192.168.1.122:3000/pps-fe/vue-listview/commit/49732789f))
-- **field:** 修复搜索栏内置字段类型 componentProp 无法覆盖内置默认值问题 ([50ed94849](http://192.168.1.122:3000/pps-fe/vue-listview/commit/50ed94849))
+* 修复无 field 时 filterButtons 内按钮无法点击问题 ([0f2363a](https://github.com/laomao800/vue-listview/commit/0f2363a))
+
 
 ### Features
 
-- 增加 requestDataKeyCase 可进行简单的配置请求参数拼写方案 ([b4edbc807](http://192.168.1.122:3000/pps-fe/vue-listview/commit/b4edbc807))
-- add release scripts ([7868764af](http://192.168.1.122:3000/pps-fe/vue-listview/commit/7868764af))
+* 表格增加单选模式 ([e2a6e78](https://github.com/laomao800/vue-listview/commit/e2a6e78))
+
+
+
+# [1.0.0-alpha.8](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2018-09-19)
+
+
+### Bug Fixes
+
+* 修复重设窗口大小时 filterbar 计算位置错误问题 ([e1c31cb](https://github.com/laomao800/vue-listview/commit/e1c31cb))
+
+
+
+# [1.0.0-alpha.7](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2018-09-18)
+
+
+### Bug Fixes
+
+* 修复 paginationHeight 高度获取无效导致重置布局失效问题 ([32957e2](https://github.com/laomao800/vue-listview/commit/32957e2))
+* 修复多次请求互相取消时出现空白错误信息 ([31a1bd5](https://github.com/laomao800/vue-listview/commit/31a1bd5))
+
+
+
+# [1.0.0-alpha.6](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2018-09-10)
+
+
+### Features
+
+* transformRequestData 返回 false 可阻止请求发出 ([452bbc5](https://github.com/laomao800/vue-listview/commit/452bbc5))
+
+
+
+# [1.0.0-alpha.5](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2018-09-10)
+
+
+### Bug Fixes
+
+* 修复翻页操作 page_size 参数错误 ([c1fca14](https://github.com/laomao800/vue-listview/commit/c1fca14))
+
+
+
+# [1.0.0-alpha.4](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2018-09-07)
+
+
+### Features
+
+* 搜索、重置按钮分别增加触发 filter-submit, filter-reset 事件 ([e4770fe](https://github.com/laomao800/vue-listview/commit/e4770fe))
+
+
+
+# [1.0.0-alpha.3](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2018-09-05)
+
+
+### Features
+
+* 通过浏览器 script 引入组件情况下自动 install ([346576e](https://github.com/laomao800/vue-listview/commit/346576e))
+* **filterbar:** 增加 componentEvents 可传入组件事件 ([5ec23f1](https://github.com/laomao800/vue-listview/commit/5ec23f1))
+
+
+
+# [1.0.0-alpha.2](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2018-09-04)
+
+
+### Features
+
+* filterButtons, filterFields 支持 render() 属性 ([fbd4043](https://github.com/laomao800/vue-listview/commit/fbd4043))
+
+
+
+# [1.0.0-alpha.1](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2018-08-31)
+
+
+### Bug Fixes
+
+* **field:** 搜索栏内置字段类型 prop 合并流程调整，修复 componentProp 无法覆盖内置默认值问题 ([50ed948](https://github.com/laomao800/vue-listview/commit/50ed948))
+* **style:** 修复 filterbar 在原项目 css reset 下样式错误 ([4973278](https://github.com/laomao800/vue-listview/commit/4973278))
+
+
+### Features
+
+* add release scripts ([7868764](https://github.com/laomao800/vue-listview/commit/7868764))
+* 增加 requestDataKeyCase 可进行简单的配置请求参数拼写方案 ([b4edbc8](https://github.com/laomao800/vue-listview/commit/b4edbc8))
+
+
+
+# [1.0.0-alpha.0](https://github.com/laomao800/vue-listview/compare/94d9d3d...v1.0.0-alpha.0) (2018-08-30)
+
+
+### Bug Fixes
+
+* 修复 resize 出现滚动条导致 filter bar 提交按钮偏移问题 ([ad0159a](https://github.com/laomao800/vue-listview/commit/ad0159a))
+
+
+### Features
+
+* contentDataMap ([2a255a2](https://github.com/laomao800/vue-listview/commit/2a255a2))
+* contentMessage (validateResponse, resolveRequestErrorMessage) ([543b460](https://github.com/laomao800/vue-listview/commit/543b460))
+* filterbar 代码优化 ([94d9d3d](https://github.com/laomao800/vue-listview/commit/94d9d3d))
+* table-columns, table-props, table-events, table-select-enable, table-selection ([cd8e582](https://github.com/laomao800/vue-listview/commit/cd8e582))
+
+
+
