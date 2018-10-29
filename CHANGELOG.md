@@ -1,3 +1,12 @@
+# [1.0.0-alpha.18](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.16...v1.0.0-alpha.18) (2018-10-29)
+
+
+### Bug Fixes
+
+* 内部处理 response 直接处理 axios 相应内容的 data 属性，以和自定义 requestHandler 时验证表现一致 ([1ba116d](https://github.com/laomao800/vue-listview/commit/1ba116d))
+
+
+
 # [1.0.0-alpha.16](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2018-10-29)
 
 
