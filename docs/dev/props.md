@@ -90,7 +90,7 @@ sidebarDepth: 2
 - type: `Boolean`
 - default: `true`
 
-底部是否显示分页功能。开启后，发送接口的参数除了包含搜索栏内的数据，还会自动附加上 `page` 和 `pageSize` 2 个参数。
+底部是否显示分页功能。开启后，发送接口的参数除了包含搜索栏内的数据，还会自动附加上 `page_index` 和 `page_size` 2 个参数。
 
 ### pageSizes
 
