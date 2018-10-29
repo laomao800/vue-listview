@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import VNodeCmp from '@/components/v-node-cmp.js'
-import ListviewHeader from '@/components/listview-header.vue'
+import VNodeCmp from '../components/v-node-cmp.js'
+import ListviewHeader from '../components/listview-header.vue'
 
 export default {
   name: 'ListviewContainer',

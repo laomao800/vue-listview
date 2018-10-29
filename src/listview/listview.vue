@@ -136,9 +136,9 @@
 <script>
 import _ from 'lodash'
 import axios from 'axios'
-import VNode from '@/components/v-node'
-import ListviewHeader from '@/components/listview-header.vue'
-import Filterbar from '@/listview/components/filterbar.vue'
+import VNode from '../components/v-node'
+import ListviewHeader from '../components/listview-header.vue'
+import Filterbar from './components/filterbar.vue'
 import {
   dataMapping,
   parseSizeWithUnit,

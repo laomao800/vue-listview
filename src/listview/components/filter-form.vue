@@ -47,9 +47,9 @@
 <script>
 import _ from 'lodash'
 import hasValues from 'has-values'
-import fieldComponents, { getFieldComponentName } from '@/components/fields'
-import VNode from '@/components/v-node.js'
-import { isVNode } from '@/utils/utils.js'
+import fieldComponents, { getFieldComponentName } from '../../components/fields'
+import VNode from '../../components/v-node.js'
+import { isVNode } from '../../utils/utils.js'
 
 export default {
   name: 'FilterForm',
