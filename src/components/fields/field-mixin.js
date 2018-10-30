@@ -10,7 +10,12 @@ export default {
   computed: {
     value: {
       get() {
-        return get(this.model, this.field.model)
+        let value = get(this.model, this.field.model)
+        // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
+        if (_.camelCase(this.field.type) === 'multipleSelect') {
+          value = Array.isArray(value) ? value : []
+        }
+        return value
       },
       set(newVal) {
         const model = this.model
