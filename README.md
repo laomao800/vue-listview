@@ -8,6 +8,11 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 
 默认为表格类列表页，也可通过 [Slot](/dev/slots.md) 实现自定义列表布局。
 
+## 文档 & Demo
+
+- 文档： <https://laomao800.github.io/vue-listview/>
+- Demo： <https://laomao800.github.io/vue-listview/storybook/index.html>
+
 ## 安装
 
 ```bash
@@ -68,39 +73,3 @@ export default {
 new Vue().$mount('#app')
 </script>
 ```
-
-## 基本配置
-
-- 搜索栏
-  - 操作按钮 [《Prop: filterButtons》](/dev/prop-filter-buttons.md)
-  - 搜索字段 [《Prop: filterFields》](/dev/prop-filter-fields.md)
-- 表格布局 [《Prop: tableColumns》](/dev/prop-table-columns.md)
-- 自定义布局 [《Slot》](/dev/slots.md)
-
-## `/dist` 文件说明
-
-由于 Listview 内部所有基础视图组件都来自 [Element-UI](http://element.eleme.io/) ，因此打包文件分别有两个版本，以下为 `dist` 目录下文件的对比说明：
-
-- `listview-component.common.js`
-
-  **默认文件**，只包含 listview 自身功能
-
-- `listview-component.umd.js`
-
-  同上的 UMD 版本
-
-- `listview-component.umd.min.js`
-
-  同上的 UMD 压缩版本
-
-- `listview.common.js`
-
-  包含 listview 功能和 Element-UI + css 完整库
-
-- `listview.umd.js`
-
-  同上的 UMD 版本
-
-- `listview.umd.min.js`
-
-  同上的 UMD 压缩版本
