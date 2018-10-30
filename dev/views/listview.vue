@@ -3,47 +3,25 @@
     <!-- eslint-disable vue/attributes-order -->
     <listview-container
       :header-title="'演示列表容器'"
-      :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
+      :header-nav="['菜单1', { text: '菜单2' }]"
     >
       <listview
-        :header-title="'演示列表1'"
-
-        :autoload="true"
+        header-title="演示列表1"
         request-url="/mock/listview"
         request-method="post"
-
         :filter-buttons="filterButtons"
         :filter-fields="filterFields"
         :filter-model="filterModel"
-
         :table-columns="tableColumns"
-        :table-props="tableProps"
-        :table-events="tableEvents"
         :table-selection.sync="tableSelection"
-
-        :use-page="true"
-        :page-sizes="[20, 50, 100]"
-        :page-size="20"
       />
       <listview
-        :header-title="'演示列表2'"
-
-        :autoload="true"
+        header-title="演示列表2"
         request-url="/mock/listview"
         request-method="post"
-
         :filter-buttons="filterButtons"
         :filter-fields="filterFields2"
         :filter-model="filterModel2"
-
-        :table-columns="tableColumns"
-        :table-props="tableProps"
-        :table-events="tableEvents"
-        :table-selection.sync="tableSelection"
-
-        :use-page="true"
-        :page-sizes="[20, 50, 100]"
-        :page-size="20"
       >
         <template slot-scope="{ contentData, contentMessage }">
           <el-alert
@@ -112,49 +90,52 @@ export default {
           type: 'success',
           icon: 'el-icon-circle-plus-outline',
           text: '添加',
-          click: this.showAddModal
+          click: () => this.showMessage('添加')
         },
-        {
-          type: 'danger',
-          icon: 'el-icon-remove-outline',
-          text: '查看已选',
-          loading: this.getLoadingSelection,
-          click: () => {
-            if (this.tableSelection.length < 1) {
-              this.$message.error('请至少选择一条数据')
-            } else {
-              this.loadingSelection = true
-              setTimeout(() => {
-                this.$message.success(
-                  JSON.stringify(this.tableSelection.map(row => row.sku))
-                )
-                this.loadingSelection = false
-              }, 500)
-            }
-          }
-        },
+        () => (
+          <el-button
+            loading={this.loadingSelection}
+            icon="el-icon-remove-outline"
+            type="danger"
+            on-click={() => {
+              if (this.tableSelection.length < 1) {
+                this.$message.error('请至少选择一条数据')
+              } else {
+                this.loadingSelection = true
+                setTimeout(() => {
+                  this.$message.success(
+                    JSON.stringify(this.tableSelection.map(row => row.sku))
+                  )
+                  this.loadingSelection = false
+                }, 500)
+              }
+            }}
+          >
+            查看已选
+          </el-button>
+        ),
         {
           type: 'primary',
           icon: 'el-icon-circle-plus-outline',
           text: '下拉按钮',
           trigger: 'click',
           splitButton: true,
-          click() {
-            alert('button')
+          click: () => {
+            this.showMessage('下拉按钮')
           },
           children: [
             {
               icon: 'el-icon-circle-plus-outline',
               text: '菜单1',
-              click() {
-                alert(1)
+              click: () => {
+                this.showMessage('菜单1')
               }
             },
             {
               icon: 'el-icon-remove-outline',
               text: '菜单2',
-              click() {
-                alert(2)
+              click: () => {
+                this.showMessage('菜单2')
               }
             }
           ]
@@ -382,27 +363,13 @@ export default {
             { label: '修改时间', prop: 'date', align: 'center' }
           ]
         }
-      ],
-      tableProps: {
-        size: 'small',
-        border: true
-      },
-      tableEvents: {
-        rowClick(val) {},
-        selectionChange(val) {}
-      }
+      ]
     }
   },
 
   methods: {
-    showAddModal() {
-      alert('showAddModal')
-    },
-    handleFilterSubmit(data) {
-      console.log('filter', data)
-    },
-    getLoadingSelection() {
-      return this.loadingSelection
+    showMessage(msg) {
+      this.$message.success(msg)
     }
   }
 }
