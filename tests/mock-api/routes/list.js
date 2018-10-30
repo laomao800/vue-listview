@@ -43,7 +43,7 @@ module.exports = app => {
           'enable|1': true
         }
       ],
-      total: 80
+      total_count: 80
     })
     const responseData = successWrap(data)
     return res.json(responseData)
@@ -52,7 +52,7 @@ module.exports = app => {
   router.all('/listview-empty', (req, res) => {
     const responseData = successWrap({
       items: [],
-      total: 0
+      total_count: 0
     })
     return res.json(responseData)
   })
