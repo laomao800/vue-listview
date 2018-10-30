@@ -30,14 +30,6 @@
   "bugs": {
     "url": "https://github.com/laomao800/vue-listview/issues"
   },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "element-ui": "^2.4.8",
-    "get-value": "^3.0.1",
-    "has-values": "^2.0.1",
-    "lodash": "^4.17.10",
-    "vue": "^2.5.17"
-  },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.0-alpha.25",
     "@storybook/addon-links": "^4.0.0-alpha.25",
@@ -48,6 +40,7 @@
     "@vue/cli-service": "^3.0.0",
     "@vue/eslint-config-standard": "^3.0.0",
     "@vue/test-utils": "^1.0.0-beta.24",
+    "axios": "^0.18.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "babel-plugin-component": "^1.1.1",
@@ -56,16 +49,20 @@
     "conventional-changelog": "^2.0.3",
     "conventional-changelog-angular": "^5.0.1",
     "cross-env": "^5.2.0",
+    "element-ui": "^2.4.9",
     "eslint-plugin-vue": "^5.0.0-beta.3",
     "execa": "^1.0.0",
     "express": "^4.16.3",
     "express-delay": "^0.2.0",
     "ftp-deploy": "^2.1.2",
+    "get-value": "^3.0.1",
+    "has-values": "^2.0.1",
     "html-loader": "^0.5.5",
     "inquirer": "^6.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "lint-staged": "^7.2.2",
+    "lodash": "^4.17.11",
     "lodash-webpack-plugin": "^0.11.5",
     "markdown-it-plantuml": "^1.2.0",
     "markdown-loader": "^3.0.0",
@@ -79,6 +76,7 @@
     "stylelint-config-prettier": "^3.2.0",
     "stylelint-config-recess-order": "^2.0.0",
     "stylelint-config-standard": "^18.2.0",
+    "vue": "^2.5.17",
     "vue-cli-plugin-storybook": "^0.4.8",
     "vue-jest": "^2.6.0",
     "vue-template-compiler": "^2.5.17",
@@ -87,7 +85,7 @@
   },
   "main": "dist/listview-component.common.js",
   "files": [
-    "dist/*.js",
+    "dist",
     "src"
   ],
   "lint-staged": {
