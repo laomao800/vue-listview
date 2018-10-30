@@ -1,3 +1,29 @@
+# [1.0.0-alpha.19](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2018-10-30)
+
+
+### Bug Fixes
+
+* Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错 ([30cec60](https://github.com/laomao800/vue-listview/commit/30cec60))
+* 修复在内容已有数据情况下无法显示报错信息问题 ([69368a6](https://github.com/laomao800/vue-listview/commit/69368a6))
+* 更新 Element-UI v2.4.9 ([ae382bc](https://github.com/laomao800/vue-listview/commit/ae382bc))
+
+
+### Code Refactoring
+
+* 调整 page 默认参数键名 ([9383a0e](https://github.com/laomao800/vue-listview/commit/9383a0e))
+
+
+### Features
+
+* usePage 支持传入 Object 类型指定分页参数名 ([df776e8](https://github.com/laomao800/vue-listview/commit/df776e8))
+
+
+### BREAKING CHANGES
+
+* - `contentDataMap` 默认值的 total 映射路径修改为 `result.total_count`
+
+
+
 # [1.0.0-alpha.18](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.16...v1.0.0-alpha.18) (2018-10-29)
 
 
