@@ -196,7 +196,7 @@ export default {
       type: Object,
       default: () => ({
         items: 'result.items',
-        total: 'result.total'
+        total: 'result.total_count'
       })
     },
 
