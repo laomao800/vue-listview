@@ -541,21 +541,24 @@ export default {
       this.contentLoading = false
 
       // change: 自定义 requestHandler 与内置请求响应都通过验证流程
+      let contentResponse = null
       if (this.validateResponse(response)) {
         this.setContentMessage(null) // 清空错误信息
-        const contentResponse = this.transformResponseData
+        contentResponse = this.transformResponseData
           ? this.transformResponseData(response)
           : response
-        const contentData = this.contentDataMap
-          ? dataMapping(contentResponse, this.contentDataMap)
-          : contentResponse
-        this.contentData = contentData
       } else {
         this.setContentMessage(
           this.resolveResponseErrorMessage(response),
           'error'
         )
       }
+      // 未通过验证的数据也统一通过 contentDataMap 再回传 contentData 确保格式统一
+      const contentData = this.contentDataMap
+        ? dataMapping(contentResponse, this.contentDataMap)
+        : contentResponse
+
+      this.contentData = contentData
     },
 
     /**
