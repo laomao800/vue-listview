@@ -113,7 +113,7 @@
         </div>
 
         <div
-          v-if="usePage"
+          v-if="!!usePage"
           ref="pagination"
           class="listview__page"
         >
@@ -146,6 +146,8 @@ import {
   snakeCaseObjectKey,
   pascalCaseObjectKey
 } from '@/utils/utils'
+
+const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
 
 export default {
   name: 'Listview',
@@ -237,7 +239,7 @@ export default {
     tableSelection: { type: Array, default: () => [] },
 
     // Pager
-    usePage: { type: Boolean, default: true },
+    usePage: { type: [Boolean, Object], default: true },
     pageSizes: { type: Array, default: () => [20, 50, 100] },
     pageSize: { type: Number, default: 20 }
   },
@@ -459,8 +461,14 @@ export default {
         )
       })
       if (this.usePage) {
-        payloadData.page_index = this.currentPage
-        payloadData.page_size = this.currentPageSize
+        let indexKey = defaultPageParamKeys.pageIndex
+        let sizeKey = defaultPageParamKeys.pageSize
+        if (_.isPlainObject(this.usePage)) {
+          indexKey = this.usePage.pageIndex || indexKey
+          sizeKey = this.usePage.pageSize || sizeKey
+        }
+        payloadData[indexKey] = this.currentPage
+        payloadData[sizeKey] = this.currentPageSize
       }
 
       // 请求参数 key 拼写方法转换

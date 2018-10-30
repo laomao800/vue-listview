@@ -87,10 +87,12 @@ sidebarDepth: 2
 
 ### usePage
 
-- type: `Boolean`
-- default: `true`
+- type: `Boolean | Object`
+- default: `true` | `{ pageIndex: 'page_index', pageSize: 'page_size' }`
 
-底部是否显示分页功能。开启后，发送接口的参数除了包含搜索栏内的数据，还会自动附加上 `page_index` 和 `page_size` 2 个参数。
+是否开启底部分页功能，传入 `Boolean` 类型，则表示功能开启与否，开启后在请求时参数上除了包含搜索栏内的数据，还会自动附加上 `page_index` 和 `page_size` 2 个参数。
+
+如果接口的分页参数与默认的不一致，可以通过传入 `Object` 类型，指定 pageIndex 和 pageSize 2 个 key 名，相应的分页参数值会以配置好的 key 名发送。
 
 ### pageSizes
 
