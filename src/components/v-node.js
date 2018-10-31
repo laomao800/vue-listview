@@ -1,8 +1,8 @@
 export default {
-  functional: true,
+  abstract: true,
   name: 'VNode',
   props: ['node'],
-  render(h, context) {
-    return context.props.node
+  render() {
+    return this.node
   }
 }

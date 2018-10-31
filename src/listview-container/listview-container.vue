@@ -22,7 +22,7 @@
     <div class="listview-container__content">
       <keep-alive>
         <template v-for="(item, index) in childListviews">
-          <v-node-cmp
+          <v-node
             v-if="index === activeTab"
             ref="listviewChild"
             :key="index"
@@ -35,14 +35,14 @@
 </template>
 
 <script>
-import VNodeCmp from '../components/v-node-cmp.js'
+import VNode from '../components/v-node.js'
 import ListviewHeader from '../components/listview-header.vue'
 
 export default {
   name: 'ListviewContainer',
 
   components: {
-    VNodeCmp,
+    VNode,
     ListviewHeader
   },
 
