@@ -18,7 +18,7 @@ sidebarDepth: 2
 - type: `Array`
 - default: `[]`
 
-设置页面顶部通栏内的面包屑，每一个数组项支持属性有：
+设置页面顶部通栏内的面包屑，子项可为字符串或 object ， object 支持属性有：
 
 | 参数   | 说明                                      |
 | ------ | ----------------------------------------- |
@@ -274,7 +274,7 @@ sidebarDepth: 2
 - type: `Function(requestData)`
 - default: `null`
 
-自定义请求方法，该方法优先级最高，若设置了该方法，其他请求相关的配置以及 `validateResponse` 错误验证，直接将方法返回值使用 `contentDataMap` 进行映射处理，支持返回 Promise 。
+自定义请求方法，需要返回 Promise ，该方法优先级最高，若设置了该方法，会以返回的内容交由 `validateResponse` 进行验证，具体流程可查看上方流程图。
 
 ### transformRequestData
 
