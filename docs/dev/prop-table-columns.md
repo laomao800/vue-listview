@@ -7,16 +7,17 @@
 
 ## 常用属性
 
-| 参数         | 类型             | 说明                                                        |
-| ------------ | ---------------- | ----------------------------------------------------------- |
-| label        | String           | 表头显示的内容                                              |
-| prop         | String           | 列字段名                                                    |
-| width        | String , Number  | 列宽度                                                      |
-| align        | String           | 列对齐方式 `left` , `center` , `right`                      |
-| fixed        | String , Boolean | 列是否固定在左侧或者右侧，true 表示固定在左侧               |
-| formatter    | function(row)    | 如数据需要简单文本加工，可使用该配置处理后 return 即可      |
-| **render**   | function(scope)  | 接受参数为 [slot scope](#slot-scope) ，支持返回字符串或 JSX |
-| **children** | Array            | 子列配置，子项支持属性与父级一致                            |
+| 参数         | 类型             | 说明                                                                  |
+| ------------ | ---------------- | --------------------------------------------------------------------- |
+| **render**   | function(scope)  | 接受参数为 [slot scope](#slot-scope) ，支持返回字符串或 JSX           |
+| **children** | Array            | 子列配置，子项支持属性与父级一致                                      |
+| label        | String           | 表头显示的内容                                                        |
+| prop         | String           | 列字段名                                                              |
+| width        | String , Number  | 列宽度                                                                |
+| align        | String           | 列对齐方式 `left` , `center` , `right`                                |
+| fixed        | String , Boolean | 列是否固定在左侧或者右侧，true 表示固定在左侧                         |
+| formatter    | function(row)    | 如数据需要简单文本加工，可使用该配置处理后 return 即可                |
+| ...          | -                | **支持所有 [Element-UI Table column](#element-ui-table-column) 配置** |
 
 其中除了 `children` 和 `render` 为 listview 新增的属性，其余完整列表请查阅 [Element-UI Table column](#element-ui-table-column) 。
 
