@@ -24,7 +24,7 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 'error',
     'vue/no-spaces-around-equal-signs-in-attribute': 'error',
     // 'vue/script-indent': ['error', 2, { baseIndent: 0 }],
-    'vue/no-unused-components': false
+    'vue/no-unused-components': 0
   },
   overrides: [
     {
