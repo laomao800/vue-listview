@@ -4,6 +4,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "dist/listview-component.common.js",
+  "types": "types",
+  "files": [
+    "dist",
+    "src",
+    "types"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
@@ -83,10 +90,10 @@
     "vuepress": "^0.14.2",
     "vuex": "^3.0.1"
   },
-  "main": "dist/listview-component.common.js",
-  "files": [
-    "dist",
-    "src"
+  "keywords": [
+    "vue-listview",
+    "vue",
+    "listview"
   ],
   "lint-staged": {
     "*.js": [
