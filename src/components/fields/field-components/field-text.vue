@@ -1,6 +1,6 @@
 <template>
   <el-input
-    v-model="value"
+    v-model.trim="value"
     :placeholder="field.label"
     :disabled="field.disabled"
     v-bind="mergedProps"
