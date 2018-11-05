@@ -1,3 +1,18 @@
+# [1.0.0-alpha.20](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2018-11-05)
+
+
+### Bug Fixes
+
+* **filterbar:** text trim value ([28897f1](https://github.com/laomao800/vue-listview/commit/28897f1))
+
+
+### Features
+
+* add types ([62dbb31](https://github.com/laomao800/vue-listview/commit/62dbb31))
+* 使用 abstract 组件替代原 functional v-node 组件 ([8142afd](https://github.com/laomao800/vue-listview/commit/8142afd))
+
+
+
 # [1.0.0-alpha.19](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2018-10-30)
 
 
