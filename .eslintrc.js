@@ -9,8 +9,8 @@ module.exports = {
     // Turn off 'space-before-function-paren' for prettier
     // https://github.com/prettier/prettier/issues/3847
     'space-before-function-paren': 0,
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'vue/max-attributes-per-line': [
       2,
       {

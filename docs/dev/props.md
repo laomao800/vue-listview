@@ -223,7 +223,7 @@ sidebarDepth: 2
   ```js
   function (response) {
     try {
-      return response.data.is_success
+      return response.is_success
     } catch (e) {
       return false
     }
@@ -240,7 +240,7 @@ sidebarDepth: 2
   ```js
   function (response) {
     try {
-      return response.data.error_info.msg
+      return response.error_info.msg
     } catch (e) {
       return '未知错误'
     }
