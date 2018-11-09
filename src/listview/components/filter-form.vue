@@ -22,8 +22,8 @@
         :node="field()"
       />
       <v-node
-        v-else-if="field.render"
-        :node="field.render()"
+        v-else-if="isFunction(field.render)"
+        :node="field.render(field)"
       />
       <v-node
         v-else-if="isVNode(field)"

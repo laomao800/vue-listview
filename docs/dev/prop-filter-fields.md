@@ -145,11 +145,14 @@ export default {
           }.bind(this)
         },
 
-        // 也支持使用 label 设置顶部的字段说明装饰元素，但需要注意需要设置 model 以及 filterModel 内有相匹配的属性，如果是自定义组件需要自行实现写入值的逻辑。
+        // 也支持使用 label 设置顶部的字段说明装饰元素，
+        // 但需要注意需要设置 model 以及 filterModel 内有相匹配的属性，
+        // 如果是自定义组件需要自行实现写入值的逻辑，
+        // 参数 field 为该 object 项自身。
         {
           label: 'jsx',
           model: 'jsx',
-          render: () => {
+          render: field => {
             return (
               <input
                 value={this.filterModel.jsx}
