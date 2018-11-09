@@ -139,15 +139,33 @@ import axios from 'axios'
 import VNode from '../components/v-node'
 import ListviewHeader from '../components/listview-header.vue'
 import Filterbar from './components/filterbar.vue'
+import { dataMapping, parseSizeWithUnit } from '@/utils/utils'
 import {
-  dataMapping,
-  parseSizeWithUnit,
   camelCaseObjectKey,
   snakeCaseObjectKey,
   pascalCaseObjectKey
-} from '@/utils/utils'
+} from '@/utils/objectKey'
+import { warn } from '@/utils/debug'
 
 const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
+
+/**
+ * 验证 fields 内是否有重复的 model 属性
+ */
+function validateFilterFields(fields) {
+  if (Array.isArray(fields)) {
+    const duplicateFields = _.pickBy(
+      _.countBy(fields, 'model'),
+      count => count > 1
+    )
+    if (!_.isEmpty(duplicateFields)) {
+      warn(
+        "FilterFields 配置内有重复的 'model' : " +
+          Object.keys(duplicateFields).join(', ')
+      )
+    }
+  }
+}
 
 export default {
   name: 'Listview',
@@ -310,8 +328,9 @@ export default {
     fullHeight: /* istanbul ignore next */ function() {
       this.initLayout()
     },
-    filterFields: /* istanbul ignore next */ function() {
+    filterFields: /* istanbul ignore next */ function(val) {
       this.initLayout()
+      validateFilterFields(val)
     },
     showFilterSearch: /* istanbul ignore next */ function() {
       this.initLayout()
@@ -334,6 +353,7 @@ export default {
         this.setContentMessage(message, type)
       }
     }
+    validateFilterFields(this.filterFields)
   },
 
   mounted() {
@@ -424,9 +444,7 @@ export default {
     },
 
     handleFilterSubmit() {
-      // 点击搜索栏搜索按钮时复位至第一页
-      this.currentPage = 1
-      this.requestData()
+      this.search()
       this.$emit('filter-submit')
     },
 
@@ -445,9 +463,7 @@ export default {
 
     async requestData() {
       if (!this.requestHandler && !this.requestUrl) {
-        // eslint-disable-next-line no-console
-        console.warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
-        return
+        return warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
       }
       // 请求参数合并转换
       let payloadData = _.cloneDeep(this.filterModel)
