@@ -146,6 +146,7 @@ import {
   pascalCaseObjectKey
 } from '@/utils/objectKey'
 import { warn } from '@/utils/debug'
+import './listview.less'
 
 const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
 
@@ -661,96 +662,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-.listview {
-  overflow: auto;
-
-  .el-table .el-table__body tr.el-table__row.row--selected td {
-    background-color: #ffd;
-  }
-
-  .el-table th {
-    background: #f5f7fa;
-  }
-
-  &__main {
-    padding: 10px;
-    padding-bottom: 5px;
-    background-color: #fff;
-    border: 5px solid #f0f2f5;
-  }
-
-  &__content {
-    overflow: auto;
-
-    .el-table__empty-text {
-      width: auto;
-      max-width: 50%;
-    }
-  }
-
-  .content-message {
-    display: flex;
-    padding: 15px 20px;
-    line-height: 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 15px #ddd;
-
-    &--icon {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-right: 10px;
-      font-size: 24px;
-    }
-
-    &--message {
-      font-size: 14px;
-      text-align: left;
-    }
-
-    &--success .content-message--icon {
-      color: #6ac243;
-    }
-
-    &--warning .content-message--icon {
-      color: #f90;
-    }
-
-    &--info .content-message--icon {
-      color: #459ffc;
-    }
-
-    &--error .content-message--icon {
-      color: #f56c6c;
-    }
-  }
-
-  .table-column--single-selection .el-radio__label {
-    display: none;
-  }
-
-  &__page {
-    padding-top: 5px;
-  }
-
-  // Element-ui overwrite
-  .el-pagination {
-    &.is-background {
-      .btn-next,
-      .btn-prev,
-      .el-pager li {
-        margin: 0 8px 0 0;
-      }
-      .el-select .el-input {
-        margin: 0;
-      }
-    }
-  }
-  .el-table--border .el-table-column--selection .cell {
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-}
-</style>

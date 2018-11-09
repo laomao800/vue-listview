@@ -35,6 +35,7 @@
 <script>
 import VNode from '../components/v-node.js'
 import ListviewHeader from '../components/listview-header.vue'
+import './listview-container.less'
 
 export default {
   name: 'ListviewContainer',
@@ -78,53 +79,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-.listview-container {
-  display: flex;
-  flex-direction: column;
-
-  &__tabs {
-    padding: 5px 5px 0;
-    background: #f4f7fa;
-    border-bottom: 1px solid #e2e6ec;
-  }
-  &__tab {
-    display: inline-block;
-    padding: 0 16px;
-    margin-bottom: -1px;
-    margin-left: -1px;
-    font-size: 14px;
-    line-height: 36px;
-    color: #333;
-    cursor: pointer;
-    border: solid #0000;
-    border-width: 1px 1px 0;
-    border-radius: 3px 3px 0 0;
-    transition: color 0.2s;
-
-    &:hover {
-      color: #409eff;
-    }
-
-    &--active {
-      color: #409eff;
-      cursor: default;
-      background: #fff;
-      border-color: #dadee5;
-    }
-  }
-
-  &__content {
-    flex: 1;
-    overflow: hidden;
-
-    .listview__header {
-      display: none;
-    }
-    .listview__main {
-      border-top: none;
-    }
-  }
-}
-</style>
