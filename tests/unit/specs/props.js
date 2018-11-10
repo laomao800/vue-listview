@@ -61,6 +61,14 @@ export const filterFields = [
     disabled: true
   },
   {
+    type: 'label',
+    label: '数字'
+  },
+  {
+    type: 'number',
+    model: 'number'
+  },
+  {
     type: 'select',
     model: 'select',
     label: '单选字段',

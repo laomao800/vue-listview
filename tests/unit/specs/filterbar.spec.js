@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { mount, shallowMount, config } from '@vue/test-utils'
 import Filterbar from '@/listview/components/filterbar'
 import FilterForm from '@/listview/components/filter-form'
 import {
@@ -6,6 +6,9 @@ import {
   filterButtonsDropdown,
   filterFields
 } from './props.js'
+
+// 使用内建的 transition 组件，避免 <ElSelectDropdown> 组件在测试中报错
+config.stubs.transition = false
 
 describe('filterbar - filterButtons', () => {
   it('普通按钮渲染', () => {
@@ -123,15 +126,40 @@ describe('filterbar - filterButtons', () => {
 describe('filterbar - filterFields', () => {
   describe('FilterForm', () => {
     it('渲染所有有效的内置字段类型', () => {
-      const wrapper = shallowMount(FilterForm, {
+      const wrapper = mount(Filterbar, {
         propsData: {
-          fields: filterFields
+          filterFields: [
+            {
+              type: 'unknow',
+              label: '无效类型'
+            },
+            ...filterFields
+          ]
         }
       })
       expect(wrapper.html()).toMatchSnapshot()
       expect(wrapper.findAll('.filterbar__field')).toHaveLength(
         filterFields.length
       )
+    })
+
+    it('指定 width', () => {
+      const WIDTH = 280
+      const cloneFields = JSON.parse(JSON.stringify(filterFields))
+      Object.keys(cloneFields).forEach(key => {
+        cloneFields[key].width = WIDTH
+      })
+      const wrapper = mount(Filterbar, {
+        propsData: {
+          filterFields: cloneFields
+        }
+      })
+      const $fields = wrapper.findAll(
+        '.filterbar__field > .el-form-item > .el-form-item__content > div'
+      )
+      $fields.wrappers.forEach(field => {
+        expect(field.element.style.width).toBe(`${WIDTH}px`)
+      })
     })
 
     it('JSX', function() {

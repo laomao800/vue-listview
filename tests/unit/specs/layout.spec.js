@@ -22,7 +22,7 @@ describe('layout', () => {
     it('nav', () => {
       const wrapper = shallowMount(ListviewHeader, {
         propsData: {
-          nav: [{ text: 'home', to: '/home' }, { text: 'list', to: '/list' }]
+          nav: ['home', { text: 'list', to: '/list' }]
         }
       })
       expect(wrapper.html()).toMatchSnapshot()

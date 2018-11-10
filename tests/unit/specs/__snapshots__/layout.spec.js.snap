@@ -26,7 +26,7 @@ exports[`layout listview header nav 1`] = `
 <div class="listview__header">
   <!---->
   <elbreadcrumb-stub separator="/" separatorclass="" class="listview__breadcrumb">
-    <elbreadcrumbitem-stub to="/home">
+    <elbreadcrumbitem-stub>
       home
     </elbreadcrumbitem-stub>
     <elbreadcrumbitem-stub to="/list">

@@ -2,7 +2,7 @@ import {
   camelCaseObjectKey,
   snakeCaseObjectKey,
   pascalCaseObjectKey
-} from '@/utils/utils'
+} from '@/utils/objectKey'
 
 describe('transformObjectKey', () => {
   const originData = {
