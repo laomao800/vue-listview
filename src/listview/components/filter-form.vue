@@ -62,11 +62,11 @@ export default {
   props: {
     model: {
       type: Object,
-      default: () => ({})
+      default: /* istanbul ignore next */ () => ({})
     },
     fields: {
       type: Array,
-      default: () => []
+      default: /* istanbul ignore next */ () => []
     }
   },
 

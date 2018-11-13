@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import Vue from 'vue'
 import get from '@/utils/get-value'
 
@@ -54,4 +55,16 @@ export function dataMapping(data = {}, dataMap = {}) {
   })
 
   return result
+}
+
+/**
+ * 判断值是否为搜索栏内合法的值，通过验证的值才可继续作为参数随请求提交
+ */
+export function isValidFieldValue(val) {
+  return !(
+    val === null ||
+    val === undefined ||
+    val === '' ||
+    ((Array.isArray(val) || _.isPlainObject(val)) && _.isEmpty(val))
+  )
 }

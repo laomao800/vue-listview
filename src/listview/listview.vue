@@ -53,10 +53,10 @@
               :height="contentHeight"
               :style="{ width: '100%' }"
               :row-class-name="contentTableRowClassName"
-              v-bind="validTableProps"
+              v-bind="normalizeTableProps"
               @selection-change="handleTableSelectionChange"
               @row-click="handleRowClick"
-              v-on="validTableEvents"
+              v-on="normalizeTableEvents"
             >
               <template
                 v-if="internalContentMessage"
@@ -139,13 +139,17 @@ import axios from 'axios'
 import VNode from '../components/v-node'
 import ListviewHeader from '../components/listview-header.vue'
 import Filterbar from './components/filterbar.vue'
-import { dataMapping, parseSizeWithUnit } from '@/utils/utils'
+import { warn, error } from '@/utils/debug'
+import {
+  dataMapping,
+  parseSizeWithUnit,
+  isValidFieldValue
+} from '@/utils/utils'
 import {
   camelCaseObjectKey,
   snakeCaseObjectKey,
   pascalCaseObjectKey
 } from '@/utils/objectKey'
-import { warn } from '@/utils/debug'
 import './listview.less'
 
 const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
@@ -154,18 +158,43 @@ const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
  * 验证 fields 内是否有重复的 model 属性
  */
 function validateFilterFields(fields) {
+  /* istanbul ignore next */
   if (Array.isArray(fields)) {
     const duplicateFields = _.pickBy(
       _.countBy(fields, 'model'),
       count => count > 1
     )
     if (!_.isEmpty(duplicateFields)) {
-      warn(
+      error(
         "FilterFields 配置内有重复的 'model' : " +
           Object.keys(duplicateFields).join(', ')
       )
     }
   }
+}
+
+/**
+ * 应用 filterField 内设置的字段 getter ，
+ * 如果 getter 执行有错误则依然使用原始值
+ */
+function applyFieldGetter(modelData, getters) {
+  /* istanbul ignore next */
+  Object.keys(getters).forEach(key => {
+    try {
+      modelData[key] = getters[key](modelData[key], modelData)
+    } catch (e) {
+      if (isValidFieldValue(modelData[key])) {
+        error(
+          [
+            `FilterFields '${key}' getter error:`,
+            `    - Value: ${JSON.stringify(modelData[key])}`,
+            `    - Getter: ${getters[key].toString()}`,
+            `    - Error: ${e}`
+          ].join('\n')
+        )
+      }
+    }
+  })
 }
 
 export default {
@@ -303,44 +332,55 @@ export default {
     /**
      * 对传入的 tableEvents 的 key 统一转换为横线分隔格式
      */
-    validTableEvents() {
+    normalizeTableEvents() {
       /* istanbul ignore next */
       return _.mapKeys(this.tableEvents, (value, key) => _.kebabCase(key))
     },
 
     /**
-     * 直接 v-bind 到 <el-table> 上与默认配置重名的属性会失效，
-     * 因此通过 computed 合并所需的 props
+     * 写在 $attrs 上的 prop 优先级会比 v-bind 内的高，以下 3 个属性需要可配置，
+     * 既 <el-table size="small" v-bind="tableProps" /> 无法修改 size 的值，
+     * 因此先通过 computed 合并所需的 props ，再统一绑定最后的合并结果
      */
-    validTableProps() {
+    normalizeTableProps() {
       const defaultProps = {
         size: 'small',
         border: true,
         stripe: true
       }
       return _.merge(defaultProps, this.tableProps)
+    },
+
+    /**
+     * 从 filterFields 内提取数据 getter ，并以 model 值作为新 key 名返回一个 object
+     * [{ model: 'text', get: val => val.toUpperCase() }]
+     * -> { text: val => val.toUpperCase() }
+     */
+    filterModelGetters() {
+      const fields = _.keyBy(this.filterFields, 'model')
+      const getters = {}
+      _.transform(
+        fields,
+        function(result, field, key) {
+          if (_.isFunction(field.get)) {
+            result[field.model] = field.get
+          }
+        },
+        getters
+      )
+      return getters
     }
   },
 
   watch: {
-    height: /* istanbul ignore next */ function() {
-      this.initLayout()
-    },
-    fullHeight: /* istanbul ignore next */ function() {
-      this.initLayout()
-    },
+    height: 'initLayout',
+    fullHeight: 'initLayout',
+    showFilterSearch: 'initLayout',
+    showFilterReset: 'initLayout',
+    filterbarFold: 'initLayout',
     filterFields: /* istanbul ignore next */ function(val) {
       this.initLayout()
       validateFilterFields(val)
-    },
-    showFilterSearch: /* istanbul ignore next */ function() {
-      this.initLayout()
-    },
-    showFilterReset: /* istanbul ignore next */ function() {
-      this.initLayout()
-    },
-    filterbarFold: /* istanbul ignore next */ function() {
-      this.updateLayout()
     }
   },
 
@@ -453,7 +493,9 @@ export default {
       this.$emit('filter-reset')
     },
 
-    // 供外部使用的短别名
+    /**
+     * 供外部使用的短别名
+     */
     search(keepInPage = false) {
       if (!keepInPage) {
         // 复位至第一页
@@ -468,15 +510,16 @@ export default {
       }
       // 请求参数合并转换
       let payloadData = _.cloneDeep(this.filterModel)
+
+      // 应用 filter 设置内的 getter
+      applyFieldGetter(payloadData, this.filterModelGetters)
+
       // 删除搜索条件中的无效数据
       payloadData = _.omitBy(payloadData, val => {
-        return (
-          val === null ||
-          val === undefined ||
-          val === '' ||
-          ((Array.isArray(val) || _.isPlainObject(val)) && _.isEmpty(val))
-        )
+        return !isValidFieldValue(val)
       })
+
+      // 附加分页参数
       if (this.usePage) {
         let indexKey = defaultPageParamKeys.pageIndex
         let sizeKey = defaultPageParamKeys.pageSize
@@ -510,6 +553,7 @@ export default {
 
       // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
       if (requestData === false) {
+        /* istanbul ignore next */
         this.contentLoading = false
         return
       }
@@ -522,6 +566,7 @@ export default {
         response = await this.requestHandler(requestData)
       } else if (this.requestUrl) {
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
+        /* istanbul ignore next */
         this._requestCancelToken && this._requestCancelToken()
 
         // 构造 Axios 请求 requestConfig
@@ -530,6 +575,7 @@ export default {
           method: this.requestConfig.method || this.requestMethod,
           withCredentials: true
         }
+
         // 提前合并以获取 method 用于判断附加请求参数
         if (_requestConfig.method === 'get') {
           _requestConfig.params = requestData
@@ -538,6 +584,7 @@ export default {
         }
 
         const requestConfig = _.merge(_requestConfig, this.requestConfig)
+
         // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
         requestConfig.cancelToken = new axios.CancelToken(cancel => {
           this._requestCancelToken = cancel
@@ -557,7 +604,7 @@ export default {
 
       this.contentLoading = false
 
-      // change: 自定义 requestHandler 与内置请求响应都通过验证流程
+      // 自定义 requestHandler 与内置请求响应都通过验证流程
       let contentResponse = null
       if (this.validateResponse(response)) {
         this.setContentMessage(null) // 清空错误信息
@@ -570,6 +617,7 @@ export default {
           'error'
         )
       }
+
       // 未通过验证的数据也统一通过 contentDataMap 再回传 contentData 确保格式统一
       const contentData = this.contentDataMap
         ? dataMapping(contentResponse, this.contentDataMap)
@@ -588,13 +636,16 @@ export default {
       }
       this.$refs.contentTable.toggleRowSelection(row)
     },
+
     handleTableSelectionChange(val) {
       this.internalListSelection = val
       this.$emit('update:tableSelection', this.internalListSelection)
     },
+
     contentTableRowClassName(row) {
       return this.tableSelection.indexOf(row.row) > -1 ? 'row--selected' : ''
     },
+
     renderTableColumn(tableColumn) {
       const _createColumn = column => {
         const { render, children, ...props } = column
@@ -616,6 +667,7 @@ export default {
       // TODO: tableColumn validator
       return _.isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },
+
     setContentMessage(message = '', type = null) {
       if (message === null) {
         this.internalContentMessage = null
@@ -628,7 +680,6 @@ export default {
         error: 'el-icon-error'
       }
       const icon = type ? iconMap[type] || null : null
-
       this.internalContentMessage = {
         type,
         icon,
@@ -644,6 +695,7 @@ export default {
       this.currentPage = 1
       this.requestData()
     },
+
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage
       this.requestData()
