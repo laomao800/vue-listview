@@ -2,10 +2,6 @@
  * get-value
  * fork from <https://github.com/jonschlinkert/get-value>
  */
-import _ from 'lodash'
-
-const isObject = _.isPlainObject
-
 export default function getValue(target, path, options) {
   if (!isObject(options)) {
     options = { default: options }
@@ -107,4 +103,8 @@ function isValid(key, target, options) {
 
 function isValidObject(val) {
   return isObject(val) || Array.isArray(val) || typeof val === 'function'
+}
+
+function isObject(val) {
+  return val != null && typeof val === 'object' && Array.isArray(val) === false
 }
