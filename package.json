@@ -62,7 +62,6 @@
     "express": "^4.16.3",
     "express-delay": "^0.2.0",
     "ftp-deploy": "^2.1.2",
-    "get-value": "^3.0.1",
     "has-values": "^2.0.1",
     "html-loader": "^0.5.5",
     "inquirer": "^6.2.0",

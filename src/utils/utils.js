@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import get from 'get-value'
+import get from '@/utils/get-value'
 
 /**
  * 判断 node 是否为 Vue 内部的 VNode 类型

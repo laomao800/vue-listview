@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import get from 'get-value'
+import get from '@/utils/get-value'
 
 export default {
   props: {
