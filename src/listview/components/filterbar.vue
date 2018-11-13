@@ -294,10 +294,10 @@ export default {
       const allFields = this.getAllFieldsDom()
       let offset = 0
       if (this.topRightFilterIndex >= 0) {
-        // debugger
+        const originOffset = this.$refs.submit.getBoundingClientRect().left
         const lastItem = allFields[this.topRightFilterIndex]
-        const { x, width } = lastItem.getBoundingClientRect()
-        offset = x + width - this.$refs.submit.getBoundingClientRect().x + 10
+        const { left, width } = lastItem.getBoundingClientRect()
+        offset = left + width - originOffset + 10
         offset = Math.min(0, offset)
       }
       this.searchBtnOffset = offset
