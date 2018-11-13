@@ -53,7 +53,7 @@ describe('layout', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
-  it('contentMinHeight', () => {
+  it('contentMinHeight', async () => {
     const wrapper = mount(Listview, {
       propsData: {
         height: 200,
@@ -61,10 +61,9 @@ describe('layout', () => {
       }
     })
     wrapper.vm.updateContentHeight()
-    return Vue.nextTick().then(function() {
-      expect(wrapper.vm.contentHeight).toBe(500)
-      expect(wrapper.html()).toMatchSnapshot()
-    })
+    await Vue.nextTick()
+    expect(wrapper.vm.contentHeight).toBe(500)
+    expect(wrapper.html()).toMatchSnapshot()
   })
 
   it('pager', () => {

@@ -4,21 +4,21 @@ describe('dataMapping', () => {
   const data = {
     result: {
       results: [1, 2, 3],
-      total: 3
+      total_count: 3
     },
     success: true
   }
 
   it('dataMapping', () => {
     const result = dataMapping(data, {
-      results: 'result.results',
-      total_count: 'result.total',
+      items: 'result.results',
+      total: 'result.total_count',
       success: 'success',
       unknow: 'result.unknow.prop'
     })
     expect(result).toEqual({
-      results: [1, 2, 3],
-      total_count: 3,
+      items: [1, 2, 3],
+      total: 3,
       success: true,
       unknow: undefined
     })
