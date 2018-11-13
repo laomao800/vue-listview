@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
-import vueTestUtils from '@vue/test-utils'
+import vueTestUtils, { config } from '@vue/test-utils'
 import _ from 'lodash'
 require('babel-plugin-require-context-hook/register')()
+
+// 使用内建的 transition 组件，避免 <ElSelectDropdown> 组件在测试中报错
+config.stubs.transition = false
 
 Vue.use(ElementUI)
 

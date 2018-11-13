@@ -14,7 +14,7 @@ describe('dataMapping', () => {
       results: 'result.results',
       total_count: 'result.total',
       success: 'success',
-      unknow: 'result.unkndow.prop'
+      unknow: 'result.unknow.prop'
     })
     expect(result).toEqual({
       results: [1, 2, 3],

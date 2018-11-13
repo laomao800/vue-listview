@@ -1,14 +1,10 @@
-import { mount, shallowMount, config } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Filterbar from '@/listview/components/filterbar'
-import FilterForm from '@/listview/components/filter-form'
 import {
   filterButtonsNormal,
   filterButtonsDropdown,
   filterFields
 } from './props.js'
-
-// 使用内建的 transition 组件，避免 <ElSelectDropdown> 组件在测试中报错
-config.stubs.transition = false
 
 describe('filterbar - filterButtons', () => {
   it('普通按钮渲染', () => {

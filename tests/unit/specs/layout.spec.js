@@ -1,17 +1,17 @@
 import Vue from 'vue'
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Listview from '@/index.js'
 import ListviewHeader from '@/components/listview-header'
 
 describe('layout', () => {
   describe('listview header', () => {
     it('empty', () => {
-      const wrapper = shallowMount(ListviewHeader)
+      const wrapper = mount(ListviewHeader)
       expect(wrapper.html()).toMatchSnapshot()
     })
 
     it('title', () => {
-      const wrapper = shallowMount(ListviewHeader, {
+      const wrapper = mount(ListviewHeader, {
         propsData: {
           title: 'headerTitle'
         }
@@ -20,7 +20,7 @@ describe('layout', () => {
     })
 
     it('nav', () => {
-      const wrapper = shallowMount(ListviewHeader, {
+      const wrapper = mount(ListviewHeader, {
         propsData: {
           nav: ['home', { text: 'list', to: '/list' }]
         }
@@ -29,7 +29,7 @@ describe('layout', () => {
     })
 
     it('title & nav', () => {
-      const wrapper = shallowMount(ListviewHeader, {
+      const wrapper = mount(ListviewHeader, {
         propsData: {
           title: 'headerTitle',
           nav: [{ text: 'home', to: '/home' }, { text: 'list', to: '/list' }]
@@ -40,7 +40,7 @@ describe('layout', () => {
   })
 
   it('specify height', () => {
-    const wrapper = shallowMount(Listview, {
+    const wrapper = mount(Listview, {
       propsData: {
         autoload: false,
         usePage: false
@@ -54,7 +54,7 @@ describe('layout', () => {
   })
 
   it('contentMinHeight', () => {
-    const wrapper = shallowMount(Listview, {
+    const wrapper = mount(Listview, {
       propsData: {
         height: 200,
         contentMinHeight: 500
@@ -68,7 +68,7 @@ describe('layout', () => {
   })
 
   it('pager', () => {
-    const wrapper = shallowMount(Listview, {
+    const wrapper = mount(Listview, {
       propsData: {
         usePage: false
       }
@@ -78,7 +78,7 @@ describe('layout', () => {
 
   describe('contentMessage', () => {
     it('string', () => {
-      const wrapper = shallowMount(Listview, {
+      const wrapper = mount(Listview, {
         propsData: {
           contentMessage: 'message text'
         }
@@ -91,7 +91,7 @@ describe('layout', () => {
     })
 
     it('object', () => {
-      const wrapper = shallowMount(Listview, {
+      const wrapper = mount(Listview, {
         propsData: {
           contentMessage: {
             type: 'info',
