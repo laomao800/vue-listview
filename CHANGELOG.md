@@ -1,3 +1,27 @@
+# [1.0.0-alpha.21](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2018-11-14)
+
+
+### Bug Fixes
+
+* get-value isObject 方法与原始库保持一致，并增加原始单元测试 ([b810ee7](https://github.com/laomao800/vue-listview/commit/b810ee7))
+* 修复 listview-contaier 在部分浏览器下边框显示样式问题 ([cb1aba0](https://github.com/laomao800/vue-listview/commit/cb1aba0))
+* 修复部分国产浏览器下在开发模式 isValidObject 报错问题 ([6b7208e](https://github.com/laomao800/vue-listview/commit/6b7208e))
+* 修复部分浏览器 getBoundingClientRect 获取不到 x 值导致按钮偏移量无法计算问题 ([eafc8d8](https://github.com/laomao800/vue-listview/commit/eafc8d8))
+* **filterFields:** 仅对有 model 属性的配置项进行重复 model 判断 ([5ec8959](https://github.com/laomao800/vue-listview/commit/5ec8959))
+
+
+### Features
+
+* filterFields 支持 get 属性配置获取值的方法 ([aa628bd](https://github.com/laomao800/vue-listview/commit/aa628bd))
+* 提示 filterFields 内的重复 model 值 ([d760242](https://github.com/laomao800/vue-listview/commit/d760242))
+
+
+### Performance Improvements
+
+* listview-container 内使用 keep-alive ，避免 listview 切换时由于节点复用多次触发自身 watcher ([ab64375](https://github.com/laomao800/vue-listview/commit/ab64375))
+
+
+
 # [1.0.0-alpha.20](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2018-11-05)
 
 
