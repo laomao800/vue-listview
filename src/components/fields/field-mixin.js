@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import get from '@/utils/get-value'
+import { isValidFieldConfig } from '@/utils/utils'
 
 export default {
   props: {
@@ -10,17 +11,21 @@ export default {
   computed: {
     value: {
       get() {
-        let value = get(this.model, this.field.model)
-        // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
-        if (_.camelCase(this.field.type) === 'multipleSelect') {
-          value = Array.isArray(value) ? value : []
+        if (isValidFieldConfig(this.field)) {
+          let value = get(this.model, this.field.model)
+          // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
+          if (_.camelCase(this.field.type) === 'multipleSelect') {
+            value = Array.isArray(value) ? value : []
+          }
+          return value
         }
-        return value
       },
       set(newVal) {
-        const model = this.model
-        const schema = this.field.model
-        this.$set(model, schema, newVal)
+        if (isValidFieldConfig(this.field)) {
+          const modelData = this.model
+          const model = this.field.model
+          this.$set(modelData, model, newVal)
+        }
       }
     },
     mergedProps() {

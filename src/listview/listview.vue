@@ -143,7 +143,8 @@ import { warn, error } from '@/utils/debug'
 import {
   dataMapping,
   parseSizeWithUnit,
-  isValidFieldValue
+  isValidFieldValue,
+  isValidFieldConfig
 } from '@/utils/utils'
 import {
   camelCaseObjectKey,
@@ -160,8 +161,9 @@ const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
 function validateFilterFields(fields) {
   /* istanbul ignore next */
   if (Array.isArray(fields)) {
+    const hasModelKey = fields.filter(field => isValidFieldConfig(field))
     const duplicateFields = _.pickBy(
-      _.countBy(fields, 'model'),
+      _.countBy(hasModelKey, 'model'),
       count => count > 1
     )
     if (!_.isEmpty(duplicateFields)) {
@@ -177,17 +179,17 @@ function validateFilterFields(fields) {
  * 应用 filterField 内设置的字段 getter ，
  * 如果 getter 执行有错误则依然使用原始值
  */
-function applyFieldGetter(modelData, getters) {
+function applyFieldGetter(payloadData, getters) {
   /* istanbul ignore next */
   Object.keys(getters).forEach(key => {
     try {
-      modelData[key] = getters[key](modelData[key], modelData)
+      payloadData[key] = getters[key](payloadData[key], payloadData)
     } catch (e) {
-      if (isValidFieldValue(modelData[key])) {
+      if (isValidFieldValue(payloadData[key])) {
         error(
           [
             `FilterFields '${key}' getter error:`,
-            `  - Value: ${JSON.stringify(modelData[key])}`,
+            `  - Value: ${JSON.stringify(payloadData[key])}`,
             `  - Getter: ${getters[key].toString()}`,
             `  - Error: ${e}`
           ].join('\n')

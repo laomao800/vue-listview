@@ -68,3 +68,14 @@ export function isValidFieldValue(val) {
     ((Array.isArray(val) || _.isPlainObject(val)) && _.isEmpty(val))
   )
 }
+
+/**
+ * 判断一个值是否有效的搜索栏 field 配置项
+ */
+export function isValidFieldConfig(field) {
+  return (
+    _.isPlainObject(field) &&
+    field.hasOwnProperty('model') &&
+    typeof field.model === 'string'
+  )
+}
