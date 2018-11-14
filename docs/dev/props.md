@@ -69,6 +69,12 @@ sidebarDepth: 2
 
 可选，存储搜索栏的搜索条件值。如果有需要跟随请求直接发送的数据也可在此设置，以实现类似“隐藏域”的提交效果。
 
+::: warning 有效值过滤
+
+注意，提交时只会对内部**有效值**进行提交，会过滤掉以下内容的参数值： `''` , `null` , `undefined` , `[]` , `{}` 。
+
+:::
+
 ### showFilterSearch
 
 - type: `Boolean`
@@ -213,6 +219,53 @@ sidebarDepth: 2
 | snakeCase  | `page_index` , `page_size` |
 | pascalCase | `PageIndex` , `PageSize`   |
 
+### contentDataMap
+
+- type: `Object`
+- default: `{ items: 'result.items', total: 'result.total_count' }`
+
+数据接口响应内容属性映射。可以直接配置各属性相对于接口响应数据的取值路径来直接映射返回值。默认会有表格视图所需的 2 个属性映射 `items` （表格数据） 和 `total` 用于分页组件。
+
+在发起请求并判断接口获取成功（[`validateResponse`](#validateresponse) 方法验证通过）后：
+
+- 【默认表格样式】会分别在表格数据和分页组件使用 `items` 和 `total` 2 个属性。
+  - `<el-table :data="contentData.items" />`
+  - `<el-pagination :total="contentData.total" />`
+- 【自定义 slot 】数据挂载在 slot-scope 的 `content-data` 属性上。
+- **如果 `contentDataMap` 设置为 `null` ，则不进行映射处理，直接返回接口响应数据。**
+
+例如：有接口响应为
+
+```js
+{
+  is_success: true,
+  result: {
+    items: [1, 2, 3],
+    total: 20
+  }
+}
+```
+
+通过映射表配置
+
+```js
+{
+  items: 'result.items',
+  total: 'result.total',
+  status: 'is_success'
+}
+```
+
+可得到：
+
+```js
+{
+  items: [1, 2, 3],
+  total: 20,
+  status: true
+}
+```
+
 ## 错误处理
 
 ### validateResponse
@@ -293,50 +346,3 @@ sidebarDepth: 2
 对原始响应数据的加工方法，接收原始响应数据，处理后方法返回值会交由给 `contentDataMap` 进行映射。
 
 一般用于接口响应的数据无法简单一次映射到需要的数据（如需要根据条件重组、聚合）时，可使用该配置项。
-
-### contentDataMap
-
-- type: `Object`
-- default: `{ items: 'result.items', total: 'result.total_count' }`
-
-数据接口响应内容属性映射。可以直接配置各属性相对于接口响应数据的取值路径来直接映射返回值。默认会有表格视图所需的 2 个属性映射 `items` （表格数据） 和 `total` 用于分页组件。
-
-在发起请求并判断接口获取成功（[`validateResponse`](#validateresponse) 方法验证通过）后：
-
-- 【默认表格样式】会分别在表格数据和分页组件使用 `items` 和 `total` 2 个属性。
-  - `<el-table :data="contentData.items" />`
-  - `<el-pagination :total="contentData.total" />`
-- 【自定义 slot 】数据挂载在 slot-scope 的 `content-data` 属性上。
-- **如果 `contentDataMap` 设置为 `null` ，则不进行映射处理，直接返回接口响应数据。**
-
-例如：有接口响应为
-
-```js
-{
-  is_success: true,
-  result: {
-    items: [1, 2, 3],
-    total: 20
-  }
-}
-```
-
-通过映射表配置
-
-```js
-{
-  items: 'result.items',
-  total: 'result.total',
-  status: 'is_success'
-}
-```
-
-可得到：
-
-```js
-{
-  items: [1, 2, 3],
-  total: 20,
-  status: true
-}
-```
