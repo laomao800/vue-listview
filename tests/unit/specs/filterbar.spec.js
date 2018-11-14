@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { mount } from '@vue/test-utils'
 import Filterbar from '@/listview/components/filterbar'
 import {
@@ -175,8 +176,6 @@ describe('filterbar - filterFields', () => {
   })
 })
 
-// describe('filterbar - filterModel', () => {})
-
 describe('filterbar - filterbarFold', () => {
   const wrapper = mount(Filterbar, {
     propsData: {
@@ -250,6 +249,32 @@ describe('filterbar - SearchButton & ResetButton', () => {
       resetBtn.trigger('click')
       expect(wrapper.emitted('filter-reset')).toBeTruthy()
       expect(wrapper.emitted('filter-reset').length).toBe(1)
+    })
+
+    it('Reset model', async () => {
+      const wrapper = mount(Filterbar, {
+        propsData: {
+          filterFields: [
+            { type: 'text', model: 'text' },
+            { type: 'number', model: 'number' },
+            { type: 'multipleSelect', model: 'multipleSelect' }
+          ],
+          filterModel: {
+            text: 'mock text',
+            number: 100,
+            multipleSelect: [1, 2, 3],
+            hiddenParam: 'hidden'
+          }
+        }
+      })
+      const resetBtn = wrapper.findAll('.filterbar__submit-btn button').at(1)
+      resetBtn.trigger('click')
+      expect(wrapper.vm.filterModel).toEqual({
+        text: undefined,
+        number: undefined,
+        multipleSelect: [],
+        hiddenParam: 'hidden'
+      })
     })
   })
 })
