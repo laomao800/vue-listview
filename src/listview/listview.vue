@@ -187,9 +187,9 @@ function applyFieldGetter(modelData, getters) {
         error(
           [
             `FilterFields '${key}' getter error:`,
-            `    - Value: ${JSON.stringify(modelData[key])}`,
-            `    - Getter: ${getters[key].toString()}`,
-            `    - Error: ${e}`
+            `  - Value: ${JSON.stringify(modelData[key])}`,
+            `  - Getter: ${getters[key].toString()}`,
+            `  - Error: ${e}`
           ].join('\n')
         )
       }
