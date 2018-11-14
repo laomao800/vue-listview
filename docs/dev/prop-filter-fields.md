@@ -50,7 +50,7 @@
 
 如，内置的多选组件 `multipleSelect` 默认值的格式为数组，如果接口参数要求为逗号分隔的字符串，一个方法是可以通过 [transformRequestData](./props.md#transformrequestdata) 在提交前对整个参数对象进行加工过滤，另一个方法则可以通过配置 `get` :
 
-```
+```js
 [{
   type: 'multipleSelect',
   model: 'multipleSelect',
