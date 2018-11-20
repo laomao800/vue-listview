@@ -52,7 +52,7 @@ import VNode from '../../components/v-node.js'
 import { isVNode } from '../../utils/utils.js'
 
 export default {
-  name: 'FilterForm',
+  name: 'FilterbarForm',
 
   components: {
     ...fieldComponents,

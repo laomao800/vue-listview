@@ -131,7 +131,7 @@
       </div>
 
       <!-- 搜索栏控件区域 -->
-      <filter-form
+      <filterbar-form
         v-if="showFilterFields"
         ref="filterForm"
         :fields="validFilterFields"
@@ -147,14 +147,14 @@ import _ from 'lodash'
 import VNode from '@/components/v-node.js'
 import { isVNode } from '@/utils/utils.js'
 import { getFieldComponentName } from '@/components/fields'
-import FilterForm from './filter-form.vue'
+import FilterbarForm from './filterbar-form.vue'
 
 export default {
   name: 'FilterBar',
 
   components: {
     VNode,
-    FilterForm
+    FilterbarForm
   },
 
   props: {
