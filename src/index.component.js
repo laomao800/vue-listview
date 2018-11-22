@@ -1,12 +1,21 @@
-import Vue from 'vue'
-import Listview from '@/listview'
-import ListviewContainer from '@/listview-container'
+import _ from 'lodash'
+import Listview from './listview'
+import ListviewContainer from './listview-container'
 
-Listview.install = function() {
+Listview.install = function(Vue, options = {}) {
   Vue.component(Listview.name, Listview)
+  if (_.isPlainObject(options)) {
+    Vue.prototype.$LISTVIEW = _.pick(options, [
+      'validateResponse',
+      'resolveResponseErrorMessage',
+      'transformRequestData',
+      'transformResponseData',
+      'contentDataMap'
+    ])
+  }
 }
 
-ListviewContainer.install = function() {
+ListviewContainer.install = function(Vue) {
   Vue.component(ListviewContainer.name, ListviewContainer)
 }
 

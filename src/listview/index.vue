@@ -549,8 +549,12 @@ export default {
       }
 
       // 自定义请求参数转换方法
-      const requestData = this.transformRequestData
-        ? this.transformRequestData(payloadData)
+      // prettier-ignore
+      const transformRequestFunc = _.isFunction(this.$LISTVIEW.transformRequestData)
+        ? this.$LISTVIEW.transformRequestData
+        : this.transformRequestData
+      const requestData = transformRequestFunc
+        ? transformRequestFunc(payloadData)
         : payloadData
 
       // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
@@ -608,21 +612,32 @@ export default {
 
       // 自定义 requestHandler 与内置请求响应都通过验证流程
       let contentResponse = null
-      if (this.validateResponse(response)) {
+      const validateFunc = _.isFunction(this.$LISTVIEW.validateResponse)
+        ? this.$LISTVIEW.validateResponse
+        : this.validateResponse
+      if (validateFunc(response)) {
         this.setContentMessage(null) // 清空错误信息
-        contentResponse = this.transformResponseData
-          ? this.transformResponseData(response)
+        // prettier-ignore
+        const transformResponseFunc = _.isFunction(this.$LISTVIEW.transformResponseData)
+          ? this.$LISTVIEW.transformResponseData
+          : this.transformResponseData
+        contentResponse = transformResponseFunc
+          ? transformResponseFunc(response)
           : response
       } else {
-        this.setContentMessage(
-          this.resolveResponseErrorMessage(response),
-          'error'
-        )
+        // prettier-ignore
+        const resolveErrorMessageFunc = _.isFunction(this.$LISTVIEW.resolveResponseErrorMessage)
+          ? this.$LISTVIEW.resolveResponseErrorMessage
+          : this.resolveResponseErrorMessage
+        this.setContentMessage(resolveErrorMessageFunc(response), 'error')
       }
 
       // 未通过验证的数据也统一通过 contentDataMap 再回传 contentData 确保格式统一
-      const contentData = this.contentDataMap
-        ? dataMapping(contentResponse, this.contentDataMap)
+      const finalContentDataMap = _.isPlainObject(this.$LISTVIEW.contentDataMap)
+        ? this.$LISTVIEW.contentDataMap
+        : this.contentDataMap
+      const contentData = finalContentDataMap
+        ? dataMapping(contentResponse, finalContentDataMap)
         : contentResponse
 
       this.contentData = contentData
