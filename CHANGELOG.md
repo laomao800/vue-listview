@@ -1,3 +1,18 @@
+# [1.0.0-beta.1](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.21...v1.0.0-beta.1) (2018-11-26)
+
+
+### Bug Fixes
+
+* 修复 usePage 变更后不会删除页码提交参数 ([a246a7b](https://github.com/laomao800/vue-listview/commit/a246a7b))
+* 修复非 Vue.use 引用时 $LISTVIEW 获取失效问题 ([b0371a2](https://github.com/laomao800/vue-listview/commit/b0371a2))
+
+
+### Features
+
+* 支持 Vue.use 时或 Vue.prototype.$LISTVIEW 设置全局配置 ([064db6c](https://github.com/laomao800/vue-listview/commit/064db6c))
+
+
+
 # [1.0.0-alpha.21](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2018-11-14)
 
 
