@@ -24,6 +24,16 @@ yarn add @laomao800/vue-listview
 
 **直接 import 的文件为不包含 Element-UI 的 `listview-component` 文件，需确保项目内已有 Element-UI。**
 
+并且可以传入一个配置对象，用于全局配置 listview 。一般可用于项目接口与默认结构不同的场景，通过全局配置可不用在每个页面内重复写诸如 `validateResponse` 等“项目内通用”的配置。
+
+支持全局配置：
+
+- `validateResponse`
+- `resolveResponseErrorMessage`
+- `transformRequestData`
+- `transformResponseData`
+- `contentDataMap`
+
 ```js
 // main.js
 import Vue from 'vue'
@@ -33,6 +43,25 @@ import Listview from '@laomao800/vue-listview'
 
 Vue.use(ElementUI)
 Vue.use(Listview)
+/*
+Vue.use(Listview, {
+  validateResponse: response => response.different_success_status,
+  resolveResponseErrorMessage: () => 'global config error',
+  transformRequestData: requestData => {
+    requestData.addon = 'requestAddon'
+    return requestData
+  },
+  transformResponseData: response => {
+    response.addon = 'responseAddon'
+    return response
+  },
+  contentDataMap: {
+    addon: 'addon',
+    items: 'result.items',
+    total: 'result.total_count'
+  }
+})
+*/
 ```
 
 ### 局部注册
@@ -43,7 +72,19 @@ Vue.use(Listview)
 </template>
 
 <script>
+// import Vue from 'vue'
 import Listview from '@laomao800/vue-listview'
+
+/*
+Vue.prototype.$LISTVIEW = {
+  contentDataMap: {
+    addon: 'addon',
+    items: 'result.items',
+    total: 'result.total_count'
+  },
+  // ...
+}
+*/
 
 export default {
   components: {
