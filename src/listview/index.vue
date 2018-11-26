@@ -522,15 +522,20 @@ export default {
       })
 
       // 附加分页参数
+      let indexKey = defaultPageParamKeys.pageIndex
+      let sizeKey = defaultPageParamKeys.pageSize
       if (this.usePage) {
-        let indexKey = defaultPageParamKeys.pageIndex
-        let sizeKey = defaultPageParamKeys.pageSize
         if (_.isPlainObject(this.usePage)) {
           indexKey = this.usePage.pageIndex || indexKey
           sizeKey = this.usePage.pageSize || sizeKey
         }
         payloadData[indexKey] = this.currentPage
         payloadData[sizeKey] = this.currentPageSize
+      } else {
+        try {
+          delete payloadData[indexKey]
+          delete payloadData[sizeKey]
+        } catch (e) {}
       }
 
       // 请求参数 key 拼写方法转换
