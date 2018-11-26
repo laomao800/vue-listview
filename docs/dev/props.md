@@ -239,6 +239,7 @@ sidebarDepth: 2
 ```js
 {
   is_success: true,
+  errorInfos: null,
   result: {
     items: [1, 2, 3],
     total: 20
@@ -252,7 +253,7 @@ sidebarDepth: 2
 {
   items: 'result.items',
   total: 'result.total',
-  status: 'is_success'
+  errorInfos: 'errorInfos'
 }
 ```
 
@@ -262,7 +263,7 @@ sidebarDepth: 2
 {
   items: [1, 2, 3],
   total: 20,
-  status: true
+  errorInfos: null
 }
 ```
 
