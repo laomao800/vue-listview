@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - 9
+cache:
+  directories:
+    - node_modules
+before_script:
+  - npm install -g codecov
+script:
+  - npm run test:unit
+  - codecov --token=$CODECOV_TOKEN
+deploy:
+  - provider: npm
+    email: laomao800@gmail.com
+    api_key: $NPM_TOKEN
+    on:
+      tags: true
+      repo: laomao800/vue-listview
+  - provider: pages
+    local-dir: docs/.vuepress/dist
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    on:
+      branch: master
