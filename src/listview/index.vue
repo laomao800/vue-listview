@@ -550,7 +550,7 @@ export default {
 
       // 自定义请求参数转换方法
       // prettier-ignore
-      const transformRequestFunc = _.isFunction(this.$LISTVIEW.transformRequestData)
+      const transformRequestFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.transformRequestData)
         ? this.$LISTVIEW.transformRequestData
         : this.transformRequestData
       const requestData = transformRequestFunc
@@ -612,13 +612,14 @@ export default {
 
       // 自定义 requestHandler 与内置请求响应都通过验证流程
       let contentResponse = null
-      const validateFunc = _.isFunction(this.$LISTVIEW.validateResponse)
-        ? this.$LISTVIEW.validateResponse
-        : this.validateResponse
+      const validateFunc =
+        this.$LISTVIEW && _.isFunction(this.$LISTVIEW.validateResponse)
+          ? this.$LISTVIEW.validateResponse
+          : this.validateResponse
       if (validateFunc(response)) {
         this.setContentMessage(null) // 清空错误信息
         // prettier-ignore
-        const transformResponseFunc = _.isFunction(this.$LISTVIEW.transformResponseData)
+        const transformResponseFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.transformResponseData)
           ? this.$LISTVIEW.transformResponseData
           : this.transformResponseData
         contentResponse = transformResponseFunc
@@ -626,16 +627,17 @@ export default {
           : response
       } else {
         // prettier-ignore
-        const resolveErrorMessageFunc = _.isFunction(this.$LISTVIEW.resolveResponseErrorMessage)
+        const resolveErrorMessageFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.resolveResponseErrorMessage)
           ? this.$LISTVIEW.resolveResponseErrorMessage
           : this.resolveResponseErrorMessage
         this.setContentMessage(resolveErrorMessageFunc(response), 'error')
       }
 
       // 未通过验证的数据也统一通过 contentDataMap 再回传 contentData 确保格式统一
-      const finalContentDataMap = _.isPlainObject(this.$LISTVIEW.contentDataMap)
-        ? this.$LISTVIEW.contentDataMap
-        : this.contentDataMap
+      const finalContentDataMap =
+        this.$LISTVIEW && _.isPlainObject(this.$LISTVIEW.contentDataMap)
+          ? this.$LISTVIEW.contentDataMap
+          : this.contentDataMap
       const contentData = finalContentDataMap
         ? dataMapping(contentResponse, finalContentDataMap)
         : contentResponse
@@ -644,7 +646,7 @@ export default {
     },
 
     /**
-     * Table
+     * el-table 开启表格数据选择功能时表格行点击切换已选选项
      */
     handleRowClick(row, event) {
       // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
@@ -654,33 +656,38 @@ export default {
       this.$refs.contentTable.toggleRowSelection(row)
     },
 
+    /**
+     * el-table 表格选中数据同步至父组件
+     */
     handleTableSelectionChange(val) {
       this.internalListSelection = val
       this.$emit('update:tableSelection', this.internalListSelection)
     },
 
+    /**
+     * el-table 自定义选中行高亮
+     */
     contentTableRowClassName(row) {
       return this.tableSelection.indexOf(row.row) > -1 ? 'row--selected' : ''
     },
 
+    /**
+     * tableColumns 转换为 el-table-column ，支持 children 属性多级列配置
+     */
     renderTableColumn(tableColumn) {
       const _createColumn = column => {
         const { render, children, ...props } = column
-
         const VNodeData = { props }
         if (render) {
           VNodeData.scopedSlots = {
             default: render
           }
         }
-
         const VNodeChildren = Array.isArray(children)
           ? children.map(child => _createColumn(child))
           : null
-
         return this.$createElement('el-table-column', VNodeData, VNodeChildren)
       }
-
       // TODO: tableColumn validator
       return _.isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },

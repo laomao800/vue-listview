@@ -19,8 +19,8 @@ function transformObjectKey(object = {}, transformCase) {
       break
   }
 
+  /* istanbul ignore if */
   if (!transformFunction) {
-    /* istanbul ignore next */
     return object
   } else {
     return _.transform(
