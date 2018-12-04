@@ -1,3 +1,12 @@
+# [1.0.0-beta.2](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2018-12-04)
+
+
+### Bug Fixes
+
+* 修复部分外部使用的文件中使用 @ 符号查找不到资源问题 ([30f967e](https://github.com/laomao800/vue-listview/commit/30f967e))
+
+
+
 # [1.0.0-beta.1](https://github.com/laomao800/vue-listview/compare/v1.0.0-alpha.21...v1.0.0-beta.1) (2018-11-26)
 
 
