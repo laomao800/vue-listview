@@ -1,6 +1,6 @@
 # Vue Listview
 
-[![Build Status](https://travis-ci.org/laomao800/vue-listview.svg?branch=master)](https://travis-ci.org/laomao800/vue-listview) [![codecov](https://codecov.io/gh/laomao800/vue-listview/branch/master/graph/badge.svg)](https://codecov.io/gh/laomao800/vue-listview)
+[![Build Status](https://travis-ci.org/laomao800/vue-listview.svg?branch=master)](https://travis-ci.org/laomao800/vue-listview) [![codecov](https://codecov.io/gh/laomao800/vue-listview/branch/master/graph/badge.svg)](https://codecov.io/gh/laomao800/vue-listview) [![npm](https://img.shields.io/npm/v/@laomao800/vue-listview.svg)](https://www.npmjs.com/package/@laomao800/vue-listview)
 
 Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) ，可用于生成列表类的页面布局组件。
 
