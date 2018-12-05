@@ -37,6 +37,9 @@
   "bugs": {
     "url": "https://github.com/laomao800/vue-listview/issues"
   },
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.0-alpha.25",
     "@storybook/addon-links": "^4.0.0-alpha.25",
@@ -47,7 +50,6 @@
     "@vue/cli-service": "^3.0.0",
     "@vue/eslint-config-standard": "^3.0.0",
     "@vue/test-utils": "^1.0.0-beta.24",
-    "axios": "^0.18.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "babel-plugin-component": "^1.1.1",

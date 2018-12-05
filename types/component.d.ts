@@ -1,5 +1,5 @@
 import Vue, { VNode } from 'vue'
-import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { AxiosRequestConfig } from 'axios'
 
 /** vue-router Location */
 type Dictionary<T> = { [key: string]: T }
@@ -42,40 +42,83 @@ export interface HeaderNavObjectType {
 }
 
 export interface FilterButton {
+  /** 按钮样式类型 */
   type?: ButtonType
+
+  /** 按钮图标 */
   icon?: string
+
+  /** 是否显示为线框按钮 */
   plain?: boolean
+
+  /** 按钮文本 */
   text?: string
+
+  /** 按钮点击事件 */
   click?: () => void
+
+  /** 是否展示为分裂按钮 */
   splitButton?: boolean
+
+  /** 子按钮 */
   children?: {
     icon: FilterButton['icon']
     text: FilterButton['text']
     click: FilterButton['click']
   }
+
+  /** 自定义渲染方法 */
   render?: () => VNode
 }
 
 export interface FilterField {
+  /** 字段控件类型 */
   type: FieldType
+
+  /** 字段提交参数名 */
   model: string
+
+  /** 字段文本说明 */
   label: string
+
+  /** 是否显示为禁用状态 */
   disabled?: boolean
+
+  /** 可传入对应控件原始的 props */
   componentProps?: { [k: string]: any }
+
+  /** 可传入对应控件原始的 events */
   componentEvents?: { [k: string]: () => void }
+
+  /** 可传入对应控件原始的 slots */
   componentSlots?: { [k: string]: VNode }
 }
 
 export interface tableColumn {
+  /* 显示于列头文本 */
   label: string
+
+  /** 对应列内容的字段名 */
   prop?: string
+
+  /** 列宽 */
   width?: string
+
+  /** 列对齐方式 */
   align?: 'left' | 'center' | 'right'
-  fixed?: boolean
+
+  /** 列是否固定在左侧或者右侧，true 表示固定在左侧 */
+  fixed?: boolean | 'left' | 'right'
+
+  /** 内容格式化方法，可简单进行字符串格式化 */
   formatter?: (row: any) => string
+
+  /** 单元格渲染方法，可使用 JSX */
   render?: (
     { row, column, $index }: { row: any; column: any; $index: number }
   ) => VNode
+
+  /** 子列 */
   children?: tableColumn
 }
 
@@ -138,10 +181,10 @@ export declare class VueListviewProps extends Vue {
       }
 
   /** 验证接口响应是否成功 */
-  validateResponse: (response: AxiosResponse['data']) => boolean
+  validateResponse: (response: any) => boolean
 
   /** 解析错误提示信息 */
-  resolveResponseErrorMessage: (response: AxiosResponse['data']) => string
+  resolveResponseErrorMessage: (response: any) => string
 
   /** 搜索栏左侧按钮配置。 default: [] */
   filterButtons: FilterButton[] | (() => VNode) | VNode
@@ -159,7 +202,7 @@ export declare class VueListviewProps extends Vue {
   showFilterReset: boolean
 
   /** 表格列配置。 default: [] */
-  tableColumns: tableColumn
+  tableColumns: tableColumn[]
 
   /** 可传入 <el-table> 的所有支持属性。 default: {} */
   tableProps: { [k: string]: any }
