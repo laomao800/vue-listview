@@ -1,5 +1,7 @@
 language: node_js
 
+if: tag IS present
+
 node_js:
   - 9
 
