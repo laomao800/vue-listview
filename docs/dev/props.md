@@ -335,7 +335,7 @@ sidebarDepth: 2
 - type: `Function(requestData)`
 - default: `null`
 
-该方法可对接口发起请求参数在发送前作最后的更改。参数 `requestData` 包含搜索栏的所有数据，如果有开启分页还会包含 `page_index` 和 `page_size` 。
+该方法可对接口发起请求参数在发送前作最后的更改，方法最终 return 的数据会作为提交参数。参数 `requestData` 包含搜索栏的所有数据，如果有开启分页还会包含 `page_index` 和 `page_size` 。
 
 如果该方法显式的返回 `false` 则会阻止提交，可用于发起请求前进行参数验证等。
 
@@ -344,6 +344,6 @@ sidebarDepth: 2
 - type: `Function(requestData)`
 - default: `null`
 
-对原始响应数据的加工方法，接收原始响应数据，处理后方法返回值会交由给 `contentDataMap` 进行映射。
+对原始响应数据的加工方法，接收原始响应数据，方法处理后 return 的返回值会交由给 `contentDataMap` 进行映射。
 
 一般用于接口响应的数据无法简单一次映射到需要的数据（如需要根据条件重组、聚合）时，可使用该配置项。
