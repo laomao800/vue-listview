@@ -1,3 +1,12 @@
+# [1.0.0-beta.3](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2018-12-05)
+
+
+### Bug Fixes
+
+* fix types ([8b864fa](https://github.com/laomao800/vue-listview/commit/8b864fa))
+
+
+
 # [1.0.0-beta.2](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2018-12-04)
 
 
