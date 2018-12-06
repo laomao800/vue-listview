@@ -4,13 +4,13 @@
 
 默认使用 `<listview />` 会默认使用表格布局，其中 `slot-scope` 包含有以下属性：
 
-| 参数           | 类型          | 说明                         |
-| -------------- | ------------- | ---------------------------- |
-| filterModel    | Object        | 搜索栏数据                   |
-| contentHeight  | Number        | 内容区域高度                 |
-| contentLoading | Boolean       | 是否正在发送数据读取请求     |
-| contentData    | Array         | 列表内容                     |
-| contentMessage | Object , null | `{ type, message }` 错误信息 |
+| 参数           | 类型          | 说明                                       |
+| -------------- | ------------- | ------------------------------------------ |
+| filterModel    | Object        | 搜索栏数据                                 |
+| contentHeight  | Number        | 内容区域高度                               |
+| contentLoading | Boolean       | 是否正在发送数据读取请求                   |
+| contentData    | Object        | `{ items: Array, total: Number }` 内容对象 |
+| contentMessage | Object , null | `{ type, message }` 错误信息               |
 
 ### Default slot 演示
 
