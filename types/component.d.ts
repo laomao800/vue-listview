@@ -94,7 +94,7 @@ export interface FilterField {
   componentSlots?: { [k: string]: VNode }
 }
 
-export interface tableColumn {
+export interface TableColumn {
   /* 显示于列头文本 */
   label: string
 
@@ -119,7 +119,7 @@ export interface tableColumn {
   ) => VNode
 
   /** 子列 */
-  children?: tableColumn
+  children?: TableColumn
 }
 
 export declare class VueListviewProps extends Vue {
@@ -202,7 +202,7 @@ export declare class VueListviewProps extends Vue {
   showFilterReset: boolean
 
   /** 表格列配置。 default: [] */
-  tableColumns: tableColumn[]
+  tableColumns: TableColumn[]
 
   /** 可传入 <el-table> 的所有支持属性。 default: {} */
   tableProps: { [k: string]: any }
@@ -229,4 +229,9 @@ export declare class VueListviewProps extends Vue {
 
   /** 默认每页分页数量。 default: 20 */
   pageSize: number
+}
+
+export declare class VueListviewContainerProps extends Vue {
+  headerTitle: VueListviewProps['headerTitle']
+  headerNav: VueListviewProps['headerNav']
 }
