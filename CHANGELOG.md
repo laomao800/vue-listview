@@ -1,3 +1,13 @@
+# [1.0.0-beta.4](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2018-12-06)
+
+
+### Bug Fixes
+
+* 修正内部取消请求时界面丢失 loading 并显示“未知错误”问题 ([008da3a](https://github.com/laomao800/vue-listview/commit/008da3a))
+* 增加 ListviewContainer types ([26bfb5f](https://github.com/laomao800/vue-listview/commit/26bfb5f))
+
+
+
 # [1.0.0-beta.3](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2018-12-05)
 
 
