@@ -571,7 +571,8 @@ export default {
 
       this.contentLoading = true
 
-      let response
+      let response = null
+      let _responseError = false
       if (this.requestHandler) {
         // 自定义请求方法
         response = await this.requestHandler(requestData)
@@ -606,36 +607,43 @@ export default {
           const res = await axiosService(requestConfig)
           response = res.data
         } catch (error) {
-          if (!axios.isCancel(error)) {
+          _responseError = true
+          if (axios.isCancel(error)) {
+            // 如果为 axios 的取消则跳过后续解析步骤，保持界面 loading 状态
+            return false
+          } else {
+            // 非内部取消的异常才解析错误信息
             this.setContentMessage(error.message, 'error')
-            this.contentLoading = false
           }
         }
       }
 
       this.contentLoading = false
 
-      // 自定义 requestHandler 与内置请求响应都通过验证流程
       let contentResponse = null
-      const validateFunc =
-        this.$LISTVIEW && _.isFunction(this.$LISTVIEW.validateResponse)
-          ? this.$LISTVIEW.validateResponse
-          : this.validateResponse
-      if (validateFunc(response)) {
-        this.setContentMessage(null) // 清空错误信息
-        // prettier-ignore
-        const transformResponseFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.transformResponseData)
-          ? this.$LISTVIEW.transformResponseData
-          : this.transformResponseData
-        contentResponse = transformResponseFunc
-          ? transformResponseFunc(response)
-          : response
-      } else {
-        // prettier-ignore
-        const resolveErrorMessageFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.resolveResponseErrorMessage)
-          ? this.$LISTVIEW.resolveResponseErrorMessage
-          : this.resolveResponseErrorMessage
-        this.setContentMessage(resolveErrorMessageFunc(response), 'error')
+      if (!_responseError) {
+        // 自定义 requestHandler 与内置请求响应都通过验证流程
+        const validateFunc =
+          this.$LISTVIEW && _.isFunction(this.$LISTVIEW.validateResponse)
+            ? this.$LISTVIEW.validateResponse
+            : this.validateResponse
+        if (validateFunc(response)) {
+          // 清空错误信息
+          this.setContentMessage(null)
+          // prettier-ignore
+          const transformResponseFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.transformResponseData)
+            ? this.$LISTVIEW.transformResponseData
+            : this.transformResponseData
+          contentResponse = transformResponseFunc
+            ? transformResponseFunc(response)
+            : response
+        } else {
+          // prettier-ignore
+          const resolveErrorMessageFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.resolveResponseErrorMessage)
+            ? this.$LISTVIEW.resolveResponseErrorMessage
+            : this.resolveResponseErrorMessage
+          this.setContentMessage(resolveErrorMessageFunc(response), 'error')
+        }
       }
 
       // 未通过验证的数据也统一通过 contentDataMap 再回传 contentData 确保格式统一
