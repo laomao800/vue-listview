@@ -84,6 +84,12 @@ export interface FilterField {
   /** 是否显示为禁用状态 */
   disabled?: boolean
 
+  /** 类型为 select 或 multipleSelect 时的选项配置 */
+  options?: {
+    label: string
+    value: any
+  }[]
+
   /** 可传入对应控件原始的 props */
   componentProps?: { [k: string]: any }
 
@@ -102,7 +108,7 @@ export interface TableColumn {
   prop?: string
 
   /** 列宽 */
-  width?: string
+  width?: string | number
 
   /** 列对齐方式 */
   align?: 'left' | 'center' | 'right'
