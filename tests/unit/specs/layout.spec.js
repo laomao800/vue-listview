@@ -39,40 +39,31 @@ describe('layout', () => {
     })
   })
 
-  it('specify height', () => {
-    const wrapper = mount(Listview, {
-      propsData: {
-        autoload: false,
-        usePage: false
-      }
+  describe('height', () => {
+    it('specify height', async () => {
+      const wrapper = mount(Listview, {
+        propsData: {
+          autoload: false,
+          usePage: false,
+          height: 500
+        }
+      })
+      expect(wrapper.element.style.height).toBe('500px')
+      await Vue.nextTick()
     })
-    expect(wrapper.html()).toMatchSnapshot()
-    wrapper.setProps({
-      height: 500
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
 
-  it('contentMinHeight', async () => {
-    const wrapper = mount(Listview, {
-      propsData: {
-        height: 200,
-        contentMinHeight: 500
-      }
+    it('contentMinHeight', async () => {
+      const wrapper = mount(Listview, {
+        propsData: {
+          height: 200,
+          contentMinHeight: 500
+        }
+      })
+      wrapper.vm.updateContentHeight()
+      await Vue.nextTick()
+      expect(wrapper.vm.contentHeight).toBe(500)
+      expect(wrapper.html()).toMatchSnapshot()
     })
-    wrapper.vm.updateContentHeight()
-    await Vue.nextTick()
-    expect(wrapper.vm.contentHeight).toBe(500)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('pager', () => {
-    const wrapper = mount(Listview, {
-      propsData: {
-        usePage: false
-      }
-    })
-    expect(wrapper.html()).toMatchSnapshot()
   })
 
   describe('contentMessage', () => {
@@ -104,5 +95,10 @@ describe('layout', () => {
         message: 'message text'
       })
     })
+  })
+
+  it('pager', () => {
+    const wrapper = mount(Listview, { propsData: { usePage: false } })
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

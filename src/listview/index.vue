@@ -37,7 +37,9 @@
       <div v-loading="contentLoading">
         <div
           ref="content"
-          :style="{ height: `${contentHeight}px` }"
+          :style="{
+            height: contentHeight ? `${contentHeight}px` : null
+          }"
           class="listview__content"
         >
           <slot
@@ -296,7 +298,6 @@ export default {
 
   data() {
     return {
-      maxHeight: null,
       contentHeight: null,
       filterbarFold: true,
       contentLoading: false,
@@ -449,30 +450,37 @@ export default {
         // 在 listview-container 中，不是当前视图不触发重算
         return
       }
+
+      let maxHeight = null
       if (this.fixedHeight) {
-        this.maxHeight = this.$el.getBoundingClientRect().height
+        maxHeight = this.$el.getBoundingClientRect().height
       } else if (this.fullHeight) {
-        this.maxHeight = window.innerHeight
+        maxHeight = window.innerHeight
       } else {
-        this.maxHeight = null
-        this.contentHeight = parseInt(this.contentMinHeight, 10)
+        // 自动高度
+        maxHeight = null
+        return
       }
 
-      if (this.maxHeight !== null) {
         // 有可能是 filterbar 的展开与缩起，引发的 update ，
         // 需要 nextTick 等待界面变化后再计算布局
         await this.$nextTick()
-        const contentEl = this.$refs.content
-        /* istanbul ignore next */
-        const contentTop = contentEl ? contentEl.getBoundingClientRect().top : 0
+
+      // 指定高度时，需要从 $el 位置开始计算 top 高度，
+      // 确保处于 listview-container 容器内的高度能铺满
+      const wrapOffsetTop = this.fixedHeight
+        ? this.$el.getBoundingClientRect().top
+        : 0
+
+      const contentOffsetTop = this.$refs.content.getBoundingClientRect().top
         const paginationHeight = this.getPaginationHeight()
+      // prettier-ignore
         const restHeight =
-          this.maxHeight -
-          contentTop -
-          this.contentBottomOffset -
-          paginationHeight
+        (maxHeight + wrapOffsetTop) -
+        contentOffsetTop -
+        paginationHeight -
+        this.contentBottomOffset
         this.contentHeight = Math.max(restHeight, this.contentMinHeight)
-      }
     },
 
     /**
