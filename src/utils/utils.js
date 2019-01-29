@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Vue from 'vue'
-import get from './get-value'
+import get from './getValue'
 
 /**
  * 判断 node 是否为 Vue 内部的 VNode 类型

@@ -1,4 +1,4 @@
-import get from '@/utils/get-value'
+import get from '@/utils/getValue'
 
 describe('get value:', function() {
   it('should return non-object when given as the first argument', function() {

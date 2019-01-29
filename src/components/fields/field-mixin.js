@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import get from '../../utils/get-value'
+import get from '../../utils/getValue'
 import { isValidFieldConfig } from '../../utils/utils'
 
 export default {
