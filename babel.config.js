@@ -1,10 +1,7 @@
 const plugins = [
   // Support async/await
   // https://babeljs.io/docs/plugins/transform-runtime/
-  [
-    '@babel/transform-runtime',
-    { helpers: true, polyfill: false, regenerator: true }
-  ]
+  ['@babel/transform-runtime', { helpers: true, regenerator: true }]
 ]
 
 if (
@@ -21,16 +18,7 @@ if (
 }
 
 module.exports = {
-  presets: [
-    [
-      '@vue/app',
-      {
-        // Disable Babel's polyfills, replaced by the
-        // polyfill.io service in index.html
-        useBuiltIns: false
-      }
-    ]
-  ],
+  presets: ['@vue/app'],
   plugins,
   env: {
     test: {
