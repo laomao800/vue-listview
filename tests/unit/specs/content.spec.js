@@ -57,30 +57,31 @@ function createVM(store, options = {}) {
 }
 
 describe('分页参数', () => {
-  const store = new DataStore()
-  const wrapper = createVM(store, {
-    usePage: false
-  })
-  const $listview = wrapper.vm.$refs.listview
-  let $pagination = null
+  let store, wrapper, $listview, $pagination
 
-  it('不带分页参数', () => {
-    $listview.search()
-    expect(store.hasProp('requestData', 'page_index')).toBe(false)
-    expect(store.hasProp('requestData', 'page_size')).toBe(false)
-  })
-
-  it('带分页参数', () => {
-    wrapper.setData({
+  beforeEach(() => {
+    store = new DataStore()
+    wrapper = createVM(store, {
       usePage: true
     })
+    $listview = wrapper.vm.$refs.listview
     $pagination = $listview.$children.filter(
       child => child.$options.name === 'ElPagination'
     )[0]
+  })
+
+  it('带分页参数', () => {
     expect($pagination).toBeTruthy()
     $listview.search()
     expect(store.getProp('requestData', 'page_index')).toBe(1)
     expect(store.getProp('requestData', 'page_size')).toBe(2)
+  })
+
+  it('不带分页参数', () => {
+    wrapper.setData({ usePage: false })
+    $listview.search()
+    expect(store.hasProp('requestData', 'page_index')).toBe(false)
+    expect(store.hasProp('requestData', 'page_size')).toBe(false)
   })
 
   it('自定义分页参数', () => {

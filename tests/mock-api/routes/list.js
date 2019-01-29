@@ -28,8 +28,9 @@ module.exports = app => {
     if (req.body.error) {
       return res.json(errorWrap('演示接口返回错误信息'))
     }
+    const pageSize = req.body.page_size || 20
     const data = Mock.mock({
-      'items|20': [
+      [`items|${pageSize}`]: [
         {
           id: '@guid',
           sku: /SKU\d{6}/,

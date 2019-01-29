@@ -96,11 +96,11 @@ exports[`layout height contentMinHeight 1`] = `
         </div>
       </div></span><button type="button" disabled="disabled" class="btn-prev"><i class="el-icon el-icon-arrow-left"></i></button>
       <ul class="el-pager">
+        <li class="number active">1</li>
         <!---->
         <!---->
         <!---->
-        <!---->
-      </ul><button type="button" disabled="disabled" class="btn-next"><i class="el-icon el-icon-arrow-right"></i></button><span class="el-pagination__jump">前往<div class="el-input el-pagination__editor is-in-pagination"><!----><input type="number" autocomplete="off" min="1" max="0" class="el-input__inner"><!----><!----><!----></div>页</span>
+      </ul><button type="button" disabled="disabled" class="btn-next"><i class="el-icon el-icon-arrow-right"></i></button><span class="el-pagination__jump">前往<div class="el-input el-pagination__editor is-in-pagination"><!----><input type="number" autocomplete="off" min="1" max="1" class="el-input__inner"><!----><!----><!----></div>页</span>
     </div>
   </div>
 </div>
