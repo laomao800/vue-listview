@@ -664,6 +664,11 @@ export default {
         : contentResponse
 
       this.contentData = contentData
+
+      // 重置表格垂直滚动距离
+      if (this.$refs.contentTable) {
+        this.$refs.contentTable.bodyWrapper.scrollTop = 0
+      }
     },
 
     /**
