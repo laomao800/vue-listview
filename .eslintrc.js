@@ -23,13 +23,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/api/**/*'],
-      rules: {
-        camelcase: 0
-      }
-    },
-    {
-      files: ['src/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
+      files: ['src/**/*', 'dev/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
       excludedFiles: 'app.config.js',
       parserOptions: {
         parser: 'babel-eslint',

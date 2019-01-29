@@ -56,7 +56,7 @@ describe('get value:', function() {
   it('should support a custom join function', function() {
     const fixture = { 'a-b': { c: { d: 'e' } } }
     const options = {
-      split: path => path.split(/[-\/]/),
+      split: path => path.split(/[-/]/),
       join: segs => segs.join('-')
     }
     expect(get(fixture, 'a/b-c/d', options)).toBe('e')

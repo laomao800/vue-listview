@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { mount } from '@vue/test-utils'
 import Filterbar from '@/listview/components/filterbar'
 import {

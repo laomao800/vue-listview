@@ -6,15 +6,9 @@
     }"
     class="listview"
   >
-    <listview-header
-      :title="headerTitle"
-      :nav="headerNav"
-    />
+    <listview-header :title="headerTitle" :nav="headerNav"/>
 
-    <div
-      ref="main"
-      class="listview__main"
-    >
+    <div ref="main" class="listview__main">
       <filterbar
         ref="filterbar"
         :filter-buttons="filterButtons"
@@ -27,10 +21,10 @@
         @filter-reset="handleFilterReset"
       >
         <template slot="prepend-filterbar-submit">
-          <slot name="prepend-filterbar-submit" />
+          <slot name="prepend-filterbar-submit"/>
         </template>
         <template slot="append-filterbar-submit">
-          <slot name="append-filterbar-submit" />
+          <slot name="append-filterbar-submit"/>
         </template>
       </filterbar>
 
@@ -60,21 +54,15 @@
               @row-click="handleRowClick"
               v-on="normalizeTableEvents"
             >
-              <template
-                v-if="internalContentMessage"
-                slot="empty"
-              >
+              <template v-if="internalContentMessage" slot="empty">
                 <span
                   :class="[
                     'content-message',
                     { [`content-message--${internalContentMessage.type}`]: internalContentMessage.type }
                   ]"
                 >
-                  <span
-                    v-if="internalContentMessage.icon"
-                    class="content-message--icon"
-                  >
-                    <i :class="internalContentMessage.icon" />
+                  <span v-if="internalContentMessage.icon" class="content-message--icon">
+                    <i :class="internalContentMessage.icon"/>
                   </span>
                   <span class="content-message--message">{{ internalContentMessage.message }}</span>
                 </span>
@@ -91,7 +79,7 @@
                 <template slot-scope="{ row }">
                   <el-radio
                     :value="tableSelection.indexOf(row) > -1 ? '' : false"
-                    label=""
+                    label
                     @click.native.stop.prevent="($event) => handleRowClick(row, $event)"
                   />
                 </template>
@@ -105,20 +93,13 @@
               />
 
               <template v-for="(column, index) in tableColumns">
-                <v-node
-                  :key="index"
-                  :node="renderTableColumn(column)"
-                />
+                <v-node :key="index" :node="renderTableColumn(column)"/>
               </template>
             </el-table>
           </slot>
         </div>
 
-        <div
-          v-if="!!usePage"
-          ref="pagination"
-          class="listview__page"
-        >
+        <div v-if="!!usePage" ref="pagination" class="listview__page">
           <el-pagination
             :total="contentData.total"
             :current-page="currentPage"
@@ -462,9 +443,9 @@ export default {
         return
       }
 
-        // 有可能是 filterbar 的展开与缩起，引发的 update ，
-        // 需要 nextTick 等待界面变化后再计算布局
-        await this.$nextTick()
+      // 有可能是 filterbar 的展开与缩起，引发的 update ，
+      // 需要 nextTick 等待界面变化后再计算布局
+      await this.$nextTick()
 
       // 指定高度时，需要从 $el 位置开始计算 top 高度，
       // 确保处于 listview-container 容器内的高度能铺满
@@ -473,14 +454,14 @@ export default {
         : 0
 
       const contentOffsetTop = this.$refs.content.getBoundingClientRect().top
-        const paginationHeight = this.getPaginationHeight()
+      const paginationHeight = this.getPaginationHeight()
       // prettier-ignore
-        const restHeight =
+      const restHeight =
         (maxHeight + wrapOffsetTop) -
         contentOffsetTop -
         paginationHeight -
         this.contentBottomOffset
-        this.contentHeight = Math.max(restHeight, this.contentMinHeight)
+      this.contentHeight = Math.max(restHeight, this.contentMinHeight)
     },
 
     /**
