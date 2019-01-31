@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.4...v1.0.0) (2019-01-31)
+
+
+### Bug Fixes
+
+* types fix ([06965dc](https://github.com/laomao800/vue-listview/commit/06965dc))
+* 事件 filter-submit 增加返回参数 filterModel ([f43ea94](https://github.com/laomao800/vue-listview/commit/f43ea94))
+* 修复 full-height 为 `false` 时表格自动高度样式展示问题 ([647c285](https://github.com/laomao800/vue-listview/commit/647c285))
+* 请求内容数据后重置 el-table 垂直滚动距离 ([c92f6e6](https://github.com/laomao800/vue-listview/commit/c92f6e6))
+
+
+
 # [1.0.0-beta.4](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2018-12-06)
 
 
