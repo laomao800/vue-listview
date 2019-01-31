@@ -35,6 +35,14 @@ const release = async () => {
   const version = customVersion || versions[bump]
   process.env.VERSION = version
 
+  const { genDocs } = await inquirer.prompt([
+    {
+      name: 'genDocs',
+      message: `Generate ${version} docs?`,
+      type: 'confirm'
+    }
+  ])
+
   const { yes } = await inquirer.prompt([
     {
       name: 'yes',
@@ -49,11 +57,13 @@ const release = async () => {
     await execa('git', ['commit', '-m', `build: build ${version}`], {
       stdio: 'inherit'
     })
-    await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
-    await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
-    await execa('git', ['commit', '-m', `build: docs ${version}`], {
-      stdio: 'inherit'
-    })
+    if (genDocs) {
+      await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
+      await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
+      await execa('git', ['commit', '-m', `build: docs ${version}`], {
+        stdio: 'inherit'
+      })
+    }
     await execa(
       'npm',
       ['version', version, '-m', `build: release ${version}`],
