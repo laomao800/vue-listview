@@ -50,7 +50,6 @@ const release = async () => {
       stdio: 'inherit'
     })
     await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
-    await execa('npm', ['run', 'storybook:build'], { stdio: 'inherit' })
     await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
     await execa('git', ['commit', '-m', `build: docs ${version}`], {
       stdio: 'inherit'
