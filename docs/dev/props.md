@@ -46,6 +46,15 @@ sidebarDepth: 2
 
 内容区域最小高度。在 `fullHeight` 为 `false` 的时候生效。
 
+### contentMessage
+
+- type: `[Object, String]`
+- default: `{}`
+
+可用在 [autoload](#autoload) 为 `false` 时候，初始显示的提示信息。
+
+如果为 `String` 类型则不带图标只显示文本。如果为 `Object` 类型则支持格式为 `{ type: '', message: '' }` ，其中 type 支持 `success` , `warning` , `info` , `error` 。
+
 ## 搜索栏
 
 ### filterButtons
@@ -306,15 +315,6 @@ sidebarDepth: 2
 - 【默认表格样式】错误信息会出现在表格内容区域内
 - 【自定义 slot 】数据挂载在 slot-scope 的 `content-message` 属性上。
 
-### contentMessage
-
-- type: `[Object, String]`
-- default: `{}`
-
-可用在 [autoload](#autoload) 为 `false` 时候，初始显示的提示信息。
-
-如果为 `String` 类型则不带图标只显示文本。如果为 `Object` 类型则支持格式为 `{ type: '', message: '' }` ，其中 type 支持 `success` , `warning` , `info` , `error` 。
-
 ## 数据请求 - 高级配置
 
 如果对于数据接口请求在发送前、接受后有特殊的处理流程，或者接口数据格式与规范不一致，可通过以下几个参数对数据进行加工处理，内部处理流程为：
@@ -328,7 +328,7 @@ sidebarDepth: 2
 - type: `Function(requestData)`
 - default: `null`
 
-自定义请求方法，需要返回 Promise ，该方法优先级最高，若设置了该方法，会以返回的内容交由 `validateResponse` 进行验证，具体流程可查看上方流程图。
+自定义请求方法，需要返回 Promise ，该方法优先级最高，若设置了该方法，会以返回的内容交由 [`validateResponse`](#validateresponse) 进行验证，具体流程可查看上方流程图。
 
 ### transformRequestData
 
