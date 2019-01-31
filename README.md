@@ -13,7 +13,7 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 ## 文档 & Demo
 
 - 文档： <https://laomao800.github.io/vue-listview/>
-- Demo： <https://laomao800.github.io/vue-listview/storybook/index.html>
+- Demo： <https://laomao800.github.io/vue-listview/demo/layout/all.html>
 
 ## 安装
 
