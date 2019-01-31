@@ -432,14 +432,13 @@ export default {
         return
       }
 
-      let maxHeight = null
+      let maxHeight = 0
       if (this.fixedHeight) {
         maxHeight = this.$el.getBoundingClientRect().height
       } else if (this.fullHeight) {
         maxHeight = window.innerHeight
       } else {
         // 自动高度
-        maxHeight = null
         return
       }
 
@@ -477,7 +476,7 @@ export default {
 
     handleFilterSubmit() {
       this.search()
-      this.$emit('filter-submit')
+      this.$emit('filter-submit', { filterModel: this.filterModel })
     },
 
     handleFilterReset() {
