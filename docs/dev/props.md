@@ -39,13 +39,6 @@ sidebarDepth: 2
 
 垂直高度是否铺满屏幕高度。
 
-### contentMinHeight
-
-- type: `[String, Number]`
-- default: `160`
-
-内容区域最小高度。在 `fullHeight` 为 `false` 的时候生效。
-
 ### contentMessage
 
 - type: `[Object, String]`

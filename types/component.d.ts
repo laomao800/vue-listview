@@ -141,9 +141,6 @@ export declare class VueListviewProps extends Vue {
   /** 垂直高度是否铺满屏幕高度。 default: true */
   fullHeight: boolean
 
-  /** 内容区域最小高度。 default: 160 */
-  contentMinHeight: string | number
-
   /** 初始化后是否自动加载第一页内容。 default: true */
   autoload: boolean
 

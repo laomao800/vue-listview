@@ -1,7 +1,6 @@
 <template>
   <listview
     :full-height="false"
-    :content-min-height="300"
     :show-filter-search="false"
     :show-filter-reset="false"
     :request-handler="requestHandler"

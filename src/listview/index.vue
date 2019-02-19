@@ -201,11 +201,6 @@ export default {
     // Layout
     height: { type: [String, Number], default: null },
     fullHeight: { type: Boolean, default: true },
-    contentMinHeight: {
-      type: [String, Number],
-      default: 160,
-      validator: value => parseInt(value, 10) >= 0
-    },
 
     // Data request
     autoload: { type: Boolean, default: true },
@@ -460,7 +455,7 @@ export default {
         contentOffsetTop -
         paginationHeight -
         this.contentBottomOffset
-      this.contentHeight = Math.max(restHeight, this.contentMinHeight)
+      this.contentHeight = restHeight
     },
 
     /**
@@ -498,6 +493,7 @@ export default {
       if (!this.requestHandler && !this.requestUrl) {
         return warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
       }
+
       // 请求参数合并转换
       let payloadData = _.cloneDeep(this.filterModel)
 
@@ -648,6 +644,11 @@ export default {
       // 重置表格垂直滚动距离
       if (this.$refs.contentTable) {
         this.$refs.contentTable.bodyWrapper.scrollTop = 0
+      }
+
+      // 若非全屏布局，有可能由于数据增加出现垂直滚动条，需要刷新搜索栏“搜索”按钮位置
+      if (!this.fullHeight) {
+        this.updateFilterbarLayout()
       }
     },
 

@@ -51,19 +51,6 @@ describe('layout', () => {
       expect(wrapper.element.style.height).toBe('500px')
       await Vue.nextTick()
     })
-
-    it('contentMinHeight', async () => {
-      const wrapper = mount(Listview, {
-        propsData: {
-          height: 200,
-          contentMinHeight: 500
-        }
-      })
-      wrapper.vm.updateContentHeight()
-      await Vue.nextTick()
-      expect(wrapper.vm.contentHeight).toBe(500)
-      expect(wrapper.html()).toMatchSnapshot()
-    })
   })
 
   describe('contentMessage', () => {
