@@ -1,3 +1,17 @@
+## [1.0.1](https://github.com/laomao800/vue-listview/compare/v1.0.0...v1.0.1) (2019-02-19)
+
+
+### chore
+
+* 移除 contentMinHeight 避免配置上产生误解。 ([4fce9b4](https://github.com/laomao800/vue-listview/commit/4fce9b4))
+
+
+### BREAKING CHANGES
+
+* 移除 contentMinHeight
+
+
+
 # [1.0.0](https://github.com/laomao800/vue-listview/compare/v1.0.0-beta.4...v1.0.0) (2019-01-31)
 
 
