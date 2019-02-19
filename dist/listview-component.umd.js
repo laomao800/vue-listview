@@ -1,4 +1,4 @@
-/*! Vue Listview v1.0.0 */
+/*! Vue Listview v1.0.1 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
@@ -5806,14 +5806,17 @@ var update = add("90a351a6", content, true, {"sourceMap":false,"shadowMode":fals
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4245");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("60ed");
-/* harmony import */ var lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("bba4");
-/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_camelCase__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_getValue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("9255");
-/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("fa7d");
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("551c");
+/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4245");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("60ed");
+/* harmony import */ var lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("bba4");
+/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_camelCase__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_getValue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("9255");
+/* harmony import */ var _utils_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("fa7d");
+
 
 
 
@@ -5837,11 +5840,11 @@ var update = add("90a351a6", content, true, {"sourceMap":false,"shadowMode":fals
   computed: {
     value: {
       get: function get() {
-        if (Object(_utils_utils__WEBPACK_IMPORTED_MODULE_4__[/* isValidFieldConfig */ "c"])(this.field)) {
-          var value = Object(_utils_getValue__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(this.model, this.field.model); // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
+        if (Object(_utils_utils__WEBPACK_IMPORTED_MODULE_5__[/* isValidFieldConfig */ "c"])(this.field)) {
+          var value = Object(_utils_getValue__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this.model, this.field.model); // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
 
 
-          if (lodash_camelCase__WEBPACK_IMPORTED_MODULE_2___default()(this.field.type) === 'multipleSelect') {
+          if (lodash_camelCase__WEBPACK_IMPORTED_MODULE_3___default()(this.field.type) === 'multipleSelect') {
             value = Array.isArray(value) ? value : [];
           }
 
@@ -5849,7 +5852,7 @@ var update = add("90a351a6", content, true, {"sourceMap":false,"shadowMode":fals
         }
       },
       set: function set(newVal) {
-        if (Object(_utils_utils__WEBPACK_IMPORTED_MODULE_4__[/* isValidFieldConfig */ "c"])(this.field)) {
+        if (Object(_utils_utils__WEBPACK_IMPORTED_MODULE_5__[/* isValidFieldConfig */ "c"])(this.field)) {
           var modelData = this.model;
           var model = this.field.model;
           this.$set(modelData, model, newVal);
@@ -5857,12 +5860,12 @@ var update = add("90a351a6", content, true, {"sourceMap":false,"shadowMode":fals
       }
     },
     mergedProps: function mergedProps() {
-      var defaultProps = lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_1___default()(this.defaultProps) ? this.defaultProps : {};
-      var componentProps = lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_1___default()(this.field.componentProps) ? this.field.componentProps : {};
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()(defaultProps, componentProps);
+      var defaultProps = lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_2___default()(this.defaultProps) ? this.defaultProps : {};
+      var componentProps = lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_2___default()(this.field.componentProps) ? this.field.componentProps : {};
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()(defaultProps, componentProps);
     },
     mergedEvents: function mergedEvents() {
-      return lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_1___default()(this.field.componentEvents) ? this.field.componentEvents : {};
+      return lodash_isPlainObject__WEBPACK_IMPORTED_MODULE_2___default()(this.field.componentEvents) ? this.field.componentEvents : {};
     },
     componentSlots: function componentSlots() {
       return this.field.componentSlots || {};
@@ -12661,8 +12664,8 @@ var pick_default = /*#__PURE__*/__webpack_require__.n(pick);
 var isPlainObject = __webpack_require__("60ed");
 var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"402c06ae-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=d50d407c&
-var listviewvue_type_template_id_d50d407c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules//.cache//vue-loader","cacheIdentifier":"402c06ae-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=174920de&
+var listviewvue_type_template_id_174920de_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
     minHeight: _vm.fixedHeight && 'inherit'
   })},[_c('listview-header',{attrs:{"title":_vm.headerTitle,"nav":_vm.headerNav}}),_c('div',{ref:"main",staticClass:"listview__main"},[_c('filterbar',{ref:"filterbar",attrs:{"filter-buttons":_vm.filterButtons,"filter-fields":_vm.filterFields,"filter-model":_vm.filterModel,"filterbar-fold":_vm.filterbarFold,"show-filter-search":_vm.showFilterSearch,"show-filter-reset":_vm.showFilterReset},on:{"update:filterbarFold":function($event){_vm.filterbarFold=$event},"filter-submit":_vm.handleFilterSubmit,"filter-reset":_vm.handleFilterReset}},[_c('template',{slot:"prepend-filterbar-submit"},[_vm._t("prepend-filterbar-submit")],2),_c('template',{slot:"append-filterbar-submit"},[_vm._t("append-filterbar-submit")],2)],2),_c('div',{directives:[{name:"loading",rawName:"v-loading",value:(_vm.contentLoading),expression:"contentLoading"}]},[_c('div',{ref:"content",staticClass:"listview__content",style:({
@@ -12677,7 +12680,7 @@ var _obj;}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=d50d407c&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=174920de&
 
 // CONCATENATED MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/builtin/es6/objectWithoutProperties.js
 function _objectWithoutProperties(source, excluded) {
@@ -13453,6 +13456,7 @@ var listview = __webpack_require__("d49b");
 
 
 
+
 var defaultPageParamKeys = {
   pageIndex: 'page_index',
   pageSize: 'page_size'
@@ -13525,13 +13529,6 @@ function applyFieldGetter(payloadData, getters) {
     fullHeight: {
       type: Boolean,
       default: true
-    },
-    contentMinHeight: {
-      type: [String, Number],
-      default: 160,
-      validator: function validator(value) {
-        return parseInt(value, 10) >= 0;
-      }
     },
     // Data request
     autoload: {
@@ -13908,7 +13905,7 @@ function applyFieldGetter(payloadData, getters) {
                 paginationHeight = this.getPaginationHeight(); // prettier-ignore
 
                 restHeight = maxHeight + wrapOffsetTop - contentOffsetTop - paginationHeight - this.contentBottomOffset;
-                this.contentHeight = Math.max(restHeight, this.contentMinHeight);
+                this.contentHeight = restHeight;
 
               case 19:
               case "end":
@@ -14161,9 +14158,14 @@ function applyFieldGetter(payloadData, getters) {
 
                 if (this.$refs.contentTable) {
                   this.$refs.contentTable.bodyWrapper.scrollTop = 0;
+                } // 若非全屏布局，有可能由于数据增加出现垂直滚动条，需要刷新搜索栏“搜索”按钮位置
+
+
+                if (!this.fullHeight) {
+                  this.updateFilterbarLayout();
                 }
 
-              case 61:
+              case 62:
               case "end":
                 return _context4.stop();
             }
@@ -14291,7 +14293,7 @@ function applyFieldGetter(payloadData, getters) {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_d50d407c_render,
+  listviewvue_type_template_id_174920de_render,
   staticRenderFns,
   false,
   null,
