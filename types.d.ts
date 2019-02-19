@@ -1,7 +1,7 @@
-import Vue, { VNode } from 'vue'
+import Vue, { VueConstructor, VNode } from 'vue'
 import { AxiosRequestConfig } from 'axios'
 
-/** vue-router Location */
+// vue-router Location
 type Dictionary<T> = { [key: string]: T }
 interface Location {
   name?: string
@@ -13,15 +13,11 @@ interface Location {
   replace?: boolean
 }
 
-export type MessageType = 'success' | 'warning' | 'info' | 'error'
-export type ButtonType =
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'info'
-  | 'text'
-export type FieldType =
+type MessageType = 'success' | 'warning' | 'info' | 'error'
+
+type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text'
+
+type FieldType =
   | 'label'
   | 'text'
   | 'number'
@@ -36,12 +32,12 @@ export type FieldType =
   | 'dateTimeRange'
   | 'cascader'
 
-export interface HeaderNavObjectType {
+interface HeaderNavObjectType {
   text: string
   to?: Location
 }
 
-export interface FilterButton {
+interface FilterButton {
   /** 按钮样式类型 */
   type?: ButtonType
 
@@ -62,24 +58,24 @@ export interface FilterButton {
 
   /** 子按钮 */
   children?: {
-    icon: FilterButton['icon']
-    text: FilterButton['text']
-    click: FilterButton['click']
+    icon?: FilterButton['icon']
+    text?: FilterButton['text']
+    click?: FilterButton['click']
   }
 
   /** 自定义渲染方法 */
   render?: () => VNode
 }
 
-export interface FilterField {
+interface FilterField {
   /** 字段控件类型 */
-  type: FieldType
+  type?: FieldType
 
   /** 字段提交参数名 */
-  model: string
+  model?: string
 
   /** 字段文本说明 */
-  label: string
+  label?: string
 
   /** 是否显示为禁用状态 */
   disabled?: boolean
@@ -100,9 +96,9 @@ export interface FilterField {
   componentSlots?: { [k: string]: VNode }
 }
 
-export interface TableColumn {
+interface TableColumn {
   /* 显示于列头文本 */
-  label: string
+  label?: string
 
   /** 对应列内容的字段名 */
   prop?: string
@@ -120,15 +116,21 @@ export interface TableColumn {
   formatter?: (row: any) => string
 
   /** 单元格渲染方法，可使用 JSX */
-  render?: (
-    { row, column, $index }: { row: any; column: any; $index: number }
-  ) => VNode
+  render?: ({
+    row,
+    column,
+    $index
+  }: {
+    row: any
+    column: any
+    $index: number
+  }) => VNode
 
   /** 子列 */
   children?: TableColumn
 }
 
-export declare class VueListviewProps extends Vue {
+declare class ListviewProps {
   /** 设置页面顶部通栏内的页面标题文本。 default: '' */
   headerTitle: string
 
@@ -167,16 +169,17 @@ export declare class VueListviewProps extends Vue {
   requestHandler: (requestData?: object) => Promise<any>
 
   /** 对接口发起请求参数在发送前作最后的更改 */
-  transformRequestData: (requestData: object) => object | boolean
+  transformRequestData: (requestData?: object) => object | boolean
 
   /** 对原始响应数据的加工方法 default: null */
-  transformResponseData: (requestData: object) => void
+  transformResponseData: (requestData?: object) => void
 
   /** 数据接口响应内容属性映射。 default: { items: 'result.items', total: 'result.total_count' } */
   contentDataMap: { [k: string]: string }
 
   /** 可用在 autoload 为 false 时候，初始显示的提示信息。 default: null */
   contentMessage:
+    | null
     | string
     | {
         type: MessageType
@@ -184,10 +187,10 @@ export declare class VueListviewProps extends Vue {
       }
 
   /** 验证接口响应是否成功 */
-  validateResponse: (response: any) => boolean
+  validateResponse: (response?: any) => boolean
 
   /** 解析错误提示信息 */
-  resolveResponseErrorMessage: (response: any) => string
+  resolveResponseErrorMessage: (response?: any) => any
 
   /** 搜索栏左侧按钮配置。 default: [] */
   filterButtons: FilterButton[] | (() => VNode) | VNode
@@ -196,10 +199,10 @@ export declare class VueListviewProps extends Vue {
   filterFields: FilterField[] | (() => VNode) | VNode
 
   /** 可选，存储搜索栏的搜索条件值。 default: {} */
-  filterModel?: { [k: string]: any }
+  filterModel: { [k: string]: any }
 
   /** 是否显示搜索栏的“提交”按钮。 default: true */
-  showFilterSearch?: boolean
+  showFilterSearch: boolean
 
   /** 是否显示搜索栏的“重置”按钮。 default: true */
   showFilterReset: boolean
@@ -234,7 +237,26 @@ export declare class VueListviewProps extends Vue {
   pageSize: number
 }
 
-export declare class VueListviewContainerProps extends Vue {
-  headerTitle: VueListviewProps['headerTitle']
-  headerNav: VueListviewProps['headerNav']
+declare class ListviewContainerProps extends Vue {
+  headerTitle: ListviewProps['headerTitle']
+  headerNav: ListviewProps['headerNav']
+}
+
+declare class Listview extends ListviewProps {
+  static install(Vue: VueConstructor<Vue>, options: any): void
+}
+
+declare class ListviewContainer extends ListviewContainerProps {
+  static install(Vue: VueConstructor<Vue>, options: any): void
+}
+
+export default Listview
+export {
+  Listview,
+  ListviewContainer,
+  ListviewProps,
+  ListviewContainerProps,
+  FilterButton,
+  FilterField,
+  TableColumn
 }

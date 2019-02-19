@@ -5,11 +5,11 @@
     "access": "public"
   },
   "main": "dist/listview-component.common.js",
-  "types": "types",
+  "types": "types.d.ts",
   "files": [
     "dist",
     "src",
-    "types"
+    "types.d.ts"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
