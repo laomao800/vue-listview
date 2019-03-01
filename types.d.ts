@@ -37,6 +37,12 @@ interface HeaderNavObjectType {
   to?: Location
 }
 
+interface SelectOption {
+  label: string
+  value: any
+  children?: SelectOption[]
+}
+
 interface FilterButton {
   /** 按钮样式类型 */
   type?: ButtonType
@@ -81,10 +87,7 @@ interface FilterField {
   disabled?: boolean
 
   /** 类型为 select 或 multipleSelect 时的选项配置 */
-  options?: {
-    label: string
-    value: any
-  }[]
+  options?: SelectOption[]
 
   /** 可传入对应控件原始的 props */
   componentProps?: { [k: string]: any }
@@ -93,7 +96,7 @@ interface FilterField {
   componentEvents?: { [k: string]: () => void }
 
   /** 可传入对应控件原始的 slots */
-  componentSlots?: { [k: string]: VNode }
+  componentSlots?: { [k: string]: any }
 }
 
 interface TableColumn {
