@@ -4,6 +4,7 @@
       :request-url="requestUrl"
       :filter-buttons="filterButtons"
       :filter-fields="filterFields"
+      :filter-model="filterModel"
       :table-selection.sync="tableSelection"
       :table-columns="tableColumns"
     />
@@ -68,8 +69,21 @@ export default {
           type: 'text',
           model: 'name',
           label: '文本字段'
+        },
+        {
+          type: 'select',
+          model: 'status',
+          label: '带有默认值的字段',
+          options: [
+            { label: '选项1', value: 1 },
+            { label: '选项2', value: 2 },
+            { label: '选项3', value: 3 }
+          ]
         }
       ],
+      filterModel: {
+        status: 3
+      },
       tableColumns: [
         {
           label: '自定义标签',
