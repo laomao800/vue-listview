@@ -157,10 +157,11 @@ export default {
         },
         {
           type: 'label',
-          label: '数字'
+          label: '文本'
         },
         {
           type: 'number',
+          label: '数字',
           model: 'number'
         },
         {
