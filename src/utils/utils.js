@@ -21,9 +21,13 @@ export function isVNode(node) {
  * 'a' -> null
  */
 export function parseSizeWithUnit(value) {
-  const isPercent = /\d+%/.test(value)
+  if (/^-?\d+(.\d+)?(%|(px))$/.test(value)) {
+    return value
+  } else if (typeof value === 'number') {
+    return `${value}px`
+  }
   const num = parseInt(value, 10)
-  return num ? (isPercent ? `${num}%` : `${num}px`) : null
+  return !isNaN(num) ? `${num}px` : null
 }
 
 /**
