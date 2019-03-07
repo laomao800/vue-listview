@@ -13,27 +13,12 @@
       @keydown.native.enter="handleFilterSearch"
     >
       <!-- 操作按钮区域 -->
-      <div
-        v-if="showFilterButtons"
-        class="filterbar__buttons"
-      >
+      <div v-if="showFilterButtons" class="filterbar__buttons">
         <el-form-item>
           <template v-for="(button, index) in filterButtons">
-            <v-node
-              v-if="isFunction(button)"
-              :key="index"
-              :node="button()"
-            />
-            <v-node
-              v-else-if="button.render"
-              :key="index"
-              :node="button.render()"
-            />
-            <v-node
-              v-else-if="isVNode(button)"
-              :key="index"
-              :node="button"
-            />
+            <v-node v-if="isFunction(button)" :key="index" :node="button()"/>
+            <v-node v-else-if="button.render" :key="index" :node="button.render()"/>
+            <v-node v-else-if="isVNode(button)" :key="index" :node="button"/>
             <el-dropdown
               v-else-if="Array.isArray(button.children)"
               :key="index"
@@ -44,10 +29,7 @@
               @click="applyButtonClick(button, $event)"
             >
               <template v-if="button.splitButton">
-                <i
-                  v-if="button.icon"
-                  :class="button.icon"
-                />
+                <i v-if="button.icon" :class="button.icon"/>
                 {{ button.text }}
               </template>
               <template v-else>
@@ -56,7 +38,8 @@
                   :icon="button.icon"
                   @click="applyButtonClick(button, $event)"
                 >
-                  {{ button.text }}<i class="el-icon-arrow-down el-icon--right" />
+                  {{ button.text }}
+                  <i class="el-icon-arrow-down el-icon--right"/>
                 </el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
@@ -65,10 +48,7 @@
                   :key="childIndex"
                   @click.native="applyButtonClick(child, $event)"
                 >
-                  <i
-                    v-if="child.icon"
-                    :class="child.icon"
-                  />
+                  <i v-if="child.icon" :class="child.icon"/>
                   {{ child.text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -80,9 +60,7 @@
               :plain="button.plain"
               :icon="button.icon"
               @click="applyButtonClick(button, $event)"
-            >
-              {{ button.text }}
-            </el-button>
+            >{{ button.text }}</el-button>
           </template>
         </el-form-item>
       </div>
@@ -104,22 +82,15 @@
           class="filterbar__submit-btn"
         >
           <el-form-item>
-            <slot name="prepend-filterbar-submit" />
+            <slot name="prepend-filterbar-submit"/>
             <el-button
               v-if="showFilterSearch"
               type="primary"
               icon="el-icon-search"
               @click="handleFilterSearch"
-            >
-              搜索
-            </el-button>
-            <el-button
-              v-if="showFilterReset"
-              @click="handleFilterReset"
-            >
-              重置
-            </el-button>
-            <slot name="append-filterbar-submit" />
+            >搜索</el-button>
+            <el-button v-if="showFilterReset" @click="handleFilterReset">重置</el-button>
+            <slot name="append-filterbar-submit"/>
           </el-form-item>
         </div>
         <el-button

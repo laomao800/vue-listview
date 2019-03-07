@@ -9,9 +9,7 @@ exports[`filterbar - SearchButton & ResetButton ResetButton 1`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button>
+              <!----><i class="el-icon-search"></i><span>搜索</span></button>
             <!---->
             <!---->
           </div>
@@ -34,13 +32,9 @@ exports[`filterbar - SearchButton & ResetButton ResetButton 2`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -64,9 +58,7 @@ exports[`filterbar - SearchButton & ResetButton SearchButton 1`] = `
           <div class="el-form-item__content">
             <!----> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -88,13 +80,9 @@ exports[`filterbar - SearchButton & ResetButton SearchButton 2`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -117,13 +105,9 @@ exports[`filterbar - SearchButton & ResetButton Slots 1`] = `
           <!---->
           <div class="el-form-item__content">
             <div>prepend-filterbar-submit</div> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <div>append-filterbar-submit</div>
             <!---->
           </div>
@@ -153,13 +137,9 @@ exports[`filterbar - filterButtons JSX 1`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -190,9 +170,11 @@ exports[`filterbar - filterButtons 带下拉按钮渲染 1`] = `
             <ul class="el-dropdown-menu el-popper" style="display: none;">
               <li tabindex="-1" class="el-dropdown-menu__item">
                 <!---->
+                <!---->
                 菜单1
               </li>
               <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
                 <!---->
                 菜单2
               </li>
@@ -201,13 +183,16 @@ exports[`filterbar - filterButtons 带下拉按钮渲染 1`] = `
           <div class="el-dropdown"><button type="button" class="el-button el-button--primary el-button--small el-dropdown-selfdefine" aria-haspopup="list" role="button" tabindex="0">
               <!---->
               <!----><span>
-                下拉按钮2<i class="el-icon-arrow-down el-icon--right"></i></span></button>
+                下拉按钮2
+                <i class="el-icon-arrow-down el-icon--right"></i></span></button>
             <ul class="el-dropdown-menu el-popper" style="display: none;">
               <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
                 <!---->
                 菜单1
               </li>
               <li tabindex="-1" class="el-dropdown-menu__item">
+                <!---->
                 <!---->
                 菜单2
               </li>
@@ -222,13 +207,9 @@ exports[`filterbar - filterButtons 带下拉按钮渲染 1`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -249,28 +230,14 @@ exports[`filterbar - filterButtons 普通按钮渲染 1`] = `
         <!---->
         <div class="el-form-item__content"><button type="button" class="el-button el-button--default el-button--small">
             <!---->
-            <!----><span>
-            default
-          </span></button><button type="button" class="el-button el-button--text el-button--small">
+            <!----><span>default</span></button><button type="button" class="el-button el-button--text el-button--small">
             <!---->
-            <!----><span>
-            text
-          </span></button><button type="button" class="el-button el-button--primary el-button--small">
-            <!----><i class="el-icon-edit"></i><span>
-            primary
-          </span></button><button type="button" class="el-button el-button--success el-button--small">
-            <!----><i class="el-icon-check"></i><span>
-            success
-          </span></button><button type="button" class="el-button el-button--info el-button--small">
-            <!----><i class="el-icon-message"></i><span>
-            info
-          </span></button><button type="button" class="el-button el-button--warning el-button--small">
-            <!----><i class="el-icon-star-off"></i><span>
-            warning
-          </span></button><button type="button" class="el-button el-button--danger el-button--small">
-            <!----><i class="el-icon-delete"></i><span>
-            danger
-          </span></button>
+            <!----><span>text</span></button><button type="button" class="el-button el-button--primary el-button--small">
+            <!----><i class="el-icon-edit"></i><span>primary</span></button><button type="button" class="el-button el-button--success el-button--small">
+            <!----><i class="el-icon-check"></i><span>success</span></button><button type="button" class="el-button el-button--info el-button--small">
+            <!----><i class="el-icon-message"></i><span>info</span></button><button type="button" class="el-button el-button--warning el-button--small">
+            <!----><i class="el-icon-star-off"></i><span>warning</span></button><button type="button" class="el-button el-button--danger el-button--small">
+            <!----><i class="el-icon-delete"></i><span>danger</span></button>
           <!---->
         </div>
       </div>
@@ -280,13 +247,9 @@ exports[`filterbar - filterButtons 普通按钮渲染 1`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -308,13 +271,9 @@ exports[`filterbar - filterFields FilterForm JSX 1`] = `
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -341,13 +300,9 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
         <div class="el-form-item el-form-item--small">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-              <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+              <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
               <!---->
-              <!----><span>
-            重置
-          </span></button>
+              <!----><span>重置</span></button>
             <!---->
           </div>
         </div>
@@ -422,7 +377,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
               <!---->
               <div class="el-input el-input--small el-input--suffix">
                 <!----><input type="text" readonly="readonly" autocomplete="off" placeholder="单选字段" class="el-input__inner">
-                <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----></span>
+                <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----><!----><!----></span>
                 <!----></span>
                 <!---->
               </div>
@@ -464,7 +419,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
                 <!----><input type="text" autocomplete="off" class="el-select__input is-small" style="width: -0.625%; max-width: -42px;"></div>
               <div class="el-input el-input--small el-input--suffix">
                 <!----><input type="text" readonly="readonly" autocomplete="off" placeholder="多选字段" class="el-input__inner">
-                <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----></span>
+                <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----><!----><!----></span>
                 <!----></span>
                 <!---->
               </div>
@@ -501,7 +456,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
           <!---->
           <div class="el-form-item__content">
             <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--date" style="width: 180px;">
-              <!----><input type="text" autocomplete="off" name="" placeholder="日期选择" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-date"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----></span>
+              <!----><input type="text" autocomplete="off" name="" placeholder="日期选择" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-date"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----></span>
               <!----></span>
               <!---->
             </div>
@@ -525,7 +480,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
           <!---->
           <div class="el-form-item__content">
             <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--time-select" style="width: 120px;">
-              <!----><input type="text" autocomplete="off" name="" placeholder="固定时间" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----></span>
+              <!----><input type="text" autocomplete="off" name="" placeholder="固定时间" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----></span>
               <!----></span>
               <!---->
             </div>
@@ -539,7 +494,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
           <!---->
           <div class="el-form-item__content">
             <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--time" style="width: 120px;">
-              <!----><input type="text" autocomplete="off" name="" placeholder="任意时间" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----></span>
+              <!----><input type="text" autocomplete="off" name="" placeholder="任意时间" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----></span>
               <!----></span>
               <!---->
             </div>
@@ -563,7 +518,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
           <!---->
           <div class="el-form-item__content">
             <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--datetime" style="width: 200px;">
-              <!----><input type="text" autocomplete="off" name="" placeholder="日期时间" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----></span>
+              <!----><input type="text" autocomplete="off" name="" placeholder="日期时间" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----></span>
               <!----></span>
               <!---->
             </div>
@@ -585,7 +540,7 @@ exports[`filterbar - filterFields FilterForm 渲染所有有效的内置字段�
         <!---->
         <div class="el-form-item el-form-item--small">
           <!---->
-          <div class="el-form-item__content"><span class="el-cascader el-cascader--small" style="width: 180px;"><div class="el-input el-input--small el-input--suffix"><!----><input type="text" readonly="readonly" autocomplete="off" placeholder="级联选项" class="el-input__inner"><!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon el-icon-arrow-down"></i><!----></span>
+          <div class="el-form-item__content"><span class="el-cascader el-cascader--small" style="width: 180px;"><div class="el-input el-input--small el-input--suffix"><!----><input type="text" readonly="readonly" autocomplete="off" placeholder="级联选项" class="el-input__inner"><!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon el-icon-arrow-down"></i><!----><!----><!----></span>
             <!----></span>
             <!---->
           </div><span class="el-cascader__label"></span></span>

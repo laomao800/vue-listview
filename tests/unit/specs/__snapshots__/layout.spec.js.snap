@@ -5,32 +5,20 @@ exports[`layout listview header empty 1`] = `undefined`;
 exports[`layout listview header nav 1`] = `
 <div class="listview__header">
   <!---->
-  <div aria-label="Breadcrumb" role="navigation" class="el-breadcrumb listview__breadcrumb"><span class="el-breadcrumb__item"><span role="link" class="el-breadcrumb__inner">
-      home
-    </span><span role="presentation" class="el-breadcrumb__separator"></span></span><span class="el-breadcrumb__item" aria-current="page"><span role="link" class="el-breadcrumb__inner is-link">
-      list
-    </span><span role="presentation" class="el-breadcrumb__separator"></span></span></div>
+  <div aria-label="Breadcrumb" role="navigation" class="el-breadcrumb listview__breadcrumb"><span class="el-breadcrumb__item"><span role="link" class="el-breadcrumb__inner">home</span><span role="presentation" class="el-breadcrumb__separator"></span></span><span class="el-breadcrumb__item" aria-current="page"><span role="link" class="el-breadcrumb__inner is-link">list</span><span role="presentation" class="el-breadcrumb__separator"></span></span></div>
 </div>
 `;
 
 exports[`layout listview header title & nav 1`] = `
 <div class="listview__header">
-  <h1 class="listview__title">
-    headerTitle
-  </h1>
-  <div aria-label="Breadcrumb" role="navigation" class="el-breadcrumb listview__breadcrumb"><span class="el-breadcrumb__item"><span role="link" class="el-breadcrumb__inner is-link">
-      home
-    </span><span role="presentation" class="el-breadcrumb__separator"></span></span><span class="el-breadcrumb__item" aria-current="page"><span role="link" class="el-breadcrumb__inner is-link">
-      list
-    </span><span role="presentation" class="el-breadcrumb__separator"></span></span></div>
+  <h1 class="listview__title">headerTitle</h1>
+  <div aria-label="Breadcrumb" role="navigation" class="el-breadcrumb listview__breadcrumb"><span class="el-breadcrumb__item"><span role="link" class="el-breadcrumb__inner is-link">home</span><span role="presentation" class="el-breadcrumb__separator"></span></span><span class="el-breadcrumb__item" aria-current="page"><span role="link" class="el-breadcrumb__inner is-link">list</span><span role="presentation" class="el-breadcrumb__separator"></span></span></div>
 </div>
 `;
 
 exports[`layout listview header title 1`] = `
 <div class="listview__header">
-  <h1 class="listview__title">
-    headerTitle
-  </h1>
+  <h1 class="listview__title">headerTitle</h1>
   <div aria-label="Breadcrumb" role="navigation" class="el-breadcrumb listview__breadcrumb"></div>
 </div>
 `;
@@ -47,13 +35,9 @@ exports[`layout pager 1`] = `
             <div class="el-form-item el-form-item--small">
               <!---->
               <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small">
-                  <!----><i class="el-icon-search"></i><span>
-            搜索
-          </span></button> <button type="button" class="el-button el-button--default el-button--small">
+                  <!----><i class="el-icon-search"></i><span>搜索</span></button> <button type="button" class="el-button el-button--default el-button--small">
                   <!---->
-                  <!----><span>
-            重置
-          </span></button>
+                  <!----><span>重置</span></button>
                 <!---->
               </div>
             </div>

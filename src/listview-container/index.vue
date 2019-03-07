@@ -1,9 +1,6 @@
 <template>
   <div class="listview-container">
-    <listview-header
-      :title="headerTitle"
-      :nav="headerNav"
-    />
+    <listview-header :title="headerTitle" :nav="headerNav"/>
 
     <div class="listview-container__tabs">
       <span
@@ -14,19 +11,13 @@
           { 'listview-container__tab--active': index === activeTab }
         ]"
         @click="activeTab = index"
-      >
-        {{ title || '未命名' }}
-      </span>
+      >{{ title || '未命名' }}</span>
     </div>
 
     <div class="listview-container__content">
       <template v-for="(item, index) in childListviews">
         <keep-alive :key="index">
-          <v-node
-            v-if="index === activeTab"
-            ref="listviewChild"
-            :node="item"
-          />
+          <v-node v-if="index === activeTab" ref="listviewChild" :node="item"/>
         </keep-alive>
       </template>
     </div>

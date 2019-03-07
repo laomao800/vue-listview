@@ -6,15 +6,8 @@
     v-bind="mergedProps"
     v-on="mergedEvents"
   >
-    <template
-      v-for="(slot, key) in componentSlots"
-      :slot="key"
-    >
-      <v-node
-        v-if="isVNode(slot)"
-        :key="key"
-        :node="slot"
-      />
+    <template v-for="(slot, key) in componentSlots" :slot="key">
+      <v-node v-if="isVNode(slot)" :key="key" :node="slot"/>
       <template v-else>{{ slot }}</template>
     </template>
   </el-input>

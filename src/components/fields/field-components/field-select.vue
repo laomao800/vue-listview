@@ -7,11 +7,7 @@
     v-on="mergedEvents"
   >
     <template v-if="Array.isArray(field.options)">
-      <el-option
-        v-for="(option, index) in field.options"
-        :key="index"
-        v-bind="option"
-      />
+      <el-option v-for="(option, index) in field.options" :key="index" v-bind="option"/>
     </template>
   </el-select>
 </template>
