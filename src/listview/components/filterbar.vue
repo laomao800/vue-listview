@@ -335,7 +335,7 @@ export default {
     height: 32px;
     padding-top: 0;
     padding-bottom: 0;
-    line-height: 32px;
+    line-height: 1;
     vertical-align: top;
   }
   .el-input-group__append,
