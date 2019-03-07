@@ -53,7 +53,7 @@
     "conventional-changelog": "^3.0.5",
     "conventional-changelog-angular": "^5.0.2",
     "cross-env": "^5.2.0",
-    "element-ui": "^2.5.2",
+    "element-ui": "^2.6.1",
     "eslint-plugin-vue": "^5.1.0",
     "execa": "^1.0.0",
     "express": "^4.16.3",

@@ -4553,10 +4553,10 @@ elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
 
-element-ui@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.npmjs.org/element-ui/-/element-ui-2.5.2.tgz#3f38b75d54bb0df2da2682cc60dcd1993be4bfb1"
-  integrity sha512-Iiw/6AmPbcpXy1BdSIAk9cmLtpZ6geus3/TI/d20t/kKXmSRpyh7vx6hvH+9a7n0RiHAJiCxwgUvw1bjuuGIXw==
+element-ui@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.npmjs.org/element-ui/-/element-ui-2.6.1.tgz#86db79ff5de9b1bcc3187b65b3772b0c54074718"
+  integrity sha512-Jm0sw0sxVrR6KzSMgymrDP1v+V8U+pn9IgdpHHhgjSLRM6foM05u6RsRUjy3jbuQmEYov1t8yLwqhDgDBvCIyw==
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"
@@ -9977,6 +9977,8 @@ reduce-css-calc@^1.2.6:
 reduce-function-call@^1.0.1:
   version "1.0.2"
   resolved "https://registry.npmjs.org/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
+  dependencies:
+    balanced-match "^0.4.2"
 
 reduce@^1.0.1:
   version "1.0.1"
