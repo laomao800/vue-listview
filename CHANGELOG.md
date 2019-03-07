@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/laomao800/vue-listview/compare/v1.0.1...v1.0.2) (2019-03-07)
+
+
+### Bug Fixes
+
+* type fixed ([49a7435](https://github.com/laomao800/vue-listview/commit/49a7435))
+* update Element-UI to 2.6.1 ([6fd2a98](https://github.com/laomao800/vue-listview/commit/6fd2a98))
+
+
+
 ## [1.0.1](https://github.com/laomao800/vue-listview/compare/v1.0.0...v1.0.1) (2019-02-19)
 
 
