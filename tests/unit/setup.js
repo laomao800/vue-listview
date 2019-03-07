@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 import vueTestUtils, { config } from '@vue/test-utils'
 import _ from 'lodash'
@@ -63,42 +62,6 @@ global.createComponentMocks = ({ store, router, style, mocks, stubs }) => {
   // https://vue-test-utils.vuejs.org/zh/api/options.html#mocks
   returnOptions.mocks = mocks || {}
 
-  // 可以通过以下格式传入 store 定义:
-  //
-  // store: {
-  //   someModuleName: {
-  //     state: { ... },
-  //     getters: { ... },
-  //     actions: { ... },
-  //   },
-  //   anotherModuleName: {
-  //     getters: { ... },
-  //   },
-  // },
-  //
-  // 模块默认开启命名空间配置
-  if (store) {
-    localVue.use(Vuex)
-    returnOptions.store = new Vuex.Store({
-      modules: Object.keys(store)
-        .map(moduleName => {
-          const storeModule = store[moduleName]
-          return {
-            [moduleName]: {
-              state: storeModule.state || {},
-              getters: storeModule.getters || {},
-              actions: storeModule.actions || {},
-              namespaced:
-                typeof storeModule.namespaced === 'undefined'
-                  ? true
-                  : storeModule.namespaced
-            }
-          }
-        })
-        .reduce((moduleA, moduleB) => Object.assign({}, moduleA, moduleB), {})
-    })
-  }
-
   // 如果传入 `router: true` ，则会自动注册 2 个 Vue Router 的内置组件
   if (router) {
     returnOptions.stubs['router-link'] = true
@@ -111,16 +74,4 @@ global.createComponentMocks = ({ store, router, style, mocks, stubs }) => {
   }
 
   return returnOptions
-}
-
-// 可传入 Vuex 的单个 module ，自动创建只包含传入 module 的一个 store
-global.createModuleStore = vuexModule => {
-  vueTestUtils.createLocalVue().use(Vuex)
-  const store = new Vuex.Store({
-    ..._.cloneDeep(vuexModule)
-  })
-  if (vuexModule.actions.init) {
-    store.dispatch('init')
-  }
-  return store
 }
