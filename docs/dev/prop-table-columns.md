@@ -9,7 +9,7 @@
 
 | 参数         | 类型             | 说明                                                                  |
 | ------------ | ---------------- | --------------------------------------------------------------------- |
-| **render**   | function(scope)  | 接受参数为 [slot scope](#slot-scope) ，支持返回字符串或 JSX           |
+| **render**   | function(scope)  | 接受参数为 { row, column, $index } ，支持返回字符串或 JSX           |
 | **children** | Array            | 子列配置，子项支持属性与父级一致                                      |
 | label        | String           | 表头显示的内容                                                        |
 | prop         | String           | 列字段名                                                              |
