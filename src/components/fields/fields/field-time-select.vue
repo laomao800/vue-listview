@@ -1,5 +1,5 @@
 <template>
-  <el-date-picker
+  <el-time-select
     v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import fieldMixin from '../field-mixin'
+import fieldMixin from './field-mixin'
 
 export default {
-  name: 'FieldDateTime',
+  name: 'FieldTimeSelect',
 
   mixins: [fieldMixin],
 
@@ -20,8 +20,7 @@ export default {
     return {
       defaultProps: {
         clearable: true,
-        style: { width: '200px' },
-        type: 'datetime'
+        style: { width: '120px' }
       }
     }
   }

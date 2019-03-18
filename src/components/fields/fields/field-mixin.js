@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import get from '../../utils/getValue'
-import { isValidFieldConfig } from '../../utils/utils'
+import get from '@/utils/getValue'
+import { isValidFieldConfig } from '@/utils/utils'
 
 export default {
   props: {

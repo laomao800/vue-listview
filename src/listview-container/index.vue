@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import VNode from '../components/v-node.js'
-import ListviewHeader from '../components/listview-header.vue'
-import './listview-container.less'
+import VNode from '@/components/v-node.js'
+import ListviewHeader from '@/components/listview-header.vue'
+import './style.less'
 
 export default {
   name: 'ListviewContainer',

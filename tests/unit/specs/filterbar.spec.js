@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import Filterbar from '@/listview/components/filterbar'
+import Filterbar from '@/components/filterbar'
 import {
   filterButtonsNormal,
   filterButtonsDropdown,

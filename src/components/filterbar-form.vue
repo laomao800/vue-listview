@@ -1,5 +1,5 @@
 <template>
-  <div v-if="fields.length > 0">
+  <div>
     <div v-for="(field, index) in fields" ref="field" :key="index" class="filterbar__field">
       <transition v-if="field.label" name="label-trans">
         <div v-if="showFieldLabel(field)" class="filterbar__field-label">{{ field.label }}</div>
@@ -25,15 +25,15 @@
 <script>
 import _ from 'lodash'
 import hasValues from 'has-values'
-import fieldComponents, { getFieldComponentName } from '../../components/fields'
-import VNode from '../../components/v-node.js'
-import { isVNode } from '../../utils/utils.js'
+import VNode from '@/components/v-node.js'
+import { allComponents, getFieldComponentName } from '@/components/fields'
+import { isVNode } from '@/utils/utils.js'
 
 export default {
   name: 'FilterbarForm',
 
   components: {
-    ...fieldComponents,
+    ...allComponents,
     VNode
   },
 

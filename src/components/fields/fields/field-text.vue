@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import fieldMixin from '../field-mixin'
-import VNode from '../../v-node.js'
-import { isVNode } from '../../../utils/utils.js'
+import fieldMixin from './field-mixin'
+import VNode from '@/components/v-node.js'
+import { isVNode } from '@/utils/utils.js'
 
 export default {
   name: 'FieldText',

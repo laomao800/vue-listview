@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import fieldMixin from '../field-mixin'
+import fieldMixin from './field-mixin'
 
 export default {
-  name: 'FieldDataRange',
+  name: 'FieldDateTimeRange',
 
   mixins: [fieldMixin],
 
@@ -20,8 +20,8 @@ export default {
     return {
       defaultProps: {
         clearable: true,
-        style: { width: '240px' },
-        type: 'daterange',
+        style: { width: '360px' },
+        type: 'datetimerange',
         startPlaceholder: '开始日期',
         endPlaceholder: '结束日期',
         expandTrigger: 'hover'

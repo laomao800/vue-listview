@@ -1,18 +1,19 @@
 <template>
-  <el-time-select
+  <el-cascader
     v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
+    :options="field.options"
     v-bind="mergedProps"
     v-on="mergedEvents"
   />
 </template>
 
 <script>
-import fieldMixin from '../field-mixin'
+import fieldMixin from './field-mixin'
 
 export default {
-  name: 'FieldTimeSelect',
+  name: 'FieldCascader',
 
   mixins: [fieldMixin],
 
@@ -20,7 +21,8 @@ export default {
     return {
       defaultProps: {
         clearable: true,
-        style: { width: '120px' }
+        style: { width: '180px' },
+        expandTrigger: 'hover'
       }
     }
   }

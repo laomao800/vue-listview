@@ -119,9 +119,9 @@
 <script>
 import _ from 'lodash'
 import axios from 'axios'
-import VNode from '../components/v-node'
-import ListviewHeader from '../components/listview-header.vue'
-import Filterbar from './components/filterbar.vue'
+import VNode from '@/components/v-node'
+import ListviewHeader from '@/components/listview-header.vue'
+import Filterbar from '@/components/filterbar.vue'
 import { warn, error } from '@/utils/debug'
 import {
   dataMapping,
@@ -134,7 +134,7 @@ import {
   snakeCaseObjectKey,
   pascalCaseObjectKey
 } from '@/utils/objectKey'
-import './listview.less'
+import './style.less'
 
 const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
 

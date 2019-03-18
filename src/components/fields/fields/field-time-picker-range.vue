@@ -1,5 +1,5 @@
 <template>
-  <el-date-picker
+  <el-time-picker
     v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import fieldMixin from '../field-mixin'
+import fieldMixin from './field-mixin'
 
 export default {
-  name: 'FieldDateTimeRange',
+  name: 'FieldTimeRange',
 
   mixins: [fieldMixin],
 
@@ -20,11 +20,10 @@ export default {
     return {
       defaultProps: {
         clearable: true,
-        style: { width: '360px' },
-        type: 'datetimerange',
-        startPlaceholder: '开始日期',
-        endPlaceholder: '结束日期',
-        expandTrigger: 'hover'
+        style: { width: '200px' },
+        isRange: true,
+        startPlaceholder: '开始时间',
+        endPlaceholder: '结束时间'
       }
     }
   }

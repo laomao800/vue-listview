@@ -1,5 +1,5 @@
 <template>
-  <el-time-picker
+  <el-input-number
     v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
@@ -9,21 +9,18 @@
 </template>
 
 <script>
-import fieldMixin from '../field-mixin'
+import fieldMixin from './field-mixin'
 
 export default {
-  name: 'FieldTimeRange',
+  name: 'FieldNumber',
 
   mixins: [fieldMixin],
 
   data() {
     return {
       defaultProps: {
-        clearable: true,
-        style: { width: '200px' },
-        isRange: true,
-        startPlaceholder: '开始时间',
-        endPlaceholder: '结束时间'
+        controlsPosition: 'right',
+        style: { width: '100px' }
       }
     }
   }
