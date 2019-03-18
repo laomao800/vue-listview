@@ -138,6 +138,35 @@ export default {
           options: [{ label: '触发500错误', value: 1 }]
         },
         {
+          type: 'select',
+          model: 'promiseOptions',
+          label: 'promiseOptions',
+          options: () =>
+            new Promise(resolve => {
+              setTimeout(() => {
+                resolve([
+                  { label: '单选项 1', value: 1 },
+                  { label: '单选项 2', value: 2 },
+                  { label: '单选项 3', value: 3 }
+                ])
+              }, 3000)
+            })
+        },
+        {
+          type: 'multipleSelect',
+          model: 'asyncOptions',
+          label: 'asyncOptions',
+          options: done => {
+            setTimeout(() => {
+              done([
+                { label: '多选项 1', value: 1 },
+                { label: '多选项 2', value: 2 },
+                { label: '多选项 3', value: 3 }
+              ])
+            }, 3000)
+          }
+        },
+        {
           type: 'text',
           model: 'name',
           label: '文本字段',
@@ -155,15 +184,17 @@ export default {
           label: '禁用文本',
           disabled: true
         },
-        {
-          type: 'label',
-          label: '文本'
-        },
-        {
-          type: 'number',
-          label: '数字',
-          model: 'number'
-        },
+        [
+          {
+            type: 'label',
+            label: '文本'
+          },
+          {
+            type: 'number',
+            label: '数字',
+            model: 'number'
+          }
+        ],
         {
           type: 'select',
           model: 'select',

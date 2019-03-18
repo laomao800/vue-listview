@@ -76,7 +76,7 @@
 
 ### 私有配置 `options`
 
-- type: `Array`
+- type: `Array` | `() => Promise<options>` | `(done) => void`
 - default: `[]`
 
 对于 `select` , `multipleSelect` , `cascader` 字段，可通过 `options` 属性配置选项值：
@@ -98,6 +98,50 @@
 #### `cascader`
 
 支持属性和 [Cascader - options](http://element.eleme.io/#/zh-CN/component/cascader#attributes) 相同。
+
+#### 异步选项
+
+有时需要从其他接口选项内容，可在 `options` 传入函数来进行异步填充，支持 2 种方式：
+
+1. 返回 `Promise`：
+
+```js
+{
+  type: 'select',
+  model: 'promiseOptions',
+  label: 'promiseOptions',
+  options: () =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve([
+          { label: '单选项 1', value: 1 },
+          { label: '单选项 2', value: 2 },
+          { label: '单选项 3', value: 3 }
+        ])
+      }, 3000)
+    })
+  }
+}
+```
+
+2. 使用第一个参数 `done(options)` ：
+
+```js
+{
+  type: 'multipleSelect',
+  model: 'asyncOptions',
+  label: 'asyncOptions',
+  options: done => {
+    setTimeout(() => {
+      done([
+        { label: '多选项 1', value: 1 },
+        { label: '多选项 2', value: 2 },
+        { label: '多选项 3', value: 3 }
+      ])
+    }, 3000)
+  }
+}
+```
 
 ### componentSlots
 
