@@ -160,7 +160,7 @@ describe('filterbar - filterFields', () => {
       })
     })
 
-    it('JSX', function() {
+    it('JSX', () => {
       const jsxWrapper = {
         components: { Filterbar },
         render(h) {
@@ -185,6 +185,34 @@ describe('filterbar - filterFields', () => {
         true
       )
     })
+
+    it('Group', () => {
+      const wrapper = mount({
+        components: { Filterbar },
+        render(h) {
+          return (
+            <filterbar
+              filterFields={[
+                { type: 'text', model: 'text', label: '普通文本' },
+                [
+                  { type: 'text', model: 'text1', label: '文本1' },
+                  { type: 'text', model: 'text2', label: '文本2' }
+                ]
+              ]}
+            />
+          )
+        }
+      })
+      const fields = wrapper.findAll('.filterbar__form > div')
+      const normalField = fields.at(0)
+      const groupField = fields.at(1)
+      expect(fields).toHaveLength(2)
+      expect(normalField.classes('filterbar__field--group')).toBe(false)
+      expect(groupField.classes('filterbar__field--group')).toBe(true)
+      // prettier-ignore
+      const groupChild = groupField.findAll('.filterbar__field:not(.filterbar__field--group)')
+      expect(groupChild).toHaveLength(2)
+    })
   })
 })
 
@@ -196,9 +224,9 @@ describe('filterbar - filterbarFold', () => {
   })
 
   it('toggleFilterbar', () => {
-    const foldClassName = 'list-view__filterbar--fold'
+    const foldClassName = 'listview__filterbar--fold'
     const $toggler = wrapper.find('.filterbar__submit-more')
-    const $filterbar = wrapper.find('.list-view__filterbar').element
+    const $filterbar = wrapper.find('.listview__filterbar').element
     expect($filterbar.classList.contains(foldClassName)).toBe(true)
     wrapper.setProps({ filterbarFold: false })
     expect($filterbar.classList.contains(foldClassName)).toBe(false)

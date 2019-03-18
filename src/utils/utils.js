@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import Vue from 'vue'
 import get from './getValue'
+import { getFieldComponentName } from '@/components/fields'
 
 /**
  * 判断 node 是否为 Vue 内部的 VNode 类型
@@ -78,8 +79,9 @@ export function isValidFieldValue(val) {
  */
 export function isValidFieldConfig(field) {
   return (
-    _.isPlainObject(field) &&
-    field.hasOwnProperty('model') &&
-    typeof field.model === 'string'
+    _.isFunction(field) ||
+    _.isFunction(field.render) ||
+    isVNode(field) ||
+    getFieldComponentName(field.type)
   )
 }

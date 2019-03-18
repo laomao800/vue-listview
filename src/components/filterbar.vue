@@ -2,8 +2,8 @@
   <div
     v-if="showFilterButtons || showFilterSubmit || showFilterFields"
     :class="[
-      'list-view__filterbar',
-      { 'list-view__filterbar--fold': internalFilterbarFold }
+      'listview__filterbar',
+      { 'listview__filterbar--fold': internalFilterbarFold }
     ]"
   >
     <el-form
@@ -116,8 +116,7 @@
 <script>
 import _ from 'lodash'
 import VNode from '@/components/v-node.js'
-import { isVNode } from '@/utils/utils.js'
-import { getFieldComponentName } from '@/components/fields'
+import { isVNode, isValidFieldConfig } from '@/utils/utils.js'
 import FilterbarForm from './filterbar-form.vue'
 
 export default {
@@ -148,15 +147,9 @@ export default {
 
   computed: {
     validFilterFields() {
-      return this.filterFields.filter(field => {
-        // 过滤有效的 filterFields ，只支持预设的字段、或包含 render 函数或 VNode
-        return (
-          _.isFunction(field) ||
-          _.isFunction(field.render) ||
-          isVNode(field) ||
-          getFieldComponentName(field.type)
-        )
-      })
+      return this.filterFields.filter(
+        field => isValidFieldConfig(field) || Array.isArray(field)
+      )
     },
     isNoneFields() {
       return this.validFilterFields.length === 0
@@ -280,7 +273,7 @@ export default {
 <style lang="less">
 @filter-gap-size: 10px;
 
-.list-view__filterbar {
+.listview__filterbar {
   padding-top: @filter-gap-size;
   margin-top: -@filter-gap-size;
   margin-bottom: @filter-gap-size;

@@ -51,17 +51,19 @@
 如，内置的多选组件 `multipleSelect` 默认值的格式为数组，如果接口参数要求为逗号分隔的字符串，一个方法是可以通过 [transformRequestData](./props.md#transformrequestdata) 在提交前对整个参数对象进行加工过滤，另一个方法则可以通过配置 `get` :
 
 ```js
-[{
-  type: 'multipleSelect',
-  model: 'multipleSelect',
-  label: '多选字段',
-  options: [
-    { label: '选项 1', value: 1 },
-    { label: '选项 2', value: 2 },
-    { label: '选项 3', value: 3 }
-  ],
-  get: val => val.join(',')
-}]
+;[
+  {
+    type: 'multipleSelect',
+    model: 'multipleSelect',
+    label: '多选字段',
+    options: [
+      { label: '选项 1', value: 1 },
+      { label: '选项 2', value: 2 },
+      { label: '选项 3', value: 3 }
+    ],
+    get: val => val.join(',')
+  }
+]
 ```
 
 ::: warning 注意
@@ -99,7 +101,7 @@
 
 支持属性和 [Cascader - options](http://element.eleme.io/#/zh-CN/component/cascader#attributes) 相同。
 
-#### 异步选项
+#### 异步选项 <Badge text="1.1.0+" />
 
 有时需要从其他接口选项内容，可在 `options` 传入函数来进行异步填充，支持 2 种方式：
 
@@ -185,6 +187,26 @@
 - default: `{}`
 
 可传入[各自对应 Element-UI 组件](#type-字段类型可选值)的 Events 。
+
+## 组合 <Badge text="1.1.0+" />
+
+搜索栏每个字段组件为一个单位，默认超过屏幕宽度的组件会自动收起。
+
+但对于有些需要组合多个字段组件的场景（如 “开始-结束” 2 个文本框），不想被自动收起功能分开成 2 个部分，可以使用组合配置形式，组合内的所有组件会视为一个单位，在收起时不被拆开，配置方式为将想要组合的元素放入一个数组内：
+
+```js
+{
+  // ...
+  filterFields: [
+    { type: 'text', model: 'text', label: '普通文本' },
+    // 以下 2 个文本字段会展现为一个整体
+    [
+      { type: 'text', model: 'text1', label: '文本1' },
+      { type: 'text', model: 'text2', label: '文本2' }
+    ]
+  ]
+}
+```
 
 ## JSX
 

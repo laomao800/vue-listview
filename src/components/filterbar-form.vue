@@ -1,33 +1,9 @@
-<template>
-  <div>
-    <div v-for="(field, index) in fields" ref="field" :key="index" class="filterbar__field">
-      <transition v-if="field.label" name="label-trans">
-        <div v-if="showFieldLabel(field)" class="filterbar__field-label">{{ field.label }}</div>
-      </transition>
-      <v-node v-if="isFunction(field)" :node="field()"/>
-      <v-node v-else-if="isFunction(field.render)" :node="field.render(field)"/>
-      <v-node v-else-if="isVNode(field)" :node="field"/>
-      <el-form-item v-else>
-        <component
-          :is="getFieldComponentName(field.type)"
-          :model="model"
-          :field="field"
-          v-bind="{
-            // field.width 判断如果放在 {} 内，会导致 field 内的 style 属性的 width 失效
-            style: field.width ? { width: `${field.width}px` } : null
-          }"
-        />
-      </el-form-item>
-    </div>
-  </div>
-</template>
-
 <script>
 import _ from 'lodash'
 import hasValues from 'has-values'
 import VNode from '@/components/v-node.js'
 import { allComponents, getFieldComponentName } from '@/components/fields'
-import { isVNode } from '@/utils/utils.js'
+import { isVNode, isValidFieldConfig } from '@/utils/utils.js'
 
 export default {
   name: 'FilterbarForm',
@@ -63,7 +39,68 @@ export default {
       const value = this.getFieldValue(field)
       // hasValues(null) -> true ，所以需要和 value 同时判断
       return value !== null && hasValues(value)
+    },
+
+    renderField(field) {
+      const label = field.label ? (
+        <transition name="label-trans">
+          {this.showFieldLabel(field) && (
+            <div class="filterbar__field-label">{field.label}</div>
+          )}
+        </transition>
+      ) : null
+      let content
+      if (_.isFunction(field)) {
+        content = <v-node node={field()} />
+      } else if (_.isFunction(field.render)) {
+        content = <v-node node={field.render(field)} />
+      } else if (isVNode(field)) {
+        content = <v-node node={field} />
+      } else {
+        const FieldComponent = getFieldComponentName(field.type)
+        content = (
+          <el-form-item>
+            <FieldComponent
+              model={this.model}
+              field={field}
+              {...{
+                // field.width 判断如果放在 {} 内，会导致 field 内的 style 属性的 width 失效
+                style: field.width ? { width: `${field.width}px` } : null
+              }}
+            />
+          </el-form-item>
+        )
+      }
+      return (
+        <div ref="field" refInFor={true} class="filterbar__field">
+          {label}
+          {content}
+        </div>
+      )
     }
+  },
+
+  render() {
+    return (
+      <div>
+        {this.fields.map((field, index) => {
+          if (Array.isArray(field)) {
+            const subFieldNodes = []
+            field.forEach(subField => {
+              if (isValidFieldConfig(subField)) {
+                subFieldNodes.push(this.renderField(subField))
+              }
+            })
+            return subFieldNodes.length > 0 ? (
+              <div class="filterbar__field filterbar__field--group">
+                {subFieldNodes}
+              </div>
+            ) : null
+          }
+          return this.renderField(field)
+        })}
+      </div>
+    )
   }
 }
 </script>

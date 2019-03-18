@@ -138,35 +138,6 @@ export default {
           options: [{ label: '触发500错误', value: 1 }]
         },
         {
-          type: 'select',
-          model: 'promiseOptions',
-          label: 'promiseOptions',
-          options: () =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve([
-                  { label: '单选项 1', value: 1 },
-                  { label: '单选项 2', value: 2 },
-                  { label: '单选项 3', value: 3 }
-                ])
-              }, 3000)
-            })
-        },
-        {
-          type: 'multipleSelect',
-          model: 'asyncOptions',
-          label: 'asyncOptions',
-          options: done => {
-            setTimeout(() => {
-              done([
-                { label: '多选项 1', value: 1 },
-                { label: '多选项 2', value: 2 },
-                { label: '多选项 3', value: 3 }
-              ])
-            }, 3000)
-          }
-        },
-        {
           type: 'text',
           model: 'name',
           label: '文本字段',
@@ -178,16 +149,10 @@ export default {
             'suffix-icon': 'el-icon-date'
           }
         },
-        {
-          type: 'text',
-          model: 'disabled',
-          label: '禁用文本',
-          disabled: true
-        },
         [
           {
             type: 'label',
-            label: '文本'
+            label: '文本标签'
           },
           {
             type: 'number',
@@ -217,6 +182,35 @@ export default {
             { label: '禁用项', value: 4, disabled: true }
           ],
           get: val => val.join(',')
+        },
+        {
+          type: 'select',
+          model: 'promiseOptions',
+          label: 'promiseOptions',
+          options: () =>
+            new Promise(resolve => {
+              setTimeout(() => {
+                resolve([
+                  { label: '单选项 1', value: 1 },
+                  { label: '单选项 2', value: 2 },
+                  { label: '单选项 3', value: 3 }
+                ])
+              }, 3000)
+            })
+        },
+        {
+          type: 'multipleSelect',
+          model: 'asyncOptions',
+          label: 'asyncOptions',
+          options: done => {
+            setTimeout(() => {
+              done([
+                { label: '多选项 1', value: 1 },
+                { label: '多选项 2', value: 2 },
+                { label: '多选项 3', value: 3 }
+              ])
+            }, 3000)
+          }
         },
         {
           type: 'date',

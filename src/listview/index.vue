@@ -126,8 +126,7 @@ import { warn, error } from '@/utils/debug'
 import {
   dataMapping,
   parseSizeWithUnit,
-  isValidFieldValue,
-  isValidFieldConfig
+  isValidFieldValue
 } from '@/utils/utils'
 import {
   camelCaseObjectKey,
@@ -144,7 +143,13 @@ const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
 function validateFilterFields(fields) {
   /* istanbul ignore next */
   if (Array.isArray(fields)) {
-    const hasModelKey = fields.filter(field => isValidFieldConfig(field))
+    const hasModelKey = fields.filter(field => {
+      return (
+        _.isPlainObject(field) &&
+        field.hasOwnProperty('model') &&
+        typeof field.model === 'string'
+      )
+    })
     const duplicateFields = _.pickBy(
       _.countBy(hasModelKey, 'model'),
       count => count > 1

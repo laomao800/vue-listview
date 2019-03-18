@@ -33,8 +33,6 @@
   // HTML
   // ===
   "html.format.enable": false,
-  "html.suggest.angular1": false,
-  "html.suggest.ionic": false,
   "vetur.validation.template": false,
   // ===
   // JS(ON)
@@ -57,5 +55,10 @@
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
+  },
+  "markdownlint.config": {
+    "MD013": false,
+    "MD030": false,
+    "MD033": false
   }
 }
