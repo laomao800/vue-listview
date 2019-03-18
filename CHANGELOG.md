@@ -1,3 +1,13 @@
+# [1.1.0](https://github.com/laomao800/vue-listview/compare/v1.0.2...v1.1.0) (2019-03-18)
+
+
+### Features
+
+* **filterFields:** select, multipleSelect, cascader 类型 options 属性支持函数返回 Promise 或通过 done 参数异步填充选项 ([f726095](https://github.com/laomao800/vue-listview/commit/f726095))
+* **filterFields:** 支持通过数组形式对搜索字段进行分组展示 ([2ba6046](https://github.com/laomao800/vue-listview/commit/2ba6046))
+
+
+
 ## [1.0.2](https://github.com/laomao800/vue-listview/compare/v1.0.1...v1.0.2) (2019-03-07)
 
 
