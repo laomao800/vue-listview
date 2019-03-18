@@ -12,7 +12,6 @@ describe('filterbar - filterButtons', () => {
     const wrapper = mount(Filterbar, {
       propsData: { filterButtons }
     })
-    expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.findAll('.filterbar__buttons .el-button')).toHaveLength(
       filterButtons.length
     )
@@ -23,11 +22,6 @@ describe('filterbar - filterButtons', () => {
     const wrapper = mount(Filterbar, {
       propsData: { filterButtons }
     })
-    // el-dropdown 会生成随机 id ，先删除后再测试 snapshots
-    const randomAttrReg = /aria-controls="dropdown-menu-\d+"|id="dropdown-menu-\d+"/g
-    let wrapperHtml = wrapper.html()
-    wrapperHtml = wrapperHtml.replace(randomAttrReg, '')
-    expect(wrapperHtml).toMatchSnapshot()
     expect(wrapper.findAll('.filterbar__buttons .el-dropdown')).toHaveLength(
       filterButtons.length
     )
@@ -39,13 +33,21 @@ describe('filterbar - filterButtons', () => {
       render(h) {
         return (
           <filterbar
-            filterButtons={[<button>button</button>, <strong>strong</strong>]}
+            filterButtons={[
+              <button class="jsx-button">button</button>,
+              <strong class="strong-text">strong</strong>
+            ]}
           />
         )
       }
     }
     const wrapper = mount(jsxWrapper)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.find('.filterbar__buttons .jsx-button').is('button')).toBe(
+      true
+    )
+    expect(wrapper.find('.filterbar__buttons .strong-text').is('strong')).toBe(
+      true
+    )
   })
 
   it('按钮点击事件', () => {
@@ -123,6 +125,7 @@ describe('filterbar - filterFields', () => {
   describe('FilterForm', () => {
     it('渲染所有有效的内置字段类型', () => {
       const wrapper = mount(Filterbar, {
+        sync: false,
         propsData: {
           filterFields: [
             {
@@ -133,7 +136,6 @@ describe('filterbar - filterFields', () => {
           ]
         }
       })
-      expect(wrapper.html()).toMatchSnapshot()
       expect(wrapper.findAll('.filterbar__field')).toHaveLength(
         filterFields.length
       )
@@ -164,13 +166,24 @@ describe('filterbar - filterFields', () => {
         render(h) {
           return (
             <filterbar
-              filterFields={[<button>button</button>, <strong>strong</strong>]}
+              filterFields={[
+                <input class="jsx-input" />,
+                <select class="jsx-select">
+                  <option value="1">1</option>
+                </select>
+              ]}
             />
           )
         }
       }
+
       const wrapper = mount(jsxWrapper)
-      expect(wrapper.html()).toMatchSnapshot()
+      expect(wrapper.find('.filterbar__field .jsx-input').is('input')).toBe(
+        true
+      )
+      expect(wrapper.find('.filterbar__field .jsx-select').is('select')).toBe(
+        true
+      )
     })
   })
 })
@@ -199,22 +212,30 @@ describe('filterbar - SearchButton & ResetButton', () => {
     const wrapper = mount(Filterbar, {
       propsData: { showFilterSearch: false }
     })
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(
+      wrapper.find('.filterbar__submit-btn .el-button--primary').exists()
+    ).toBe(false)
     wrapper.setProps({
       showFilterSearch: true
     })
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(
+      wrapper.find('.filterbar__submit-btn .el-button--primary').exists()
+    ).toBe(true)
   })
 
   it('ResetButton', () => {
     const wrapper = mount(Filterbar, {
       propsData: { showFilterReset: false }
     })
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(
+      wrapper.find('.filterbar__submit-btn .el-button--default').exists()
+    ).toBe(false)
     wrapper.setProps({
       showFilterReset: true
     })
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(
+      wrapper.find('.filterbar__submit-btn .el-button--default').exists()
+    ).toBe(true)
   })
 
   it('Slots', () => {
@@ -223,14 +244,26 @@ describe('filterbar - SearchButton & ResetButton', () => {
       render(h) {
         return (
           <filterbar>
-            <div slot="prepend-filterbar-submit">prepend-filterbar-submit</div>
-            <div slot="append-filterbar-submit">append-filterbar-submit</div>
+            <div
+              class="prepend-filterbar-submit"
+              slot="prepend-filterbar-submit"
+            >
+              prepend-filterbar-submit
+            </div>
+            <div class="append-filterbar-submit" slot="append-filterbar-submit">
+              append-filterbar-submit
+            </div>
           </filterbar>
         )
       }
     }
     const wrapper = mount(slotWrapper)
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(
+      wrapper.find('.filterbar__submit-btn .prepend-filterbar-submit').exists()
+    ).toBe(true)
+    expect(
+      wrapper.find('.filterbar__submit-btn .append-filterbar-submit').exists()
+    ).toBe(true)
   })
 
   describe('Events', () => {

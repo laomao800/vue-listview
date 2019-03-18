@@ -6,6 +6,13 @@ require('babel-plugin-require-context-hook/register')()
 
 // 使用内建的 transition 组件，避免 <ElSelectDropdown> 组件在测试中报错
 config.stubs.transition = false
+config.stubs['el-select'] = '<div class="mock-el-select" />'
+config.stubs['el-input-number'] = '<div class="mock-el-input-number" />'
+// config.stubs['el-pagination'] = '<div class="mock-el-pagination" />'
+config.stubs['el-pagination'] = Vue.extend({
+  name: 'ElPagination',
+  template: '<div class="mock-el-pagination" />'
+})
 
 Vue.use(ElementUI)
 

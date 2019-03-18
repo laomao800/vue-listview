@@ -65,9 +65,7 @@ describe('分页参数', () => {
       usePage: true
     })
     $listview = wrapper.vm.$refs.listview
-    $pagination = $listview.$children.filter(
-      child => child.$options.name === 'ElPagination'
-    )[0]
+    $pagination = wrapper.find({ name: 'ElPagination' })
   })
 
   it('带分页参数', () => {
@@ -105,13 +103,13 @@ describe('分页参数', () => {
   })
 
   it('pageSize 切换', () => {
-    $pagination.$emit('size-change', 3)
+    $pagination.vm.$emit('size-change', 3)
     expect($listview.currentPage).toBe(1)
     expect($listview.currentPageSize).toBe(3)
   })
 
   it('search(true) 保持当前页码', () => {
-    $pagination.$emit('current-change', 20)
+    $pagination.vm.$emit('current-change', 20)
     $listview.search(true)
     expect($listview.currentPage).toBe(20)
     $listview.search()

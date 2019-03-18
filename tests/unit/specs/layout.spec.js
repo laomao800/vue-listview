@@ -84,8 +84,8 @@ describe('layout', () => {
     })
   })
 
-  it('pager', () => {
+  it('pager off', () => {
     const wrapper = mount(Listview, { propsData: { usePage: false } })
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.vm.$el.querySelector('.listview__page')).toBe(null)
   })
 })
