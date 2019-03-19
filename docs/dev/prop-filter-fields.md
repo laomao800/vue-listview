@@ -72,7 +72,20 @@
 
 如果 `get()` 方法抛出错误，会以原始值提交，并在控制台给出相应的错误信息。
 
-第二个参数 `filterModel` 为所有字段
+第二个参数 `filterModel` 为所有字段内容，即 Props `filter-model` 的一个引用，因此对于 `dateRange` 等“范围”类型的字段，如果需要提交为单独 2 个字符串形式的话，可用以下方式：
+
+```js
+{
+  type: 'dateRange',
+  model: 'startDate',
+  label: '日期范围',
+  get(val, filterModel) {
+    const [startDate, endDate] = val
+    filterModel.endDate = endDate
+    return startDate
+  }
+}
+```
 
 :::
 

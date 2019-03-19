@@ -152,12 +152,26 @@ export default {
         [
           {
             type: 'label',
-            label: '文本标签'
+            label: '支持组合'
           },
+          {
+            type: 'text',
+            label: '支持组合多个字段为一个整体'
+          },
+          {
+            type: 'text',
+            label: '避免被自动收起拆开'
+          }
+        ],
+        [
           {
             type: 'number',
             label: '数字',
             model: 'number'
+          },
+          {
+            type: 'label',
+            label: '文本标签'
           }
         ],
         {

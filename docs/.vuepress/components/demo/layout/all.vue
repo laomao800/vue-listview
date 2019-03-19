@@ -139,6 +139,18 @@ export default {
           model: 'dateRange',
           label: '日期范围'
         },
+        // 默认“日期范围”的值为一个数组表示起始于结束时间，
+        // 如果需要分开 2 个字段提交，可利用 get 属性对数据进行处理：
+        // {
+        //   type: 'dateRange',
+        //   model: 'startDate',
+        //   label: '日期范围',
+        //   get(val, filterModel) {
+        //     const [startDate, endDate] = val
+        //     filterModel.endDate = endDate
+        //     return startDate
+        //   }
+        // },
         {
           type: 'timeSelect',
           model: 'timeSelect',
@@ -193,6 +205,20 @@ export default {
             }
           ]
         },
+        [
+          {
+            type: 'label',
+            label: '组合'
+          },
+          {
+            type: 'text',
+            label: '支持组合多个字段'
+          },
+          {
+            type: 'text',
+            label: '避免被自动收起拆开'
+          }
+        ],
         {
           type: 'label',
           label: '文本标签'
