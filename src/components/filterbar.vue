@@ -337,6 +337,10 @@ export default {
     }
   }
 
+  .filterbar__field--group {
+    margin: 0;
+  }
+
   .filterbar__buttons {
     float: left;
     margin-right: 0;
