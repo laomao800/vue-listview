@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/laomao800/vue-listview/compare/v1.1.0...v1.1.1) (2019-03-19)
+
+
+### Bug Fixes
+
+* **filterbar:** 修复未传 model 时 value 显示 [object Object] 问题 ([8b56ab0](https://github.com/laomao800/vue-listview/commit/8b56ab0))
+
+
+
 # [1.1.0](https://github.com/laomao800/vue-listview/compare/v1.0.2...v1.1.0) (2019-03-18)
 
 
