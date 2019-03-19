@@ -1,4 +1,4 @@
-/*! Vue Listview v1.1.0 */
+/*! Vue Listview v1.1.1 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
@@ -4457,10 +4457,14 @@ module.exports = transform;
     value: {
       get: function get() {
         if (Object(_utils_utils__WEBPACK_IMPORTED_MODULE_4__[/* isValidFieldConfig */ "c"])(this.field)) {
-          var value = Object(_utils_getValue__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(this.model, this.field.model); // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
+          var value;
 
+          if (this.field.model) {
+            value = Object(_utils_getValue__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(this.model, this.field.model);
+          }
 
           if (lodash_camelCase__WEBPACK_IMPORTED_MODULE_2___default()(this.field.type) === 'multipleSelect') {
+            // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
             value = Array.isArray(value) ? value : [];
           }
 
@@ -8682,10 +8686,14 @@ var staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/fields/fields/field-date-time-range.vue?vue&type=template&id=c52a2bf4&
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
 // EXTERNAL MODULE: ./src/components/fields/fields/field-mixin.js
 var field_mixin = __webpack_require__("50fe");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib??ref--12-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fields/fields/field-date-time-range.vue?vue&type=script&lang=js&
+
 //
 //
 //
@@ -9257,7 +9265,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".listview__filterbar{padding-top:10px;margin-top:-10px;margin-bottom:10px}.listview__filterbar:after{display:table;clear:both;content:\"\"}.listview__filterbar--fold{box-sizing:content-box;height:32px;overflow:hidden}.listview__filterbar .el-button{height:32px;padding-top:0;padding-bottom:0;line-height:1;vertical-align:top}.listview__filterbar .el-button [class*=\" el-icon-\"],.listview__filterbar .el-button [class^=el-icon-]{width:1em}.listview__filterbar .el-input-group__append,.listview__filterbar .el-input-group__prepend{padding:0 10px}.listview__filterbar .el-form-item__label{padding:0 0 0 2px;margin-right:-4px}.listview__filterbar .filterbar__buttons .el-form-item,.listview__filterbar .filterbar__buttons>*,.listview__filterbar .filterbar__form .el-form-item,.listview__filterbar .filterbar__form>*,.listview__filterbar .filterbar__submit .el-form-item,.listview__filterbar .filterbar__submit>*{margin:0}.listview__filterbar .filterbar__buttons,.listview__filterbar .filterbar__field{position:relative;display:inline-block;margin:0 10px 10px 0;vertical-align:top}.listview__filterbar .filterbar__buttons .el-form-item__content>*,.listview__filterbar .filterbar__buttons .el-form-item__content>.el-cascader .el-input__inner,.listview__filterbar .filterbar__buttons .el-form-item__content>.el-input .el-input__inner,.listview__filterbar .filterbar__buttons .el-form-item__content>.el-select .el-input__inner,.listview__filterbar .filterbar__field .el-form-item__content>*,.listview__filterbar .filterbar__field .el-form-item__content>.el-cascader .el-input__inner,.listview__filterbar .filterbar__field .el-form-item__content>.el-input .el-input__inner,.listview__filterbar .filterbar__field .el-form-item__content>.el-select .el-input__inner{vertical-align:top}.listview__filterbar .filterbar__buttons{float:left;margin-right:0}.listview__filterbar .filterbar__buttons .el-button+.el-dropdown,.listview__filterbar .filterbar__buttons .el-dropdown+.el-button,.listview__filterbar .filterbar__buttons .el-dropdown+.el-dropdown,.listview__filterbar .filterbar__buttons .el-form-item__content>*{display:inline-block;margin-right:10px;margin-left:0}.listview__filterbar .filterbar__form{margin-bottom:-10px}.listview__filterbar .filterbar__submit{float:right;margin:0;margin-bottom:10px}.listview__filterbar .filterbar__submit-btn{display:inline-block}.listview__filterbar .filterbar__submit-btn .el-form-item__content>*{display:inline-block;transition:inherit}.listview__filterbar .filterbar__submit-btn .el-form-item__content>:not(:first-child){margin-left:10px}.listview__filterbar .filterbar__submit-more{width:40px;padding:0;margin-left:10px;line-height:30px}.listview__filterbar .filterbar__submit--nomore{padding-right:50px}.listview__filterbar .filterbar__submit--nomore .filterbar__submit-more{display:none}.listview__filterbar .filterbar__submit--onleft{float:inherit}", ""]);
+exports.push([module.i, ".listview__filterbar{padding-top:10px;margin-top:-10px;margin-bottom:10px}.listview__filterbar:after{display:table;clear:both;content:\"\"}.listview__filterbar--fold{box-sizing:content-box;height:32px;overflow:hidden}.listview__filterbar .el-button{height:32px;padding-top:0;padding-bottom:0;line-height:1;vertical-align:top}.listview__filterbar .el-button [class*=\" el-icon-\"],.listview__filterbar .el-button [class^=el-icon-]{width:1em}.listview__filterbar .el-input-group__append,.listview__filterbar .el-input-group__prepend{padding:0 10px}.listview__filterbar .el-form-item__label{padding:0 0 0 2px;margin-right:-4px}.listview__filterbar .filterbar__buttons .el-form-item,.listview__filterbar .filterbar__buttons>*,.listview__filterbar .filterbar__form .el-form-item,.listview__filterbar .filterbar__form>*,.listview__filterbar .filterbar__submit .el-form-item,.listview__filterbar .filterbar__submit>*{margin:0}.listview__filterbar .filterbar__buttons,.listview__filterbar .filterbar__field{position:relative;display:inline-block;margin:0 10px 10px 0;vertical-align:top}.listview__filterbar .filterbar__buttons .el-form-item__content>*,.listview__filterbar .filterbar__buttons .el-form-item__content>.el-cascader .el-input__inner,.listview__filterbar .filterbar__buttons .el-form-item__content>.el-input .el-input__inner,.listview__filterbar .filterbar__buttons .el-form-item__content>.el-select .el-input__inner,.listview__filterbar .filterbar__field .el-form-item__content>*,.listview__filterbar .filterbar__field .el-form-item__content>.el-cascader .el-input__inner,.listview__filterbar .filterbar__field .el-form-item__content>.el-input .el-input__inner,.listview__filterbar .filterbar__field .el-form-item__content>.el-select .el-input__inner{vertical-align:top}.listview__filterbar .filterbar__field--group{margin:0}.listview__filterbar .filterbar__buttons{float:left;margin-right:0}.listview__filterbar .filterbar__buttons .el-button+.el-dropdown,.listview__filterbar .filterbar__buttons .el-dropdown+.el-button,.listview__filterbar .filterbar__buttons .el-dropdown+.el-dropdown,.listview__filterbar .filterbar__buttons .el-form-item__content>*{display:inline-block;margin-right:10px;margin-left:0}.listview__filterbar .filterbar__form{margin-bottom:-10px}.listview__filterbar .filterbar__submit{float:right;margin:0;margin-bottom:10px}.listview__filterbar .filterbar__submit-btn{display:inline-block}.listview__filterbar .filterbar__submit-btn .el-form-item__content>*{display:inline-block;transition:inherit}.listview__filterbar .filterbar__submit-btn .el-form-item__content>:not(:first-child){margin-left:10px}.listview__filterbar .filterbar__submit-more{width:40px;padding:0;margin-left:10px;line-height:30px}.listview__filterbar .filterbar__submit--nomore{padding-right:50px}.listview__filterbar .filterbar__submit--nomore .filterbar__submit-more{display:none}.listview__filterbar .filterbar__submit--onleft{float:inherit}", ""]);
 
 // exports
 
@@ -13283,8 +13291,8 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 component.options.__file = "listview-header.vue"
 /* harmony default export */ var listview_header = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"197f5754-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar.vue?vue&type=template&id=6cf17590&
-var filterbarvue_type_template_id_6cf17590_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"197f5754-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar.vue?vue&type=template&id=fb3fa986&
+var filterbarvue_type_template_id_fb3fa986_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
     'listview__filterbar',
     { 'listview__filterbar--fold': _vm.internalFilterbarFold }
   ]},[_c('el-form',{attrs:{"inline":true,"size":"small"},nativeOn:{"submit":function($event){$event.preventDefault();},"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleFilterSearch($event)}}},[(_vm.showFilterButtons)?_c('div',{staticClass:"filterbar__buttons"},[_c('el-form-item',[_vm._l((_vm.filterButtons),function(button,index){return [(_vm.isFunction(button))?_c('v-node',{key:index,attrs:{"node":button()}}):(button.render)?_c('v-node',{key:index,attrs:{"node":button.render()}}):(_vm.isVNode(button))?_c('v-node',{key:index,attrs:{"node":button}}):(Array.isArray(button.children))?_c('el-dropdown',{key:index,attrs:{"type":button.type,"split-button":button.splitButton,"trigger":button.trigger || 'click',"placement":"bottom"},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[(button.splitButton)?[(button.icon)?_c('i',{class:button.icon}):_vm._e(),_vm._v("\n              "+_vm._s(button.text)+"\n            ")]:[_c('el-button',{attrs:{"type":button.type,"icon":button.icon},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[_vm._v("\n                "+_vm._s(button.text)+"\n                "),_c('i',{staticClass:"el-icon-arrow-down el-icon--right"})])],_c('el-dropdown-menu',{attrs:{"slot":"dropdown"},slot:"dropdown"},_vm._l((button.children),function(child,childIndex){return _c('el-dropdown-item',{key:childIndex,nativeOn:{"click":function($event){return _vm.applyButtonClick(child, $event)}}},[(child.icon)?_c('i',{class:child.icon}):_vm._e(),_vm._v("\n                "+_vm._s(child.text)+"\n              ")])}),1)],2):_c('el-button',{key:index,attrs:{"type":button.type,"plain":button.plain,"icon":button.icon},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[_vm._v(_vm._s(button.text))])]})],2)],1):_vm._e(),(_vm.showFilterSubmit)?_c('div',{ref:"submit",class:[
@@ -13294,10 +13302,10 @@ var filterbarvue_type_template_id_6cf17590_render = function () {var _vm=this;va
           'filterbar__submit--onleft': _vm.isNoneFields
         }
       ]},[_c('div',{staticClass:"filterbar__submit-btn",style:({ transform: ("translateX(" + _vm.searchBtnOffset + "px)") })},[_c('el-form-item',[_vm._t("prepend-filterbar-submit"),(_vm.showFilterSearch)?_c('el-button',{attrs:{"type":"primary","icon":"el-icon-search"},on:{"click":_vm.handleFilterSearch}},[_vm._v("搜索")]):_vm._e(),(_vm.showFilterReset)?_c('el-button',{on:{"click":_vm.handleFilterReset}},[_vm._v("重置")]):_vm._e(),_vm._t("append-filterbar-submit")],2)],1),_c('el-button',{staticClass:"filterbar__submit-more",attrs:{"icon":_vm.internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top',"type":"primary"},on:{"click":_vm.toggleFilterbar}})],1):_vm._e(),(_vm.showFilterFields)?_c('filterbar-form',{ref:"filterForm",staticClass:"filterbar__form",attrs:{"fields":_vm.validFilterFields,"model":_vm.filterModel}}):_vm._e()],1)],1):_vm._e()}
-var filterbarvue_type_template_id_6cf17590_staticRenderFns = []
+var filterbarvue_type_template_id_fb3fa986_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/filterbar.vue?vue&type=template&id=6cf17590&
+// CONCATENATED MODULE: ./src/components/filterbar.vue?vue&type=template&id=fb3fa986&
 
 // EXTERNAL MODULE: ./src/utils/utils.js
 var utils = __webpack_require__("fa7d");
@@ -13724,8 +13732,8 @@ var filterbarvue_type_style_index_0_lang_less_ = __webpack_require__("e067");
 
 var filterbar_component = Object(componentNormalizer["a" /* default */])(
   components_filterbarvue_type_script_lang_js_,
-  filterbarvue_type_template_id_6cf17590_render,
-  filterbarvue_type_template_id_6cf17590_staticRenderFns,
+  filterbarvue_type_template_id_fb3fa986_render,
+  filterbarvue_type_template_id_fb3fa986_staticRenderFns,
   false,
   null,
   null,
