@@ -12,9 +12,12 @@ export default {
     value: {
       get() {
         if (isValidFieldConfig(this.field)) {
-          let value = get(this.model, this.field.model)
-          // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
+          let value
+          if (this.field.model) {
+            value = get(this.model, this.field.model)
+          }
           if (_.camelCase(this.field.type) === 'multipleSelect') {
+            // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
             value = Array.isArray(value) ? value : []
           }
           return value
