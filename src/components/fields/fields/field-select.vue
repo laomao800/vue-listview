@@ -26,7 +26,7 @@ export default {
       filterable: true,
       style: { width: '180px' }
     }
-    if (this.field.type === 'multipleSelect') {
+    if (_.camelCase(this.field.type) === 'multipleSelect') {
       defaultProps.multiple = true
       defaultProps.collapseTags = true
     }
