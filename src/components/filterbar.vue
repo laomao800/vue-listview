@@ -12,6 +12,42 @@
       @submit.native.prevent
       @keydown.native.enter="handleFilterSearch"
     >
+      <!-- 提交、重置按钮区域 -->
+      <div
+        v-if="showFilterSubmit"
+        ref="submit"
+        :class="[
+          'filterbar__submit',
+          {
+            'filterbar__submit--nomore': !filterbarHasMore,
+            'filterbar__submit--onleft': isNoneFields
+          }
+        ]"
+      >
+        <div
+          :style="{ transform: `translateX(${searchBtnOffset}px)` }"
+          class="filterbar__submit-btn"
+        >
+          <el-form-item>
+            <slot name="prepend-filterbar-submit"/>
+            <el-button
+              v-if="showFilterSearch"
+              type="primary"
+              icon="el-icon-search"
+              @click="handleFilterSearch"
+            >搜索</el-button>
+            <el-button v-if="showFilterReset" @click="handleFilterReset">重置</el-button>
+            <slot name="append-filterbar-submit"/>
+          </el-form-item>
+        </div>
+        <el-button
+          :icon="internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
+          type="primary"
+          class="filterbar__submit-more"
+          @click="toggleFilterbar"
+        />
+      </div>
+
       <!-- 操作按钮区域 -->
       <div v-if="showFilterButtons" class="filterbar__buttons">
         <el-form-item>
@@ -63,42 +99,6 @@
             >{{ button.text }}</el-button>
           </template>
         </el-form-item>
-      </div>
-
-      <!-- 提交、重置按钮区域 -->
-      <div
-        v-if="showFilterSubmit"
-        ref="submit"
-        :class="[
-          'filterbar__submit',
-          {
-            'filterbar__submit--nomore': !filterbarHasMore,
-            'filterbar__submit--onleft': isNoneFields
-          }
-        ]"
-      >
-        <div
-          :style="{ transform: `translateX(${searchBtnOffset}px)` }"
-          class="filterbar__submit-btn"
-        >
-          <el-form-item>
-            <slot name="prepend-filterbar-submit"/>
-            <el-button
-              v-if="showFilterSearch"
-              type="primary"
-              icon="el-icon-search"
-              @click="handleFilterSearch"
-            >搜索</el-button>
-            <el-button v-if="showFilterReset" @click="handleFilterReset">重置</el-button>
-            <slot name="append-filterbar-submit"/>
-          </el-form-item>
-        </div>
-        <el-button
-          :icon="internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
-          type="primary"
-          class="filterbar__submit-more"
-          @click="toggleFilterbar"
-        />
       </div>
 
       <!-- 搜索栏控件区域 -->
