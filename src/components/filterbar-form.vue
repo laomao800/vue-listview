@@ -3,7 +3,7 @@ import _ from 'lodash'
 import hasValues from 'has-values'
 import VNode from '@/components/v-node.js'
 import { allComponents, getFieldComponentName } from '@/components/fields'
-import { isVNode, isValidFieldConfig } from '@/utils/utils.js'
+import { isVNode } from '@/utils/utils.js'
 
 export default {
   name: 'FilterbarForm',
@@ -87,9 +87,7 @@ export default {
           if (Array.isArray(field)) {
             const subFieldNodes = []
             field.forEach(subField => {
-              if (isValidFieldConfig(subField)) {
-                subFieldNodes.push(this.renderField(subField))
-              }
+              subFieldNodes.push(this.renderField(subField))
             })
             return subFieldNodes.length > 0 ? (
               <div class="filterbar__field filterbar__field--group">
@@ -116,6 +114,7 @@ export default {
   line-height: 12px;
   color: #999;
   white-space: nowrap;
+  cursor: default;
   background-color: #fff;
   opacity: 1;
   transform: translateY(-50%) scale(0.9);

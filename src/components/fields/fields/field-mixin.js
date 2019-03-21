@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import get from '@/utils/getValue'
-import { isValidFieldConfig } from '@/utils/utils'
 
 export default {
   props: {
@@ -11,23 +10,27 @@ export default {
   computed: {
     value: {
       get() {
-        if (isValidFieldConfig(this.field)) {
-          let value
-          if (this.field.model) {
-            value = get(this.model, this.field.model)
-          }
-          if (_.camelCase(this.field.type) === 'multipleSelect') {
-            // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
-            value = Array.isArray(value) ? value : []
-          }
-          return value
+        const modelProperty = this.field.model
+        let value = null
+        if (modelProperty) {
+          value = get(this.model, modelProperty)
         }
+        if (_.camelCase(this.field.type) === 'multipleSelect') {
+          // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
+          value = Array.isArray(value) ? value : []
+        }
+        return value
       },
       set(newVal) {
-        if (isValidFieldConfig(this.field)) {
-          const modelData = this.model
-          const model = this.field.model
-          this.$set(modelData, model, newVal)
+        const modelProperty = this.field.model
+        if (modelProperty) {
+          this.$set(this.model, modelProperty, newVal)
+        } else {
+          if (process.env.NODE_ENV !== 'production') {
+            console.error(
+              `${JSON.stringify(this.field)}\n 未配置 model 属性，无法写入值。`
+            )
+          }
         }
       }
     },
