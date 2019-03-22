@@ -228,7 +228,7 @@ describe('filterbar - filterbarFold', () => {
     const $toggler = wrapper.find('.filterbar__submit-more')
     const $filterbar = wrapper.find('.listview__filterbar').element
     expect($filterbar.classList.contains(foldClassName)).toBe(true)
-    wrapper.setProps({ filterbarFold: false })
+    wrapper.vm.toggleFilterbar()
     expect($filterbar.classList.contains(foldClassName)).toBe(false)
     $toggler.trigger('click')
     expect($filterbar.classList.contains(foldClassName)).toBe(true)
