@@ -1,3 +1,19 @@
+## [1.1.2](https://github.com/laomao800/vue-listview/compare/v1.1.1...v1.1.2) (2019-04-01)
+
+
+### Bug Fixes
+
+* **filterFields:** 修复 type 非 camalCase 时 multipleSelect value 报错问题 ([4eff86b](https://github.com/laomao800/vue-listview/commit/4eff86b))
+* 使用内置搜索类型时，避免未设置 model 时写入空键内容 ([0d7df9e](https://github.com/laomao800/vue-listview/commit/0d7df9e))
+
+
+### Performance Improvements
+
+* external axios lodash ([d958894](https://github.com/laomao800/vue-listview/commit/d958894))
+* 更新布局类方法增加 debounce ([561ecea](https://github.com/laomao800/vue-listview/commit/561ecea))
+
+
+
 ## [1.1.1](https://github.com/laomao800/vue-listview/compare/v1.1.0...v1.1.1) (2019-03-19)
 
 
