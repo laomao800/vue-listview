@@ -357,13 +357,17 @@ export default {
   },
 
   watch: {
-    height: 'initLayout',
-    fullHeight: 'initLayout',
-    showFilterSearch: 'initLayout',
-    showFilterReset: 'initLayout',
-    filterbarFold: 'initLayout',
-    filterFields: /* istanbul ignore next */ function(val) {
-      this.initLayout()
+    height: 'updateLayout',
+    fullHeight() {
+      this.initContentEvent()
+      this.updateLayout()
+    },
+    showFilterSearch: 'updateLayout',
+    showFilterReset: 'updateLayout',
+    filterbarFold: 'updateLayout',
+    filterButtons: 'updateLayout',
+    filterFields(val) {
+      this.updateLayout()
       validateFilterFields(val)
     }
   },
@@ -389,7 +393,7 @@ export default {
   },
 
   beforeDestroy: /* istanbul ignore next */ function() {
-    window.removeEventListener('resize', this.updateContentHeight)
+    window.removeEventListener('resize', this.updateContentLayout)
     window.removeEventListener('resize', this.updateFilterbarLayout)
   },
 
@@ -399,15 +403,21 @@ export default {
       await this.$nextTick()
       this.updateLayout()
 
+      this.initContentEvent()
+      this.initFilterEvent()
+    },
+
+    initContentEvent() {
       /* istanbul ignore next */
       if (this.fullHeight) {
-        window.addEventListener('resize', this.updateContentHeight)
+        window.addEventListener('resize', this.updateContentLayout)
       } else {
-        window.removeEventListener('resize', this.updateContentHeight)
+        window.removeEventListener('resize', this.updateContentLayout)
       }
+    },
 
+    initFilterEvent() {
       const validFilterFields = this.$refs.filterbar.validFilterFields
-
       if (validFilterFields.length > 0) {
         window.addEventListener('resize', this.updateFilterbarLayout)
       } else {
@@ -418,15 +428,21 @@ export default {
     /**
      * 更新所有布局数据，包括内容高度和 filterbar
      */
-    updateLayout() {
-      this.updateContentHeight()
+    updateLayout: _.debounce(
+      function() {
+        this.updateContentLayout()
       this.updateFilterbarLayout()
     },
+      0,
+      {
+        leading: true
+      }
+    ),
 
     /**
      * 更新主要内容区域高度尺寸
      */
-    async updateContentHeight() {
+    async updateContentLayout() {
       if (this._inactive) {
         // 在 listview-container 中，不是当前视图不触发重算
         return

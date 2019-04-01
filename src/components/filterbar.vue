@@ -234,6 +234,7 @@ export default {
       this.$emit('update:filterbarFold', this.internalFilterbarFold)
     },
 
+    // 此处不添加 debounce 避免展开时由于父级出现滚动条更新不及时导致界面跳动
     async updateLayout() {
       await this.$nextTick()
       const allFields = this.getAllFieldsDom()
@@ -318,6 +319,10 @@ export default {
     > * {
       margin: 0;
     }
+  }
+
+  .filterbar__submit-btn .el-button {
+    float: left;
   }
 
   .filterbar__buttons,
