@@ -49,8 +49,15 @@ module.exports = {
     )
 
     if (process.env.BUILD_MODE === 'component') {
+      const nodeExternals = require('webpack-node-externals')
       config.externals = config.externals || {} // for webpack inspect
       config.externals['element-ui'] = 'ELEMENT'
+      config.externals = [
+        config.externals,
+        nodeExternals({
+          whitelist: [/^@babel/]
+        })
+      ]
     }
 
     const version = process.env.VERSION || require('./package.json').version

@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   extends: [
@@ -15,6 +16,7 @@ module.exports = {
   ],
   rules: {
     // Only allow debugger in development
+    'no-empty': ['error', { allowEmptyCatch: true }],
     'no-debugger': process.env.PRE_COMMIT ? 'error' : 'off',
     // Only allow `console.log` in development
     'no-console': process.env.PRE_COMMIT
@@ -23,22 +25,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/**/*', 'dev/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
-      excludedFiles: 'app.config.js',
-      parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module'
-      },
-      env: {
-        browser: true
-      }
-    },
-    {
-      files: ['**/*.unit.js'],
-      parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module'
-      },
+      files: ['tests/unit/specs/**/*.unit.js'],
       env: { jest: true },
       globals: {
         mount: false,
