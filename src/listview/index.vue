@@ -431,8 +431,8 @@ export default {
     updateLayout: _.debounce(
       function() {
         this.updateContentLayout()
-      this.updateFilterbarLayout()
-    },
+        this.updateFilterbarLayout()
+      },
       0,
       {
         leading: true
