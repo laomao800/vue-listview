@@ -210,7 +210,7 @@ export default {
     // Data request
     autoload: { type: Boolean, default: true },
     requestUrl: { type: String, default: '' },
-    requestMethod: { type: String, default: 'get' },
+    requestMethod: { type: String, default: 'post' },
     requestConfig: { type: Object, default: () => ({}) },
     requestDataKeyCase: {
       type: String,
