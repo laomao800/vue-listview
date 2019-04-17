@@ -85,3 +85,22 @@ export function isValidFieldConfig(field) {
     getFieldComponentName(field.type)
   )
 }
+
+export function nodeParents(node, selector) {
+  const allMatchs = Array.from(document.querySelectorAll(selector))
+  if (allMatchs.length === 0) {
+    return null
+  }
+  function find(curNode) {
+    const parentNode = curNode.parentNode
+    if (allMatchs.includes(parentNode)) {
+      return parentNode
+    } else {
+      if (parentNode.parentNode) {
+        return find(parentNode)
+      }
+    }
+    return null
+  }
+  return find(node)
+}

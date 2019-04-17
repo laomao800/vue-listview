@@ -143,12 +143,26 @@ sidebarDepth: 2
 
 内部通过 `v-on` 绑定给 `<el-table>` 元素。
 
-### tableSelectEnable
+### tableSelectionColumn <Badge text="1.2.0+" />
 
-- type: `Boolean|String`
+- type: `Boolean` | `String` | `Object`
 - default: `true`
 
-是否开启表格行选择功能。传入 `'single'` 为表格单选效果。
+是否开启表格行选择功能。传入 `'single'` 为表格单选效果。如果需要禁用部分行的可选状态，可传入 `selectable` 属性：
+
+```js
+{
+  tableSelectionColumn: {
+    // 不传该属性默认为多选
+    type: 'single',
+
+    // 用法与 <el-table-column /> 的 selectable 一致，返回 false 表示当行不可选择
+    selectable(row, index) {
+      return index % 2 === 0
+    }
+  }
+}
+```
 
 ### tableSelection
 

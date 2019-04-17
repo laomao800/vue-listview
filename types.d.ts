@@ -220,7 +220,13 @@ declare class ListviewProps {
   tableEvents: { [k: string]: () => void }
 
   /** 是否开启表格行选择功能，传入 'single' 为表格单选效果。 default: true */
-  tableSelectEnable: boolean | 'single'
+  tableSelectionColumn:
+    | boolean
+    | string
+    | {
+        type: string
+        selectable: (row: any, index: number) => boolean
+      }
 
   /** 表格行选择的选中数据，可通过 .sync 修饰符获取更新。 default: [] */
   tableSelection: any[]

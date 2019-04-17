@@ -68,29 +68,33 @@
                 </span>
               </template>
 
-              <el-table-column
-                v-if="tableSelectEnable === 'single'"
-                :fixed="tableColumns.some(col => col.fixed)"
-                :resizable="false"
-                width="50"
-                align="center"
-                class-name="table-column--single-selection"
-              >
-                <template slot-scope="{ row }">
-                  <el-radio
-                    :value="tableSelection.indexOf(row) > -1 ? '' : false"
-                    label
-                    @click.native.stop.prevent="($event) => handleRowClick(row, $event)"
-                  />
-                </template>
-              </el-table-column>
+              <template v-if="!!selectionColumn">
+                <el-table-column
+                  v-if="selectionColumn.type === 'single'"
+                  :fixed="tableColumns.some(col => col.fixed)"
+                  :resizable="false"
+                  width="50"
+                  align="center"
+                  class-name="el-table-column--selection el-table-column--single-selection"
+                >
+                  <template slot-scope="{ row, $index }">
+                    <el-radio
+                      :value="tableSelection.indexOf(row) > -1 ? '' : null"
+                      :disabled="selectionColumn.selectable ? !selectionColumn.selectable.call(null, row, $index) : false"
+                      label
+                      @click.native.stop.prevent="($event) => handleRowClick(row, $event)"
+                    />
+                  </template>
+                </el-table-column>
 
-              <el-table-column
-                v-else-if="!!tableSelectEnable"
-                type="selection"
-                width="50"
-                align="center"
-              />
+                <el-table-column
+                  v-else
+                  v-bind="selectionColumn"
+                  type="selection"
+                  width="50"
+                  align="center"
+                />
+              </template>
 
               <template v-for="(column, index) in tableColumns">
                 <v-node :key="index" :node="renderTableColumn(column)"/>
@@ -126,7 +130,8 @@ import { warn, error } from '@/utils/debug'
 import {
   dataMapping,
   parseSizeWithUnit,
-  isValidFieldValue
+  isValidFieldValue,
+  nodeParents
 } from '@/utils/utils'
 import {
   camelCaseObjectKey,
@@ -268,7 +273,7 @@ export default {
     tableColumns: { type: Array, default: () => [] },
     tableProps: { type: Object, default: () => ({}) },
     tableEvents: { type: Object, default: () => ({}) },
-    tableSelectEnable: { type: [Boolean, String], default: true },
+    tableSelectionColumn: { type: [Boolean, String, Object], default: true },
     tableSelection: { type: Array, default: () => [] },
 
     // Pager
@@ -294,6 +299,26 @@ export default {
   },
 
   computed: {
+    /**
+     * 规范化表格选择列配置
+     */
+    selectionColumn() {
+      const column = this.tableSelectionColumn
+      if (column === false) {
+        return false
+      }
+      let finalColumn = {}
+      if (column === 'single') {
+        finalColumn.type = 'single'
+      } else if (_.isPlainObject(column)) {
+        finalColumn.type = column.type === 'single' ? 'single' : 'selection'
+        finalColumn.selectable = _.isFunction(column.selectable)
+          ? column.selectable
+          : null
+      }
+      return finalColumn
+    },
+
     /**
      * 内容区域垂直铺满屏幕后需要减去的距离，包括了可能的装饰性留白的内外边距尺寸
      */
@@ -676,12 +701,20 @@ export default {
     /**
      * el-table 开启表格数据选择功能时表格行点击切换已选选项
      */
-    handleRowClick(row, event) {
-      // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
-      if (this.tableSelectEnable === 'single') {
-        this.$refs.contentTable.store.states.selection = []
+    handleRowClick(row, column, event) {
+      if (this.selectionColumn) {
+        if (this.selectionColumn.selectable) {
+          // 选择列中若有禁用选项则当行数据禁止选中
+          const $rowNode = nodeParents(event.target, '.el-table__row')
+          const $selectNode = $rowNode.querySelector('input')
+          if (!$selectNode || $selectNode.disabled) return
+        }
+        // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
+        if (this.selectionColumn.type === 'single') {
+          this.$refs.contentTable.store.states.selection = []
+        }
+        this.$refs.contentTable.toggleRowSelection(row)
       }
-      this.$refs.contentTable.toggleRowSelection(row)
     },
 
     /**
