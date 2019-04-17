@@ -79,7 +79,7 @@
                 >
                   <template slot-scope="{ row, $index }">
                     <el-radio
-                      :value="tableSelection.indexOf(row) > -1 ? '' : null"
+                      :value="internalListSelection.indexOf(row) > -1 ? '' : null"
                       :disabled="selectionColumn.selectable ? !selectionColumn.selectable.call(null, row, $index) : false"
                       label
                       @click.native.stop.prevent="($event) => handleRowClick(row, $event)"
@@ -703,7 +703,7 @@ export default {
      */
     handleRowClick(row, column, event) {
       if (this.selectionColumn) {
-        if (this.selectionColumn.selectable) {
+        if (this.selectionColumn.selectable && event) {
           // 选择列中若有禁用选项则当行数据禁止选中
           const $rowNode = nodeParents(event.target, '.el-table__row')
           const $selectNode = $rowNode.querySelector('input')
@@ -729,7 +729,9 @@ export default {
      * el-table 自定义选中行高亮
      */
     contentTableRowClassName(row) {
-      return this.tableSelection.indexOf(row.row) > -1 ? 'row--selected' : ''
+      return this.internalListSelection.indexOf(row.row) > -1
+        ? 'row--selected'
+        : ''
     },
 
     /**
