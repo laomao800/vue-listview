@@ -55,7 +55,7 @@ module.exports = {
       config.externals = [
         config.externals,
         nodeExternals({
-          whitelist: [/^@babel/]
+          whitelist: [/^@babel/, /current-script-polyfill/]
         })
       ]
     }
