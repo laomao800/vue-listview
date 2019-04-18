@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/laomao800/vue-listview/compare/v1.2.0...v1.2.1) (2019-04-18)
+
+
+### Bug Fixes
+
+* 修复打包后 current-script-polyfill 缺失报错 ([c1fd5b8](https://github.com/laomao800/vue-listview/commit/c1fd5b8))
+
+
+
 # [1.2.0](https://github.com/laomao800/vue-listview/compare/v1.1.2...v1.2.0) (2019-04-18)
 
 
