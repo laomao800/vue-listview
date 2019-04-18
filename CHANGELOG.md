@@ -1,3 +1,24 @@
+# [1.2.0](https://github.com/laomao800/vue-listview/compare/v1.1.2...v1.2.0) (2019-04-18)
+
+
+### Bug Fixes
+
+* requestMethod 默认值修改为 'post' ([3eb08a2](https://github.com/laomao800/vue-listview/commit/3eb08a2))
+* 修复在 <listview-container/> 内 table-selection.sync 无法更新成功 ([b55f913](https://github.com/laomao800/vue-listview/commit/b55f913))
+
+
+### Features
+
+* 表格选择列配置 prop 名调整，增加支持 selectable 设置禁用选择行 ([f159248](https://github.com/laomao800/vue-listview/commit/f159248))
+
+
+### BREAKING CHANGES
+
+* tableSelectEnable 命名调整为 tableSelectionColumn
+* requestMethod 默认值修改为 'post'
+
+
+
 ## [1.1.2](https://github.com/laomao800/vue-listview/compare/v1.1.1...v1.1.2) (2019-04-01)
 
 
