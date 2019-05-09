@@ -104,3 +104,11 @@ export function nodeParents(node, selector) {
   }
   return find(node)
 }
+
+export function isPromise(obj) {
+  return (
+    !!obj &&
+    (typeof obj === 'object' || typeof obj === 'function') &&
+    typeof obj.then === 'function'
+  )
+}

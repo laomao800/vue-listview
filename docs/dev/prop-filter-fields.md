@@ -118,28 +118,26 @@
 
 有时需要从其他接口选项内容，可在 `options` 传入函数来进行异步填充，支持 2 种方式：
 
-1. 返回 `Promise`：
+1\. `Promise`：
 
 ```js
 {
   type: 'select',
   model: 'promiseOptions',
   label: 'promiseOptions',
-  options: () =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve([
-          { label: '单选项 1', value: 1 },
-          { label: '单选项 2', value: 2 },
-          { label: '单选项 3', value: 3 }
-        ])
-      }, 3000)
-    })
-  }
+  options: new Promise(resolve => {
+    setTimeout(() => {
+      resolve([
+        { label: '单选项 1', value: 1 },
+        { label: '单选项 2', value: 2 },
+        { label: '单选项 3', value: 3 }
+      ])
+    }, 3000)
+  })
 }
 ```
 
-2. 使用第一个参数 `done(options)` ：
+2\. 使用第一个参数 `done(options)` ：
 
 ```js
 {

@@ -202,16 +202,15 @@ export default {
           type: 'select',
           model: 'promiseOptions',
           label: 'promiseOptions',
-          options: () =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve([
-                  { label: '单选项 1', value: 1 },
-                  { label: '单选项 2', value: 2 },
-                  { label: '单选项 3', value: 3 }
-                ])
-              }, 3000)
-            })
+          options: new Promise(resolve => {
+            setTimeout(() => {
+              resolve([
+                { label: '单选项 1', value: 1 },
+                { label: '单选项 2', value: 2 },
+                { label: '单选项 3', value: 3 }
+              ])
+            }, 5000)
+          })
         },
         {
           type: 'multipleSelect',

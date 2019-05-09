@@ -12,6 +12,7 @@
 <script>
 import _ from 'lodash'
 import fieldMixin from './field-mixin'
+import { isPromise } from '@/utils/utils'
 
 export default {
   name: 'FieldCascader',
@@ -31,9 +32,10 @@ export default {
 
   async mounted() {
     const optionConfig = this.field.options
+    const isPromiseOption = isPromise(optionConfig)
     if (Array.isArray(optionConfig)) {
       this.internalOptions = optionConfig
-    } else if (_.isFunction(optionConfig)) {
+    } else if (_.isFunction(optionConfig) || isPromiseOption) {
       this.loading = true
       const resolver = options => {
         if (Array.isArray(options)) {
@@ -41,7 +43,9 @@ export default {
           this.loading = false
         }
       }
-      const result = await optionConfig(resolver)
+      const result = isPromiseOption
+        ? await optionConfig
+        : await optionConfig(resolver)
       resolver(result)
     }
   }
