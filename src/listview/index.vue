@@ -140,8 +140,6 @@ import {
 } from '@/utils/objectKey'
 import './style.less'
 
-const defaultPageParamKeys = { pageIndex: 'page_index', pageSize: 'page_size' }
-
 /**
  * 验证 fields 内是否有重复的 model 属性
  */
@@ -552,6 +550,9 @@ export default {
       })
 
       // 附加分页参数
+      const defaultPageParamKeys = this.$LISTVIEW && _.isPlainObject(this.$LISTVIEW.usePage)
+        ? this.$LISTVIEW.usePage
+        : { pageIndex: 'page_index', pageSize: 'page_size' }
       let indexKey = defaultPageParamKeys.pageIndex
       let sizeKey = defaultPageParamKeys.pageSize
       if (this.usePage) {

@@ -10,7 +10,8 @@ Listview.install = function(Vue, options = {}) {
       'resolveResponseErrorMessage',
       'transformRequestData',
       'transformResponseData',
-      'contentDataMap'
+      'contentDataMap',
+      'usePage'
     ])
   }
 }
