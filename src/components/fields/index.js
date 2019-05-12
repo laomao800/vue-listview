@@ -16,13 +16,14 @@ const fieldKeys = componentNames.map(key =>
   _.camelCase(key.replace(/^field/, ''))
 )
 const fieldKeysMap = _.zipObject(fieldKeys, componentNames)
+
 function getFieldComponentName(key) {
-  if (!key) {
-    /* istanbul ignore next */
-    return false
+  if (key) {
+    const fieldKey = _.camelCase(key)
+    return fieldKeysMap[fieldKey] || null
   }
-  const fieldKey = _.camelCase(key)
-  return fieldKeysMap[fieldKey]
+  /* istanbul ignore next */
+  return null
 }
 
 export { allComponents, getFieldComponentName }
