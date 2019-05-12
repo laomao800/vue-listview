@@ -1,3 +1,13 @@
+## [1.2.2](https://github.com/laomao800/vue-listview/compare/v1.2.1...v1.2.2) (2019-05-12)
+
+
+### Bug Fixes
+
+* **filterbar:** 修复 options 无法直接接收 Promise 数据 ([4f61dab](https://github.com/laomao800/vue-listview/commit/4f61dab))
+* 全局配置可配置 usePage ([515dcc3](https://github.com/laomao800/vue-listview/commit/515dcc3))
+
+
+
 ## [1.2.1](https://github.com/laomao800/vue-listview/compare/v1.2.0...v1.2.1) (2019-04-18)
 
 
