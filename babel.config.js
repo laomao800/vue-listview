@@ -1,13 +1,6 @@
-const plugins = [
-  // Support async/await
-  // https://babeljs.io/docs/plugins/transform-runtime/
-  ['@babel/transform-runtime', { helpers: true, regenerator: true }]
-]
+const plugins = []
 
-if (
-  process.env.NODE_ENV === 'production' &&
-  process.env.BUILD_MODE !== 'component'
-) {
+if (process.env.BUILD_MODE !== 'component') {
   plugins.push([
     'component',
     {

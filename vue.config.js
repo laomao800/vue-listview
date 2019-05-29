@@ -51,7 +51,7 @@ module.exports = {
     if (process.env.BUILD_MODE === 'component') {
       const nodeExternals = require('webpack-node-externals')
       config.externals = config.externals || {} // for webpack inspect
-      config.externals['element-ui'] = 'ELEMENT'
+      config.externals['element-ui'] = 'element-ui'
       config.externals = [
         config.externals,
         nodeExternals({
