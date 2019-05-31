@@ -21,8 +21,8 @@ ListviewContainer.install = function(Vue) {
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(Listview)
-  window.Vue.use(ListviewContainer)
+  Listview.install(window.Vue)
+  ListviewContainer.install(window.Vue)
 }
 
 export default Listview
