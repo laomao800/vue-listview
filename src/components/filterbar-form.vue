@@ -49,17 +49,18 @@ export default {
           )}
         </transition>
       ) : null
+      const key = field.key || field.model || null
       let content
       if (_.isFunction(field)) {
-        content = <v-node node={field()} />
+        content = <v-node node={field()} key={key} />
       } else if (_.isFunction(field.render)) {
-        content = <v-node node={field.render(field)} />
+        content = <v-node node={field.render(field)} key={key} />
       } else if (isVNode(field)) {
-        content = <v-node node={field} />
+        content = <v-node node={field} key={key} />
       } else {
         const FieldComponent = getFieldComponentName(field.type)
         content = (
-          <el-form-item>
+          <el-form-item key={key}>
             <FieldComponent
               model={this.model}
               field={field}

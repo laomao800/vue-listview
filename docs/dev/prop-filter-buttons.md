@@ -81,6 +81,13 @@ export default {
 }
 ```
 
+### key
+
+- type: `String`
+- default: `null`
+
+同 vue 组件的 `:key` 属性，若不设置会直接使用循环下标。
+
 ### children
 
 - type: `Array`

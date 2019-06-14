@@ -18,6 +18,7 @@
 | label           | √    | String   | 字段中文说明                                                                 |
 | disabled        |      | Boolean  | 是否禁用                                                                     |
 | get             |      | Function | 配置字段的取值格式，具体请查看 [get](#get) 小节说明                          |
+| key             |      | String   | 同 vue 组件的 `:key` 属性，若不设置会直接使用子项的 `model` 值               |
 | componentProps  |      | Object   | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
 | componentEvents |      | Object   | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
 | componentSlots  |      | Object   | 可传入各自组件支持的 slots ，具体可查看 [componentSlots](#componentslots)    |

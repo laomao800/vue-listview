@@ -52,12 +52,12 @@
       <div v-if="showFilterButtons" class="filterbar__buttons">
         <el-form-item>
           <template v-for="(button, index) in filterButtons">
-            <v-node v-if="isFunction(button)" :key="index" :node="button()"/>
-            <v-node v-else-if="button.render" :key="index" :node="button.render()"/>
-            <v-node v-else-if="isVNode(button)" :key="index" :node="button"/>
+            <v-node v-if="isFunction(button)" :key="button.key || index" :node="button()"/>
+            <v-node v-else-if="button.render" :key="button.key || index" :node="button.render()"/>
+            <v-node v-else-if="isVNode(button)" :key="button.key || index" :node="button"/>
             <el-dropdown
               v-else-if="Array.isArray(button.children)"
-              :key="index"
+              :key="button.key || index"
               :type="button.type"
               :split-button="button.splitButton"
               :trigger="button.trigger || 'click'"
@@ -91,7 +91,7 @@
             </el-dropdown>
             <el-button
               v-else
-              :key="index"
+              :key="button.key || index"
               :type="button.type"
               :plain="button.plain"
               :icon="button.icon"
