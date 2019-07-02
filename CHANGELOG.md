@@ -1,4 +1,19 @@
-## [1.2.3-0](https://github.com/laomao800/vue-listview/compare/v1.2.2...v1.2.3-0) (2019-05-29)
+## [1.2.3](https://github.com/laomao800/vue-listview/compare/v1.2.2...v1.2.3) (2019-07-02)
+
+
+### Bug Fixes
+
+* 修正使用 CDN 时全局配置 $LISTVIEW 配置不生效 ([026bfef](https://github.com/laomao800/vue-listview/commit/026bfef))
+
+
+### Features
+
+* upgrade to 'v-slot' syntax ([a1f9322](https://github.com/laomao800/vue-listview/commit/a1f9322))
+
+
+### Performance Improvements
+
+* filterButtons 与 filterFields 增加 key 属性支持 ([42053fe](https://github.com/laomao800/vue-listview/commit/42053fe))
 
 
 
