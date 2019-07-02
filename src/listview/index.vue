@@ -20,10 +20,10 @@
         @filter-submit="handleFilterSubmit"
         @filter-reset="handleFilterReset"
       >
-        <template slot="prepend-filterbar-submit">
+        <template #prepend-filterbar-submit>
           <slot name="prepend-filterbar-submit"/>
         </template>
-        <template slot="append-filterbar-submit">
+        <template #append-filterbar-submit>
           <slot name="append-filterbar-submit"/>
         </template>
       </filterbar>
@@ -54,7 +54,7 @@
               @row-click="handleRowClick"
               v-on="normalizeTableEvents"
             >
-              <template v-if="internalContentMessage" slot="empty">
+              <template v-if="internalContentMessage" #empty>
                 <span
                   :class="[
                     'content-message',
@@ -77,7 +77,7 @@
                   align="center"
                   class-name="el-table-column--selection el-table-column--single-selection"
                 >
-                  <template slot-scope="{ row, $index }">
+                  <template v-slot="{ row, $index }">
                     <el-radio
                       :value="internalListSelection.indexOf(row) > -1 ? '' : null"
                       :disabled="selectionColumn.selectable ? !selectionColumn.selectable.call(null, row, $index) : false"

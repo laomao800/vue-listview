@@ -20,7 +20,7 @@
     request-url="/mock/listview"
     request-method="post"
   >
-    <template slot-scope="{
+    <template v-slot="{
       filterModel,
       contentHeight,
       contentLoading,
@@ -48,7 +48,12 @@
 ```vue
 <template>
   <listview>
-    <el-button type="danger" slot="prepend-filterbar-submit">一键重算</el-button>
+    <template #prepend-filterbar-submit>
+      <el-button type="danger">Button 1</el-button>
+    </template>
+    <template #append-filterbar-submit>
+      <el-button type="danger">Button 2</el-button>
+    </template>
   </listview>
 </template>
 ```
