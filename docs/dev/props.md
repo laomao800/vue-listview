@@ -202,7 +202,7 @@ sidebarDepth: 2
 ### requestMethod
 
 - type: `String`
-- default: `get`
+- default: `post`
 
 支持 Axios 支持的方法： `get`, `delete`, `head`, `options`, `post`, `put`, `patch` 。
 
