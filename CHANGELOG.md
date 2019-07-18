@@ -1,3 +1,7 @@
+## [1.2.4](https://github.com/laomao800/vue-listview/compare/v1.2.3...v1.2.4) (2019-07-18)
+
+
+
 ## [1.2.3](https://github.com/laomao800/vue-listview/compare/v1.2.2...v1.2.3) (2019-07-02)
 
 
