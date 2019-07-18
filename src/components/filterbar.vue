@@ -78,18 +78,16 @@
                   <i class="el-icon-arrow-down el-icon--right"/>
                 </el-button>
               </template>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item
-                    v-for="(child, childIndex) in button.children"
-                    :key="childIndex"
-                    @click.native="applyButtonClick(child, $event)"
-                  >
-                    <i v-if="child.icon" :class="child.icon"/>
-                    {{ child.text }}
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="(child, childIndex) in button.children"
+                  :key="childIndex"
+                  @click.native="applyButtonClick(child, $event)"
+                >
+                  <i v-if="child.icon" :class="child.icon"/>
+                  {{ child.text }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
             </el-dropdown>
             <el-button
               v-else

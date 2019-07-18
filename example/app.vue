@@ -20,7 +20,7 @@
         :filter-fields="filterFields2"
         :filter-model="filterModel2"
       >
-        <template v-slot="{ contentData, contentMessage }">
+        <template slot-scope="{ contentData, contentMessage }">
           <el-alert
             v-if="contentMessage"
             :title="contentMessage.message"
