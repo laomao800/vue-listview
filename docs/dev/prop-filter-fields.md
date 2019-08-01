@@ -92,7 +92,7 @@
 
 ### 私有配置 `options`
 
-- type: `Array` | `() => Promise<options>` | `(done) => void`
+- type: `Array` | `Promise` | `() => Promise<options>` | `(done) => void`
 - default: `[]`
 
 对于 `select` , `multipleSelect` , `cascader` 字段，可通过 `options` 属性配置选项值：
@@ -126,15 +126,17 @@
   type: 'select',
   model: 'promiseOptions',
   label: 'promiseOptions',
-  options: new Promise(resolve => {
-    setTimeout(() => {
-      resolve([
-        { label: '单选项 1', value: 1 },
-        { label: '单选项 2', value: 2 },
-        { label: '单选项 3', value: 3 }
-      ])
-    }, 3000)
-  })
+  options() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve([
+          { label: '单选项 1', value: 1 },
+          { label: '单选项 2', value: 2 },
+          { label: '单选项 3', value: 3 }
+        ])
+      }, 3000)
+    })
+  }
 }
 ```
 

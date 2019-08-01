@@ -9,7 +9,7 @@
 
 | 参数         | 类型             | 说明                                                                  |
 | ------------ | ---------------- | --------------------------------------------------------------------- |
-| **render**   | function(scope)  | 接受参数为 { row, column, $index } ，支持返回字符串或 JSX           |
+| **render**   | function(scope)  | 接受参数为 { row, column, $index } ，支持返回字符串或 JSX             |
 | **children** | Array            | 子列配置，子项支持属性与父级一致                                      |
 | label        | String           | 表头显示的内容                                                        |
 | prop         | String           | 列字段名                                                              |
@@ -74,7 +74,7 @@
     label: '操作',
     align: 'center',
     fixed: true,
-    render: function({ row, column, $index }) {
+    render: ({ row, column, $index }) => {
       return (
         <el-button
           size="mini"
@@ -90,7 +90,7 @@
           查看
         </el-button>
       )
-    }.bind(this)
+    }
   },
 
   // 需要对数据进行简单处理后再输出
@@ -103,7 +103,7 @@
   {
     label: '是否启用',
     align: 'center',
-    render: function({ row, column, $index }) {
+    render({ row, column, $index }) {
       if (row.enable) {
         return <span style="color:#67c23a">启用</span>
       } else {
