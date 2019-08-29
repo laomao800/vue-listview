@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.4 */
+/*! Vue Listview v1.2.5 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -12993,15 +12993,15 @@ var pick_default = /*#__PURE__*/__webpack_require__.n(pick);
 var isPlainObject = __webpack_require__("60ed");
 var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"345eccac-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=ef5b2ae2&
-var listviewvue_type_template_id_ef5b2ae2_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"345eccac-vue-loader-template"}!./node_modules/@vue/cli-service/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=1e863a4a&
+var listviewvue_type_template_id_1e863a4a_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
     minHeight: _vm.fixedHeight && 'inherit'
   })},[_c('listview-header',{attrs:{"title":_vm.headerTitle,"nav":_vm.headerNav}}),_c('div',{ref:"main",staticClass:"listview__main"},[_c('filterbar',{ref:"filterbar",attrs:{"filter-buttons":_vm.filterButtons,"filter-fields":_vm.filterFields,"filter-model":_vm.filterModel,"filterbar-fold":_vm.filterbarFold,"show-filter-search":_vm.showFilterSearch,"show-filter-reset":_vm.showFilterReset},on:{"update:filterbarFold":function($event){_vm.filterbarFold=$event},"update:filterbar-fold":function($event){_vm.filterbarFold=$event},"filter-submit":_vm.handleFilterSubmit,"filter-reset":_vm.handleFilterReset}},[_c('template',{slot:"prepend-filterbar-submit"},[_vm._t("prepend-filterbar-submit")],2),_c('template',{slot:"append-filterbar-submit"},[_vm._t("append-filterbar-submit")],2)],2),_c('div',{directives:[{name:"loading",rawName:"v-loading",value:(_vm.contentLoading),expression:"contentLoading"}]},[_c('div',{ref:"content",staticClass:"listview__content",style:({
           height: _vm.contentHeight ? (_vm.contentHeight + "px") : null
-        })},[_vm._t("default",[_c('el-table',_vm._g(_vm._b({ref:"contentTable",style:({ width: '100%' }),attrs:{"data":_vm.contentData.items,"height":_vm.contentHeight,"row-class-name":_vm.contentTableRowClassName},on:{"selection-change":_vm.handleTableSelectionChange,"row-click":_vm.handleRowClick}},'el-table',_vm.normalizeTableProps,false),_vm.normalizeTableEvents),[(_vm.internalContentMessage)?_c('template',{slot:"empty"},[_c('span',{class:[
+        })},[_vm._t("default",[_c('el-table',_vm._g(_vm._b({ref:"contentTable",style:({ width: '100%' }),attrs:{"data":_vm.contentData.items,"height":_vm.contentHeight},on:{"selection-change":_vm.handleTableSelectionChange,"row-click":_vm.handleRowClick}},'el-table',_vm.normalizeTableProps,false),_vm.normalizeTableEvents),[(_vm.internalContentMessage)?_c('template',{slot:"empty"},[_c('span',{class:[
                   'content-message',
                   ( _obj = {}, _obj[("content-message--" + (_vm.internalContentMessage.type))] = _vm.internalContentMessage.type, _obj )
                 ]},[(_vm.internalContentMessage.icon)?_c('span',{staticClass:"content-message--icon"},[_c('i',{class:_vm.internalContentMessage.icon})]):_vm._e(),_c('span',{staticClass:"content-message--message"},[_vm._v(_vm._s(_vm.internalContentMessage.message))])])]):_vm._e(),(!!_vm.selectionColumn)?[(_vm.selectionColumn.type === 'single')?_c('el-table-column',{attrs:{"fixed":_vm.tableColumns.some(function (col) { return col.fixed; }),"resizable":false,"width":"50","align":"center","class-name":"el-table-column--selection el-table-column--single-selection"},scopedSlots:_vm._u([{key:"default",fn:function(ref){
@@ -13011,7 +13011,7 @@ return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=ef5b2ae2&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=1e863a4a&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/builtin/es6/objectWithoutProperties.js
 function _objectWithoutProperties(source, excluded) {
@@ -13774,6 +13774,7 @@ var style = __webpack_require__("dbac");
 
 
 
+
 /**
  * 验证 fields 内是否有重复的 model 属性
  */
@@ -14063,12 +14064,35 @@ function applyFieldGetter(payloadData, getters) {
      * 因此先通过 computed 合并所需的 props ，再统一绑定最后的合并结果
      */
     normalizeTableProps: function normalizeTableProps() {
+      var _this = this;
+
       var defaultProps = {
         size: 'small',
         border: true,
         stripe: true
       };
-      return merge_default()(defaultProps, this.tableProps);
+
+      var mergedPros = mapKeys_default()(merge_default()(defaultProps, this.tableProps), function (value, key) {
+        return kebabCase_default()(key);
+      });
+
+      var rowClassName = mergedPros['row-class-name'];
+
+      if (rowClassName) {
+        if (isFunction_default()(rowClassName)) {
+          mergedPros['row-class-name'] = function () {
+            return [_this.selectionRowClassName.apply(_this, arguments), rowClassName.apply(void 0, arguments)].join(' ');
+          };
+        } else {
+          mergedPros['row-class-name'] = function () {
+            return [_this.selectionRowClassName.apply(_this, arguments), rowClassName].join(' ');
+          };
+        }
+      } else {
+        mergedPros['row-class-name'] = this.selectionRowClassName;
+      }
+
+      return mergedPros;
     },
 
     /**
@@ -14317,7 +14341,7 @@ function applyFieldGetter(payloadData, getters) {
       var _requestData = Object(asyncToGenerator["a" /* default */])(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4() {
-        var _this = this;
+        var _this2 = this;
 
         var payloadData, defaultPageParamKeys, indexKey, sizeKey, transformRequestFunc, requestData, response, _responseError, _requestConfig, requestConfig, axiosService, res, contentResponse, validateFunc, transformResponseFunc, resolveErrorMessageFunc, finalContentDataMap, contentData;
 
@@ -14333,7 +14357,8 @@ function applyFieldGetter(payloadData, getters) {
                 return _context4.abrupt("return", warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。'));
 
               case 2:
-                // 请求参数合并转换
+                this.$emit('before-request', this); // 请求参数合并转换
+
                 payloadData = cloneDeep_default()(this.filterModel); // 应用 filter 设置内的 getter
 
                 applyFieldGetter(payloadData, this.filterModelGetters); // 删除搜索条件中的无效数据
@@ -14366,34 +14391,34 @@ function applyFieldGetter(payloadData, getters) {
 
 
                 if (!this.requestDataKeyCase) {
-                  _context4.next = 19;
+                  _context4.next = 20;
                   break;
                 }
 
                 _context4.t0 = this.requestDataKeyCase;
-                _context4.next = _context4.t0 === 'camelCase' ? 13 : _context4.t0 === 'snakeCase' ? 15 : _context4.t0 === 'pascalCase' ? 17 : 19;
+                _context4.next = _context4.t0 === 'camelCase' ? 14 : _context4.t0 === 'snakeCase' ? 16 : _context4.t0 === 'pascalCase' ? 18 : 20;
                 break;
 
-              case 13:
+              case 14:
                 payloadData = camelCaseObjectKey(payloadData);
-                return _context4.abrupt("break", 19);
+                return _context4.abrupt("break", 20);
 
-              case 15:
+              case 16:
                 payloadData = snakeCaseObjectKey(payloadData);
-                return _context4.abrupt("break", 19);
+                return _context4.abrupt("break", 20);
 
-              case 17:
+              case 18:
                 payloadData = pascalCaseObjectKey(payloadData);
-                return _context4.abrupt("break", 19);
+                return _context4.abrupt("break", 20);
 
-              case 19:
+              case 20:
                 // 自定义请求参数转换方法
                 // prettier-ignore
                 transformRequestFunc = this.$LISTVIEW && isFunction_default()(this.$LISTVIEW.transformRequestData) ? this.$LISTVIEW.transformRequestData : this.transformRequestData;
                 requestData = transformRequestFunc ? transformRequestFunc(payloadData) : payloadData; // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
 
                 if (!(requestData === false)) {
-                  _context4.next = 24;
+                  _context4.next = 25;
                   break;
                 }
 
@@ -14401,27 +14426,27 @@ function applyFieldGetter(payloadData, getters) {
                 this.contentLoading = false;
                 return _context4.abrupt("return");
 
-              case 24:
+              case 25:
                 this.contentLoading = true;
                 response = null;
                 _responseError = false;
 
                 if (!this.requestHandler) {
-                  _context4.next = 33;
+                  _context4.next = 34;
                   break;
                 }
 
-                _context4.next = 30;
+                _context4.next = 31;
                 return this.requestHandler(requestData);
 
-              case 30:
+              case 31:
                 response = _context4.sent;
-                _context4.next = 55;
+                _context4.next = 56;
                 break;
 
-              case 33:
+              case 34:
                 if (!this.requestUrl) {
-                  _context4.next = 55;
+                  _context4.next = 56;
                   break;
                 }
 
@@ -14446,36 +14471,36 @@ function applyFieldGetter(payloadData, getters) {
                 requestConfig = merge_default()(_requestConfig, this.requestConfig); // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
 
                 requestConfig.cancelToken = new axios_default.a.CancelToken(function (cancel) {
-                  _this._requestCancelToken = cancel;
+                  _this2._requestCancelToken = cancel;
                 });
-                _context4.prev = 39;
+                _context4.prev = 40;
                 axiosService = axios_default.a.create();
-                _context4.next = 43;
+                _context4.next = 44;
                 return axiosService(requestConfig);
 
-              case 43:
+              case 44:
                 res = _context4.sent;
                 response = res.data;
-                _context4.next = 55;
+                _context4.next = 56;
                 break;
 
-              case 47:
-                _context4.prev = 47;
-                _context4.t1 = _context4["catch"](39);
+              case 48:
+                _context4.prev = 48;
+                _context4.t1 = _context4["catch"](40);
                 _responseError = true;
 
                 if (!axios_default.a.isCancel(_context4.t1)) {
-                  _context4.next = 54;
+                  _context4.next = 55;
                   break;
                 }
 
                 return _context4.abrupt("return", false);
 
-              case 54:
+              case 55:
                 // 非内部取消的异常才解析错误信息
                 this.setContentMessage(_context4.t1.message, 'error');
 
-              case 55:
+              case 56:
                 this.contentLoading = false;
                 contentResponse = null;
 
@@ -14510,12 +14535,14 @@ function applyFieldGetter(payloadData, getters) {
                   this.updateFilterbarLayout();
                 }
 
-              case 63:
+                this.$emit('requested', this);
+
+              case 65:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[39, 47]]);
+        }, _callee4, this, [[40, 48]]);
       }));
 
       return function requestData() {
@@ -14555,7 +14582,7 @@ function applyFieldGetter(payloadData, getters) {
     /**
      * el-table 自定义选中行高亮
      */
-    contentTableRowClassName: function contentTableRowClassName(row) {
+    selectionRowClassName: function selectionRowClassName(row) {
       return this.internalListSelection.indexOf(row.row) > -1 ? 'row--selected' : '';
     },
 
@@ -14563,7 +14590,7 @@ function applyFieldGetter(payloadData, getters) {
      * tableColumns 转换为 el-table-column ，支持 children 属性多级列配置
      */
     renderTableColumn: function renderTableColumn(tableColumn) {
-      var _this2 = this;
+      var _this3 = this;
 
       var _createColumn = function _createColumn(column) {
         var render = column.render,
@@ -14583,7 +14610,7 @@ function applyFieldGetter(payloadData, getters) {
         var VNodeChildren = Array.isArray(children) ? children.map(function (child) {
           return _createColumn(child);
         }) : null;
-        return _this2.$createElement('el-table-column', VNodeData, VNodeChildren);
+        return _this3.$createElement('el-table-column', VNodeData, VNodeChildren);
       }; // TODO: tableColumn validator
 
 
@@ -14647,7 +14674,7 @@ function applyFieldGetter(payloadData, getters) {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_ef5b2ae2_render,
+  listviewvue_type_template_id_1e863a4a_render,
   staticRenderFns,
   false,
   null,
