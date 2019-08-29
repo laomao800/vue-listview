@@ -48,7 +48,6 @@
               :data="contentData.items"
               :height="contentHeight"
               :style="{ width: '100%' }"
-              :row-class-name="contentTableRowClassName"
               v-bind="normalizeTableProps"
               @selection-change="handleTableSelectionChange"
               @row-click="handleRowClick"
@@ -355,7 +354,28 @@ export default {
         border: true,
         stripe: true
       }
-      return _.merge(defaultProps, this.tableProps)
+      const mergedPros = _.mapKeys(
+        _.merge(defaultProps, this.tableProps),
+        (value, key) => _.kebabCase(key)
+      )
+      const rowClassName = mergedPros['row-class-name']
+      if (rowClassName) {
+        if (_.isFunction(rowClassName)) {
+          mergedPros['row-class-name'] = (...args) => [
+            this.selectionRowClassName(...args),
+            rowClassName(...args)
+          ].join(' ')
+        } else {
+          mergedPros['row-class-name'] = (...args) => [
+            this.selectionRowClassName(...args),
+            rowClassName
+          ].join(' ')
+        }
+      } else {
+        mergedPros['row-class-name'] = this.selectionRowClassName
+      }
+
+      return mergedPros
     },
 
     /**
@@ -729,7 +749,7 @@ export default {
     /**
      * el-table 自定义选中行高亮
      */
-    contentTableRowClassName(row) {
+    selectionRowClassName(row) {
       return this.internalListSelection.indexOf(row.row) > -1
         ? 'row--selected'
         : ''

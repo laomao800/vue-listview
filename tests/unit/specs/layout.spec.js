@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { mount } from '@vue/test-utils'
 import Listview from '@/index.js'
 import ListviewHeader from '@/components/listview-header'
@@ -40,7 +39,7 @@ describe('layout', () => {
   })
 
   describe('height', () => {
-    it('specify height', async () => {
+    it('specify height', () => {
       const wrapper = mount(Listview, {
         propsData: {
           autoload: false,
@@ -49,7 +48,6 @@ describe('layout', () => {
         }
       })
       expect(wrapper.element.style.height).toBe('500px')
-      await Vue.nextTick()
     })
   })
 
@@ -87,5 +85,39 @@ describe('layout', () => {
   it('pager off', () => {
     const wrapper = mount(Listview, { propsData: { usePage: false } })
     expect(wrapper.vm.$el.querySelector('.listview__page')).toBe(null)
+  })
+
+  describe('row class name', () => {
+    it('row string class', async () => {
+      const wrapper = mount(Listview, {
+        propsData: {
+          tableProps: {
+            rowClassName: 'row-view-class'
+          }
+        }
+      })
+      expect(
+        wrapper.vm.$refs.contentTable.rowClassName({
+          row: {},
+          rowIndex: 1
+        })
+      ).toContain('row-view-class')
+    })
+
+    it('row func class', () => {
+      const wrapper = mount(Listview, {
+        propsData: {
+          tableProps: {
+            rowClassName: ({ rowIndex }) => 'row-' + rowIndex
+          }
+        }
+      })
+      expect(
+        wrapper.vm.$refs.contentTable.rowClassName({
+          row: {},
+          rowIndex: 1
+        })
+      ).toContain('row-1')
+    })
   })
 })
