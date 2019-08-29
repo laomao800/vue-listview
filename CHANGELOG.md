@@ -1,8 +1,18 @@
-## [1.2.4](https://github.com/laomao800/vue-listview/compare/v1.2.3...v1.2.4) (2019-07-18)
+## [1.2.5](https://github.com/laomao800/vue-listview/compare/v1.2.4...v1.2.5) (2019-08-29)
+
+
+### Bug Fixes
+
+* 修正 tableProps.rowClassName 配置无效 ([aff2d8f](https://github.com/laomao800/vue-listview/commit/aff2d8f))
+
+
+### Features
+
+* 增加 before-request 与 requested 事件 ([22a13be](https://github.com/laomao800/vue-listview/commit/22a13be))
 
 
 
-## [1.2.3](https://github.com/laomao800/vue-listview/compare/v1.2.2...v1.2.3) (2019-07-02)
+## [1.2.4](https://github.com/laomao800/vue-listview/compare/v1.2.2...v1.2.4) (2019-07-18)
 
 
 ### Bug Fixes
