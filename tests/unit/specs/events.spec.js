@@ -1,7 +1,8 @@
+import Vue from 'vue'
 import { mount } from '@vue/test-utils'
 import Listview from '@/index'
 
-describe('listview - events', () => {
+describe('events', () => {
   const wrapper = mount({
     template: `
       <Listview
@@ -30,5 +31,20 @@ describe('listview - events', () => {
     expect(wrapper.emitted('filter-reset').length).toBe(1)
     resetBtn.trigger('click')
     expect(wrapper.emitted('filter-reset').length).toBe(2)
+  })
+
+  it('before-request & requested', async () => {
+    const wrapper = mount(Listview, {
+      propsData: {
+        autoload: false,
+        requestHandler: () => ({})
+      }
+    })
+    wrapper.vm.search()
+    await Vue.nextTick()
+    expect(wrapper.emitted('before-request')).toBeTruthy()
+    expect(wrapper.emitted('before-request').length).toBe(1)
+    expect(wrapper.emitted('requested')).toBeTruthy()
+    expect(wrapper.emitted('requested').length).toBe(1)
   })
 })

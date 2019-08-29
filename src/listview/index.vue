@@ -558,6 +558,8 @@ export default {
         return warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
       }
 
+      this.$emit('before-request', this)
+
       // 请求参数合并转换
       let payloadData = _.cloneDeep(this.filterModel)
 
@@ -717,6 +719,8 @@ export default {
       if (!this.fullHeight) {
         this.updateFilterbarLayout()
       }
+
+      this.$emit('requested', this)
     },
 
     /**
