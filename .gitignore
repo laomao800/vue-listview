@@ -13,8 +13,6 @@ node_modules/
 # local env files
 .env.local
 .env.*.local
-scripts/release-private.js
-docs/.vuepress/config-private.js
 
 # Log files
 *.log

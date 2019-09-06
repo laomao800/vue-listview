@@ -215,7 +215,7 @@ export default {
 
     handleFilterReset() {
       const model = this.filterModel
-      this.filterFields.forEach(field => {
+      const _resetField = (field) => {
         const name = field.model
         if (name && model.hasOwnProperty(name)) {
           const value = model[name]
@@ -224,6 +224,13 @@ export default {
           } else {
             this.$set(model, name, undefined)
           }
+        }
+      }
+      this.filterFields.forEach((field) => {
+        if (Array.isArray(field)) {
+          field.forEach(_resetField)
+        } else {
+          _resetField(field)
         }
       })
       this.$emit('filter-reset', this.filterModel)

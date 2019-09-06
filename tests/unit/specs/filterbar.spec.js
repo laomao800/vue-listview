@@ -315,6 +315,11 @@ describe('filterbar - SearchButton & ResetButton', () => {
       const wrapper = mount(Filterbar, {
         propsData: {
           filterFields: [
+            [
+              { type: 'text', model: 'text2' },
+              { type: 'number', model: 'number2' },
+              { type: 'multipleSelect', model: 'multipleSelect2' }
+            ],
             { type: 'text', model: 'text' },
             { type: 'number', model: 'number' },
             { type: 'multipleSelect', model: 'multipleSelect' }
@@ -323,6 +328,9 @@ describe('filterbar - SearchButton & ResetButton', () => {
             text: 'mock text',
             number: 100,
             multipleSelect: [1, 2, 3],
+            text2: 'mock text',
+            number2: 100,
+            multipleSelect2: [1, 2, 3],
             hiddenParam: 'hidden'
           }
         }
@@ -333,6 +341,9 @@ describe('filterbar - SearchButton & ResetButton', () => {
         text: undefined,
         number: undefined,
         multipleSelect: [],
+        text2: undefined,
+        number2: undefined,
+        multipleSelect2: [],
         hiddenParam: 'hidden'
       })
     })

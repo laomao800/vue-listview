@@ -157,11 +157,13 @@ export default {
           },
           {
             type: 'text',
-            label: '支持组合多个字段为一个整体'
+            label: '支持组合多个字段为一个整体',
+            model: 'group-text-1'
           },
           {
             type: 'text',
-            label: '避免被自动收起拆开'
+            label: '避免被自动收起拆开',
+            model: 'group-text-2'
           }
         ],
         [
