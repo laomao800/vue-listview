@@ -1,6 +1,6 @@
 {
   "name": "@laomao800/vue-listview",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "publishConfig": {
     "access": "public"
   },
