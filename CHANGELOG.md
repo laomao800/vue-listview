@@ -1,3 +1,12 @@
+## [1.2.6](https://github.com/laomao800/vue-listview/compare/v1.2.5...v1.2.6) (2019-09-06)
+
+
+### Bug Fixes
+
+* 修正 filterFields 内组合形式的字段无法重置 ([5946a57](https://github.com/laomao800/vue-listview/commit/5946a57))
+
+
+
 ## [1.2.5](https://github.com/laomao800/vue-listview/compare/v1.2.4...v1.2.5) (2019-08-29)
 
 
