@@ -1,6 +1,8 @@
 # Vue Listview
 
-[![Build Status](https://travis-ci.org/laomao800/vue-listview.svg?branch=master)](https://travis-ci.org/laomao800/vue-listview) [![codecov](https://codecov.io/gh/laomao800/vue-listview/branch/master/graph/badge.svg)](https://codecov.io/gh/laomao800/vue-listview) [![npm](https://img.shields.io/npm/v/@laomao800/vue-listview.svg)](https://www.npmjs.com/package/@laomao800/vue-listview)
+[![Build Status](https://travis-ci.org/laomao800/vue-listview.svg?branch=master)](https://travis-ci.org/laomao800/vue-listview)
+[![codecov](https://codecov.io/gh/laomao800/vue-listview/branch/master/graph/badge.svg)](https://codecov.io/gh/laomao800/vue-listview)
+[![npm](https://img.shields.io/npm/v/@laomao800/vue-listview.svg)](https://www.npmjs.com/package/@laomao800/vue-listview)
 
 Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) ，可用于生成列表类的页面布局组件。
 
@@ -18,18 +20,18 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 ## 安装
 
 ```bash
-npm i -S @laomao800/vue-listview
+yarn add @laomao800/vue-listview element-ui
 
 # OR
 
-yarn add @laomao800/vue-listview
+npm i -S @laomao800/vue-listview element-ui
 ```
+
+**Element-UI 作为 peerDependencies 需要同步安装。**
 
 ## 使用
 
 ### 全局注册
-
-**直接 import 的文件为不包含 Element-UI 的 `listview-component` 文件，需确保项目内已有 Element-UI。**
 
 ```js
 // main.js

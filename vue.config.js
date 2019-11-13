@@ -67,6 +67,7 @@ module.exports = {
   },
 
   devServer: {
+    disableHostCheck: true,
     before: require('./tests/mock-api')
   }
 }
