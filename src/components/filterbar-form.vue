@@ -84,7 +84,7 @@ export default {
   render() {
     return (
       <div>
-        {this.fields.map((field, index) => {
+        {this.fields.map(field => {
           if (Array.isArray(field)) {
             const subFieldNodes = []
             field.forEach(subField => {

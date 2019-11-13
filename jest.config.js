@@ -4,21 +4,12 @@ const _ = require('lodash')
 process.env.MOCK_API_PORT = process.env.MOCK_API_PORT || _.random(9000, 9999)
 
 module.exports = {
+  preset: '@vue/cli-plugin-unit-jest',
   setupFiles: ['<rootDir>/tests/unit/setup'],
   globalSetup: '<rootDir>/tests/unit/global-setup',
   globalTeardown: '<rootDir>/tests/unit/global-teardown',
-  setupTestFrameworkScriptFile: '<rootDir>/tests/unit/matchers',
-  testMatch: [
-    '**/(*.)unit.js',
-    '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
-  ],
+  setupFilesAfterEnv: ['<rootDir>/tests/unit/matchers'],
   moduleFileExtensions: ['js', 'json', 'vue'],
-  transform: {
-    '^.+\\.vue$': 'vue-jest',
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
-      'jest-transform-stub',
-    '^.+\\.jsx?$': 'babel-jest'
-  },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less)$': '<rootDir>/tests/unit/__mocks__/styleMock.js'

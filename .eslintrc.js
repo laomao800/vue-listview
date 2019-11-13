@@ -1,17 +1,13 @@
 module.exports = {
   root: true,
+  env: {
+    node: true
+  },
   parserOptions: {
     parser: 'babel-eslint',
     sourceType: 'module'
   },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#bulb-rules
-    'plugin:vue/recommended',
-    // https://github.com/prettier/eslint-config-prettier
-    'prettier',
-    'prettier/standard',
-    'prettier/vue'
-  ],
+  extends: ['plugin:vue/essential', '@vue/prettier'],
   rules: {
     // Only allow debugger in development
     'no-empty': ['error', { allowEmptyCatch: true }],

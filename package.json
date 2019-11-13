@@ -1,60 +1,52 @@
 {
   "name": "@laomao800/vue-listview",
   "version": "1.2.6",
-  "publishConfig": {
-    "access": "public"
+  "author": "laomao800 <laomao800@gmail.com>",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "rimraf dist&npm run build:component&npm run build:full",
+    "lint": "vue-cli-service lint",
+    "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --target lib --name listview-component src/index.component.js",
+    "build:full": "vue-cli-service build --no-clean --target lib --name listview src/index.js",
+    "docs:build": "vuepress build docs",
+    "docs:serve": "vuepress dev docs",
+    "release": "node scripts/release.js",
+    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:cover": "vue-cli-service test:unit --coverage",
+    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change"
   },
   "main": "dist/listview-component.common.js",
-  "types": "types.d.ts",
   "files": [
     "dist",
     "src",
     "types.d.ts"
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "lint": "vue-cli-service lint",
-    "release": "node scripts/release.js",
-    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
-    "build": "rimraf dist&npm run build:component&npm run build:full",
-    "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --target lib --name listview-component src/index.component.js",
-    "build:full": "vue-cli-service build --no-clean --target lib --name listview src/index.js",
-    "docs:serve": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "test:unit": "vue-cli-service test:unit",
-    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
-    "test:unit:cover": "vue-cli-service test:unit --coverage"
-  },
-  "author": "laomao800 <laomao800@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/laomao800/vue-listview.git"
-  },
-  "bugs": {
-    "url": "https://github.com/laomao800/vue-listview/issues"
-  },
   "dependencies": {
+    "@laomao800/parse-size-with-unit": "^1.0.0",
     "axios": "^0.18.0",
+    "core-js": "^3.3.2",
+    "element-ui": "2.x",
     "has-values": "^2.0.1",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.6.0",
-    "@vue/cli-plugin-eslint": "^3.6.0",
-    "@vue/cli-plugin-unit-jest": "^3.6.3",
-    "@vue/cli-service": "^3.6.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-plugin-unit-jest": "^4.0.5",
+    "@vue/cli-service": "^4.0.5",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^24.1.0",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-require-context-hook": "^1.0.0",
     "conventional-changelog": "^3.0.5",
     "conventional-changelog-angular": "^5.0.2",
     "cross-env": "^5.2.0",
-    "element-ui": "^2.6.x",
+    "eslint": "5",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.1.0",
     "execa": "^1.0.0",
     "express": "^4.16.3",
@@ -70,6 +62,7 @@
     "markdown-loader": "^3.0.0",
     "mockjs": "^1.0.1-beta3",
     "normalize.css": "^8.0.1",
+    "prettier": "^1.19.1",
     "rimraf": "^2.6.3",
     "semver": "^5.5.1",
     "stylelint": "^9.2.1",
@@ -77,18 +70,21 @@
     "stylelint-config-prettier": "^3.2.0",
     "stylelint-config-recess-order": "^2.0.0",
     "stylelint-config-standard": "^18.2.0",
-    "vue": "^2.6.10",
     "vue-jest": "^3.0.4",
     "vue-server-renderer": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
     "vuepress": "^0.14.8",
     "webpack-node-externals": "^1.7.2"
   },
+  "bugs": {
+    "url": "https://github.com/laomao800/vue-listview/issues"
+  },
   "keywords": [
     "vue-listview",
     "vue",
     "listview"
   ],
+  "license": "MIT",
   "lint-staged": {
     "*.js": [
       "vue-cli-service lint",
@@ -98,5 +94,13 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laomao800/vue-listview.git"
+  },
+  "types": "types.d.ts"
 }

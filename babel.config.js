@@ -11,13 +11,13 @@ if (process.env.BUILD_MODE !== 'component') {
 }
 
 module.exports = {
-  presets: ['@vue/app'],
+  presets: ['@vue/cli-plugin-babel/preset'],
   plugins,
   env: {
     test: {
       presets: [
         [
-          '@vue/app',
+          '@vue/cli-plugin-babel/preset',
           {
             // Enable Babel's polyfills for Jest tests
             useBuiltIns: 'usage',

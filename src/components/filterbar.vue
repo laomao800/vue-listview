@@ -29,19 +29,25 @@
           class="filterbar__submit-btn"
         >
           <el-form-item>
-            <slot name="prepend-filterbar-submit"/>
+            <slot name="prepend-filterbar-submit" />
             <el-button
               v-if="showFilterSearch"
               type="primary"
               icon="el-icon-search"
               @click="handleFilterSearch"
-            >搜索</el-button>
-            <el-button v-if="showFilterReset" @click="handleFilterReset">重置</el-button>
-            <slot name="append-filterbar-submit"/>
+            >
+              搜索
+            </el-button>
+            <el-button v-if="showFilterReset" @click="handleFilterReset">
+              重置
+            </el-button>
+            <slot name="append-filterbar-submit" />
           </el-form-item>
         </div>
         <el-button
-          :icon="internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'"
+          :icon="
+            internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'
+          "
           type="primary"
           class="filterbar__submit-more"
           @click="toggleFilterbar"
@@ -52,9 +58,21 @@
       <div v-if="showFilterButtons" class="filterbar__buttons">
         <el-form-item>
           <template v-for="(button, index) in filterButtons">
-            <v-node v-if="isFunction(button)" :key="button.key || index" :node="button()"/>
-            <v-node v-else-if="button.render" :key="button.key || index" :node="button.render()"/>
-            <v-node v-else-if="isVNode(button)" :key="button.key || index" :node="button"/>
+            <v-node
+              v-if="isFunction(button)"
+              :key="button.key || index"
+              :node="button()"
+            />
+            <v-node
+              v-else-if="button.render"
+              :key="button.key || index"
+              :node="button.render()"
+            />
+            <v-node
+              v-else-if="isVNode(button)"
+              :key="button.key || index"
+              :node="button"
+            />
             <el-dropdown
               v-else-if="Array.isArray(button.children)"
               :key="button.key || index"
@@ -65,7 +83,7 @@
               @click="applyButtonClick(button, $event)"
             >
               <template v-if="button.splitButton">
-                <i v-if="button.icon" :class="button.icon"/>
+                <i v-if="button.icon" :class="button.icon" />
                 {{ button.text }}
               </template>
               <template v-else>
@@ -75,7 +93,7 @@
                   @click="applyButtonClick(button, $event)"
                 >
                   {{ button.text }}
-                  <i class="el-icon-arrow-down el-icon--right"/>
+                  <i class="el-icon-arrow-down el-icon--right" />
                 </el-button>
               </template>
               <el-dropdown-menu slot="dropdown">
@@ -84,7 +102,7 @@
                   :key="childIndex"
                   @click.native="applyButtonClick(child, $event)"
                 >
-                  <i v-if="child.icon" :class="child.icon"/>
+                  <i v-if="child.icon" :class="child.icon" />
                   {{ child.text }}
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -96,7 +114,9 @@
               :plain="button.plain"
               :icon="button.icon"
               @click="applyButtonClick(button, $event)"
-            >{{ button.text }}</el-button>
+            >
+              {{ button.text }}
+            </el-button>
           </template>
         </el-form-item>
       </div>
@@ -215,7 +235,7 @@ export default {
 
     handleFilterReset() {
       const model = this.filterModel
-      const _resetField = (field) => {
+      const _resetField = field => {
         const name = field.model
         if (name && model.hasOwnProperty(name)) {
           const value = model[name]
@@ -226,7 +246,7 @@ export default {
           }
         }
       }
-      this.filterFields.forEach((field) => {
+      this.filterFields.forEach(field => {
         if (Array.isArray(field)) {
           field.forEach(_resetField)
         } else {

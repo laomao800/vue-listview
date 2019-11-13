@@ -6,7 +6,9 @@
         v-for="(item, index) in internalNav"
         :key="index"
         :to="item.to"
-      >{{ item.text }}</el-breadcrumb-item>
+      >
+        {{ item.text }}
+      </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>

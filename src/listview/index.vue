@@ -137,16 +137,12 @@
 <script>
 import _ from 'lodash'
 import axios from 'axios'
+import parseSize from '@laomao800/parse-size-with-unit'
 import VNode from '@/components/v-node'
 import ListviewHeader from '@/components/listview-header.vue'
 import Filterbar from '@/components/filterbar.vue'
 import { warn, error } from '@/utils/debug'
-import {
-  dataMapping,
-  parseSizeWithUnit,
-  isValidFieldValue,
-  nodeParents
-} from '@/utils/utils'
+import { dataMapping, isValidFieldValue, nodeParents } from '@/utils/utils'
 import {
   camelCaseObjectKey,
   snakeCaseObjectKey,
@@ -344,7 +340,7 @@ export default {
      * 如果为固定高度布局，则会返回能直接用于 css height 的值
      */
     fixedHeight() {
-      return parseSizeWithUnit(this.height)
+      return parseSize(this.height)
     },
 
     /**
@@ -398,7 +394,7 @@ export default {
       const getters = {}
       _.transform(
         fields,
-        function(result, field, key) {
+        (result, field) => {
           if (_.isFunction(field.get)) {
             result[field.model] = field.get
           }

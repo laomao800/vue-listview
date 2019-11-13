@@ -13,25 +13,6 @@ export function isVNode(node) {
 }
 
 /**
- * 带数值单位字符转换
- * 50 -> '50px'
- * '50px' -> '50px'
- * '50.5px' -> '50px'
- * '50%' -> '50%'
- * '50.5%' -> '50%'
- * 'a' -> null
- */
-export function parseSizeWithUnit(value) {
-  if (/^-?\d+(.\d+)?(%|(px))$/.test(value)) {
-    return value
-  } else if (typeof value === 'number') {
-    return `${value}px`
-  }
-  const num = parseInt(value, 10)
-  return !isNaN(num) ? `${num}px` : null
-}
-
-/**
  * 根据映射表设置的结构提取数据并返回一个新对象
  *
  * dataMapping({

@@ -434,7 +434,7 @@ describe('object-path .get tests', function() {
   // this differs from object-path, which does not allow
   // the user to get non-own properties for some reason.
   it('should get non-"own" properties', function() {
-    const Base = function(enabled) {}
+    const Base = function() {}
     Base.prototype = {
       one: {
         two: true

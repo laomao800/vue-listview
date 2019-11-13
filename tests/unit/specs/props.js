@@ -176,7 +176,7 @@ export const tableColumns = [
     width: 150,
     align: 'center',
     fixed: true,
-    render: prop => {
+    render: () => {
       return (
         <div>
           <el-button

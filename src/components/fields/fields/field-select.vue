@@ -7,7 +7,11 @@
     v-bind="mergedProps"
     v-on="mergedEvents"
   >
-    <el-option v-for="(option, index) in internalOptions" :key="index" v-bind="option"/>
+    <el-option
+      v-for="(option, index) in internalOptions"
+      v-bind="option"
+      :key="index"
+    />
   </el-select>
 </template>
 

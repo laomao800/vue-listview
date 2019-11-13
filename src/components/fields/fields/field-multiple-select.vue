@@ -1,5 +1,5 @@
 <template functional>
-  <field-select v-bind="data.attrs" :style="data.style" v-on="listeners"/>
+  <field-select v-bind="data.attrs" :style="data.style" v-on="listeners" />
 </template>
 
 <script>
