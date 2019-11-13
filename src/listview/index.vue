@@ -6,7 +6,7 @@
     }"
     class="listview"
   >
-    <listview-header :title="headerTitle" :nav="headerNav"/>
+    <listview-header :title="headerTitle" :nav="headerNav" />
 
     <div ref="main" class="listview__main">
       <filterbar
@@ -21,10 +21,10 @@
         @filter-reset="handleFilterReset"
       >
         <template slot="prepend-filterbar-submit">
-          <slot name="prepend-filterbar-submit"/>
+          <slot name="prepend-filterbar-submit" />
         </template>
         <template slot="append-filterbar-submit">
-          <slot name="append-filterbar-submit"/>
+          <slot name="append-filterbar-submit" />
         </template>
       </filterbar>
 
@@ -57,13 +57,20 @@
                 <span
                   :class="[
                     'content-message',
-                    { [`content-message--${internalContentMessage.type}`]: internalContentMessage.type }
+                    {
+                      [`content-message--${internalContentMessage.type}`]: internalContentMessage.type
+                    }
                   ]"
                 >
-                  <span v-if="internalContentMessage.icon" class="content-message--icon">
-                    <i :class="internalContentMessage.icon"/>
+                  <span
+                    v-if="internalContentMessage.icon"
+                    class="content-message--icon"
+                  >
+                    <i :class="internalContentMessage.icon" />
                   </span>
-                  <span class="content-message--message">{{ internalContentMessage.message }}</span>
+                  <span class="content-message--message">{{
+                    internalContentMessage.message
+                  }}</span>
                 </span>
               </template>
 
@@ -78,10 +85,18 @@
                 >
                   <template slot-scope="{ row, $index }">
                     <el-radio
-                      :value="internalListSelection.indexOf(row) > -1 ? '' : null"
-                      :disabled="selectionColumn.selectable ? !selectionColumn.selectable.call(null, row, $index) : false"
+                      :value="
+                        internalListSelection.indexOf(row) > -1 ? '' : null
+                      "
+                      :disabled="
+                        selectionColumn.selectable
+                          ? !selectionColumn.selectable.call(null, row, $index)
+                          : false
+                      "
                       label
-                      @click.native.stop.prevent="($event) => handleRowClick(row, $event)"
+                      @click.native.stop.prevent="
+                        $event => handleRowClick(row, $event)
+                      "
                     />
                   </template>
                 </el-table-column>
@@ -96,7 +111,7 @@
               </template>
 
               <template v-for="(column, index) in tableColumns">
-                <v-node :key="index" :node="renderTableColumn(column)"/>
+                <v-node :key="index" :node="renderTableColumn(column)" />
               </template>
             </el-table>
           </slot>
@@ -359,15 +374,13 @@ export default {
       const rowClassName = mergedPros['row-class-name']
       if (rowClassName) {
         if (_.isFunction(rowClassName)) {
-          mergedPros['row-class-name'] = (...args) => [
-            this.selectionRowClassName(...args),
-            rowClassName(...args)
-          ].join(' ')
+          mergedPros['row-class-name'] = (...args) =>
+            [this.selectionRowClassName(...args), rowClassName(...args)].join(
+              ' '
+            )
         } else {
-          mergedPros['row-class-name'] = (...args) => [
-            this.selectionRowClassName(...args),
-            rowClassName
-          ].join(' ')
+          mergedPros['row-class-name'] = (...args) =>
+            [this.selectionRowClassName(...args), rowClassName].join(' ')
         }
       } else {
         mergedPros['row-class-name'] = this.selectionRowClassName
@@ -570,9 +583,10 @@ export default {
       })
 
       // 附加分页参数
-      const defaultPageParamKeys = this.$LISTVIEW && _.isPlainObject(this.$LISTVIEW.usePage)
-        ? this.$LISTVIEW.usePage
-        : { pageIndex: 'page_index', pageSize: 'page_size' }
+      const defaultPageParamKeys =
+        this.$LISTVIEW && _.isPlainObject(this.$LISTVIEW.usePage)
+          ? this.$LISTVIEW.usePage
+          : { pageIndex: 'page_index', pageSize: 'page_size' }
       let indexKey = defaultPageParamKeys.pageIndex
       let sizeKey = defaultPageParamKeys.pageSize
       if (this.usePage) {

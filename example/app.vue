@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <!-- eslint-disable vue/attributes-order -->
-    <listview-container :header-title="'演示列表容器'" :header-nav="['菜单1', { text: '菜单2' }]">
+    <listview-container
+      :header-title="'演示列表容器'"
+      :header-nav="['菜单1', { text: '菜单2' }]"
+    >
       <listview
         header-title="演示列表1"
         request-url="/mock/listview"
@@ -35,7 +38,7 @@
                 <div class="thumb">
                   <img
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIBAMAAABfdrOtAAAAG1BMVEXMzMwAAACZmZkzMzMZGRlmZmZMTEyysrJ/f3/9S/GQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABrklEQVR4nO3UT0/CMBjH8ccx2I56IF6nkHglQoxHnX/gSKIvwBi9TyWel7gX7tP2GQpEE4revp+EluX3ZN3ariIAAAAAAAAAAAAAAAAA8JvjwrXZsb94Ldbj5HtgVdtKJuPLuXbX4xu9Gl5N5qv54GrSXwZWtbVeIdmt3qSQtwdJSsnOVvNHkcUyCFVxjiqZaTeTtBb/W5UctkGoipMW+YV2H9Jom4828tICq4rTqXtuJV7kWdtsX5tuoc17m59bYFVx9qpOrV1anburqf50DSRbTsyhhMCq4gZpdMK06xSluzp1jS7xorZYZykEVhU3yCw8Xqd2LxGeOp9+vUhaSwisKmqM7mhzEGma5c3u5A8GaarN6ZJuv43zqew+XcnUHu/bwusX+NQu8LCS3Rde11jWt7Burby0Z3D9rls491v2QtxnNpT2Y9St1RQ+b9yTh8CqItz713dbqZS0lrA8bmv5V5Cunz0LQtX2emEJhrU/IGd2QPb0pjJw/8LSWBCqtnd0oObuxHeH+GD9qE9c3G8Dq4qWnfju9ae9EwKrAgAAAAAAAAAAAAAAAPAfPgFZpkiD9I8rfAAAAABJRU5ErkJggg=="
-                  >
+                  />
                 </div>
                 <div class="info">
                   <div class="sku">{{ item.sku }}</div>
@@ -127,7 +130,8 @@ export default {
       ],
 
       filterModel: {
-        hidden: 'hidden'
+        hidden: 'hidden',
+        multipleSelect: []
       },
       filterModel2: {},
 
