@@ -10,6 +10,10 @@
 
 参数 `keepInPage` 默认为 `false` ，传入 `true` 可以保留当前页码重新请求数据，可用于操作数据后的当页刷新。
 
+### resetFilter()
+
+重置搜索栏数据，效果与点击“重置”按钮一致。
+
 ### setContentMessage(message, type)
 
 - 参数

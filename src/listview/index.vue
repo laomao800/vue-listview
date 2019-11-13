@@ -17,8 +17,8 @@
         :filterbar-fold.sync="filterbarFold"
         :show-filter-search="showFilterSearch"
         :show-filter-reset="showFilterReset"
-        @filter-submit="handleFilterSubmit"
-        @filter-reset="handleFilterReset"
+        @filter-submit="onFilterSubmit"
+        @filter-reset="onFilterReset"
       >
         <template slot="prepend-filterbar-submit">
           <slot name="prepend-filterbar-submit" />
@@ -558,13 +558,17 @@ export default {
       this.$refs.filterbar.updateLayout()
     },
 
-    handleFilterSubmit() {
+    onFilterSubmit() {
       this.search()
       this.$emit('filter-submit', { filterModel: this.filterModel })
     },
 
-    handleFilterReset() {
+    onFilterReset() {
       this.$emit('filter-reset')
+    },
+
+    resetFilter() {
+      this.$refs.filterbar.handleFilterReset()
     },
 
     /**
@@ -720,10 +724,12 @@ export default {
 
       this.contentData = contentData
 
-      // 重置表格垂直滚动距离
-      if (this.$refs.contentTable) {
-        this.$refs.contentTable.bodyWrapper.scrollTop = 0
-      }
+      try {
+        // 重置表格垂直滚动距离
+        if (this.$refs.contentTable) {
+          this.$refs.contentTable.bodyWrapper.scrollTop = 0
+        }
+      } catch (e) {}
 
       // 若非全屏布局，有可能由于数据增加出现垂直滚动条，需要刷新搜索栏“搜索”按钮位置
       if (!this.fullHeight) {

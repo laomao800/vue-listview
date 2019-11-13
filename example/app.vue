@@ -161,7 +161,7 @@ export default {
           },
           {
             type: 'text',
-            label: '支持组合多个字段为一个整体',
+            label: '组合多个字段为整体',
             model: 'group-text-1'
           },
           {
