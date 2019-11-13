@@ -202,6 +202,29 @@ function applyFieldGetter(payloadData, getters) {
   })
 }
 
+const DEFAULT_PROPS = {
+  validateResponse: response => {
+    try {
+      return response.is_success
+    } catch (e) {
+      return false
+    }
+  },
+  resolveResponseErrorMessage: response => {
+    try {
+      return response.error_info.msg
+    } catch (e) {
+      return '未知错误'
+    }
+  },
+  transformRequestData: null,
+  transformResponseData: null,
+  contentDataMap: {
+    items: 'result.items',
+    total: 'result.total_count'
+  }
+}
+
 export default {
   name: 'Listview',
 
@@ -240,36 +263,12 @@ export default {
 
     // Adv response
     transformResponseData: { type: Function, default: null },
-    contentDataMap: {
-      type: Object,
-      default: () => ({
-        items: 'result.items',
-        total: 'result.total_count'
-      })
-    },
+    contentDataMap: { type: Object, default: null },
 
     // Request error handler
     contentMessage: { type: [Object, String], default: null },
-    validateResponse: {
-      type: Function,
-      default: /* istanbul ignore next */ function(response) {
-        try {
-          return response.is_success
-        } catch (e) {
-          return false
-        }
-      }
-    },
-    resolveResponseErrorMessage: {
-      type: Function,
-      default: /* istanbul ignore next */ function(response) {
-        try {
-          return response.error_info.msg
-        } catch (e) {
-          return '未知错误'
-        }
-      }
-    },
+    validateResponse: { type: Function, default: null },
+    resolveResponseErrorMessage: { type: Function, default: null },
 
     // Filterbar
     // TODO: validator
@@ -407,6 +406,25 @@ export default {
         getters
       )
       return getters
+    },
+
+    overrideProps() {
+      // 非 .use 引入的 Listview 未注册 $LISTVIEW
+      const globalConfig = this.$LISTVIEW || {}
+      const overrides = {}
+      const props = [
+        'validateResponse',
+        'resolveResponseErrorMessage',
+        'transformRequestData',
+        'transformResponseData',
+        'contentDataMap',
+        'usePage'
+      ]
+      props.forEach(prop => {
+        overrides[prop] =
+          this[prop] || globalConfig[prop] || DEFAULT_PROPS[prop]
+      })
+      return overrides
     }
   },
 
@@ -524,9 +542,9 @@ export default {
 
       const contentOffsetTop = this.$refs.content.getBoundingClientRect().top
       const paginationHeight = this.getPaginationHeight()
-      // prettier-ignore
       const restHeight =
-        (maxHeight + wrapOffsetTop) -
+        maxHeight +
+        wrapOffsetTop -
         contentOffsetTop -
         paginationHeight -
         this.contentBottomOffset
@@ -583,24 +601,19 @@ export default {
       })
 
       // 附加分页参数
-      const defaultPageParamKeys =
-        this.$LISTVIEW && _.isPlainObject(this.$LISTVIEW.usePage)
-          ? this.$LISTVIEW.usePage
-          : { pageIndex: 'page_index', pageSize: 'page_size' }
-      let indexKey = defaultPageParamKeys.pageIndex
-      let sizeKey = defaultPageParamKeys.pageSize
-      if (this.usePage) {
-        if (_.isPlainObject(this.usePage)) {
-          indexKey = this.usePage.pageIndex || indexKey
-          sizeKey = this.usePage.pageSize || sizeKey
+      let indexKey = 'page_index'
+      let sizeKey = 'page_size'
+      const usePage = this.overrideProps['usePage']
+      if (usePage) {
+        if (_.isPlainObject(usePage)) {
+          indexKey = usePage['pageIndex'] || indexKey
+          sizeKey = usePage['pageSize'] || sizeKey
         }
         payloadData[indexKey] = this.currentPage
         payloadData[sizeKey] = this.currentPageSize
       } else {
-        try {
-          delete payloadData[indexKey]
-          delete payloadData[sizeKey]
-        } catch (e) {}
+        delete payloadData[indexKey]
+        delete payloadData[sizeKey]
       }
 
       // 请求参数 key 拼写方法转换
@@ -619,12 +632,9 @@ export default {
       }
 
       // 自定义请求参数转换方法
-      // prettier-ignore
-      const transformRequestFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.transformRequestData)
-        ? this.$LISTVIEW.transformRequestData
-        : this.transformRequestData
-      const requestData = transformRequestFunc
-        ? transformRequestFunc(payloadData)
+      const transformRequestFn = this.overrideProps['transformRequestData']
+      const requestData = transformRequestFn
+        ? transformRequestFn(payloadData)
         : payloadData
 
       // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
@@ -688,34 +698,26 @@ export default {
       let contentResponse = null
       if (!_responseError) {
         // 自定义 requestHandler 与内置请求响应都通过验证流程
-        const validateFunc =
-          this.$LISTVIEW && _.isFunction(this.$LISTVIEW.validateResponse)
-            ? this.$LISTVIEW.validateResponse
-            : this.validateResponse
+        const validateFunc = this.overrideProps.validateResponse
         if (validateFunc(response)) {
           // 清空错误信息
           this.setContentMessage(null)
-          // prettier-ignore
-          const transformResponseFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.transformResponseData)
-            ? this.$LISTVIEW.transformResponseData
-            : this.transformResponseData
-          contentResponse = transformResponseFunc
-            ? transformResponseFunc(response)
+          const transformResponseFn = this.overrideProps[
+            'transformResponseData'
+          ]
+          contentResponse = transformResponseFn
+            ? transformResponseFn(response)
             : response
         } else {
-          // prettier-ignore
-          const resolveErrorMessageFunc = this.$LISTVIEW && _.isFunction(this.$LISTVIEW.resolveResponseErrorMessage)
-            ? this.$LISTVIEW.resolveResponseErrorMessage
-            : this.resolveResponseErrorMessage
-          this.setContentMessage(resolveErrorMessageFunc(response), 'error')
+          const resolveErrorMessageFn = this.overrideProps[
+            'resolveResponseErrorMessage'
+          ]
+          this.setContentMessage(resolveErrorMessageFn(response), 'error')
         }
       }
 
       // 未通过验证的数据也统一通过 contentDataMap 再回传 contentData 确保格式统一
-      const finalContentDataMap =
-        this.$LISTVIEW && _.isPlainObject(this.$LISTVIEW.contentDataMap)
-          ? this.$LISTVIEW.contentDataMap
-          : this.contentDataMap
+      const finalContentDataMap = this.overrideProps['contentDataMap']
       const contentData = finalContentDataMap
         ? dataMapping(contentResponse, finalContentDataMap)
         : contentResponse
