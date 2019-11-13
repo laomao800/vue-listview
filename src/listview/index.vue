@@ -175,16 +175,14 @@ function applyFieldGetter(payloadData, getters) {
     try {
       payloadData[key] = getters[key](payloadData[key], payloadData)
     } catch (e) {
-      if (isValidFieldValue(payloadData[key])) {
-        error(
-          [
-            `FilterFields '${key}' getter error:`,
-            `  - Value: ${JSON.stringify(payloadData[key])}`,
-            `  - Getter: ${getters[key].toString()}`,
-            `  - Error: ${e}`
-          ].join('\n')
-        )
-      }
+      error(
+        [
+          `FilterFields '${key}' getter error:`,
+          `  - Value: ${JSON.stringify(payloadData[key])}`,
+          `  - Getter: ${getters[key].toString()}`,
+          `  - Error: ${e}`
+        ].join('\n')
+      )
     }
   })
 }
