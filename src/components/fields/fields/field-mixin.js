@@ -3,7 +3,7 @@ import get from '@/utils/getValue'
 
 export default {
   props: {
-    model: { type: Object, default: () => ({}) },
+    formModel: { type: Object, default: () => ({}) },
     field: { type: Object, default: () => ({}) }
   },
 
@@ -13,7 +13,7 @@ export default {
         const modelProperty = this.field.model
         let value = null
         if (modelProperty) {
-          value = get(this.model, modelProperty)
+          value = get(this.formModel, modelProperty)
         }
         if (_.camelCase(this.field.type) === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
@@ -24,7 +24,7 @@ export default {
       set(newVal) {
         const modelProperty = this.field.model
         if (modelProperty) {
-          this.$set(this.model, modelProperty, newVal)
+          this.$set(this.formModel, modelProperty, newVal)
         } else {
           if (process.env.NODE_ENV !== 'production') {
             console.error(

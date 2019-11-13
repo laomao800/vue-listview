@@ -62,7 +62,7 @@ export default {
         content = (
           <el-form-item key={key}>
             <FieldComponent
-              model={this.model}
+              form-model={this.model}
               field={field}
               {...{
                 // field.width 判断如果放在 {} 内，会导致 field 内的 style 属性的 width 失效
