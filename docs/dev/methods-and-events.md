@@ -20,9 +20,11 @@
   - `message` ：文本内容，设为 `null` 则会清空 `contentMessage`
   - `type` ：可选，支持值有 `success` , `warning` , `info` , `error`
 
+设置无数据时内容区域的展示文本。
+
 ### updateLayout()
 
-刷新布局，包括搜索栏和内容区域，但正常情况下无需调用。
+刷新布局，包括搜索栏和内容区域，但正常情况下无需手动调用。
 
 ## Events
 
