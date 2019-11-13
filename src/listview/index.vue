@@ -618,6 +618,8 @@ export default {
 
       // 请求参数 key 拼写方法转换
       if (this.requestDataKeyCase) {
+        // TODO: 下一个次版本移除该 prop
+        warn('请精确传入参数名， `requestDataKeyCase` 将在下一个次版本取消。')
         switch (this.requestDataKeyCase) {
           case 'camelCase':
             payloadData = camelCaseObjectKey(payloadData)
