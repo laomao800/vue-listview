@@ -11,20 +11,20 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 ## 安装
 
 ```bash
-npm i -S @laomao800/vue-listview
+yarn add @laomao800/vue-listview element-ui
 
 # OR
 
-yarn add @laomao800/vue-listview
+npm i -S @laomao800/vue-listview element-ui
 ```
+
+**Element-UI 作为 peerDependencies 需要同步安装。**
 
 ## 使用
 
 ### 全局注册
 
-**直接 import 的文件为不包含 Element-UI 的 `listview-component` 文件，需确保项目内已有 Element-UI。**
-
-并且可以传入一个配置对象，用于全局配置 listview 。一般可用于项目接口与默认结构不同的场景，通过全局配置可不用在每个页面内重复写诸如 `validateResponse` 等“项目内通用”的配置。
+可以传入配置对象，用于全局配置 listview 。一般可用于项目接口与默认结构不同的场景，通过全局配置可不用在每个页面内重复写诸如 `validateResponse` 等“项目内通用”的配置。
 
 支持全局配置：
 
