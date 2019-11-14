@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@laomao800/parse-size-with-unit": "^1.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "core-js": "^3.3.2",
     "element-ui": "2.x",
     "has-values": "^2.0.1",
