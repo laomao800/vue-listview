@@ -10,7 +10,7 @@
 
 参数 `keepInPage` 默认为 `false` ，传入 `true` 可以保留当前页码重新请求数据，可用于操作数据后的当页刷新。
 
-<Badge text="1.2.7+" vertical="middel" /> 以后该方法返回一个 Promise ，数据请求成功后响应。
+<Badge text="1.2.7" vertical="middel" /> 以后该方法返回一个 Promise ，数据请求成功后响应。
 
 ### resetFilter()
 

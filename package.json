@@ -45,13 +45,12 @@
     "conventional-changelog": "^3.0.5",
     "conventional-changelog-angular": "^5.0.2",
     "cross-env": "^5.2.0",
-    "eslint": "5",
+    "eslint": "5.x",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.1.0",
     "execa": "^1.0.0",
     "express": "^4.16.3",
     "express-delay": "^0.2.0",
-    "ftp-deploy": "^2.1.2",
     "html-loader": "^0.5.5",
     "inquirer": "^6.2.0",
     "less": "^3.8.1",
@@ -73,7 +72,7 @@
     "vue-jest": "^3.0.4",
     "vue-server-renderer": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^0.14.8",
+    "vuepress": "^1.2.0",
     "webpack-node-externals": "^1.7.2"
   },
   "bugs": {
