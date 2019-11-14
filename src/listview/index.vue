@@ -579,7 +579,7 @@ export default {
         // 复位至第一页
         this.currentPage = 1
       }
-      this.requestData()
+      return this.requestData()
     },
 
     async requestData() {
