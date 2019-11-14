@@ -1,3 +1,19 @@
+## [1.2.7](https://github.com/laomao800/vue-listview/compare/v1.2.6...v1.2.7) (2019-11-14)
+
+
+### Bug Fixes
+
+* 修正 filterField getter 错误未正确触发提示 ([16c0d75](https://github.com/laomao800/vue-listview/commit/16c0d75))
+* 修正全局配置 $LISTVIEW 未被传入同名 props 覆盖 ([fe8cfd1](https://github.com/laomao800/vue-listview/commit/fe8cfd1))
+
+
+### Features
+
+* listview 实例提供 resetFilter() 重置搜索栏 ([1770954](https://github.com/laomao800/vue-listview/commit/1770954))
+* search() 方法返回一个 Promise ([3f30be1](https://github.com/laomao800/vue-listview/commit/3f30be1))
+
+
+
 ## [1.2.6](https://github.com/laomao800/vue-listview/compare/v1.2.5...v1.2.6) (2019-09-06)
 
 
