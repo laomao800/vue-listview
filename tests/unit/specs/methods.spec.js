@@ -1,8 +1,8 @@
-import Vue from 'vue'
 import { mount } from '@vue/test-utils'
+import { wait } from '../helpers'
 import Listview from '@/index'
 
-describe('events', () => {
+describe('Methods', () => {
   const wrapper = mount({
     template: `
       <Listview
@@ -41,7 +41,7 @@ describe('events', () => {
       }
     })
     wrapper.vm.search()
-    await Vue.nextTick()
+    await wait()
     expect(wrapper.emitted('before-request')).toBeTruthy()
     expect(wrapper.emitted('before-request').length).toBe(1)
     expect(wrapper.emitted('requested')).toBeTruthy()

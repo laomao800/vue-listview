@@ -1,3 +1,6 @@
+export const wait = (time = 100) =>
+  new Promise(resolve => setTimeout(resolve, time))
+
 export const filterButtonsNormal = [
   {
     text: 'default'

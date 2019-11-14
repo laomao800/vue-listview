@@ -6,6 +6,20 @@ require('babel-plugin-require-context-hook/register')()
 
 // 使用内建的 transition 组件，避免 <ElSelectDropdown> 组件在测试中报错
 config.stubs.transition = false
+config.stubs['el-table'] = {
+  template:
+    '<div class="mock-el-table" :row-class-name="internalRowClassName" />',
+  props: {
+    rowClassName: {}
+  },
+  computed: {
+    internalRowClassName() {
+      return typeof this.rowClassName === 'function'
+        ? this.rowClassName({})
+        : this.rowClassName
+    }
+  }
+}
 config.stubs['el-select'] = '<div class="mock-el-select" />'
 config.stubs['el-input-number'] = '<div class="mock-el-input-number" />'
 // config.stubs['el-pagination'] = '<div class="mock-el-pagination" />'
@@ -17,10 +31,7 @@ config.stubs['el-pagination'] = Vue.extend({
 Vue.use(ElementUI)
 
 _.mixin({
-  pascalCase: _.flow(
-    _.camelCase,
-    _.upperFirst
-  )
+  pascalCase: _.flow(_.camelCase, _.upperFirst)
 })
 
 Vue.config.productionTip = false

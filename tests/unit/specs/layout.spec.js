@@ -31,23 +31,13 @@ describe('layout', () => {
       const wrapper = mount(ListviewHeader, {
         propsData: {
           title: 'headerTitle',
-          nav: [{ text: 'home', to: '/home' }, { text: 'list', to: '/list' }]
+          nav: [
+            { text: 'home', to: '/home' },
+            { text: 'list', to: '/list' }
+          ]
         }
       })
       expect(wrapper.html()).toMatchSnapshot()
-    })
-  })
-
-  describe('height', () => {
-    it('specify height', () => {
-      const wrapper = mount(Listview, {
-        propsData: {
-          autoload: false,
-          usePage: false,
-          height: 500
-        }
-      })
-      expect(wrapper.element.style.height).toBe('500px')
     })
   })
 
@@ -82,11 +72,6 @@ describe('layout', () => {
     })
   })
 
-  it('pager off', () => {
-    const wrapper = mount(Listview, { propsData: { usePage: false } })
-    expect(wrapper.vm.$el.querySelector('.listview__page')).toBe(null)
-  })
-
   describe('row class name', () => {
     it('row string class', async () => {
       const wrapper = mount(Listview, {
@@ -97,10 +82,9 @@ describe('layout', () => {
         }
       })
       expect(
-        wrapper.vm.$refs.contentTable.rowClassName({
-          row: {},
-          rowIndex: 1
-        })
+        wrapper
+          .find({ ref: 'contentTable' })
+          .element.getAttribute('row-class-name')
       ).toContain('row-view-class')
     })
 
@@ -108,16 +92,33 @@ describe('layout', () => {
       const wrapper = mount(Listview, {
         propsData: {
           tableProps: {
-            rowClassName: ({ rowIndex }) => 'row-' + rowIndex
+            rowClassName: () => 'row-view-class-fn'
           }
         }
       })
       expect(
-        wrapper.vm.$refs.contentTable.rowClassName({
-          row: {},
-          rowIndex: 1
-        })
-      ).toContain('row-1')
+        wrapper
+          .find({ ref: 'contentTable' })
+          .element.getAttribute('row-class-name')
+      ).toContain('row-view-class-fn')
+    })
+  })
+
+  describe('Others', () => {
+    it('specify height', () => {
+      const wrapper = mount(Listview, {
+        propsData: {
+          autoload: false,
+          usePage: false,
+          height: 500
+        }
+      })
+      expect(wrapper.element.style.height).toBe('500px')
+    })
+
+    it('pager off', () => {
+      const wrapper = mount(Listview, { propsData: { usePage: false } })
+      expect(wrapper.vm.$el.querySelector('.listview__page')).toBe(null)
     })
   })
 })
