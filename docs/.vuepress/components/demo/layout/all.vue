@@ -87,7 +87,8 @@ export default {
       ],
 
       filterModel: {
-        hidden: 'hidden'
+        hidden: 'hidden',
+        multipleSelect: []
       },
 
       filterFields: [
