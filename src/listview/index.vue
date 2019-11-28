@@ -95,7 +95,7 @@
                       "
                       label
                       @click.native.stop.prevent="
-                        $event => handleRowClick(row, $event)
+                        $event => handleRowClick(row, null, $event)
                       "
                     />
                   </template>
@@ -317,10 +317,10 @@ export default {
         finalColumn.type = 'single'
       } else if (_.isPlainObject(column)) {
         finalColumn.type = column.type === 'single' ? 'single' : 'selection'
-        finalColumn.selectable = _.isFunction(column.selectable)
-          ? column.selectable
-          : null
       }
+      finalColumn.selectable = _.isFunction(column.selectable)
+        ? column.selectable
+        : null
       return finalColumn
     },
 
@@ -749,7 +749,9 @@ export default {
         if (this.selectionColumn.selectable && event) {
           // 选择列中若有禁用选项则当行数据禁止选中
           const $rowNode = nodeParents(event.target, '.el-table__row')
-          const $selectNode = $rowNode.querySelector('input')
+          const $selectNode = $rowNode.querySelector(
+            '.el-table-column--selection input'
+          )
           if (!$selectNode || $selectNode.disabled) return
         }
         // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
