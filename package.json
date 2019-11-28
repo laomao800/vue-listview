@@ -5,16 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rimraf dist&npm run build:component&npm run build:full",
-    "lint": "vue-cli-service lint",
     "build:component": "cross-env BUILD_MODE=component vue-cli-service build --no-clean --target lib --name listview-component src/index.component.js",
     "build:full": "vue-cli-service build --no-clean --target lib --name listview src/index.js",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:cover": "vue-cli-service test:unit --coverage",
+    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
     "docs:build": "vuepress build docs",
     "docs:serve": "vuepress dev docs",
     "release": "node scripts/release.js",
-    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
-    "test:unit": "vue-cli-service test:unit",
-    "test:unit:cover": "vue-cli-service test:unit --coverage",
-    "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change"
+    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages"
   },
   "main": "dist/listview-component.common.js",
   "files": [
@@ -32,11 +32,11 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-eslint": "^4.0.5",
-    "@vue/cli-plugin-unit-jest": "^4.0.5",
-    "@vue/cli-service": "^4.0.5",
-    "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/cli-plugin-babel": "^4.1.1",
+    "@vue/cli-plugin-eslint": "^4.1.1",
+    "@vue/cli-plugin-unit-jest": "^4.1.1",
+    "@vue/cli-service": "^4.1.1",
+    "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "babel-plugin-component": "^1.1.1",
