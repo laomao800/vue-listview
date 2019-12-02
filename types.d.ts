@@ -168,9 +168,6 @@ declare class ListviewProps {
   /** 兼容 Axios 的所有除了 cancelToken 之外的 requestConfig 配置。 default: {} */
   requestConfig: AxiosRequestConfig
 
-  /** 请求参数拼写转换方案，默认不转换。 default: null */
-  requestDataKeyCase: 'camelCase' | 'snakeCase' | 'pascalCase'
-
   /** 自定义请求方法，需要返回 Promise ，以返回的内容交由 `validateResponse` 进行验证 */
   requestHandler: (requestData?: object) => Promise<any>
 

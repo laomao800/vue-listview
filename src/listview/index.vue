@@ -143,11 +143,6 @@ import ListviewHeader from '@/components/listview-header.vue'
 import Filterbar from '@/components/filterbar.vue'
 import { warn, error } from '@/utils/debug'
 import { dataMapping, isValidFieldValue, nodeParents } from '@/utils/utils'
-import {
-  camelCaseObjectKey,
-  snakeCaseObjectKey,
-  pascalCaseObjectKey
-} from '@/utils/objectKey'
 import './style.less'
 
 /**
@@ -246,12 +241,6 @@ export default {
     requestUrl: { type: String, default: '' },
     requestMethod: { type: String, default: 'post' },
     requestConfig: { type: Object, default: () => ({}) },
-    requestDataKeyCase: {
-      type: String,
-      default: null,
-      validator: value =>
-        ['camelCase', 'snakeCase', 'pascalCase'].indexOf(value) > -1
-    },
 
     // Adv request
     requestHandler: { type: Function, default: null },
@@ -614,23 +603,6 @@ export default {
       } else {
         delete payloadData[indexKey]
         delete payloadData[sizeKey]
-      }
-
-      // 请求参数 key 拼写方法转换
-      if (this.requestDataKeyCase) {
-        // TODO: 下一个次版本移除该 prop
-        warn('请精确传入参数名， `requestDataKeyCase` 将在下一个次版本取消。')
-        switch (this.requestDataKeyCase) {
-          case 'camelCase':
-            payloadData = camelCaseObjectKey(payloadData)
-            break
-          case 'snakeCase':
-            payloadData = snakeCaseObjectKey(payloadData)
-            break
-          case 'pascalCase':
-            payloadData = pascalCaseObjectKey(payloadData)
-            break
-        }
       }
 
       // 自定义请求参数转换方法
