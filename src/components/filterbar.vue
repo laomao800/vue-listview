@@ -292,7 +292,7 @@ export default {
         offset = left + width - originOffset + 10
         offset = Math.min(0, offset)
       }
-      this.searchBtnOffset = offset
+      this.searchBtnOffset = Math.floor(offset)
     }
   }
 }
