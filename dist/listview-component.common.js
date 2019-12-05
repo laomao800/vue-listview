@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.8 */
+/*! Vue Listview v1.2.9 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1232,13 +1232,6 @@ module.exports = require("lodash/kebabCase");
 
 /***/ }),
 
-/***/ "5a5e":
-/***/ (function(module, exports) {
-
-module.exports = require("@vue/babel-helper-vue-jsx-merge-props");
-
-/***/ }),
-
 /***/ "5fef":
 /***/ (function(module, exports) {
 
@@ -1353,13 +1346,6 @@ module.exports = require("core-js/modules/es.date.to-string");
 /***/ (function(module, exports) {
 
 module.exports = require("regenerator-runtime/runtime");
-
-/***/ }),
-
-/***/ "7a90":
-/***/ (function(module, exports) {
-
-module.exports = require("lodash/snakeCase");
 
 /***/ }),
 
@@ -1557,13 +1543,6 @@ exports = module.exports = __webpack_require__("24fb")(false);
 // Module
 exports.push([module.i, ".listview{overflow:auto}.listview .el-table .el-table__body tr.el-table__row.row--selected td{background-color:#ffd}.listview .el-table th{background:#f5f7fa}.listview__main{padding:10px;padding-bottom:5px;background-color:#fff;border:5px solid #f0f2f5}.listview__content{overflow:auto}.listview__content .el-table__empty-text{width:auto;max-width:50%}.listview .content-message{display:-webkit-box;display:-ms-flexbox;display:flex;padding:15px 20px;line-height:30px;border-radius:5px;-webkit-box-shadow:0 0 15px #ddd;box-shadow:0 0 15px #ddd}.listview .content-message--icon{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:10px;font-size:24px}.listview .content-message--message{font-size:14px;text-align:left}.listview .content-message--success .content-message--icon{color:#6ac243}.listview .content-message--warning .content-message--icon{color:#f90}.listview .content-message--info .content-message--icon{color:#459ffc}.listview .content-message--error .content-message--icon{color:#f56c6c}.listview .el-table-column--single-selection .el-radio__label{display:none}.listview__page{padding-top:5px;text-align:left}.listview .el-pagination.is-background .btn-next,.listview .el-pagination.is-background .btn-prev,.listview .el-pagination.is-background .el-pager li{margin:0 8px 0 0}.listview .el-pagination.is-background .el-select .el-input{margin:0}.listview .el-table--border .el-table-column--selection .cell{padding-right:10px;padding-left:10px}", ""]);
 
-
-/***/ }),
-
-/***/ "9993":
-/***/ (function(module, exports) {
-
-module.exports = require("lodash/upperFirst");
 
 /***/ }),
 
@@ -2784,8 +2763,8 @@ var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject_);
 var isFunction_ = __webpack_require__("f90b");
 var isFunction_default = /*#__PURE__*/__webpack_require__.n(isFunction_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3533ef4c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=1dae96e8&
-var listviewvue_type_template_id_1dae96e8_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3533ef4c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=6ab8bfae&
+var listviewvue_type_template_id_6ab8bfae_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -2804,7 +2783,7 @@ return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=1dae96e8&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=6ab8bfae&
 
 // EXTERNAL MODULE: external "core-js/modules/es.array.filter"
 var es_array_filter_ = __webpack_require__("4a38");
@@ -3026,8 +3005,8 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var listview_header = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3533ef4c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar.vue?vue&type=template&id=28eca71e&
-var filterbarvue_type_template_id_28eca71e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3533ef4c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar.vue?vue&type=template&id=40af38c2&
+var filterbarvue_type_template_id_40af38c2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
     'listview__filterbar',
     { 'listview__filterbar--fold': _vm.internalFilterbarFold }
   ]},[_c('el-form',{attrs:{"inline":true,"size":"small"},nativeOn:{"submit":function($event){$event.preventDefault();},"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleFilterSearch($event)}}},[(_vm.showFilterSubmit)?_c('div',{ref:"submit",class:[
@@ -3037,10 +3016,10 @@ var filterbarvue_type_template_id_28eca71e_render = function () {var _vm=this;va
           'filterbar__submit--onleft': _vm.isNoneFields
         }
       ]},[_c('div',{staticClass:"filterbar__submit-btn",style:({ transform: ("translateX(" + _vm.searchBtnOffset + "px)") })},[_c('el-form-item',[_vm._t("prepend-filterbar-submit"),(_vm.showFilterSearch)?_c('el-button',{attrs:{"type":"primary","icon":"el-icon-search"},on:{"click":_vm.handleFilterSearch}},[_vm._v(" 搜索 ")]):_vm._e(),(_vm.showFilterReset)?_c('el-button',{on:{"click":_vm.handleFilterReset}},[_vm._v(" 重置 ")]):_vm._e(),_vm._t("append-filterbar-submit")],2)],1),_c('el-button',{staticClass:"filterbar__submit-more",attrs:{"icon":_vm.internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top',"type":"primary"},on:{"click":_vm.toggleFilterbar}})],1):_vm._e(),(_vm.showFilterButtons)?_c('div',{staticClass:"filterbar__buttons"},[_c('el-form-item',[_vm._l((_vm.filterButtons),function(button,index){return [(_vm.isFunction(button))?_c('v-node',{key:button.key || index,attrs:{"node":button()}}):(button.render)?_c('v-node',{key:button.key || index,attrs:{"node":button.render()}}):(_vm.isVNode(button))?_c('v-node',{key:button.key || index,attrs:{"node":button}}):(Array.isArray(button.children))?_c('el-dropdown',{key:button.key || index,attrs:{"type":button.type,"split-button":button.splitButton,"trigger":button.trigger || 'click',"placement":"bottom"},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[(button.splitButton)?[(button.icon)?_c('i',{class:button.icon}):_vm._e(),_vm._v(" "+_vm._s(button.text)+" ")]:[_c('el-button',{attrs:{"type":button.type,"icon":button.icon},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[_vm._v(" "+_vm._s(button.text)+" "),_c('i',{staticClass:"el-icon-arrow-down el-icon--right"})])],_c('el-dropdown-menu',{attrs:{"slot":"dropdown"},slot:"dropdown"},_vm._l((button.children),function(child,childIndex){return _c('el-dropdown-item',{key:childIndex,nativeOn:{"click":function($event){return _vm.applyButtonClick(child, $event)}}},[(child.icon)?_c('i',{class:child.icon}):_vm._e(),_vm._v(" "+_vm._s(child.text)+" ")])}),1)],2):_c('el-button',{key:button.key || index,attrs:{"type":button.type,"plain":button.plain,"icon":button.icon},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[_vm._v(" "+_vm._s(button.text)+" ")])]})],2)],1):_vm._e(),(_vm.showFilterFields)?_c('filterbar-form',{ref:"filterForm",staticClass:"filterbar__form",attrs:{"fields":_vm.validFilterFields,"model":_vm.filterModel}}):_vm._e()],1)],1):_vm._e()}
-var filterbarvue_type_template_id_28eca71e_staticRenderFns = []
+var filterbarvue_type_template_id_40af38c2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/filterbar.vue?vue&type=template&id=28eca71e&
+// CONCATENATED MODULE: ./src/components/filterbar.vue?vue&type=template&id=40af38c2&
 
 // EXTERNAL MODULE: ./src/utils/utils.js
 var utils = __webpack_require__("fa7d");
@@ -3050,10 +3029,6 @@ var es_object_get_own_property_descriptor_ = __webpack_require__("6b07");
 
 // EXTERNAL MODULE: external "core-js/modules/es.object.get-own-property-descriptors"
 var es_object_get_own_property_descriptors_ = __webpack_require__("46bb");
-
-// EXTERNAL MODULE: external "@vue/babel-helper-vue-jsx-merge-props"
-var babel_helper_vue_jsx_merge_props_ = __webpack_require__("5a5e");
-var babel_helper_vue_jsx_merge_props_default = /*#__PURE__*/__webpack_require__.n(babel_helper_vue_jsx_merge_props_);
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 function _defineProperty(obj, key, value) {
@@ -3078,7 +3053,6 @@ var external_has_values_default = /*#__PURE__*/__webpack_require__.n(external_ha
 var components_fields = __webpack_require__("2d3d");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib??ref--12-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar-form.vue?vue&type=script&lang=js&
-
 
 
 
@@ -3170,17 +3144,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
         var FieldComponent = Object(components_fields["b" /* getFieldComponentName */])(field.type);
         content = h("el-form-item", {
           "key": key
-        }, [h(FieldComponent, babel_helper_vue_jsx_merge_props_default()([{
+        }, [h(FieldComponent, {
           "attrs": {
             "form-model": this.model,
             "field": field
-          }
-        }, {
-          // field.width 判断如果放在 {} 内，会导致 field 内的 style 属性的 width 失效
-          style: field.width ? {
+          },
+          "style": field.width ? {
             width: "".concat(field.width, "px")
           } : null
-        }]))]);
+        })]);
       }
 
       return h("div", {
@@ -3451,7 +3423,7 @@ var filterbar_form_component = Object(componentNormalizer["a" /* default */])(
         offset = Math.min(0, offset);
       }
 
-      this.searchBtnOffset = offset;
+      this.searchBtnOffset = Math.floor(offset);
     }
   }
 });
@@ -3471,8 +3443,8 @@ var filterbarvue_type_style_index_0_lang_less_ = __webpack_require__("e067");
 
 var filterbar_component = Object(componentNormalizer["a" /* default */])(
   components_filterbarvue_type_script_lang_js_,
-  filterbarvue_type_template_id_28eca71e_render,
-  filterbarvue_type_template_id_28eca71e_staticRenderFns,
+  filterbarvue_type_template_id_40af38c2_render,
+  filterbarvue_type_template_id_40af38c2_staticRenderFns,
   false,
   null,
   null,
@@ -3499,80 +3471,10 @@ if (true) {
     console.error("%c Listview error %c ".concat(msg), 'background:#e30;padding:1px;border-radius:3px;color:#fff', 'background:transparent');
   };
 }
-// EXTERNAL MODULE: external "lodash/upperFirst"
-var upperFirst_ = __webpack_require__("9993");
-var upperFirst_default = /*#__PURE__*/__webpack_require__.n(upperFirst_);
-
-// EXTERNAL MODULE: external "lodash/snakeCase"
-var snakeCase_ = __webpack_require__("7a90");
-var snakeCase_default = /*#__PURE__*/__webpack_require__.n(snakeCase_);
-
-// EXTERNAL MODULE: external "lodash/camelCase"
-var camelCase_ = __webpack_require__("81fa");
-var camelCase_default = /*#__PURE__*/__webpack_require__.n(camelCase_);
-
-// CONCATENATED MODULE: ./src/utils/objectKey.js
-
-
-
-
-
-/**
- * 更改 object key 拼写方案，并返回一个新 object （浅克隆）
- * @param {Object} 待处理 object
- * @param {String} 转换方案
- */
-function transformObjectKey() {
-  var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var transformCase = arguments.length > 1 ? arguments[1] : undefined;
-  var transformFunction;
-
-  switch (transformCase) {
-    case 'camelCase':
-      transformFunction = camelCase_default.a;
-      break;
-
-    case 'snakeCase':
-      transformFunction = snakeCase_default.a;
-      break;
-
-    case 'pascalCase':
-      transformFunction = function transformFunction(str) {
-        return upperFirst_default()(camelCase_default()(str));
-      };
-
-      break;
-  }
-  /* istanbul ignore if */
-
-
-  if (!transformFunction) {
-    return object;
-  } else {
-    return transform_default()(object, function (result, value, key) {
-      result[transformFunction(key)] = value;
-      return result;
-    }, {});
-  }
-}
-
-function camelCaseObjectKey() {
-  var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return transformObjectKey(object, 'camelCase');
-}
-function snakeCaseObjectKey() {
-  var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return transformObjectKey(object, 'snakeCase');
-}
-function pascalCaseObjectKey() {
-  var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return transformObjectKey(object, 'pascalCase');
-}
 // EXTERNAL MODULE: ./src/listview/style.less
 var style = __webpack_require__("dbac");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib??ref--12-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=script&lang=js&
-
 
 
 
@@ -3716,13 +3618,6 @@ var DEFAULT_PROPS = {
       type: Object,
       default: function _default() {
         return {};
-      }
-    },
-    requestDataKeyCase: {
-      type: String,
-      default: null,
-      validator: function validator(value) {
-        return ['camelCase', 'snakeCase', 'pascalCase'].indexOf(value) > -1;
       }
     },
     // Adv request
@@ -4204,39 +4099,14 @@ var DEFAULT_PROPS = {
               } else {
                 delete payloadData[indexKey];
                 delete payloadData[sizeKey];
-              } // 请求参数 key 拼写方法转换
+              } // 自定义请求参数转换方法
 
 
-              if (!this.requestDataKeyCase) {
-                _context4.next = 21;
-                break;
-              }
-
-              // TODO: 下一个次版本移除该 prop
-              warn('请精确传入参数名， `requestDataKeyCase` 将在下一个次版本取消。');
-              _context4.t0 = this.requestDataKeyCase;
-              _context4.next = _context4.t0 === 'camelCase' ? 15 : _context4.t0 === 'snakeCase' ? 17 : _context4.t0 === 'pascalCase' ? 19 : 21;
-              break;
-
-            case 15:
-              payloadData = camelCaseObjectKey(payloadData);
-              return _context4.abrupt("break", 21);
-
-            case 17:
-              payloadData = snakeCaseObjectKey(payloadData);
-              return _context4.abrupt("break", 21);
-
-            case 19:
-              payloadData = pascalCaseObjectKey(payloadData);
-              return _context4.abrupt("break", 21);
-
-            case 21:
-              // 自定义请求参数转换方法
               transformRequestFn = this.overrideProps['transformRequestData'];
               requestData = transformRequestFn ? transformRequestFn(payloadData) : payloadData; // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
 
               if (!(requestData === false)) {
-                _context4.next = 26;
+                _context4.next = 15;
                 break;
               }
 
@@ -4244,27 +4114,27 @@ var DEFAULT_PROPS = {
               this.contentLoading = false;
               return _context4.abrupt("return");
 
-            case 26:
+            case 15:
               this.contentLoading = true;
               response = null;
               _responseError = false;
 
               if (!this.requestHandler) {
-                _context4.next = 35;
+                _context4.next = 24;
                 break;
               }
 
-              _context4.next = 32;
+              _context4.next = 21;
               return regeneratorRuntime.awrap(this.requestHandler(requestData));
 
-            case 32:
+            case 21:
               response = _context4.sent;
-              _context4.next = 57;
+              _context4.next = 46;
               break;
 
-            case 35:
+            case 24:
               if (!this.requestUrl) {
-                _context4.next = 57;
+                _context4.next = 46;
                 break;
               }
 
@@ -4290,34 +4160,34 @@ var DEFAULT_PROPS = {
               requestConfig.cancelToken = new external_axios_default.a.CancelToken(function (cancel) {
                 _this3._requestCancelToken = cancel;
               });
-              _context4.prev = 41;
+              _context4.prev = 30;
               axiosService = external_axios_default.a.create();
-              _context4.next = 45;
+              _context4.next = 34;
               return regeneratorRuntime.awrap(axiosService(requestConfig));
 
-            case 45:
+            case 34:
               res = _context4.sent;
               response = res.data;
-              _context4.next = 57;
+              _context4.next = 46;
               break;
 
-            case 49:
-              _context4.prev = 49;
-              _context4.t1 = _context4["catch"](41);
+            case 38:
+              _context4.prev = 38;
+              _context4.t0 = _context4["catch"](30);
               _responseError = true;
 
-              if (!external_axios_default.a.isCancel(_context4.t1)) {
-                _context4.next = 56;
+              if (!external_axios_default.a.isCancel(_context4.t0)) {
+                _context4.next = 45;
                 break;
               }
 
               return _context4.abrupt("return", false);
 
-            case 56:
+            case 45:
               // 非内部取消的异常才解析错误信息
-              this.setContentMessage(_context4.t1.message, 'error');
+              this.setContentMessage(_context4.t0.message, 'error');
 
-            case 57:
+            case 46:
               this.contentLoading = false;
               contentResponse = null;
 
@@ -4355,12 +4225,12 @@ var DEFAULT_PROPS = {
 
               this.$emit('requested', this);
 
-            case 66:
+            case 55:
             case "end":
               return _context4.stop();
           }
         }
-      }, null, this, [[41, 49]]);
+      }, null, this, [[30, 38]]);
     },
 
     /**
@@ -4487,7 +4357,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_1dae96e8_render,
+  listviewvue_type_template_id_6ab8bfae_render,
   staticRenderFns,
   false,
   null,

@@ -64,10 +64,7 @@ export default {
             <FieldComponent
               form-model={this.model}
               field={field}
-              {...{
-                // field.width 判断如果放在 {} 内，会导致 field 内的 style 属性的 width 失效
-                style: field.width ? { width: `${field.width}px` } : null
-              }}
+              style={field.width ? { width: `${field.width}px` } : null}
             />
           </el-form-item>
         )
