@@ -32,14 +32,10 @@ module.exports = {
       .rule('md')
       .use('markdown-loader')
       .loader('markdown-loader')
+    config.performance.hints(false)
   },
 
   configureWebpack: config => {
-    // 关闭 webpack 性能警告
-    config.performance = {
-      hints: false
-    }
-
     const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
     config.plugins.push(
       new LodashModuleReplacementPlugin({

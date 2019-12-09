@@ -402,13 +402,13 @@ export default {
         'resolveResponseErrorMessage',
         'transformRequestData',
         'transformResponseData',
-        'contentDataMap',
-        'usePage'
+        'contentDataMap'
       ]
       props.forEach(prop => {
         overrides[prop] =
           this[prop] || globalConfig[prop] || DEFAULT_PROPS[prop]
       })
+      overrides['usePage'] = globalConfig['usePage'] || this.usePage
       return overrides
     }
   },
