@@ -8,7 +8,6 @@ module.exports = {
   setupFiles: ['<rootDir>/tests/unit/setup'],
   globalSetup: '<rootDir>/tests/unit/global-setup',
   globalTeardown: '<rootDir>/tests/unit/global-teardown',
-  setupFilesAfterEnv: ['<rootDir>/tests/unit/matchers'],
   moduleFileExtensions: ['js', 'json', 'vue'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

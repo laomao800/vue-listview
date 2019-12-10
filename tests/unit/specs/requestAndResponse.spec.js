@@ -74,7 +74,9 @@ describe('Request params', () => {
   it('自定义参数 getter', () => {
     const { requestSpy } = createWrapper({
       filterModel: {
-        multipleSelect: [1, 2, 3]
+        multipleSelect: [1, 2, 3],
+        text1: 'text1',
+        text2: 'text2'
       },
       filterFields: [
         {
@@ -88,13 +90,19 @@ describe('Request params', () => {
             { label: '禁用项', value: 4, disabled: true }
           ],
           get: val => val.join(',')
-        }
+        },
+        [
+          { type: 'text', model: 'text1', get: val => val + '-addon' },
+          { type: 'text', model: 'text2', get: val => val + '-addon' }
+        ]
       ]
     })
     expect(requestSpy.mock.calls[0][0]).toHaveProperty(
       'multipleSelect',
       '1,2,3'
     )
+    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text1', 'text1-addon')
+    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', 'text2-addon')
   })
 })
 

@@ -142,19 +142,24 @@ import VNode from '@/components/v-node'
 import ListviewHeader from '@/components/listview-header.vue'
 import Filterbar from '@/components/filterbar.vue'
 import { warn, error } from '@/utils/debug'
-import { dataMapping, isValidFieldValue, nodeParents } from '@/utils/utils'
+import {
+  dataMapping,
+  isValidFieldValue,
+  nodeParents,
+  hasOwn
+} from '@/utils/utils'
 import './style.less'
 
 /**
  * 验证 fields 内是否有重复的 model 属性
  */
-function validateFilterFields(fields) {
+const validateFilterFields = fields => {
   /* istanbul ignore next */
   if (Array.isArray(fields)) {
     const hasModelKey = fields.filter(field => {
       return (
         _.isPlainObject(field) &&
-        field.hasOwnProperty('model') &&
+        hasOwn(field, 'model') &&
         typeof field.model === 'string'
       )
     })
@@ -175,7 +180,7 @@ function validateFilterFields(fields) {
  * 应用 filterField 内设置的字段 getter ，
  * 如果 getter 执行有错误则依然使用原始值
  */
-function applyFieldGetter(payloadData, getters) {
+const applyFieldGetter = (payloadData, getters) => {
   /* istanbul ignore next */
   Object.keys(getters).forEach(key => {
     try {
@@ -192,6 +197,18 @@ function applyFieldGetter(payloadData, getters) {
     }
   })
 }
+
+const resolvefilterModelGetters = (fields, getters = {}) =>
+  fields.reduce((result, field) => {
+    if (Array.isArray(field)) {
+      resolvefilterModelGetters(field, getters)
+    } else {
+      if (_.isFunction(field.get) && field.model) {
+        result[field.model] = field.get
+      }
+    }
+    return result
+  }, getters)
 
 const DEFAULT_PROPS = {
   validateResponse: response => {
@@ -379,18 +396,7 @@ export default {
      * -> { text: val => val.toUpperCase() }
      */
     filterModelGetters() {
-      const fields = _.keyBy(this.filterFields, 'model')
-      const getters = {}
-      _.transform(
-        fields,
-        (result, field) => {
-          if (_.isFunction(field.get)) {
-            result[field.model] = field.get
-          }
-        },
-        getters
-      )
-      return getters
+      return resolvefilterModelGetters(this.filterFields)
     },
 
     overrideProps() {

@@ -136,7 +136,7 @@
 <script>
 import _ from 'lodash'
 import VNode from '@/components/v-node.js'
-import { isVNode, isValidFieldConfig } from '@/utils/utils.js'
+import { isVNode, isValidFieldConfig, hasOwn } from '@/utils/utils.js'
 import FilterbarForm from './filterbar-form.vue'
 
 export default {
@@ -237,7 +237,7 @@ export default {
       const model = this.filterModel
       const _resetField = field => {
         const name = field.model
-        if (name && model.hasOwnProperty(name)) {
+        if (name && hasOwn(model, name)) {
           const value = model[name]
           if (Array.isArray(value)) {
             this.$set(model, name, [])
