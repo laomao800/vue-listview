@@ -90,6 +90,12 @@
 
 :::
 
+### 私有配置 `trim` <Badge text="1.2.11+" vertical="middel" />
+
+- type: `Boolean`
+
+对于 `text` 字段，默认在失焦后会执行 trim 操作，传入 `false` 即可关闭该行为。
+
 ### 私有配置 `options`
 
 - type: `Array` | `Promise` | `() => Promise<options>` | `(done) => void`

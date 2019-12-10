@@ -104,6 +104,37 @@ describe('Request params', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('text1', 'text1-addon')
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', 'text2-addon')
   })
+
+  it('text 字段默认开启 trim', () => {
+    const testString = '  text string  '
+    const { wrapper, requestSpy } = createWrapper({
+      filterModel: {
+        text1: testString,
+        text2: testString
+      },
+      filterFields: [
+        { type: 'text', model: 'text1' },
+        { type: 'text', model: 'text2', trim: false }
+      ]
+    })
+    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text1', testString)
+    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', testString)
+
+    wrapper
+      .find({ ref: 'filterbar' })
+      .find({ ref: 'filterForm' })
+      .findAll({ name: 'ElInput' })
+      .wrappers.forEach(inputWrapper => {
+        inputWrapper.vm.$emit('blur')
+      })
+    wrapper.vm.search()
+
+    expect(requestSpy.mock.calls[1][0]).toHaveProperty(
+      'text1',
+      testString.trim()
+    )
+    expect(requestSpy.mock.calls[1][0]).toHaveProperty('text2', testString)
+  })
 })
 
 describe('分页参数', () => {
