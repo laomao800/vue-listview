@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.10 */
+/*! Vue Listview v1.2.11 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -859,6 +859,26 @@ function isObjectLike(value) {
 }
 
 module.exports = isObjectLike;
+
+
+/***/ }),
+
+/***/ "13d5":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var $reduce = __webpack_require__("d58f").left;
+var sloppyArrayMethod = __webpack_require__("b301");
+
+// `Array.prototype.reduce` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.reduce
+$({ target: 'Array', proto: true, forced: sloppyArrayMethod('reduce') }, {
+  reduce: function reduce(callbackfn /* , initialValue */) {
+    return $reduce(this, callbackfn, arguments.length, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
 
 
 /***/ }),
@@ -3387,49 +3407,6 @@ module.exports = now;
 
 /***/ }),
 
-/***/ "4151":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseAssignValue = __webpack_require__("872a"),
-    createAggregator = __webpack_require__("50c6");
-
-/**
- * Creates an object composed of keys generated from the results of running
- * each element of `collection` thru `iteratee`. The corresponding value of
- * each key is the last element responsible for generating the key. The
- * iteratee is invoked with one argument: (value).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Collection
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} [iteratee=_.identity] The iteratee to transform keys.
- * @returns {Object} Returns the composed aggregate object.
- * @example
- *
- * var array = [
- *   { 'dir': 'left', 'code': 97 },
- *   { 'dir': 'right', 'code': 100 }
- * ];
- *
- * _.keyBy(array, function(o) {
- *   return String.fromCharCode(o.code);
- * });
- * // => { 'a': { 'dir': 'left', 'code': 97 }, 'd': { 'dir': 'right', 'code': 100 } }
- *
- * _.keyBy(array, 'dir');
- * // => { 'left': { 'dir': 'left', 'code': 97 }, 'right': { 'dir': 'right', 'code': 100 } }
- */
-var keyBy = createAggregator(function(result, value, key) {
-  baseAssignValue(result, key, value);
-});
-
-module.exports = keyBy;
-
-
-/***/ }),
-
 /***/ "4160":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3566,12 +3543,15 @@ module.exports = objectToString;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fields/fields/field-text.vue?vue&type=template&id=6c63c973&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('el-input',_vm._g(_vm._b({attrs:{"placeholder":_vm.field.label,"disabled":_vm.field.disabled},model:{value:(_vm.value),callback:function ($$v) {_vm.value=(typeof $$v === 'string'? $$v.trim(): $$v)},expression:"value"}},'el-input',_vm.mergedProps,false),_vm.mergedEvents),[_vm._l((_vm.componentSlots),function(slot,key){return _c('template',{slot:key},[(_vm.isVNode(slot))?_c('v-node',{key:key,attrs:{"node":slot}}):[_vm._v(_vm._s(slot))]],2)})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fields/fields/field-text.vue?vue&type=template&id=49b225b6&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('el-input',_vm._g(_vm._b({attrs:{"placeholder":_vm.field.label,"disabled":_vm.field.disabled},on:{"blur":_vm.onBlur},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}},'el-input',_vm.mergedProps,false),_vm.mergedEvents),[_vm._l((_vm.componentSlots),function(slot,key){return _c('template',{slot:key},[(_vm.isVNode(slot))?_c('v-node',{key:key,attrs:{"node":slot}}):[_vm._v(_vm._s(slot))]],2)})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/fields/fields/field-text.vue?vue&type=template&id=6c63c973&
+// CONCATENATED MODULE: ./src/components/fields/fields/field-text.vue?vue&type=template&id=49b225b6&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
+var es_string_trim = __webpack_require__("498a");
 
 // EXTERNAL MODULE: ./src/components/fields/fields/field-mixin.js
 var field_mixin = __webpack_require__("50fe");
@@ -3583,6 +3563,8 @@ var v_node = __webpack_require__("1765");
 var utils = __webpack_require__("fa7d");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib??ref--12-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fields/fields/field-text.vue?vue&type=script&lang=js&
+
+//
 //
 //
 //
@@ -3618,7 +3600,16 @@ var utils = __webpack_require__("fa7d");
     };
   },
   methods: {
-    isVNode: utils["c" /* isVNode */]
+    isVNode: utils["d" /* isVNode */],
+    onBlur: function onBlur() {
+      var isTrim = !Object(utils["b" /* hasOwn */])(this.field, 'trim') || !!this.field.trim;
+
+      if (isTrim) {
+        try {
+          this.value = this.value.trim();
+        } catch (error) {}
+      }
+    }
   }
 });
 // CONCATENATED MODULE: ./src/components/fields/fields/field-text.vue?vue&type=script&lang=js&
@@ -3959,6 +3950,26 @@ module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
   // Chrome 38 Symbol has incorrect toString conversion
   // eslint-disable-next-line no-undef
   return !String(Symbol());
+});
+
+
+/***/ }),
+
+/***/ "498a":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var $trim = __webpack_require__("58a8").trim;
+var forcedStringTrimMethod = __webpack_require__("e070");
+
+// `String.prototype.trim` method
+// https://tc39.github.io/ecma262/#sec-string.prototype.trim
+$({ target: 'String', proto: true, forced: forcedStringTrimMethod('trim') }, {
+  trim: function trim() {
+    return $trim(this);
+  }
 });
 
 
@@ -4508,78 +4519,6 @@ function createAggregator(setter, initializer) {
 }
 
 module.exports = createAggregator;
-
-
-/***/ }),
-
-/***/ "50ca":
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayEach = __webpack_require__("8057"),
-    baseCreate = __webpack_require__("7530"),
-    baseForOwn = __webpack_require__("242e"),
-    baseIteratee = __webpack_require__("badf"),
-    getPrototype = __webpack_require__("2dcb"),
-    isArray = __webpack_require__("6747"),
-    isBuffer = __webpack_require__("0d24"),
-    isFunction = __webpack_require__("9520"),
-    isObject = __webpack_require__("1a8c"),
-    isTypedArray = __webpack_require__("73ac");
-
-/**
- * An alternative to `_.reduce`; this method transforms `object` to a new
- * `accumulator` object which is the result of running each of its own
- * enumerable string keyed properties thru `iteratee`, with each invocation
- * potentially mutating the `accumulator` object. If `accumulator` is not
- * provided, a new object with the same `[[Prototype]]` will be used. The
- * iteratee is invoked with four arguments: (accumulator, value, key, object).
- * Iteratee functions may exit iteration early by explicitly returning `false`.
- *
- * @static
- * @memberOf _
- * @since 1.3.0
- * @category Object
- * @param {Object} object The object to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @param {*} [accumulator] The custom accumulator value.
- * @returns {*} Returns the accumulated value.
- * @example
- *
- * _.transform([2, 3, 4], function(result, n) {
- *   result.push(n *= n);
- *   return n % 2 == 0;
- * }, []);
- * // => [4, 9]
- *
- * _.transform({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
- *   (result[value] || (result[value] = [])).push(key);
- * }, {});
- * // => { '1': ['a', 'c'], '2': ['b'] }
- */
-function transform(object, iteratee, accumulator) {
-  var isArr = isArray(object),
-      isArrLike = isArr || isBuffer(object) || isTypedArray(object);
-
-  iteratee = baseIteratee(iteratee, 4);
-  if (accumulator == null) {
-    var Ctor = object && object.constructor;
-    if (isArrLike) {
-      accumulator = isArr ? new Ctor : [];
-    }
-    else if (isObject(object)) {
-      accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
-    }
-    else {
-      accumulator = {};
-    }
-  }
-  (isArrLike ? arrayEach : baseForOwn)(object, function(value, index, object) {
-    return iteratee(accumulator, value, index, object);
-  });
-  return accumulator;
-}
-
-module.exports = transform;
 
 
 /***/ }),
@@ -11615,7 +11554,7 @@ var utils = __webpack_require__("fa7d");
         switch (_context.prev = _context.next) {
           case 0:
             optionConfig = this.field.options;
-            isPromiseOption = Object(utils["b" /* isPromise */])(optionConfig);
+            isPromiseOption = Object(utils["c" /* isPromise */])(optionConfig);
 
             if (!Array.isArray(optionConfig)) {
               _context.next = 6;
@@ -12054,6 +11993,53 @@ module.exports = function (it, TAG, STATIC) {
   if (it && !has(it = STATIC ? it : it.prototype, TO_STRING_TAG)) {
     defineProperty(it, TO_STRING_TAG, { configurable: true, value: TAG });
   }
+};
+
+
+/***/ }),
+
+/***/ "d58f":
+/***/ (function(module, exports, __webpack_require__) {
+
+var aFunction = __webpack_require__("1c0b");
+var toObject = __webpack_require__("7b0b");
+var IndexedObject = __webpack_require__("44ad");
+var toLength = __webpack_require__("50c4");
+
+// `Array.prototype.{ reduce, reduceRight }` methods implementation
+var createMethod = function (IS_RIGHT) {
+  return function (that, callbackfn, argumentsLength, memo) {
+    aFunction(callbackfn);
+    var O = toObject(that);
+    var self = IndexedObject(O);
+    var length = toLength(O.length);
+    var index = IS_RIGHT ? length - 1 : 0;
+    var i = IS_RIGHT ? -1 : 1;
+    if (argumentsLength < 2) while (true) {
+      if (index in self) {
+        memo = self[index];
+        index += i;
+        break;
+      }
+      index += i;
+      if (IS_RIGHT ? index < 0 : length <= index) {
+        throw TypeError('Reduce of empty array with no initial value');
+      }
+    }
+    for (;IS_RIGHT ? index >= 0 : length > index; index += i) if (index in self) {
+      memo = callbackfn(memo, self[index], index, O);
+    }
+    return memo;
+  };
+};
+
+module.exports = {
+  // `Array.prototype.reduce` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.reduce
+  left: createMethod(false),
+  // `Array.prototype.reduceRight` method
+  // https://tc39.github.io/ecma262/#sec-array.prototype.reduceright
+  right: createMethod(true)
 };
 
 
@@ -12893,6 +12879,25 @@ if (DESCRIPTORS && typeof NativeSymbol == 'function' && (!('description' in Nati
 
 /***/ }),
 
+/***/ "e070":
+/***/ (function(module, exports, __webpack_require__) {
+
+var fails = __webpack_require__("d039");
+var whitespaces = __webpack_require__("5899");
+
+var non = '\u200B\u0085\u180E';
+
+// check that a method works with the correct list
+// of whitespaces and has a correct name
+module.exports = function (METHOD_NAME) {
+  return fails(function () {
+    return !!whitespaces[METHOD_NAME]() || non[METHOD_NAME]() != non || whitespaces[METHOD_NAME].name !== METHOD_NAME;
+  });
+};
+
+
+/***/ }),
+
 /***/ "e0c6":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12956,7 +12961,7 @@ var utils = __webpack_require__("fa7d");
         switch (_context.prev = _context.next) {
           case 0:
             optionConfig = this.field.options;
-            isPromiseOption = Object(utils["b" /* isPromise */])(optionConfig);
+            isPromiseOption = Object(utils["c" /* isPromise */])(optionConfig);
 
             if (!Array.isArray(optionConfig)) {
               _context.next = 6;
@@ -14563,12 +14568,13 @@ module.exports = initCloneObject;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isVNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isVNode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return dataMapping; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return isValidFieldValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return isValidFieldConfig; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return nodeParents; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isPromise; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return isValidFieldValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return isValidFieldConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return nodeParents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isPromise; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hasOwn; });
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4160");
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("a630");
@@ -14697,6 +14703,9 @@ function nodeParents(node, selector) {
 function isPromise(obj) {
   return !!obj && (Object(e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"])(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 }
+function hasOwn(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
 
 /***/ }),
 
@@ -14752,8 +14761,8 @@ var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject);
 var isFunction = __webpack_require__("9520");
 var isFunction_default = /*#__PURE__*/__webpack_require__.n(isFunction);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=18a48f5a&
-var listviewvue_type_template_id_18a48f5a_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=4f430803&
+var listviewvue_type_template_id_4f430803_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -14772,7 +14781,7 @@ return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=18a48f5a&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=4f430803&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -14785,6 +14794,9 @@ var es_array_join = __webpack_require__("a15b");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
+var es_array_reduce = __webpack_require__("13d5");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.date.to-string.js
 var es_date_to_string = __webpack_require__("0d03");
@@ -14872,14 +14884,6 @@ var cloneDeep_default = /*#__PURE__*/__webpack_require__.n(cloneDeep);
 // EXTERNAL MODULE: ./node_modules/lodash/debounce.js
 var debounce = __webpack_require__("b047");
 var debounce_default = /*#__PURE__*/__webpack_require__.n(debounce);
-
-// EXTERNAL MODULE: ./node_modules/lodash/transform.js
-var transform = __webpack_require__("50ca");
-var transform_default = /*#__PURE__*/__webpack_require__.n(transform);
-
-// EXTERNAL MODULE: ./node_modules/lodash/keyBy.js
-var keyBy = __webpack_require__("4151");
-var keyBy_default = /*#__PURE__*/__webpack_require__.n(keyBy);
 
 // EXTERNAL MODULE: ./node_modules/lodash/merge.js
 var merge = __webpack_require__("4245");
@@ -14994,8 +14998,8 @@ var component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var listview_header = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar.vue?vue&type=template&id=40af38c2&
-var filterbarvue_type_template_id_40af38c2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/filterbar.vue?vue&type=template&id=e08beef4&
+var filterbarvue_type_template_id_e08beef4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.showFilterButtons || _vm.showFilterSubmit || _vm.showFilterFields)?_c('div',{class:[
     'listview__filterbar',
     { 'listview__filterbar--fold': _vm.internalFilterbarFold }
   ]},[_c('el-form',{attrs:{"inline":true,"size":"small"},nativeOn:{"submit":function($event){$event.preventDefault();},"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleFilterSearch($event)}}},[(_vm.showFilterSubmit)?_c('div',{ref:"submit",class:[
@@ -15005,10 +15009,10 @@ var filterbarvue_type_template_id_40af38c2_render = function () {var _vm=this;va
           'filterbar__submit--onleft': _vm.isNoneFields
         }
       ]},[_c('div',{staticClass:"filterbar__submit-btn",style:({ transform: ("translateX(" + _vm.searchBtnOffset + "px)") })},[_c('el-form-item',[_vm._t("prepend-filterbar-submit"),(_vm.showFilterSearch)?_c('el-button',{attrs:{"type":"primary","icon":"el-icon-search"},on:{"click":_vm.handleFilterSearch}},[_vm._v(" 搜索 ")]):_vm._e(),(_vm.showFilterReset)?_c('el-button',{on:{"click":_vm.handleFilterReset}},[_vm._v(" 重置 ")]):_vm._e(),_vm._t("append-filterbar-submit")],2)],1),_c('el-button',{staticClass:"filterbar__submit-more",attrs:{"icon":_vm.internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top',"type":"primary"},on:{"click":_vm.toggleFilterbar}})],1):_vm._e(),(_vm.showFilterButtons)?_c('div',{staticClass:"filterbar__buttons"},[_c('el-form-item',[_vm._l((_vm.filterButtons),function(button,index){return [(_vm.isFunction(button))?_c('v-node',{key:button.key || index,attrs:{"node":button()}}):(button.render)?_c('v-node',{key:button.key || index,attrs:{"node":button.render()}}):(_vm.isVNode(button))?_c('v-node',{key:button.key || index,attrs:{"node":button}}):(Array.isArray(button.children))?_c('el-dropdown',{key:button.key || index,attrs:{"type":button.type,"split-button":button.splitButton,"trigger":button.trigger || 'click',"placement":"bottom"},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[(button.splitButton)?[(button.icon)?_c('i',{class:button.icon}):_vm._e(),_vm._v(" "+_vm._s(button.text)+" ")]:[_c('el-button',{attrs:{"type":button.type,"icon":button.icon},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[_vm._v(" "+_vm._s(button.text)+" "),_c('i',{staticClass:"el-icon-arrow-down el-icon--right"})])],_c('el-dropdown-menu',{attrs:{"slot":"dropdown"},slot:"dropdown"},_vm._l((button.children),function(child,childIndex){return _c('el-dropdown-item',{key:childIndex,nativeOn:{"click":function($event){return _vm.applyButtonClick(child, $event)}}},[(child.icon)?_c('i',{class:child.icon}):_vm._e(),_vm._v(" "+_vm._s(child.text)+" ")])}),1)],2):_c('el-button',{key:button.key || index,attrs:{"type":button.type,"plain":button.plain,"icon":button.icon},on:{"click":function($event){return _vm.applyButtonClick(button, $event)}}},[_vm._v(" "+_vm._s(button.text)+" ")])]})],2)],1):_vm._e(),(_vm.showFilterFields)?_c('filterbar-form',{ref:"filterForm",staticClass:"filterbar__form",attrs:{"fields":_vm.validFilterFields,"model":_vm.filterModel}}):_vm._e()],1)],1):_vm._e()}
-var filterbarvue_type_template_id_40af38c2_staticRenderFns = []
+var filterbarvue_type_template_id_e08beef4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/filterbar.vue?vue&type=template&id=40af38c2&
+// CONCATENATED MODULE: ./src/components/filterbar.vue?vue&type=template&id=e08beef4&
 
 // EXTERNAL MODULE: ./src/utils/utils.js
 var utils = __webpack_require__("fa7d");
@@ -15085,7 +15089,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
     }
   },
   methods: {
-    isVNode: utils["c" /* isVNode */],
+    isVNode: utils["d" /* isVNode */],
     isFunction: isFunction_default.a,
     getFieldComponentName: components_fields["b" /* getFieldComponentName */],
     getFieldValue: function getFieldValue(field) {
@@ -15122,7 +15126,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
           },
           "key": key
         });
-      } else if (Object(utils["c" /* isVNode */])(field)) {
+      } else if (Object(utils["d" /* isVNode */])(field)) {
         content = h("v-node", {
           "attrs": {
             "node": field
@@ -15256,7 +15260,7 @@ var filterbar_form_component = Object(componentNormalizer["a" /* default */])(
   computed: {
     validFilterFields: function validFilterFields() {
       return this.filterFields.filter(function (field) {
-        return Object(utils["d" /* isValidFieldConfig */])(field) || Array.isArray(field);
+        return Object(utils["e" /* isValidFieldConfig */])(field) || Array.isArray(field);
       });
     },
     isNoneFields: function isNoneFields() {
@@ -15292,7 +15296,7 @@ var filterbar_form_component = Object(componentNormalizer["a" /* default */])(
     this.updateLayout();
   },
   methods: {
-    isVNode: utils["c" /* isVNode */],
+    isVNode: utils["d" /* isVNode */],
     isFunction: isFunction_default.a,
     getAllFieldsDom: function getAllFieldsDom() {
       var filterForm = this.$refs['filterForm'];
@@ -15314,7 +15318,7 @@ var filterbar_form_component = Object(componentNormalizer["a" /* default */])(
       var _resetField = function _resetField(field) {
         var name = field.model;
 
-        if (name && model.hasOwnProperty(name)) {
+        if (name && Object(utils["b" /* hasOwn */])(model, name)) {
           var value = model[name];
 
           if (Array.isArray(value)) {
@@ -15432,8 +15436,8 @@ var filterbarvue_type_style_index_0_lang_less_ = __webpack_require__("e067");
 
 var filterbar_component = Object(componentNormalizer["a" /* default */])(
   components_filterbarvue_type_script_lang_js_,
-  filterbarvue_type_template_id_40af38c2_render,
-  filterbarvue_type_template_id_40af38c2_staticRenderFns,
+  filterbarvue_type_template_id_e08beef4_render,
+  filterbarvue_type_template_id_e08beef4_staticRenderFns,
   false,
   null,
   null,
@@ -15501,16 +15505,15 @@ var style = __webpack_require__("dbac");
 
 
 
-
 /**
  * 验证 fields 内是否有重复的 model 属性
  */
 
-function validateFilterFields(fields) {
+var listviewvue_type_script_lang_js_validateFilterFields = function validateFilterFields(fields) {
   /* istanbul ignore next */
   if (Array.isArray(fields)) {
     var hasModelKey = fields.filter(function (field) {
-      return isPlainObject_default()(field) && field.hasOwnProperty('model') && typeof field.model === 'string';
+      return isPlainObject_default()(field) && Object(utils["b" /* hasOwn */])(field, 'model') && typeof field.model === 'string';
     });
 
     var duplicateFields = pickBy_default()(countBy_default()(hasModelKey, 'model'), function (count) {
@@ -15521,14 +15524,14 @@ function validateFilterFields(fields) {
       error("FilterFields 配置内有重复的 'model' : " + Object.keys(duplicateFields).join(', '));
     }
   }
-}
+};
 /**
  * 应用 filterField 内设置的字段 getter ，
  * 如果 getter 执行有错误则依然使用原始值
  */
 
 
-function applyFieldGetter(payloadData, getters) {
+var listviewvue_type_script_lang_js_applyFieldGetter = function applyFieldGetter(payloadData, getters) {
   /* istanbul ignore next */
   Object.keys(getters).forEach(function (key) {
     try {
@@ -15537,7 +15540,22 @@ function applyFieldGetter(payloadData, getters) {
       error(["FilterFields '".concat(key, "' getter error:"), "  - Value: ".concat(JSON.stringify(payloadData[key])), "  - Getter: ".concat(getters[key].toString()), "  - Error: ".concat(e)].join('\n'));
     }
   });
-}
+};
+
+var listviewvue_type_script_lang_js_resolvefilterModelGetters = function resolvefilterModelGetters(fields) {
+  var getters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return fields.reduce(function (result, field) {
+    if (Array.isArray(field)) {
+      resolvefilterModelGetters(field, getters);
+    } else {
+      if (isFunction_default()(field.get) && field.model) {
+        result[field.model] = field.get;
+      }
+    }
+
+    return result;
+  }, getters);
+};
 
 var DEFAULT_PROPS = {
   validateResponse: function validateResponse(response) {
@@ -15820,17 +15838,7 @@ var DEFAULT_PROPS = {
      * -> { text: val => val.toUpperCase() }
      */
     filterModelGetters: function filterModelGetters() {
-      var fields = keyBy_default()(this.filterFields, 'model');
-
-      var getters = {};
-
-      transform_default()(fields, function (result, field) {
-        if (isFunction_default()(field.get)) {
-          result[field.model] = field.get;
-        }
-      }, getters);
-
-      return getters;
+      return listviewvue_type_script_lang_js_resolvefilterModelGetters(this.filterFields);
     },
     overrideProps: function overrideProps() {
       var _this2 = this;
@@ -15858,7 +15866,7 @@ var DEFAULT_PROPS = {
     filterButtons: 'updateLayout',
     filterFields: function filterFields(val) {
       this.updateLayout();
-      validateFilterFields(val);
+      listviewvue_type_script_lang_js_validateFilterFields(val);
     }
   },
   created: function created() {
@@ -15874,7 +15882,7 @@ var DEFAULT_PROPS = {
       }
     }
 
-    validateFilterFields(this.filterFields);
+    listviewvue_type_script_lang_js_validateFilterFields(this.filterFields);
   },
   mounted: function mounted() {
     this.initLayout();
@@ -16068,10 +16076,10 @@ var DEFAULT_PROPS = {
 
               payloadData = cloneDeep_default()(this.filterModel); // 应用 filter 设置内的 getter
 
-              applyFieldGetter(payloadData, this.filterModelGetters); // 删除搜索条件中的无效数据
+              listviewvue_type_script_lang_js_applyFieldGetter(payloadData, this.filterModelGetters); // 删除搜索条件中的无效数据
 
               payloadData = omitBy_default()(payloadData, function (val) {
-                return !Object(utils["e" /* isValidFieldValue */])(val);
+                return !Object(utils["f" /* isValidFieldValue */])(val);
               }); // 附加分页参数
 
               indexKey = 'page_index';
@@ -16230,7 +16238,7 @@ var DEFAULT_PROPS = {
       if (this.selectionColumn) {
         if (this.selectionColumn.selectable && event) {
           // 选择列中若有禁用选项则当行数据禁止选中
-          var $rowNode = Object(utils["f" /* nodeParents */])(event.target, '.el-table__row');
+          var $rowNode = Object(utils["g" /* nodeParents */])(event.target, '.el-table__row');
           var $selectNode = $rowNode.querySelector('.el-table-column--selection input');
           if (!$selectNode || $selectNode.disabled) return;
         } // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
@@ -16347,7 +16355,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_18a48f5a_render,
+  listviewvue_type_template_id_4f430803_render,
   staticRenderFns,
   false,
   null,
