@@ -3,6 +3,7 @@ export default {
   name: 'VNode',
   props: ['node'],
   render() {
+    /* istanbul ignore next */
     return this.node
   }
 }
