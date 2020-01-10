@@ -1,3 +1,12 @@
+## [1.2.12](https://github.com/laomao800/vue-listview/compare/v1.2.11...v1.2.12) (2020-01-10)
+
+
+### Bug Fixes
+
+* 修正传入 usePage 无法覆盖全局设置 ([7c1e147](https://github.com/laomao800/vue-listview/commit/7c1e147))
+
+
+
 ## [1.2.11](https://github.com/laomao800/vue-listview/compare/v1.2.10...v1.2.11) (2019-12-10)
 
 
