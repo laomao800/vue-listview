@@ -1,5 +1,33 @@
+export function createRequestSpyWrapper(propsData = {}, options = {}) {
+  const Listview = require('@/index').default
+  const { successWrap } = require('../mock-api/utils')
+
+  const requestSpy = jest.fn(() =>
+    Promise.resolve(
+      successWrap({
+        items: mockDataList,
+        total_count: 40
+      })
+    )
+  )
+
+  const wrapper = mount(Listview, {
+    propsData: {
+      requestHandler: requestSpy,
+      ...propsData
+    },
+    options
+  })
+
+  return { wrapper, requestSpy }
+}
+
 export const wait = (time = 100) =>
   new Promise(resolve => setTimeout(resolve, time))
+
+export const mockDataList = Array(10)
+  .fill()
+  .map((row, index) => ({ id: index, name: `row${index}` }))
 
 export const filterButtonsNormal = [
   {

@@ -403,18 +403,14 @@ export default {
       // 非 .use 引入的 Listview 未注册 $LISTVIEW
       const globalConfig = this.$LISTVIEW || {}
       const overrides = {}
-      const props = [
-        'validateResponse',
-        'resolveResponseErrorMessage',
-        'transformRequestData',
-        'transformResponseData',
-        'contentDataMap'
-      ]
-      props.forEach(prop => {
+      Object.keys(DEFAULT_PROPS).forEach(prop => {
         overrides[prop] =
           this[prop] || globalConfig[prop] || DEFAULT_PROPS[prop]
       })
-      overrides['usePage'] = globalConfig['usePage'] || this.usePage
+      overrides['usePage'] =
+        this.usePage === true && hasOwn(globalConfig, 'usePage')
+          ? globalConfig['usePage']
+          : this.usePage
       return overrides
     }
   },

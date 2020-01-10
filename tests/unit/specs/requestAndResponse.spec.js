@@ -1,35 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { wait } from '../helpers'
-import { successWrap } from '../../mock-api/utils'
-import Listview from '@/index'
-
-const mockDataList = Array(10)
-  .fill()
-  .map((row, index) => ({ id: index, name: `row${index}` }))
-
-function createWrapper(options = {}) {
-  const requestSpy = jest.fn(() =>
-    Promise.resolve(
-      successWrap({
-        items: mockDataList,
-        total_count: 40
-      })
-    )
-  )
-
-  const wrapper = mount(Listview, {
-    propsData: {
-      requestHandler: requestSpy,
-      ...options
-    }
-  })
-
-  return { wrapper, requestSpy }
-}
+import { createRequestSpyWrapper, mockDataList } from '../helpers'
 
 describe('Request params', () => {
   it('常规参数验证', () => {
-    const { requestSpy } = createWrapper({
+    const { requestSpy } = createRequestSpyWrapper({
       filterModel: {
         static_text: 'abc',
         multipleSelect: [1, 2, 3]
@@ -44,7 +19,7 @@ describe('Request params', () => {
   })
 
   it('transformRequestData', () => {
-    const { requestSpy } = createWrapper({
+    const { requestSpy } = createRequestSpyWrapper({
       filterModel: {
         static_text: 'abc',
         multipleSelect: [1, 2, 3]
@@ -72,7 +47,7 @@ describe('Request params', () => {
   })
 
   it('自定义参数 getter', () => {
-    const { requestSpy } = createWrapper({
+    const { requestSpy } = createRequestSpyWrapper({
       filterModel: {
         multipleSelect: [1, 2, 3],
         text1: 'text1',
@@ -107,7 +82,7 @@ describe('Request params', () => {
 
   it('text 字段默认开启 trim', () => {
     const testString = '  text string  '
-    const { wrapper, requestSpy } = createWrapper({
+    const { wrapper, requestSpy } = createRequestSpyWrapper({
       filterModel: {
         text1: testString,
         text2: testString
@@ -139,7 +114,7 @@ describe('Request params', () => {
 
 describe('分页参数', () => {
   it('默认分页参数', () => {
-    const { wrapper, requestSpy } = createWrapper({
+    const { wrapper, requestSpy } = createRequestSpyWrapper({
       pageSize: 2
     })
     expect(wrapper.find({ ref: 'pagination' }).exists()).toBe(true)
@@ -148,7 +123,7 @@ describe('分页参数', () => {
   })
 
   it('不带分页参数', () => {
-    const { wrapper, requestSpy } = createWrapper({
+    const { wrapper, requestSpy } = createRequestSpyWrapper({
       usePage: false
     })
     expect(wrapper.find({ ref: 'pagination' }).exists()).toBe(false)
@@ -157,7 +132,7 @@ describe('分页参数', () => {
   })
 
   it('自定义分页参数', () => {
-    const { requestSpy } = createWrapper({
+    const { requestSpy } = createRequestSpyWrapper({
       pageSize: 2,
       usePage: {
         pageIndex: 'customPageIndex',
@@ -169,7 +144,7 @@ describe('分页参数', () => {
   })
 
   it('无效自定义分页参数', () => {
-    const { requestSpy } = createWrapper({
+    const { requestSpy } = createRequestSpyWrapper({
       pageSize: 2,
       usePage: {
         errorPageIndex: 'errorPageIndex',
@@ -181,7 +156,7 @@ describe('分页参数', () => {
   })
 
   it('切换 pageSize', () => {
-    const { wrapper } = createWrapper({
+    const { wrapper } = createRequestSpyWrapper({
       pageSize: 2
     })
     const $pagination = wrapper.find({ name: 'ElPagination' })
@@ -190,7 +165,7 @@ describe('分页参数', () => {
   })
 
   it('search(true) 保持当前页码', () => {
-    const { wrapper } = createWrapper({
+    const { wrapper } = createRequestSpyWrapper({
       pageSize: 2
     })
     const $pagination = wrapper.find({ name: 'ElPagination' })
@@ -204,7 +179,7 @@ describe('分页参数', () => {
 
 describe('Response', () => {
   it('contentDataMap', async () => {
-    const { wrapper } = createWrapper({
+    const { wrapper } = createRequestSpyWrapper({
       contentDataMap: {
         items: 'result.items',
         total: 'result.total_count',
@@ -226,7 +201,7 @@ describe('Response', () => {
       items: mockDataList,
       total_count: 40
     }
-    const { wrapper } = createWrapper({
+    const { wrapper } = createRequestSpyWrapper({
       requestHandler() {
         return Promise.resolve({
           custom_is_success: 'done',
@@ -243,7 +218,7 @@ describe('Response', () => {
   })
 
   it('resolveResponseErrorMessage', async () => {
-    const { wrapper } = createWrapper({
+    const { wrapper } = createRequestSpyWrapper({
       requestHandler() {
         return Promise.resolve({
           custom_is_success: 'fail',
@@ -272,7 +247,7 @@ describe('Response', () => {
   })
 
   it('transformResponseData', async () => {
-    const { wrapper } = createWrapper({
+    const { wrapper } = createRequestSpyWrapper({
       contentDataMap: {
         success: 'is_success',
         items: 'new_data.items',
