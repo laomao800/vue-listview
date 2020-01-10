@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.11 */
+/*! Vue Listview v1.2.12 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1081,6 +1081,7 @@ for (var COLLECTION_NAME in DOMIterables) {
   name: 'VNode',
   props: ['node'],
   render: function render() {
+    /* istanbul ignore next */
     return this.node;
   }
 });
@@ -14761,8 +14762,8 @@ var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject);
 var isFunction = __webpack_require__("9520");
 var isFunction_default = /*#__PURE__*/__webpack_require__.n(isFunction);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=4f430803&
-var listviewvue_type_template_id_4f430803_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=41fbdb25&
+var listviewvue_type_template_id_41fbdb25_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -14781,7 +14782,7 @@ return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=4f430803&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=41fbdb25&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -15846,11 +15847,10 @@ var DEFAULT_PROPS = {
       // 非 .use 引入的 Listview 未注册 $LISTVIEW
       var globalConfig = this.$LISTVIEW || {};
       var overrides = {};
-      var props = ['validateResponse', 'resolveResponseErrorMessage', 'transformRequestData', 'transformResponseData', 'contentDataMap'];
-      props.forEach(function (prop) {
+      Object.keys(DEFAULT_PROPS).forEach(function (prop) {
         overrides[prop] = _this2[prop] || globalConfig[prop] || DEFAULT_PROPS[prop];
       });
-      overrides['usePage'] = globalConfig['usePage'] || this.usePage;
+      overrides['usePage'] = this.usePage === true && Object(utils["b" /* hasOwn */])(globalConfig, 'usePage') ? globalConfig['usePage'] : this.usePage;
       return overrides;
     }
   },
@@ -16355,7 +16355,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_4f430803_render,
+  listviewvue_type_template_id_41fbdb25_render,
   staticRenderFns,
   false,
   null,
