@@ -119,12 +119,7 @@
 
         <div v-if="!!usePage" ref="pagination" class="listview__page">
           <el-pagination
-            :total="contentData.total"
-            :current-page="currentPage"
-            :page-sizes="pageSizes"
-            :page-size="pageSize"
-            background
-            layout="total, sizes, prev, pager, next, jumper"
+            v-bind="mergedPageProps"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
           />
@@ -290,7 +285,8 @@ export default {
     // Pager
     usePage: { type: [Boolean, Object], default: true },
     pageSizes: { type: Array, default: () => [20, 50, 100] },
-    pageSize: { type: Number, default: 20 }
+    pageSize: { type: Number, default: 20 },
+    pageProps: { type: Object, default: () => ({}) }
   },
 
   data() {
@@ -412,6 +408,18 @@ export default {
           ? globalConfig['usePage']
           : this.usePage
       return overrides
+    },
+
+    mergedPageProps() {
+      return {
+        pageSizes: this.pageSizes,
+        pageSize: this.pageSize,
+        background: true,
+        layout: 'total, sizes, prev, pager, next, jumper',
+        ...this.pageProps,
+        total: this.contentData.total,
+        currentPage: this.currentPage
+      }
     }
   },
 

@@ -14,6 +14,9 @@
         :filter-model="filterModel"
         :table-columns="tableColumns"
         :table-selection.sync="tableSelection"
+        :page-props="{
+          pagerCount: 5
+        }"
       />
       <listview
         header-title="演示列表2"

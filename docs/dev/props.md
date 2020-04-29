@@ -116,6 +116,13 @@ sidebarDepth: 2
 
 默认每页分页数量。
 
+### pageProps
+
+- type: `Object`
+- default: `{}`
+
+除了 `total` 和 `currentPage` 之外的所有 `<el-pagination>` 支持的 [Props](https://element.eleme.cn/#/zh-CN/component/pagination#attributes) 。
+
 ## 表格
 
 ### tableColumns
