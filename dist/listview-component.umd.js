@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.12 */
+/*! Vue Listview v1.3.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1442,7 +1442,7 @@ module.exports = require("core-js/modules/es.string.iterator");
 /* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("46fa");
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("53ca");
+/* harmony import */ var E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("53ca");
 
 
 
@@ -1562,7 +1562,7 @@ function isValidObject(val) {
 }
 
 function isObject(val) {
-  return val != null && Object(e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(val) === 'object' && Array.isArray(val) === false;
+  return val != null && Object(E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(val) === 'object' && Array.isArray(val) === false;
 }
 
 /***/ }),
@@ -2636,7 +2636,7 @@ module.exports = require("lodash/isFunction");
 /* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("bcda");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("53ca");
+/* harmony import */ var E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("53ca");
 /* harmony import */ var lodash_isFunction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("f90b");
 /* harmony import */ var lodash_isFunction__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash_isFunction__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("e109");
@@ -2742,7 +2742,7 @@ function nodeParents(node, selector) {
   return find(node);
 }
 function isPromise(obj) {
-  return !!obj && (Object(e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"])(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+  return !!obj && (Object(E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"])(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 }
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
@@ -2791,8 +2791,8 @@ var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject_);
 var isFunction_ = __webpack_require__("f90b");
 var isFunction_default = /*#__PURE__*/__webpack_require__.n(isFunction_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=41fbdb25&
-var listviewvue_type_template_id_41fbdb25_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=d3808448&
+var listviewvue_type_template_id_d3808448_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -2807,11 +2807,14 @@ var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{
                 var $index = ref.$index;
 return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -1 ? '' : null,"disabled":_vm.selectionColumn.selectable
                         ? !_vm.selectionColumn.selectable.call(null, row, $index)
-                        : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, null, $event); })($event)}}})]}}],null,false,1410541768)}):_c('el-table-column',_vm._b({attrs:{"type":"selection","width":"50","align":"center"}},'el-table-column',_vm.selectionColumn,false))]:_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{"filterModel":_vm.filterModel,"contentHeight":_vm.contentHeight,"contentLoading":_vm.contentLoading,"contentData":_vm.contentData,"contentMessage":_vm.internalContentMessage})],2),(!!_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',{attrs:{"total":_vm.contentData.total,"current-page":_vm.currentPage,"page-sizes":_vm.pageSizes,"page-size":_vm.pageSize,"background":"","layout":"total, sizes, prev, pager, next, jumper"},on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}})],1):_vm._e()])],1)],1)}
+                        : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, null, $event); })($event)}}})]}}],null,false,1410541768)}):_c('el-table-column',_vm._b({attrs:{"type":"selection","width":"50","align":"center"}},'el-table-column',_vm.selectionColumn,false))]:_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{"filterModel":_vm.filterModel,"contentHeight":_vm.contentHeight,"contentLoading":_vm.contentLoading,"contentData":_vm.contentData,"contentMessage":_vm.internalContentMessage})],2),(!!_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',_vm._b({on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}},'el-pagination',_vm.mergedPageProps,false))],1):_vm._e()])],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=41fbdb25&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=d3808448&
+
+// EXTERNAL MODULE: external "core-js/modules/es.symbol"
+var es_symbol_ = __webpack_require__("6049");
 
 // EXTERNAL MODULE: external "core-js/modules/es.array.filter"
 var es_array_filter_ = __webpack_require__("4a38");
@@ -2833,6 +2836,12 @@ var es_date_to_string_ = __webpack_require__("7833");
 
 // EXTERNAL MODULE: external "core-js/modules/es.number.constructor"
 var es_number_constructor_ = __webpack_require__("6faa");
+
+// EXTERNAL MODULE: external "core-js/modules/es.object.get-own-property-descriptor"
+var es_object_get_own_property_descriptor_ = __webpack_require__("6b07");
+
+// EXTERNAL MODULE: external "core-js/modules/es.object.get-own-property-descriptors"
+var es_object_get_own_property_descriptors_ = __webpack_require__("46bb");
 
 // EXTERNAL MODULE: external "core-js/modules/es.object.keys"
 var es_object_keys_ = __webpack_require__("2175");
@@ -2857,9 +2866,6 @@ var es_string_search_ = __webpack_require__("be6e");
 
 // EXTERNAL MODULE: external "core-js/modules/web.dom-collections.for-each"
 var web_dom_collections_for_each_ = __webpack_require__("bcda");
-
-// EXTERNAL MODULE: external "core-js/modules/es.symbol"
-var es_symbol_ = __webpack_require__("6049");
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 
@@ -2903,6 +2909,21 @@ function _objectWithoutProperties(source, excluded) {
 // EXTERNAL MODULE: external "regenerator-runtime/runtime"
 var runtime_ = __webpack_require__("79d0");
 
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 // EXTERNAL MODULE: external "lodash/omitBy"
 var omitBy_ = __webpack_require__("3c1d");
 var omitBy_default = /*#__PURE__*/__webpack_require__.n(omitBy_);
@@ -3047,27 +3068,6 @@ var filterbarvue_type_template_id_e08beef4_staticRenderFns = []
 // EXTERNAL MODULE: ./src/utils/utils.js
 var utils = __webpack_require__("fa7d");
 
-// EXTERNAL MODULE: external "core-js/modules/es.object.get-own-property-descriptor"
-var es_object_get_own_property_descriptor_ = __webpack_require__("6b07");
-
-// EXTERNAL MODULE: external "core-js/modules/es.object.get-own-property-descriptors"
-var es_object_get_own_property_descriptors_ = __webpack_require__("46bb");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
 // EXTERNAL MODULE: external "has-values"
 var external_has_values_ = __webpack_require__("384f");
 var external_has_values_default = /*#__PURE__*/__webpack_require__.n(external_has_values_);
@@ -3532,6 +3532,15 @@ var style = __webpack_require__("dbac");
 
 
 
+function listviewvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function listviewvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { listviewvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { listviewvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+
 
 
 
@@ -3759,6 +3768,12 @@ var DEFAULT_PROPS = {
     pageSize: {
       type: Number,
       default: 20
+    },
+    pageProps: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
     }
   },
   data: function data() {
@@ -3881,6 +3896,17 @@ var DEFAULT_PROPS = {
       });
       overrides['usePage'] = this.usePage === true && Object(utils["b" /* hasOwn */])(globalConfig, 'usePage') ? globalConfig['usePage'] : this.usePage;
       return overrides;
+    },
+    mergedPageProps: function mergedPageProps() {
+      return listviewvue_type_script_lang_js_objectSpread({
+        pageSizes: this.pageSizes,
+        pageSize: this.pageSize,
+        background: true,
+        layout: 'total, sizes, prev, pager, next, jumper'
+      }, this.pageProps, {
+        total: this.contentData.total,
+        currentPage: this.currentPage
+      });
     }
   },
   watch: {
@@ -4384,7 +4410,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_41fbdb25_render,
+  listviewvue_type_template_id_d3808448_render,
   staticRenderFns,
   false,
   null,

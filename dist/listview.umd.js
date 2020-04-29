@@ -1,4 +1,4 @@
-/*! Vue Listview v1.2.12 */
+/*! Vue Listview v1.3.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
@@ -176,34 +176,6 @@ var overArg = __webpack_require__("91e9");
 var nativeKeys = overArg(Object.keys, Object);
 
 module.exports = nativeKeys;
-
-
-/***/ }),
-
-/***/ "044b":
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
 
 
 /***/ }),
@@ -7096,7 +7068,7 @@ module.exports = overArg;
 /* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("1276");
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("53ca");
+/* harmony import */ var E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("53ca");
 
 
 
@@ -7216,7 +7188,7 @@ function isValidObject(val) {
 }
 
 function isObject(val) {
-  return val != null && Object(e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(val) === 'object' && Array.isArray(val) === false;
+  return val != null && Object(E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(val) === 'object' && Array.isArray(val) === false;
 }
 
 /***/ }),
@@ -10848,7 +10820,7 @@ module.exports = false;
 
 
 var bind = __webpack_require__("1d2b");
-var isBuffer = __webpack_require__("044b");
+var isBuffer = __webpack_require__("c7ce");
 
 /*global toString:true*/
 
@@ -11208,6 +11180,24 @@ var SHARED = '__core-js_shared__';
 var store = global[SHARED] || setGlobal(SHARED, {});
 
 module.exports = store;
+
+
+/***/ }),
+
+/***/ "c7ce":
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
 
 
 /***/ }),
@@ -14605,7 +14595,7 @@ module.exports = initCloneObject;
 /* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("159b");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("53ca");
+/* harmony import */ var E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("53ca");
 /* harmony import */ var lodash_isFunction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("9520");
 /* harmony import */ var lodash_isFunction__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash_isFunction__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var lodash_isEmpty__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("13ea");
@@ -14711,7 +14701,7 @@ function nodeParents(node, selector) {
   return find(node);
 }
 function isPromise(obj) {
-  return !!obj && (Object(e_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"])(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+  return !!obj && (Object(E_laomao800_vue_listview_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"])(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 }
 function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
@@ -14771,8 +14761,8 @@ var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject);
 var isFunction = __webpack_require__("9520");
 var isFunction_default = /*#__PURE__*/__webpack_require__.n(isFunction);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=41fbdb25&
-var listviewvue_type_template_id_41fbdb25_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=d3808448&
+var listviewvue_type_template_id_d3808448_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -14787,11 +14777,14 @@ var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{
                 var $index = ref.$index;
 return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -1 ? '' : null,"disabled":_vm.selectionColumn.selectable
                         ? !_vm.selectionColumn.selectable.call(null, row, $index)
-                        : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, null, $event); })($event)}}})]}}],null,false,1410541768)}):_c('el-table-column',_vm._b({attrs:{"type":"selection","width":"50","align":"center"}},'el-table-column',_vm.selectionColumn,false))]:_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{"filterModel":_vm.filterModel,"contentHeight":_vm.contentHeight,"contentLoading":_vm.contentLoading,"contentData":_vm.contentData,"contentMessage":_vm.internalContentMessage})],2),(!!_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',{attrs:{"total":_vm.contentData.total,"current-page":_vm.currentPage,"page-sizes":_vm.pageSizes,"page-size":_vm.pageSize,"background":"","layout":"total, sizes, prev, pager, next, jumper"},on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}})],1):_vm._e()])],1)],1)}
+                        : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, null, $event); })($event)}}})]}}],null,false,1410541768)}):_c('el-table-column',_vm._b({attrs:{"type":"selection","width":"50","align":"center"}},'el-table-column',_vm.selectionColumn,false))]:_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{"filterModel":_vm.filterModel,"contentHeight":_vm.contentHeight,"contentLoading":_vm.contentLoading,"contentData":_vm.contentData,"contentMessage":_vm.internalContentMessage})],2),(!!_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',_vm._b({on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}},'el-pagination',_vm.mergedPageProps,false))],1):_vm._e()])],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=41fbdb25&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=d3808448&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -14813,6 +14806,12 @@ var es_date_to_string = __webpack_require__("0d03");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptor.js
+var es_object_get_own_property_descriptor = __webpack_require__("e439");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptors.js
+var es_object_get_own_property_descriptors = __webpack_require__("dbb4");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
@@ -14837,9 +14836,6 @@ var es_string_search = __webpack_require__("841c");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__("159b");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__("a4d3");
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 
@@ -14883,6 +14879,21 @@ function _objectWithoutProperties(source, excluded) {
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
 
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 // EXTERNAL MODULE: ./node_modules/lodash/omitBy.js
 var omitBy = __webpack_require__("dd65");
 var omitBy_default = /*#__PURE__*/__webpack_require__.n(omitBy);
@@ -15027,27 +15038,6 @@ var filterbarvue_type_template_id_e08beef4_staticRenderFns = []
 // EXTERNAL MODULE: ./src/utils/utils.js
 var utils = __webpack_require__("fa7d");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptor.js
-var es_object_get_own_property_descriptor = __webpack_require__("e439");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptors.js
-var es_object_get_own_property_descriptors = __webpack_require__("dbb4");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
 // EXTERNAL MODULE: ./node_modules/has-values/index.js
 var has_values = __webpack_require__("8213");
 var has_values_default = /*#__PURE__*/__webpack_require__.n(has_values);
@@ -15512,6 +15502,15 @@ var style = __webpack_require__("dbac");
 
 
 
+function listviewvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function listviewvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { listviewvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { listviewvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+
 
 
 
@@ -15739,6 +15738,12 @@ var DEFAULT_PROPS = {
     pageSize: {
       type: Number,
       default: 20
+    },
+    pageProps: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
     }
   },
   data: function data() {
@@ -15861,6 +15866,17 @@ var DEFAULT_PROPS = {
       });
       overrides['usePage'] = this.usePage === true && Object(utils["b" /* hasOwn */])(globalConfig, 'usePage') ? globalConfig['usePage'] : this.usePage;
       return overrides;
+    },
+    mergedPageProps: function mergedPageProps() {
+      return listviewvue_type_script_lang_js_objectSpread({
+        pageSizes: this.pageSizes,
+        pageSize: this.pageSize,
+        background: true,
+        layout: 'total, sizes, prev, pager, next, jumper'
+      }, this.pageProps, {
+        total: this.contentData.total,
+        currentPage: this.currentPage
+      });
     }
   },
   watch: {
@@ -16364,7 +16380,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_41fbdb25_render,
+  listviewvue_type_template_id_d3808448_render,
   staticRenderFns,
   false,
   null,
