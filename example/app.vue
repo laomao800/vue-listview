@@ -14,6 +14,7 @@
         :filter-model="filterModel"
         :table-columns="tableColumns"
         :table-selection.sync="tableSelection"
+        :use-page="false"
         :page-props="{
           pagerCount: 5
         }"

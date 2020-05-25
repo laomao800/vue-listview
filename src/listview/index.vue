@@ -117,12 +117,34 @@
           </slot>
         </div>
 
-        <div v-if="!!usePage" ref="pagination" class="listview__page">
-          <el-pagination
-            v-bind="mergedPageProps"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-          />
+        <div ref="footer" class="listview__footer">
+          <div class="listview__footer-left">
+            <slot name="footer-left">
+              <el-pagination
+                v-if="usePage && pagePosition !== 'right'"
+                v-bind="mergedPageProps"
+                ref="pagination"
+                class="listview__pager"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+              />
+            </slot>
+          </div>
+          <div class="listview__footer-center">
+            <slot name="footer-center" />
+          </div>
+          <div class="listview__footer-right">
+            <slot name="footer-right">
+              <el-pagination
+                v-if="usePage && pagePosition === 'right'"
+                v-bind="mergedPageProps"
+                ref="pagination"
+                class="listview__pager"
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+              />
+            </slot>
+          </div>
         </div>
       </div>
     </div>
@@ -286,7 +308,8 @@ export default {
     usePage: { type: [Boolean, Object], default: true },
     pageSizes: { type: Array, default: () => [20, 50, 100] },
     pageSize: { type: Number, default: 20 },
-    pageProps: { type: Object, default: () => ({}) }
+    pageProps: { type: Object, default: () => ({}) },
+    pagePosition: { type: String }
   },
 
   data() {
@@ -536,7 +559,7 @@ export default {
         : 0
 
       const contentOffsetTop = this.$refs.content.getBoundingClientRect().top
-      const paginationHeight = this.getPaginationHeight()
+      const paginationHeight = this.getFooterHeight()
       const restHeight =
         maxHeight +
         wrapOffsetTop -
@@ -818,12 +841,12 @@ export default {
     /**
      * 获取页码区域所占高度，用于计算内容高度
      */
-    getPaginationHeight() {
-      const paginationEl = this.$refs.pagination
-      const paginationHeight = paginationEl
-        ? paginationEl.getBoundingClientRect().height
+    getFooterHeight() {
+      const footerEl = this.$refs.footer
+      const footerHeight = footerEl
+        ? footerEl.getBoundingClientRect().height
         : 0
-      return paginationHeight
+      return footerHeight
     }
   }
 }

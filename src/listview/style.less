@@ -66,9 +66,28 @@
     display: none;
   }
 
-  &__page {
+  &__footer {
+    display: flex;
     padding-top: 5px;
-    text-align: left;
+
+    &-left,
+    &-center,
+    &-right {
+      display: flex;
+      flex: 1;
+      align-items: center;
+    }
+
+    &-left {
+      justify-content: flex-start;
+    }
+    &-center {
+      flex: inherit;
+      justify-content: center;
+    }
+    &-right {
+      justify-content: flex-end;
+    }
   }
 
   // Element-ui overwrite

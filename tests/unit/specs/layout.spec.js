@@ -104,6 +104,43 @@ describe('layout', () => {
     })
   })
 
+  describe('listview footer', () => {
+    it('pager off', () => {
+      const wrapper = mount(Listview, { propsData: { usePage: false } })
+      expect(wrapper.vm.$el.querySelector('.listview__pager')).toBe(null)
+    })
+
+    it('pager on right', () => {
+      const wrapper = mount(Listview, { propsData: { pagePosition: 'right' } })
+      expect(
+        wrapper.vm.$el.querySelector('.listview__footer-left .listview__pager')
+      ).toBe(null)
+      expect(
+        wrapper.vm.$el.querySelector('.listview__footer-right .listview__pager')
+      ).not.toBe(null)
+    })
+
+    it('footer slots', () => {
+      const slots = {
+        'footer-left': 'footer left',
+        'footer-center': 'footer center',
+        'footer-right': 'footer right'
+      }
+      const wrapper = mount(Listview, {
+        slots
+      })
+      expect(
+        wrapper.vm.$el.querySelector('.listview__footer-left').textContent
+      ).toBe(slots['footer-left'])
+      expect(
+        wrapper.vm.$el.querySelector('.listview__footer-center').textContent
+      ).toBe(slots['footer-center'])
+      expect(
+        wrapper.vm.$el.querySelector('.listview__footer-right').textContent
+      ).toBe(slots['footer-right'])
+    })
+  })
+
   describe('Others', () => {
     it('specify height', () => {
       const wrapper = mount(Listview, {
@@ -114,11 +151,6 @@ describe('layout', () => {
         }
       })
       expect(wrapper.element.style.height).toBe('500px')
-    })
-
-    it('pager off', () => {
-      const wrapper = mount(Listview, { propsData: { usePage: false } })
-      expect(wrapper.vm.$el.querySelector('.listview__page')).toBe(null)
     })
   })
 })

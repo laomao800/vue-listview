@@ -56,3 +56,15 @@
 ## append-filterbar-submit
 
 同 [prepend-filterbar-submit](#prepend-filterbar-submit) ，但是插入在“重置”按钮后面。
+
+## footer-left
+
+底部页码栏左侧插槽，设置该插槽会覆盖默认情况下的页码组件。
+
+## footer-center
+
+底部页码栏中间位置的插槽。
+
+## footer-right
+
+底部页码栏右侧插槽，设置该插槽会覆盖页码[显示在右侧的页码组件](./props.md#pageposition)。

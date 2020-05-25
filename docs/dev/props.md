@@ -123,6 +123,14 @@ sidebarDepth: 2
 
 除了 `total` 和 `currentPage` 之外的所有 `<el-pagination>` 支持的 [Props](https://element.eleme.cn/#/zh-CN/component/pagination#attributes) 。
 
+### pagePosition
+
+- type: `String`
+- default: -
+- 可选值： `right`
+
+设置页码位置，传入 `right` 可让页码显示于底部右侧。注意 slot [`footer-right`](./slots.md#footer-right) 会覆盖出现于底部右侧的页码。
+
 ## 表格
 
 ### tableColumns
