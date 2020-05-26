@@ -1,4 +1,4 @@
-/*! Vue Listview v1.3.0 */
+/*! Vue Listview v1.4.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));
@@ -8217,7 +8217,7 @@ try {
 
 exports = module.exports = __webpack_require__("24fb")(false);
 // Module
-exports.push([module.i, ".listview{overflow:auto}.listview .el-table .el-table__body tr.el-table__row.row--selected td{background-color:#ffd}.listview .el-table th{background:#f5f7fa}.listview__main{padding:10px;padding-bottom:5px;background-color:#fff;border:5px solid #f0f2f5}.listview__content{overflow:auto}.listview__content .el-table__empty-text{width:auto;max-width:50%}.listview .content-message{display:-webkit-box;display:-ms-flexbox;display:flex;padding:15px 20px;line-height:30px;border-radius:5px;-webkit-box-shadow:0 0 15px #ddd;box-shadow:0 0 15px #ddd}.listview .content-message--icon{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:10px;font-size:24px}.listview .content-message--message{font-size:14px;text-align:left}.listview .content-message--success .content-message--icon{color:#6ac243}.listview .content-message--warning .content-message--icon{color:#f90}.listview .content-message--info .content-message--icon{color:#459ffc}.listview .content-message--error .content-message--icon{color:#f56c6c}.listview .el-table-column--single-selection .el-radio__label{display:none}.listview__page{padding-top:5px;text-align:left}.listview .el-pagination.is-background .btn-next,.listview .el-pagination.is-background .btn-prev,.listview .el-pagination.is-background .el-pager li{margin:0 8px 0 0}.listview .el-pagination.is-background .el-select .el-input{margin:0}.listview .el-table--border .el-table-column--selection .cell{padding-right:10px;padding-left:10px}", ""]);
+exports.push([module.i, ".listview{overflow:auto}.listview .el-table .el-table__body tr.el-table__row.row--selected td{background-color:#ffd}.listview .el-table th{background:#f5f7fa}.listview__main{padding:10px;padding-bottom:5px;background-color:#fff;border:5px solid #f0f2f5}.listview__content{overflow:auto}.listview__content .el-table__empty-text{width:auto;max-width:50%}.listview .content-message{display:-webkit-box;display:-ms-flexbox;display:flex;padding:15px 20px;line-height:30px;border-radius:5px;-webkit-box-shadow:0 0 15px #ddd;box-shadow:0 0 15px #ddd}.listview .content-message--icon{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-right:10px;font-size:24px}.listview .content-message--message{font-size:14px;text-align:left}.listview .content-message--success .content-message--icon{color:#6ac243}.listview .content-message--warning .content-message--icon{color:#f90}.listview .content-message--info .content-message--icon{color:#459ffc}.listview .content-message--error .content-message--icon{color:#f56c6c}.listview .el-table-column--single-selection .el-radio__label{display:none}.listview__footer{display:-webkit-box;display:-ms-flexbox;display:flex;padding-top:5px}.listview__footer-center,.listview__footer-left,.listview__footer-right{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.listview__footer-left{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.listview__footer-center{-webkit-box-flex:inherit;-ms-flex:inherit;flex:inherit;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.listview__footer-right{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.listview .el-pagination.is-background .btn-next,.listview .el-pagination.is-background .btn-prev,.listview .el-pagination.is-background .el-pager li{margin:0 8px 0 0}.listview .el-pagination.is-background .el-select .el-input{margin:0}.listview .el-table--border .el-table-column--selection .cell{padding-right:10px;padding-left:10px}", ""]);
 
 
 /***/ }),
@@ -14761,8 +14761,8 @@ var isPlainObject_default = /*#__PURE__*/__webpack_require__.n(isPlainObject);
 var isFunction = __webpack_require__("9520");
 var isFunction_default = /*#__PURE__*/__webpack_require__.n(isFunction);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=d3808448&
-var listviewvue_type_template_id_d3808448_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"05ef513f-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=3e97ec4d&
+var listviewvue_type_template_id_3e97ec4d_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -14777,11 +14777,11 @@ var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{
                 var $index = ref.$index;
 return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -1 ? '' : null,"disabled":_vm.selectionColumn.selectable
                         ? !_vm.selectionColumn.selectable.call(null, row, $index)
-                        : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, null, $event); })($event)}}})]}}],null,false,1410541768)}):_c('el-table-column',_vm._b({attrs:{"type":"selection","width":"50","align":"center"}},'el-table-column',_vm.selectionColumn,false))]:_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{"filterModel":_vm.filterModel,"contentHeight":_vm.contentHeight,"contentLoading":_vm.contentLoading,"contentData":_vm.contentData,"contentMessage":_vm.internalContentMessage})],2),(!!_vm.usePage)?_c('div',{ref:"pagination",staticClass:"listview__page"},[_c('el-pagination',_vm._b({on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}},'el-pagination',_vm.mergedPageProps,false))],1):_vm._e()])],1)],1)}
+                        : false,"label":""},nativeOn:{"click":function($event){$event.stopPropagation();$event.preventDefault();return (function ($event) { return _vm.handleRowClick(row, null, $event); })($event)}}})]}}],null,false,1410541768)}):_c('el-table-column',_vm._b({attrs:{"type":"selection","width":"50","align":"center"}},'el-table-column',_vm.selectionColumn,false))]:_vm._e(),_vm._l((_vm.tableColumns),function(column,index){return [_c('v-node',{key:index,attrs:{"node":_vm.renderTableColumn(column)}})]})],2)],{"filterModel":_vm.filterModel,"contentHeight":_vm.contentHeight,"contentLoading":_vm.contentLoading,"contentData":_vm.contentData,"contentMessage":_vm.internalContentMessage})],2),_c('div',{ref:"footer",staticClass:"listview__footer"},[_c('div',{staticClass:"listview__footer-left"},[_vm._t("footer-left",[(_vm.usePage && _vm.pagePosition !== 'right')?_c('el-pagination',_vm._b({ref:"pagination",staticClass:"listview__pager",on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}},'el-pagination',_vm.mergedPageProps,false)):_vm._e()])],2),_c('div',{staticClass:"listview__footer-center"},[_vm._t("footer-center")],2),_c('div',{staticClass:"listview__footer-right"},[_vm._t("footer-right",[(_vm.usePage && _vm.pagePosition === 'right')?_c('el-pagination',_vm._b({ref:"pagination",staticClass:"listview__pager",on:{"size-change":_vm.handleSizeChange,"current-change":_vm.handleCurrentChange}},'el-pagination',_vm.mergedPageProps,false)):_vm._e()])],2)])])],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=d3808448&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=3e97ec4d&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("a4d3");
@@ -15744,6 +15744,9 @@ var DEFAULT_PROPS = {
       default: function _default() {
         return {};
       }
+    },
+    pagePosition: {
+      type: String
     }
   },
   data: function data() {
@@ -16021,7 +16024,7 @@ var DEFAULT_PROPS = {
               // 确保处于 listview-container 容器内的高度能铺满
               wrapOffsetTop = this.fixedHeight ? this.$el.getBoundingClientRect().top : 0;
               contentOffsetTop = this.$refs.content.getBoundingClientRect().top;
-              paginationHeight = this.getPaginationHeight();
+              paginationHeight = this.getFooterHeight();
               restHeight = maxHeight + wrapOffsetTop - contentOffsetTop - paginationHeight - this.contentBottomOffset;
               this.contentHeight = restHeight;
 
@@ -16361,10 +16364,10 @@ var DEFAULT_PROPS = {
     /**
      * 获取页码区域所占高度，用于计算内容高度
      */
-    getPaginationHeight: function getPaginationHeight() {
-      var paginationEl = this.$refs.pagination;
-      var paginationHeight = paginationEl ? paginationEl.getBoundingClientRect().height : 0;
-      return paginationHeight;
+    getFooterHeight: function getFooterHeight() {
+      var footerEl = this.$refs.footer;
+      var footerHeight = footerEl ? footerEl.getBoundingClientRect().height : 0;
+      return footerHeight;
     }
   }
 });
@@ -16380,7 +16383,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = Object(componentNormalizer["a" /* default */])(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_d3808448_render,
+  listviewvue_type_template_id_3e97ec4d_render,
   staticRenderFns,
   false,
   null,
