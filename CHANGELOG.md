@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/laomao800/vue-listview/compare/v1.3.0...v1.4.0) (2020-05-26)
+
+
+### Features
+
+* 增加 3 个 footer 区域插槽 ([07ac0c0](https://github.com/laomao800/vue-listview/commit/07ac0c0))
+
+
+
 # [1.3.0](https://github.com/laomao800/vue-listview/compare/v1.2.12...v1.3.0) (2020-04-29)
 
 
