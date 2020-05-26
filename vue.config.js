@@ -46,10 +46,17 @@ module.exports = {
 
     if (process.env.BUILD_MODE === 'component') {
       const nodeExternals = require('webpack-node-externals')
-      config.externals = config.externals || {} // for webpack inspect
-      config.externals['element-ui'] = 'element-ui'
+      config.externals = config.externals || {}
       config.externals = [
         config.externals,
+        {
+          'element-ui': {
+            root: 'ELEMENT',
+            commonjs: 'element-ui',
+            commonjs2: 'element-ui',
+            amd: 'element-ui'
+          }
+        },
         nodeExternals({
           whitelist: [/^@babel/, /current-script-polyfill/]
         })
