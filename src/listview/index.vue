@@ -5,6 +5,7 @@
       minHeight: fixedHeight && 'inherit'
     }"
     class="listview"
+    ref="listview"
   >
     <listview-header :title="headerTitle" :nav="headerNav" />
 
@@ -324,7 +325,9 @@ export default {
       internalContentMessage: null,
       internalListSelection: [],
       currentPage: 1,
-      currentPageSize: this.pageSize
+      currentPageSize: this.pageSize,
+
+      ro: null
     }
   },
 
@@ -480,11 +483,22 @@ export default {
     if (this.autoload) {
       this.requestData()
     }
+
+    this.ro = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        if (entry.target === this.$refs.listview) {
+          this.updateContentLayout()
+        }
+      }
+    })
+
+    this.ro.observe(this.$refs.listview)
   },
 
   beforeDestroy: /* istanbul ignore next */ function() {
     window.removeEventListener('resize', this.updateContentLayout)
     window.removeEventListener('resize', this.updateFilterbarLayout)
+    this.ro.disconnect()
   },
 
   methods: {
@@ -492,27 +506,6 @@ export default {
       // 需要 nextTick 等待 filterbar 渲染后再开始更新布局
       await this.$nextTick()
       this.updateLayout()
-
-      this.initContentEvent()
-      this.initFilterEvent()
-    },
-
-    initContentEvent() {
-      /* istanbul ignore next */
-      if (this.fullHeight) {
-        window.addEventListener('resize', this.updateContentLayout)
-      } else {
-        window.removeEventListener('resize', this.updateContentLayout)
-      }
-    },
-
-    initFilterEvent() {
-      const validFilterFields = this.$refs.filterbar.validFilterFields
-      if (validFilterFields.length > 0) {
-        window.addEventListener('resize', this.updateFilterbarLayout)
-      } else {
-        window.removeEventListener('resize', this.updateFilterbarLayout)
-      }
     },
 
     /**
