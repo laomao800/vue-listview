@@ -20,10 +20,40 @@
         @filter-submit="onFilterSubmit"
         @filter-reset="onFilterReset"
       >
-        <template slot="prepend-filterbar-submit">
+        <template v-if="$slots['filterbar-top']" slot="filterbar-top">
+          <slot name="filterbar-top" />
+        </template>
+        <template v-if="$slots['filterbar-bottom']" slot="filterbar-bottom">
+          <slot name="filterbar-bottom" />
+        </template>
+        <template v-if="$slots['filterbar-left']" slot="filterbar-left">
+          <slot name="filterbar-left" />
+        </template>
+        <template v-if="$slots['filterbar-right']" slot="filterbar-right">
+          <slot name="filterbar-right" />
+        </template>
+        <template
+          v-if="$slots['prepend-filterbar-more']"
+          slot="prepend-filterbar-more"
+        >
+          <slot name="prepend-filterbar-more" />
+        </template>
+        <template
+          v-if="$slots['append-filterbar-more']"
+          slot="append-filterbar-more"
+        >
+          <slot name="append-filterbar-more" />
+        </template>
+        <template
+          v-if="$slots['prepend-filterbar-submit']"
+          slot="prepend-filterbar-submit"
+        >
           <slot name="prepend-filterbar-submit" />
         </template>
-        <template slot="append-filterbar-submit">
+        <template
+          v-if="$slots['append-filterbar-submit']"
+          slot="append-filterbar-submit"
+        >
           <slot name="append-filterbar-submit" />
         </template>
       </filterbar>
