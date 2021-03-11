@@ -186,11 +186,19 @@ export default {
     showFilterReset: { type: Boolean, default: true },
     searchButtonConfig: {
       type: Object,
-      default: () => ({}),
+      default: () => ({
+        text: '搜索',
+        icon: 'el-icon-search',
+        type: 'primary',
+      }),
     },
     resetButtonConfig: {
       type: Object,
-      default: () => ({}),
+      default: () => ({
+        text: '重置',
+        icon: '',
+        type: 'default',
+      }),
     },
   },
 

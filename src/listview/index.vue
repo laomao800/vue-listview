@@ -17,8 +17,8 @@
         :filterbar-fold.sync="filterbarFold"
         :show-filter-search="showFilterSearch"
         :show-filter-reset="showFilterReset"
-        :custom-search-button="searchButtonConfig"
-        :custom-reset-button="resetButtonConfig"
+        :search-button-config="searchButtonConfig"
+        :reset-button-config="resetButtonConfig"
         @filter-submit="onFilterSubmit"
         @filter-reset="onFilterReset"
       >
@@ -328,22 +328,8 @@ export default {
     filterModel: { type: Object, default: () => ({}) },
     showFilterSearch: { type: Boolean, default: true },
     showFilterReset: { type: Boolean, default: true },
-    searchButtonConfig: {
-      type: Object,
-      default: () => ({
-        text: '搜索',
-        icon: 'el-icon-search',
-        type: 'primary',
-      }),
-    },
-    resetButtonConfig: {
-      type: Object,
-      default: () => ({
-        text: '重置',
-        icon: '',
-        type: 'default',
-      }),
-    },
+    searchButtonConfig: {},
+    resetButtonConfig: {},
 
     // Table
     tableColumns: { type: Array, default: () => [] },
