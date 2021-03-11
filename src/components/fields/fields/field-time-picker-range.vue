@@ -23,9 +23,9 @@ export default {
         style: { width: '200px' },
         isRange: true,
         startPlaceholder: '开始时间',
-        endPlaceholder: '结束时间'
-      }
+        endPlaceholder: '结束时间',
+      },
     }
-  }
+  },
 }
 </script>

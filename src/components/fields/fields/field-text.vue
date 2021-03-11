@@ -23,7 +23,7 @@ export default {
   name: 'FieldText',
 
   components: {
-    VNode
+    VNode,
   },
 
   mixins: [fieldMixin],
@@ -32,8 +32,8 @@ export default {
     return {
       defaultProps: {
         clearable: true,
-        style: { width: '180px' }
-      }
+        style: { width: '180px' },
+      },
     }
   },
 
@@ -46,7 +46,7 @@ export default {
           this.value = this.value.trim()
         } catch (error) {}
       }
-    }
-  }
+    },
+  },
 }
 </script>

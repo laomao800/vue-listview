@@ -4,7 +4,7 @@ import get from '@/utils/getValue'
 export default {
   props: {
     formModel: { type: Object, default: () => ({}) },
-    field: { type: Object, default: () => ({}) }
+    field: { type: Object, default: () => ({}) },
   },
 
   computed: {
@@ -32,7 +32,7 @@ export default {
             )
           }
         }
-      }
+      },
     },
     mergedProps() {
       const defaultProps = _.isPlainObject(this.defaultProps)
@@ -50,6 +50,6 @@ export default {
     },
     componentSlots() {
       return this.field.componentSlots || {}
-    }
-  }
+    },
+  },
 }

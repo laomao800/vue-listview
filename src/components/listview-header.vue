@@ -21,13 +21,13 @@ export default {
 
   props: {
     title: { type: String, default: '' },
-    nav: { type: Array, default: () => [] }
+    nav: { type: Array, default: () => [] },
   },
 
   computed: {
     internalNav() {
       const validNav = []
-      this.nav.forEach(nav => {
+      this.nav.forEach((nav) => {
         let text, to
         if (typeof nav === 'string' && !!nav) {
           text = nav
@@ -38,13 +38,13 @@ export default {
         if (text) {
           validNav.push({
             text,
-            to
+            to,
           })
         }
       })
       return validNav
-    }
-  }
+    },
+  },
 }
 </script>
 

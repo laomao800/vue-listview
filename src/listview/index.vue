@@ -2,7 +2,7 @@
   <div
     :style="{
       height: fixedHeight,
-      minHeight: fixedHeight && 'inherit'
+      minHeight: fixedHeight && 'inherit',
     }"
     class="listview"
     ref="listview"
@@ -33,7 +33,7 @@
         <div
           ref="content"
           :style="{
-            height: contentHeight ? `${contentHeight}px` : null
+            height: contentHeight ? `${contentHeight}px` : null,
           }"
           class="listview__content"
         >
@@ -59,8 +59,8 @@
                   :class="[
                     'content-message',
                     {
-                      [`content-message--${internalContentMessage.type}`]: internalContentMessage.type
-                    }
+                      [`content-message--${internalContentMessage.type}`]: internalContentMessage.type,
+                    },
                   ]"
                 >
                   <span
@@ -69,16 +69,16 @@
                   >
                     <i :class="internalContentMessage.icon" />
                   </span>
-                  <span class="content-message--message">{{
-                    internalContentMessage.message
-                  }}</span>
+                  <span class="content-message--message">
+                    {{ internalContentMessage.message }}
+                  </span>
                 </span>
               </template>
 
               <template v-if="!!selectionColumn">
                 <el-table-column
                   v-if="selectionColumn.type === 'single'"
-                  :fixed="tableColumns.some(col => col.fixed)"
+                  :fixed="tableColumns.some((col) => col.fixed)"
                   :resizable="false"
                   width="50"
                   align="center"
@@ -96,7 +96,7 @@
                       "
                       label
                       @click.native.stop.prevent="
-                        $event => handleRowClick(row, null, $event)
+                        ($event) => handleRowClick(row, null, $event)
                       "
                     />
                   </template>
@@ -164,17 +164,17 @@ import {
   dataMapping,
   isValidFieldValue,
   nodeParents,
-  hasOwn
+  hasOwn,
 } from '@/utils/utils'
 import './style.less'
 
 /**
  * 验证 fields 内是否有重复的 model 属性
  */
-const validateFilterFields = fields => {
+const validateFilterFields = (fields) => {
   /* istanbul ignore next */
   if (Array.isArray(fields)) {
-    const hasModelKey = fields.filter(field => {
+    const hasModelKey = fields.filter((field) => {
       return (
         _.isPlainObject(field) &&
         hasOwn(field, 'model') &&
@@ -183,7 +183,7 @@ const validateFilterFields = fields => {
     })
     const duplicateFields = _.pickBy(
       _.countBy(hasModelKey, 'model'),
-      count => count > 1
+      (count) => count > 1
     )
     if (!_.isEmpty(duplicateFields)) {
       error(
@@ -200,7 +200,7 @@ const validateFilterFields = fields => {
  */
 const applyFieldGetter = (payloadData, getters) => {
   /* istanbul ignore next */
-  Object.keys(getters).forEach(key => {
+  Object.keys(getters).forEach((key) => {
     try {
       payloadData[key] = getters[key](payloadData[key], payloadData)
     } catch (e) {
@@ -209,7 +209,7 @@ const applyFieldGetter = (payloadData, getters) => {
           `FilterFields '${key}' getter error:`,
           `  - Value: ${JSON.stringify(payloadData[key])}`,
           `  - Getter: ${getters[key].toString()}`,
-          `  - Error: ${e}`
+          `  - Error: ${e}`,
         ].join('\n')
       )
     }
@@ -229,14 +229,14 @@ const resolvefilterModelGetters = (fields, getters = {}) =>
   }, getters)
 
 const DEFAULT_PROPS = {
-  validateResponse: response => {
+  validateResponse: (response) => {
     try {
       return response.is_success
     } catch (e) {
       return false
     }
   },
-  resolveResponseErrorMessage: response => {
+  resolveResponseErrorMessage: (response) => {
     try {
       return response.error_info.msg
     } catch (e) {
@@ -247,8 +247,8 @@ const DEFAULT_PROPS = {
   transformResponseData: null,
   contentDataMap: {
     items: 'result.items',
-    total: 'result.total_count'
-  }
+    total: 'result.total_count',
+  },
 }
 
 export default {
@@ -257,7 +257,7 @@ export default {
   components: {
     VNode,
     Filterbar,
-    ListviewHeader
+    ListviewHeader,
   },
 
   inheritAttrs: false,
@@ -310,7 +310,7 @@ export default {
     pageSizes: { type: Array, default: () => [20, 50, 100] },
     pageSize: { type: Number, default: 20 },
     pageProps: { type: Object, default: () => ({}) },
-    pagePosition: { type: String }
+    pagePosition: { type: String },
   },
 
   data() {
@@ -320,14 +320,12 @@ export default {
       contentLoading: false,
       contentData: {
         items: [],
-        total: 0
+        total: 0,
       },
       internalContentMessage: null,
       internalListSelection: [],
       currentPage: 1,
       currentPageSize: this.pageSize,
-
-      ro: null
     }
   },
 
@@ -388,7 +386,7 @@ export default {
       const defaultProps = {
         size: 'small',
         border: true,
-        stripe: true
+        stripe: true,
       }
       const mergedPros = _.mapKeys(
         _.merge(defaultProps, this.tableProps),
@@ -425,7 +423,7 @@ export default {
       // 非 .use 引入的 Listview 未注册 $LISTVIEW
       const globalConfig = this.$LISTVIEW || {}
       const overrides = {}
-      Object.keys(DEFAULT_PROPS).forEach(prop => {
+      Object.keys(DEFAULT_PROPS).forEach((prop) => {
         overrides[prop] =
           this[prop] || globalConfig[prop] || DEFAULT_PROPS[prop]
       })
@@ -444,9 +442,9 @@ export default {
         layout: 'total, sizes, prev, pager, next, jumper',
         ...this.pageProps,
         total: this.contentData.total,
-        currentPage: this.currentPage
+        currentPage: this.currentPage,
       }
-    }
+    },
   },
 
   watch: {
@@ -462,7 +460,7 @@ export default {
     filterFields(val) {
       this.updateLayout()
       validateFilterFields(val)
-    }
+    },
   },
 
   created() {
@@ -495,7 +493,7 @@ export default {
     this.ro.observe(this.$refs.listview)
   },
 
-  beforeDestroy: /* istanbul ignore next */ function() {
+  beforeDestroy: /* istanbul ignore next */ function () {
     window.removeEventListener('resize', this.updateContentLayout)
     window.removeEventListener('resize', this.updateFilterbarLayout)
     this.ro.disconnect()
@@ -512,13 +510,13 @@ export default {
      * 更新所有布局数据，包括内容高度和 filterbar
      */
     updateLayout: _.debounce(
-      function() {
+      function () {
         this.updateContentLayout()
         this.updateFilterbarLayout()
       },
       0,
       {
-        leading: true
+        leading: true,
       }
     ),
 
@@ -611,7 +609,7 @@ export default {
       applyFieldGetter(payloadData, this.filterModelGetters)
 
       // 删除搜索条件中的无效数据
-      payloadData = _.omitBy(payloadData, val => {
+      payloadData = _.omitBy(payloadData, (val) => {
         return !isValidFieldValue(val)
       })
 
@@ -660,7 +658,7 @@ export default {
         const _requestConfig = {
           url: this.requestUrl,
           method: this.requestConfig.method || this.requestMethod,
-          withCredentials: true
+          withCredentials: true,
         }
 
         // 提前合并以获取 method 用于判断附加请求参数
@@ -673,7 +671,7 @@ export default {
         const requestConfig = _.merge(_requestConfig, this.requestConfig)
 
         // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
-        requestConfig.cancelToken = new axios.CancelToken(cancel => {
+        requestConfig.cancelToken = new axios.CancelToken((cancel) => {
           this._requestCancelToken = cancel
         })
 
@@ -781,16 +779,16 @@ export default {
      * tableColumns 转换为 el-table-column ，支持 children 属性多级列配置
      */
     renderTableColumn(tableColumn) {
-      const _createColumn = column => {
+      const _createColumn = (column) => {
         const { render, children, ...props } = column
         const VNodeData = { props }
         if (render) {
           VNodeData.scopedSlots = {
-            default: render
+            default: render,
           }
         }
         const VNodeChildren = Array.isArray(children)
-          ? children.map(child => _createColumn(child))
+          ? children.map((child) => _createColumn(child))
           : null
         return this.$createElement('el-table-column', VNodeData, VNodeChildren)
       }
@@ -807,13 +805,13 @@ export default {
         success: 'el-icon-success',
         warning: 'el-icon-warning',
         info: 'el-icon-info',
-        error: 'el-icon-error'
+        error: 'el-icon-error',
       }
       const icon = type ? iconMap[type] || null : null
       this.internalContentMessage = {
         type,
         icon,
-        message
+        message,
       }
     },
 
@@ -840,7 +838,7 @@ export default {
         ? footerEl.getBoundingClientRect().height
         : 0
       return footerHeight
-    }
-  }
+    },
+  },
 }
 </script>

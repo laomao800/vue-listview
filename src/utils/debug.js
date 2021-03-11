@@ -5,7 +5,7 @@ export let error = noop
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
-  warn = msg => {
+  warn = (msg) => {
     // eslint-disable-next-line no-console
     console.warn(
       `%c Listview warn %c ${msg}`,
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'test') {
     )
   }
 
-  error = msg => {
+  error = (msg) => {
     // eslint-disable-next-line no-console
     console.error(
       `%c Listview error %c ${msg}`,

@@ -3,44 +3,38 @@ module.exports = {
 
   pages: {
     index: {
-      entry: 'example'
-    }
+      entry: 'example',
+    },
   },
 
   productionSourceMap: false,
 
   css: {
     sourceMap: process.env.NODE_ENV !== 'production',
-    extract: false
+    extract: false,
   },
 
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module.rule('js').exclude.add(/dist/)
     config.module
       .rule('js')
       .use('babel-loader')
       .loader('babel-loader')
       .tap(() => ({
-        plugins: ['lodash']
+        plugins: ['lodash'],
       }))
     config.module.rule('md').test(/\.md$/)
-    config.module
-      .rule('md')
-      .use('html-loader')
-      .loader('html-loader')
-    config.module
-      .rule('md')
-      .use('markdown-loader')
-      .loader('markdown-loader')
+    config.module.rule('md').use('html-loader').loader('html-loader')
+    config.module.rule('md').use('markdown-loader').loader('markdown-loader')
     config.performance.hints(false)
   },
 
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
     config.plugins.push(
       new LodashModuleReplacementPlugin({
         collections: true,
-        shorthands: true
+        shorthands: true,
       })
     )
 
@@ -54,12 +48,12 @@ module.exports = {
             root: 'ELEMENT',
             commonjs: 'element-ui',
             commonjs2: 'element-ui',
-            amd: 'element-ui'
-          }
+            amd: 'element-ui',
+          },
         },
         nodeExternals({
-          whitelist: [/^@babel/, /current-script-polyfill/]
-        })
+          whitelist: [/^@babel/, /current-script-polyfill/],
+        }),
       ]
     }
 
@@ -71,6 +65,6 @@ module.exports = {
 
   devServer: {
     disableHostCheck: true,
-    before: require('./tests/mock-api')
-  }
+    before: require('./tests/mock-api'),
+  },
 }

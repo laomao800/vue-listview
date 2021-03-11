@@ -20,9 +20,9 @@ export default {
     return {
       defaultProps: {
         clearable: true,
-        style: { width: '180px' }
-      }
+        style: { width: '180px' },
+      },
     }
-  }
+  },
 }
 </script>

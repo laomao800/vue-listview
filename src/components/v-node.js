@@ -5,5 +5,5 @@ export default {
   render() {
     /* istanbul ignore next */
     return this.node
-  }
+  },
 }
