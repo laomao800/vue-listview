@@ -8,6 +8,6 @@ import fieldMixin from './field-mixin'
 export default {
   name: 'FieldLabel',
 
-  mixins: [fieldMixin]
+  mixins: [fieldMixin],
 }
 </script>

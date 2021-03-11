@@ -12,7 +12,7 @@ describe('Events', () => {
         @filter-reset="$emit('filter-reset')"
       />
     `,
-    components: { Listview }
+    components: { Listview },
   })
   const searchBtn = wrapper.findAll('.filterbar__submit-btn button').at(0)
   const resetBtn = wrapper.findAll('.filterbar__submit-btn button').at(1)
@@ -35,8 +35,8 @@ describe('Events', () => {
     const wrapper = mount(Listview, {
       propsData: {
         autoload: false,
-        requestHandler: () => ({})
-      }
+        requestHandler: () => ({}),
+      },
     })
     wrapper.vm.search()
     await wait()
@@ -49,18 +49,18 @@ describe('Events', () => {
       propsData: {
         filterModel: {
           text: '123',
-          multiple: [1, 2, 3]
+          multiple: [1, 2, 3],
         },
         filterFields: [
           { type: 'text', model: 'text' },
-          { type: 'multiple', model: 'multiple' }
-        ]
-      }
+          { type: 'multiple', model: 'multiple' },
+        ],
+      },
     })
     wrapper.vm.resetFilter()
     expect(wrapper.vm.filterModel).toEqual({
       text: undefined,
-      multiple: []
+      multiple: [],
     })
   })
 })

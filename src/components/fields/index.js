@@ -3,7 +3,7 @@ import _ from 'lodash'
 const requireFiles = require.context('./fields', true, /\.vue$/)
 
 const allComponents = {}
-requireFiles.keys().forEach(fileName => {
+requireFiles.keys().forEach((fileName) => {
   // 以驼峰命名作为 key 名存储
   const componentName = _.camelCase(
     fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')
@@ -12,7 +12,7 @@ requireFiles.keys().forEach(fileName => {
 })
 
 const componentNames = Object.keys(allComponents)
-const fieldKeys = componentNames.map(key =>
+const fieldKeys = componentNames.map((key) =>
   _.camelCase(key.replace(/^field/, ''))
 )
 const fieldKeysMap = _.zipObject(fieldKeys, componentNames)

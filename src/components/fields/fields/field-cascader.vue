@@ -24,9 +24,9 @@ export default {
       defaultProps: {
         clearable: true,
         style: { width: '180px' },
-        expandTrigger: 'hover'
+        expandTrigger: 'hover',
       },
-      internalOptions: []
+      internalOptions: [],
     }
   },
 
@@ -37,7 +37,7 @@ export default {
       this.internalOptions = optionConfig
     } else if (_.isFunction(optionConfig) || isPromiseOption) {
       this.loading = true
-      const resolver = options => {
+      const resolver = (options) => {
         if (Array.isArray(options)) {
           this.internalOptions = options
           this.loading = false
@@ -48,6 +48,6 @@ export default {
         : await optionConfig(resolver)
       resolver(result)
     }
-  }
+  },
 }
 </script>

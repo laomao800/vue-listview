@@ -12,8 +12,8 @@ describe('layout', () => {
     it('title', () => {
       const wrapper = mount(ListviewHeader, {
         propsData: {
-          title: 'headerTitle'
-        }
+          title: 'headerTitle',
+        },
       })
       expect(wrapper.html()).toMatchSnapshot()
     })
@@ -21,8 +21,8 @@ describe('layout', () => {
     it('nav', () => {
       const wrapper = mount(ListviewHeader, {
         propsData: {
-          nav: ['home', { text: 'list', to: '/list' }]
-        }
+          nav: ['home', { text: 'list', to: '/list' }],
+        },
       })
       expect(wrapper.html()).toMatchSnapshot()
     })
@@ -33,9 +33,9 @@ describe('layout', () => {
           title: 'headerTitle',
           nav: [
             { text: 'home', to: '/home' },
-            { text: 'list', to: '/list' }
-          ]
-        }
+            { text: 'list', to: '/list' },
+          ],
+        },
       })
       expect(wrapper.html()).toMatchSnapshot()
     })
@@ -45,13 +45,13 @@ describe('layout', () => {
     it('string', () => {
       const wrapper = mount(Listview, {
         propsData: {
-          contentMessage: 'message text'
-        }
+          contentMessage: 'message text',
+        },
       })
       expect(wrapper.vm.internalContentMessage).toEqual({
         type: null,
         icon: null,
-        message: 'message text'
+        message: 'message text',
       })
     })
 
@@ -60,14 +60,14 @@ describe('layout', () => {
         propsData: {
           contentMessage: {
             type: 'info',
-            message: 'message text'
-          }
-        }
+            message: 'message text',
+          },
+        },
       })
       expect(wrapper.vm.internalContentMessage).toEqual({
         type: 'info',
         icon: 'el-icon-info',
-        message: 'message text'
+        message: 'message text',
       })
     })
   })
@@ -77,9 +77,9 @@ describe('layout', () => {
       const wrapper = mount(Listview, {
         propsData: {
           tableProps: {
-            rowClassName: 'row-view-class'
-          }
-        }
+            rowClassName: 'row-view-class',
+          },
+        },
       })
       expect(
         wrapper
@@ -92,9 +92,9 @@ describe('layout', () => {
       const wrapper = mount(Listview, {
         propsData: {
           tableProps: {
-            rowClassName: () => 'row-view-class-fn'
-          }
-        }
+            rowClassName: () => 'row-view-class-fn',
+          },
+        },
       })
       expect(
         wrapper
@@ -124,10 +124,10 @@ describe('layout', () => {
       const slots = {
         'footer-left': 'footer left',
         'footer-center': 'footer center',
-        'footer-right': 'footer right'
+        'footer-right': 'footer right',
       }
       const wrapper = mount(Listview, {
-        slots
+        slots,
       })
       expect(
         wrapper.vm.$el.querySelector('.listview__footer-left').textContent
@@ -147,8 +147,8 @@ describe('layout', () => {
         propsData: {
           autoload: false,
           usePage: false,
-          height: 500
-        }
+          height: 500,
+        },
       })
       expect(wrapper.element.style.height).toBe('500px')
     })
