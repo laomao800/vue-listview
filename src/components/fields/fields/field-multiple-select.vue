@@ -8,6 +8,6 @@ import FieldSelect from './field-select'
 export default {
   name: 'FieldMultipleSelect',
 
-  components: { FieldSelect }
+  components: { FieldSelect },
 }
 </script>

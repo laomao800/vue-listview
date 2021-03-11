@@ -20,9 +20,9 @@ export default {
     return {
       defaultProps: {
         controlsPosition: 'right',
-        style: { width: '100px' }
-      }
+        style: { width: '100px' },
+      },
     }
-  }
+  },
 }
 </script>

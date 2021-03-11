@@ -3,10 +3,10 @@ const { successWrap, errorWrap } = require('../utils')
 const Mock = require('mockjs')
 const delay = require('express-delay')
 
-module.exports = app => {
+module.exports = (app) => {
   app.use(delay(200, 1000))
 
-  router.all('*', function(req, res, next) {
+  router.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
     res.header(
       'Access-Control-Allow-Headers',
@@ -41,10 +41,10 @@ module.exports = app => {
           seller: '@cname',
           date: '@date',
           quantity: '@integer(10, 200)',
-          'enable|1': true
-        }
+          'enable|1': true,
+        },
       ],
-      total_count: 800
+      total_count: 800,
     })
     const responseData = successWrap(data)
     return res.json(responseData)
@@ -53,7 +53,7 @@ module.exports = app => {
   router.all('/listview-empty', (req, res) => {
     const responseData = successWrap({
       items: [],
-      total_count: 0
+      total_count: 0,
     })
     return res.json(responseData)
   })

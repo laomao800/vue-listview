@@ -21,9 +21,9 @@ export default {
       defaultProps: {
         clearable: true,
         style: { width: '200px' },
-        type: 'datetime'
-      }
+        type: 'datetime',
+      },
     }
-  }
+  },
 }
 </script>

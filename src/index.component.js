@@ -2,7 +2,7 @@ import _ from 'lodash'
 import Listview from './listview'
 import ListviewContainer from './listview-container'
 
-Listview.install = function(Vue, options = {}) {
+Listview.install = function (Vue, options = {}) {
   Vue.prototype.$LISTVIEW = {}
 
   // Function type prop
@@ -10,9 +10,9 @@ Listview.install = function(Vue, options = {}) {
     'validateResponse',
     'resolveResponseErrorMessage',
     'transformRequestData',
-    'transformResponseData'
+    'transformResponseData',
   ]
-  fnProp.forEach(prop => {
+  fnProp.forEach((prop) => {
     if (_.isFunction(options[prop])) {
       Vue.prototype.$LISTVIEW[prop] = options[prop]
     }
@@ -27,7 +27,7 @@ Listview.install = function(Vue, options = {}) {
   Vue.component(Listview.name, Listview)
 }
 
-ListviewContainer.install = function(Vue) {
+ListviewContainer.install = function (Vue) {
   Vue.component(ListviewContainer.name, ListviewContainer)
 }
 

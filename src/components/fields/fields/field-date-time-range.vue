@@ -24,9 +24,9 @@ export default {
         type: 'datetimerange',
         startPlaceholder: '开始日期',
         endPlaceholder: '结束日期',
-        expandTrigger: 'hover'
-      }
+        expandTrigger: 'hover',
+      },
     }
-  }
+  },
 }
 </script>

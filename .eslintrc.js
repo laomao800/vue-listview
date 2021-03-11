@@ -1,11 +1,11 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   parserOptions: {
     parser: 'babel-eslint',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   extends: ['plugin:vue/essential', '@vue/prettier'],
   rules: {
@@ -15,7 +15,7 @@ module.exports = {
     // Only allow `console.log` in development
     'no-console': process.env.PRE_COMMIT
       ? ['error', { allow: ['warn', 'error'] }]
-      : 'off'
+      : 'off',
   },
   overrides: [
     {
@@ -26,8 +26,8 @@ module.exports = {
         shallowMount: false,
         shallowMountView: false,
         createComponentMocks: false,
-        createModuleStore: false
-      }
-    }
-  ]
+        createModuleStore: false,
+      },
+    },
+  ],
 }

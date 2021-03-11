@@ -11,7 +11,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'vue'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.(css|less)$': '<rootDir>/tests/unit/__mocks__/styleMock.js'
+    '\\.(css|less)$': '<rootDir>/tests/unit/__mocks__/styleMock.js',
   },
   snapshotSerializers: ['jest-serializer-vue'],
   coverageDirectory: '<rootDir>/tests/unit/coverage',
@@ -19,7 +19,7 @@ module.exports = {
     'src/**/*.{js,vue}',
     '!src/components/fields/**/*',
     '!src/index.js',
-    '!src/index.component.js'
+    '!src/index.component.js',
   ],
-  testURL: `http://localhost:${process.env.MOCK_API_PORT}`
+  testURL: `http://localhost:${process.env.MOCK_API_PORT}`,
 }

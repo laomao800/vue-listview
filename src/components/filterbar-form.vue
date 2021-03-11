@@ -10,18 +10,18 @@ export default {
 
   components: {
     ...allComponents,
-    VNode
+    VNode,
   },
 
   props: {
     model: {
       type: Object,
-      default: /* istanbul ignore next */ () => ({})
+      default: /* istanbul ignore next */ () => ({}),
     },
     fields: {
       type: Array,
-      default: /* istanbul ignore next */ () => []
-    }
+      default: /* istanbul ignore next */ () => [],
+    },
   },
 
   methods: {
@@ -75,16 +75,16 @@ export default {
           {content}
         </div>
       )
-    }
+    },
   },
 
   render() {
     return (
       <div>
-        {this.fields.map(field => {
+        {this.fields.map((field) => {
           if (Array.isArray(field)) {
             const subFieldNodes = []
-            field.forEach(subField => {
+            field.forEach((subField) => {
               subFieldNodes.push(this.renderField(subField))
             })
             return subFieldNodes.length > 0 ? (
@@ -97,7 +97,7 @@ export default {
         })}
       </div>
     )
-  }
+  },
 }
 </script>
 

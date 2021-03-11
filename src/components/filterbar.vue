@@ -3,7 +3,7 @@
     v-if="showFilterButtons || showFilterSubmit || showFilterFields"
     :class="[
       'listview__filterbar',
-      { 'listview__filterbar--fold': internalFilterbarFold }
+      { 'listview__filterbar--fold': internalFilterbarFold },
     ]"
   >
     <el-form
@@ -20,8 +20,8 @@
           'filterbar__submit',
           {
             'filterbar__submit--nomore': !filterbarHasMore,
-            'filterbar__submit--onleft': isNoneFields
-          }
+            'filterbar__submit--onleft': isNoneFields,
+          },
         ]"
       >
         <div
@@ -144,7 +144,7 @@ export default {
 
   components: {
     VNode,
-    FilterbarForm
+    FilterbarForm,
   },
 
   props: {
@@ -154,21 +154,21 @@ export default {
     filterModel: { type: Object, default: () => ({}) },
     filterbarFold: { type: Boolean, default: true },
     showFilterSearch: { type: Boolean, default: true },
-    showFilterReset: { type: Boolean, default: true }
+    showFilterReset: { type: Boolean, default: true },
   },
 
   data() {
     return {
       internalFilterbarFold: true,
       topRightFilterIndex: -1,
-      searchBtnOffset: 0
+      searchBtnOffset: 0,
     }
   },
 
   computed: {
     validFilterFields() {
       return this.filterFields.filter(
-        field => isValidFieldConfig(field) || Array.isArray(field)
+        (field) => isValidFieldConfig(field) || Array.isArray(field)
       )
     },
     isNoneFields() {
@@ -193,7 +193,7 @@ export default {
         this.topRightFilterIndex >= 0 &&
         this.topRightFilterIndex < this.validFilterFields.length - 1
       )
-    }
+    },
   },
 
   watch: {
@@ -206,7 +206,7 @@ export default {
     filterbarFold() {
       this.internalFilterbarFold = this.filterbarFold
       this.updateLayout()
-    }
+    },
   },
 
   mounted() {
@@ -235,7 +235,7 @@ export default {
 
     handleFilterReset() {
       const model = this.filterModel
-      const _resetField = field => {
+      const _resetField = (field) => {
         const name = field.model
         if (name && hasOwn(model, name)) {
           const value = model[name]
@@ -246,7 +246,7 @@ export default {
           }
         }
       }
-      this.filterFields.forEach(field => {
+      this.filterFields.forEach((field) => {
         if (Array.isArray(field)) {
           field.forEach(_resetField)
         } else {
@@ -293,8 +293,8 @@ export default {
         offset = Math.min(0, offset)
       }
       this.searchBtnOffset = Math.floor(offset)
-    }
-  }
+    },
+  },
 }
 </script>
 

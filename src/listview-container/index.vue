@@ -10,17 +10,17 @@ export default {
 
   components: {
     VNode,
-    ListviewHeader
+    ListviewHeader,
   },
 
   props: {
     headerTitle: { type: String, default: '' },
-    headerNav: { type: Array, default: () => [] }
+    headerNav: { type: Array, default: () => [] },
   },
 
   data() {
     return {
-      activeTab: 0
+      activeTab: 0,
     }
   },
 
@@ -28,20 +28,20 @@ export default {
     async activeTab(index) {
       await this.$nextTick()
       childListviews[index].componentInstance.updateLayout()
-    }
+    },
   },
 
   render() {
     // 在 computed 内计算出该值的话会和具体渲染实例不同，导致无法触发 tableSelection 的同步事件，
     // 并且避免触发无限更新界面 childListviews 不放入组件数据内
     childListviews = this.$slots.default.filter(
-      slot =>
+      (slot) =>
         slot.componentOptions &&
         slot.componentOptions.Ctor.extendOptions.name.toLowerCase() ===
           'listview'
     )
     const childListviewTitles = childListviews.map(
-      child => child.componentOptions.propsData.headerTitle || ''
+      (child) => child.componentOptions.propsData.headerTitle || ''
     )
     return (
       <div class="listview-container">
@@ -51,7 +51,7 @@ export default {
             <span
               class={{
                 'listview-container__tab': true,
-                'listview-container__tab--active': index === this.activeTab
+                'listview-container__tab--active': index === this.activeTab,
               }}
               on-click={() => (this.activeTab = index)}
             >
@@ -67,6 +67,6 @@ export default {
         </div>
       </div>
     )
-  }
+  },
 }
 </script>

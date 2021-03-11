@@ -12,7 +12,7 @@ describe('Methods', () => {
         @filter-reset="$emit('filter-reset')"
       />
     `,
-    components: { Listview }
+    components: { Listview },
   })
   const searchBtn = wrapper.findAll('.filterbar__submit-btn button').at(0)
   const resetBtn = wrapper.findAll('.filterbar__submit-btn button').at(1)
@@ -37,8 +37,8 @@ describe('Methods', () => {
     const wrapper = mount(Listview, {
       propsData: {
         autoload: false,
-        requestHandler: () => ({})
-      }
+        requestHandler: () => ({}),
+      },
     })
     wrapper.vm.search()
     await wait()

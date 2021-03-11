@@ -29,7 +29,7 @@ export default {
     const defaultProps = {
       clearable: true,
       filterable: true,
-      style: { width: '180px' }
+      style: { width: '180px' },
     }
     if (_.camelCase(this.field.type) === 'multipleSelect') {
       defaultProps.multiple = true
@@ -38,7 +38,7 @@ export default {
     return {
       defaultProps,
       internalOptions: [],
-      loading: false
+      loading: false,
     }
   },
 
@@ -49,7 +49,7 @@ export default {
       this.internalOptions = optionConfig
     } else if (_.isFunction(optionConfig) || isPromiseOption) {
       this.loading = true
-      const resolver = options => {
+      const resolver = (options) => {
         if (Array.isArray(options)) {
           this.internalOptions = options
           this.loading = false
@@ -60,6 +60,6 @@ export default {
         : await optionConfig(resolver)
       resolver(result)
     }
-  }
+  },
 }
 </script>

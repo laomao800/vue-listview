@@ -32,7 +32,7 @@ export function dataMapping(data = {}, dataMap = {}) {
   const result = {}
   const keysMap = Object.keys(dataMap)
 
-  keysMap.forEach(key => {
+  keysMap.forEach((key) => {
     try {
       const dataKey = key.toString()
       const dataValue = get(data, dataMap[key])

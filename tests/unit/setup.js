@@ -10,28 +10,28 @@ config.stubs['el-table'] = {
   template:
     '<div class="mock-el-table" :row-class-name="internalRowClassName" />',
   props: {
-    rowClassName: {}
+    rowClassName: {},
   },
   computed: {
     internalRowClassName() {
       return typeof this.rowClassName === 'function'
         ? this.rowClassName({})
         : this.rowClassName
-    }
-  }
+    },
+  },
 }
 config.stubs['el-select'] = '<div class="mock-el-select" />'
 config.stubs['el-input-number'] = '<div class="mock-el-input-number" />'
 // config.stubs['el-pagination'] = '<div class="mock-el-pagination" />'
 config.stubs['el-pagination'] = Vue.extend({
   name: 'ElPagination',
-  template: '<div class="mock-el-pagination" />'
+  template: '<div class="mock-el-pagination" />',
 })
 
 Vue.use(ElementUI)
 
 _.mixin({
-  pascalCase: _.flow(_.camelCase, _.upperFirst)
+  pascalCase: _.flow(_.camelCase, _.upperFirst),
 })
 
 Vue.config.productionTip = false
@@ -41,25 +41,25 @@ Vue.mixin({
   created() {
     // 添加 CSS modules 下的默认 `$style` 属性
     this.$style = this.$style || {}
-  }
+  },
 })
 
 // 模拟实现 window localStorage 方法
 Object.defineProperty(window, 'localStorage', {
-  value: (function() {
+  value: (function () {
     let store = {}
     return {
-      getItem: function(key) {
+      getItem: function (key) {
         return store[key] || null
       },
-      setItem: function(key, value) {
+      setItem: function (key, value) {
         store[key] = value.toString()
       },
-      clear: function() {
+      clear: function () {
         store = {}
-      }
+      },
     }
-  })()
+  })(),
 })
 
 // 全局辅助方法
