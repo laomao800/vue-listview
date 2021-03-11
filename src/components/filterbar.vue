@@ -40,14 +40,19 @@
                 <slot name="prepend-filterbar-submit" />
                 <el-button
                   v-if="showFilterSearch"
-                  type="primary"
-                  icon="el-icon-search"
+                  :type="searchButtonConfig.type"
+                  :icon="searchButtonConfig.icon"
                   @click="handleFilterSearch"
                 >
-                  搜索
+                  {{ searchButtonConfig.text }}
                 </el-button>
-                <el-button v-if="showFilterReset" @click="handleFilterReset">
-                  重置
+                <el-button
+                  v-if="showFilterReset"
+                  @click="handleFilterReset"
+                  :type="resetButtonConfig.type"
+                  :icon="resetButtonConfig.icon"
+                >
+                  {{ resetButtonConfig.text }}
                 </el-button>
                 <slot name="append-filterbar-submit" />
               </el-form-item>
@@ -179,6 +184,14 @@ export default {
     filterbarFold: { type: Boolean, default: true },
     showFilterSearch: { type: Boolean, default: true },
     showFilterReset: { type: Boolean, default: true },
+    searchButtonConfig: {
+      type: Object,
+      default: () => ({}),
+    },
+    resetButtonConfig: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   data() {

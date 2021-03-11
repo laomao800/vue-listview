@@ -91,6 +91,20 @@ sidebarDepth: 2
 
 是否显示搜索栏的“重置”按钮。
 
+### searchButtonConfig
+
+- type: `Object`
+- default: `{ text: '搜索', icon: 'el-icon-search', type: 'primary' }`
+
+搜索按钮文字及图标自定义，不传则默认。
+
+### resetButtonConfig
+
+- type: `Object`
+- default: `{ text: '重置', icon: '', type: 'default' }`
+
+重置按钮文字及图标自定义，不传则默认。
+
 ## 分页
 
 ### usePage
