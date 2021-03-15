@@ -77,19 +77,23 @@ sidebarDepth: 2
 
 :::
 
-### showFilterSearch
+### searchButton
 
-- type: `Boolean`
-- default: `true`
+- type: `Object` | `Boolean`
+- default: `{ text: '搜索', icon: 'el-icon-search', type: 'primary' }`
 
-是否显示搜索栏的“提交”按钮。
+搜索按钮自定义配置，除 `text` 属性为按钮文字外，支持所有 `<el-button>` props 。
 
-### showFilterReset
+传入 `false` 则不显示搜索栏的“提交”按钮。
 
-- type: `Boolean`
-- default: `true`
+### resetButton
 
-是否显示搜索栏的“重置”按钮。
+- type: `Object`
+- default: `{ text: '重置', icon: '', type: 'default' }`
+
+重置按钮自定义配置，除 `text` 属性为按钮文字外，支持所有 `<el-button>` props 。
+
+传入 `false` 则不显示搜索栏的“重置”按钮。
 
 ## 分页
 

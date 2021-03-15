@@ -16,17 +16,16 @@
 
 ```vue
 <template>
-  <listview
-    request-url="/mock/listview"
-    request-method="post"
-  >
-    <template slot-scope="{
-      filterModel,
-      contentHeight,
-      contentLoading,
-      contentData,
-      contentMessage
-    }">
+  <listview request-url="/mock/listview" request-method="post">
+    <template
+      slot-scope="{
+        filterModel,
+        contentHeight,
+        contentLoading,
+        contentData,
+        contentMessage,
+      }"
+    >
       <div v-if="contentLoading">Loading...</div>
       <div v-else-if="contentMessage">{{ contentMessage }}</div>
       <ul v-else>
@@ -68,3 +67,27 @@
 ## footer-right
 
 底部页码栏右侧插槽，设置该插槽会覆盖页码[显示在右侧的页码组件](./props.md#pageposition)。
+
+## filterbar-top
+
+搜索栏顶部通栏。
+
+## filterbar-bottom
+
+同 [filterbar-top](#filterbar-top) ，搜索栏底部通栏。
+
+## filterbar-left
+
+同 [filterbar-top](#filterbar-top) ，搜索栏左侧。
+
+## filterbar-right
+
+同 [filterbar-top](#filterbar-top) ，搜索栏右侧。
+
+## prepend-filterbar-more
+
+搜索栏折叠按钮（更多）左侧。
+
+## append-filterbar-more
+
+同 [prepend-filterbar-more](#prepend-filterbar-more) ，搜索栏折叠按钮（更多）右侧。

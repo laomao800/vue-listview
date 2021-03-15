@@ -3,27 +3,7 @@ import Listview from './listview'
 import ListviewContainer from './listview-container'
 
 Listview.install = function (Vue, options = {}) {
-  Vue.prototype.$LISTVIEW = {}
-
-  // Function type prop
-  const fnProp = [
-    'validateResponse',
-    'resolveResponseErrorMessage',
-    'transformRequestData',
-    'transformResponseData',
-  ]
-  fnProp.forEach((prop) => {
-    if (_.isFunction(options[prop])) {
-      Vue.prototype.$LISTVIEW[prop] = options[prop]
-    }
-  })
-  if (_.isPlainObject(options['contentDataMap'])) {
-    Vue.prototype.$LISTVIEW['contentDataMap'] = options['contentDataMap']
-  }
-  if (_.isPlainObject(options['usePage']) || _.isBoolean('usePage')) {
-    Vue.prototype.$LISTVIEW['usePage'] = options['usePage']
-  }
-
+  Vue.prototype.$LISTVIEW = options
   Vue.component(Listview.name, Listview)
 }
 

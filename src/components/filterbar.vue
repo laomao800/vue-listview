@@ -1,134 +1,161 @@
 <template>
-  <div
-    v-if="showFilterButtons || showFilterSubmit || showFilterFields"
-    :class="[
-      'listview__filterbar',
-      { 'listview__filterbar--fold': internalFilterbarFold },
-    ]"
-  >
+  <div class="listview__filterbar-wrapper">
     <el-form
       :inline="true"
       size="small"
       @submit.native.prevent
       @keydown.native.enter="handleFilterSearch"
     >
-      <!-- 提交、重置按钮区域 -->
-      <div
-        v-if="showFilterSubmit"
-        ref="submit"
-        :class="[
-          'filterbar__submit',
-          {
-            'filterbar__submit--nomore': !filterbarHasMore,
-            'filterbar__submit--onleft': isNoneFields,
-          },
-        ]"
-      >
-        <div
-          :style="{ transform: `translateX(${searchBtnOffset}px)` }"
-          class="filterbar__submit-btn"
-        >
-          <el-form-item>
-            <slot name="prepend-filterbar-submit" />
-            <el-button
-              v-if="showFilterSearch"
-              type="primary"
-              icon="el-icon-search"
-              @click="handleFilterSearch"
-            >
-              搜索
-            </el-button>
-            <el-button v-if="showFilterReset" @click="handleFilterReset">
-              重置
-            </el-button>
-            <slot name="append-filterbar-submit" />
-          </el-form-item>
-        </div>
-        <el-button
-          :icon="
-            internalFilterbarFold ? 'el-icon-caret-bottom' : 'el-icon-caret-top'
-          "
-          type="primary"
-          class="filterbar__submit-more"
-          @click="toggleFilterbar"
-        />
+      <div v-if="$slots['filterbar-top']" class="listview__filterbar-top">
+        <slot name="filterbar-top" />
       </div>
-
-      <!-- 操作按钮区域 -->
-      <div v-if="showFilterButtons" class="filterbar__buttons">
-        <el-form-item>
-          <template v-for="(button, index) in filterButtons">
-            <v-node
-              v-if="isFunction(button)"
-              :key="button.key || index"
-              :node="button()"
-            />
-            <v-node
-              v-else-if="button.render"
-              :key="button.key || index"
-              :node="button.render()"
-            />
-            <v-node
-              v-else-if="isVNode(button)"
-              :key="button.key || index"
-              :node="button"
-            />
-            <el-dropdown
-              v-else-if="Array.isArray(button.children)"
-              :key="button.key || index"
-              :type="button.type"
-              :split-button="button.splitButton"
-              :trigger="button.trigger || 'click'"
-              placement="bottom"
-              @click="applyButtonClick(button, $event)"
+      <div class="listview__filterbar-main">
+        <div v-if="$slots['filterbar-left']" class="listview__filterbar-left">
+          <slot name="filterbar-left" />
+        </div>
+        <div
+          v-if="showFilterButtons || showFilterSubmit || showFilterFields"
+          :class="[
+            'listview__filterbar',
+            { 'listview__filterbar--fold': internalFilterbarFold },
+          ]"
+        >
+          <!-- 提交、重置按钮区域 -->
+          <div
+            v-if="showFilterSubmit"
+            ref="submit"
+            :class="[
+              'filterbar__submit',
+              {
+                'filterbar__submit--nomore': !filterbarHasMore,
+                'filterbar__submit--onleft': isNoneFields,
+              },
+            ]"
+          >
+            <div
+              :style="{ transform: `translateX(${searchBtnOffset}px)` }"
+              class="filterbar__submit-btn"
             >
-              <template v-if="button.splitButton">
-                <i v-if="button.icon" :class="button.icon" />
-                {{ button.text }}
-              </template>
-              <template v-else>
+              <el-form-item>
+                <slot name="prepend-filterbar-submit" />
                 <el-button
+                  v-if="searchButton !== false"
+                  v-bind="searchButton"
+                  @click="handleFilterSearch"
+                >
+                  {{ searchButton.text }}
+                </el-button>
+                <el-button
+                  v-if="resetButton !== false"
+                  v-bind="resetButton"
+                  @click="handleFilterReset"
+                >
+                  {{ resetButton.text }}
+                </el-button>
+                <slot name="append-filterbar-submit" />
+              </el-form-item>
+            </div>
+            <div style="float: right">
+              <div class="custom-more">
+                <slot name="prepend-filterbar-more" />
+                <el-button
+                  :icon="
+                    internalFilterbarFold
+                      ? 'el-icon-caret-bottom'
+                      : 'el-icon-caret-top'
+                  "
+                  type="primary"
+                  class="filterbar__submit-more"
+                  @click="toggleFilterbar"
+                />
+                <slot name="append-filterbar-more" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 操作按钮区域 -->
+          <div v-if="showFilterButtons" class="filterbar__buttons">
+            <el-form-item>
+              <template v-for="(button, index) in filterButtons">
+                <v-node
+                  v-if="isFunction(button)"
+                  :key="button.key || index"
+                  :node="button()"
+                />
+                <v-node
+                  v-else-if="button.render"
+                  :key="button.key || index"
+                  :node="button.render()"
+                />
+                <v-node
+                  v-else-if="isVNode(button)"
+                  :key="button.key || index"
+                  :node="button"
+                />
+                <el-dropdown
+                  v-else-if="Array.isArray(button.children)"
+                  :key="button.key || index"
                   :type="button.type"
+                  :split-button="button.splitButton"
+                  :trigger="button.trigger || 'click'"
+                  placement="bottom"
+                  @click="applyButtonClick(button, $event)"
+                >
+                  <template v-if="button.splitButton">
+                    <i v-if="button.icon" :class="button.icon" />
+                    {{ button.text }}
+                  </template>
+                  <template v-else>
+                    <el-button
+                      :type="button.type"
+                      :icon="button.icon"
+                      @click="applyButtonClick(button, $event)"
+                    >
+                      {{ button.text }}
+                      <i class="el-icon-arrow-down el-icon--right" />
+                    </el-button>
+                  </template>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item
+                      v-for="(child, childIndex) in button.children"
+                      :key="childIndex"
+                      @click.native="applyButtonClick(child, $event)"
+                    >
+                      <i v-if="child.icon" :class="child.icon" />
+                      {{ child.text }}
+                    </el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+                <el-button
+                  v-else
+                  :key="button.key || index"
+                  :type="button.type"
+                  :plain="button.plain"
                   :icon="button.icon"
                   @click="applyButtonClick(button, $event)"
                 >
                   {{ button.text }}
-                  <i class="el-icon-arrow-down el-icon--right" />
                 </el-button>
               </template>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  v-for="(child, childIndex) in button.children"
-                  :key="childIndex"
-                  @click.native="applyButtonClick(child, $event)"
-                >
-                  <i v-if="child.icon" :class="child.icon" />
-                  {{ child.text }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <el-button
-              v-else
-              :key="button.key || index"
-              :type="button.type"
-              :plain="button.plain"
-              :icon="button.icon"
-              @click="applyButtonClick(button, $event)"
-            >
-              {{ button.text }}
-            </el-button>
-          </template>
-        </el-form-item>
-      </div>
+            </el-form-item>
+          </div>
 
-      <!-- 搜索栏控件区域 -->
-      <filterbar-form
-        v-if="showFilterFields"
-        ref="filterForm"
-        :fields="validFilterFields"
-        :model="filterModel"
-        class="filterbar__form"
-      />
+          <!-- 搜索栏控件区域 -->
+          <filterbar-form
+            v-if="showFilterFields"
+            ref="filterForm"
+            :fields="validFilterFields"
+            :model="filterModel"
+            class="filterbar__form"
+          />
+        </div>
+        <div v-if="$slots['filterbar-right']" class="listview__filterbar-right">
+          <slot name="filterbar-right" />
+        </div>
+      </div>
+      <div v-if="$slots['filterbar-bottom']" class="listview__filterbar-bottom">
+        <slot name="filterbar-bottom" />
+      </div>
     </el-form>
   </div>
 </template>
@@ -153,8 +180,8 @@ export default {
     filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
     filterbarFold: { type: Boolean, default: true },
-    showFilterSearch: { type: Boolean, default: true },
-    showFilterReset: { type: Boolean, default: true },
+    searchButton: { type: Object },
+    resetButton: { type: Object },
   },
 
   data() {
@@ -179,6 +206,12 @@ export default {
     },
     showFilterFields() {
       return this.validFilterFields.length > 0
+    },
+    showFilterSearch() {
+      return this.searchButton !== false
+    },
+    showFilterReset() {
+      return this.resetButton !== false
     },
     showFilterSubmit() {
       return (
@@ -301,23 +334,25 @@ export default {
 <style lang="less">
 @filter-gap-size: 10px;
 
-.listview__filterbar {
-  padding-top: @filter-gap-size;
-  margin-top: -@filter-gap-size;
+.listview__filterbar-top {
   margin-bottom: @filter-gap-size;
+}
+.listview__filterbar-bottom {
+  margin-bottom: @filter-gap-size;
+}
+.listview__filterbar-left {
+  margin-right: @filter-gap-size;
+  margin-bottom: @filter-gap-size;
+}
+.listview__filterbar-right {
+  margin-left: @filter-gap-size;
+  margin-bottom: @filter-gap-size;
+}
+.listview__filterbar-main {
+  display: flex;
+}
 
-  &::after {
-    display: table;
-    clear: both;
-    content: '';
-  }
-
-  &--fold {
-    box-sizing: content-box;
-    height: 32px;
-    overflow: hidden;
-  }
-
+.listview__filterbar-wrapper {
   .el-button {
     [class*=' el-icon-'],
     [class^='el-icon-'] {
@@ -427,6 +462,24 @@ export default {
     &--onleft {
       float: inherit;
     }
+  }
+}
+
+.listview__filterbar {
+  padding-top: @filter-gap-size;
+  margin-top: -@filter-gap-size;
+  margin-bottom: @filter-gap-size;
+
+  &::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+
+  &--fold {
+    box-sizing: content-box;
+    height: 32px;
+    overflow: hidden;
   }
 }
 </style>
