@@ -15,7 +15,7 @@
         :table-columns="tableColumns"
         :table-selection.sync="tableSelection"
         :page-props="{
-          pagerCount: 5
+          pagerCount: 5,
         }"
       />
       <listview
@@ -69,7 +69,7 @@ export default {
 
   components: {
     Listview,
-    ListviewContainer
+    ListviewContainer,
   },
 
   data() {
@@ -80,7 +80,7 @@ export default {
           type: 'success',
           icon: 'el-icon-circle-plus-outline',
           text: '添加',
-          click: () => this.showMessage('添加')
+          click: () => this.showMessage('添加'),
         },
         () => (
           <el-button
@@ -94,7 +94,7 @@ export default {
                 this.loadingSelection = true
                 setTimeout(() => {
                   this.$message.success(
-                    JSON.stringify(this.tableSelection.map(row => row.sku))
+                    JSON.stringify(this.tableSelection.map((row) => row.sku))
                   )
                   this.loadingSelection = false
                 }, 500)
@@ -119,22 +119,22 @@ export default {
               text: '菜单1',
               click: () => {
                 this.showMessage('菜单1')
-              }
+              },
             },
             {
               icon: 'el-icon-remove-outline',
               text: '菜单2',
               click: () => {
                 this.showMessage('菜单2')
-              }
-            }
-          ]
-        }
+              },
+            },
+          ],
+        },
       ],
 
       filterModel: {
         hidden: 'hidden',
-        multipleSelect: []
+        multipleSelect: [],
       },
       filterModel2: {},
 
@@ -143,7 +143,7 @@ export default {
           type: 'select',
           model: 'error',
           label: '接口错误',
-          options: [{ label: '触发500错误', value: 1 }]
+          options: [{ label: '触发500错误', value: 1 }],
         },
         {
           type: 'text',
@@ -151,38 +151,38 @@ export default {
           label: '文本字段',
           componentSlots: {
             prepend: '$',
-            append: '$'
+            append: '$',
           },
           componentProps: {
-            'suffix-icon': 'el-icon-date'
-          }
+            'suffix-icon': 'el-icon-date',
+          },
         },
         [
           {
             type: 'label',
-            label: '支持组合'
+            label: '支持组合',
           },
           {
             type: 'text',
             label: '组合多个字段为整体',
-            model: 'group-text-1'
+            model: 'group-text-1',
           },
           {
             type: 'text',
             label: '避免被自动收起拆开',
-            model: 'group-text-2'
-          }
+            model: 'group-text-2',
+          },
         ],
         [
           {
             type: 'number',
             label: '数字',
-            model: 'number'
+            model: 'number',
           },
           {
             type: 'label',
-            label: '文本标签'
-          }
+            label: '文本标签',
+          },
         ],
         {
           type: 'select',
@@ -192,8 +192,8 @@ export default {
             { label: '选项 1', value: 1 },
             { label: '选项 2', value: 2 },
             { label: '选项 3', value: 3 },
-            { label: '禁用项', value: 4, disabled: true }
-          ]
+            { label: '禁用项', value: 4, disabled: true },
+          ],
         },
         {
           type: 'multipleSelect',
@@ -203,72 +203,72 @@ export default {
             { label: '选项 1', value: 1 },
             { label: '选项 2', value: 2 },
             { label: '选项 3', value: 3 },
-            { label: '禁用项', value: 4, disabled: true }
+            { label: '禁用项', value: 4, disabled: true },
           ],
-          get: val => val.join(',')
+          get: (val) => val.join(','),
         },
         {
           type: 'select',
           model: 'promiseOptions',
           label: 'promiseOptions',
-          options: new Promise(resolve => {
+          options: new Promise((resolve) => {
             setTimeout(() => {
               resolve([
                 { label: '单选项 1', value: 1 },
                 { label: '单选项 2', value: 2 },
-                { label: '单选项 3', value: 3 }
+                { label: '单选项 3', value: 3 },
               ])
             }, 5000)
-          })
+          }),
         },
         {
           type: 'multipleSelect',
           model: 'asyncOptions',
           label: 'asyncOptions',
-          options: done => {
+          options: (done) => {
             setTimeout(() => {
               done([
                 { label: '多选项 1', value: 1 },
                 { label: '多选项 2', value: 2 },
-                { label: '多选项 3', value: 3 }
+                { label: '多选项 3', value: 3 },
               ])
             }, 3000)
-          }
+          },
         },
         {
           type: 'date',
           model: 'date',
-          label: '日期选择'
+          label: '日期选择',
         },
         {
           type: 'dateRange',
           model: 'dateRange',
-          label: '日期范围'
+          label: '日期范围',
         },
         {
           type: 'timeSelect',
           model: 'timeSelect',
-          label: '固定时间'
+          label: '固定时间',
         },
         {
           type: 'timePicker',
           model: 'timePicker',
-          label: '任意时间'
+          label: '任意时间',
         },
         {
           type: 'timePickerRange',
           model: 'timePickerRange',
-          label: '时间范围'
+          label: '时间范围',
         },
         {
           type: 'dateTime',
           model: 'dateTime',
-          label: '日期时间'
+          label: '日期时间',
         },
         {
           type: 'dateTimeRange',
           model: 'dateTimeRange',
-          label: '日期时间范围'
+          label: '日期时间范围',
         },
         {
           type: 'cascader',
@@ -289,24 +289,24 @@ export default {
                       children: [
                         {
                           value: '4',
-                          label: '菜单4'
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+                          label: '菜单4',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
       filterFields2: [
         {
           type: 'select',
           model: 'error',
           label: '接口错误',
-          options: [{ label: '触发500错误', value: 1 }]
-        }
+          options: [{ label: '触发500错误', value: 1 }],
+        },
       ],
 
       tableSelection: [],
@@ -316,14 +316,14 @@ export default {
           prop: 'sku',
           width: 100,
           align: 'center',
-          fixed: true
+          fixed: true,
         },
         {
           label: '产品名称',
           prop: 'name',
           width: 200,
           align: 'center',
-          fixed: true
+          fixed: true,
         },
         {
           label: '操作',
@@ -334,7 +334,7 @@ export default {
             return (
               <div>
                 <el-button
-                  on-click={e => e.stopPropagation()}
+                  on-click={(e) => e.stopPropagation()}
                   style="padding:4px 8px"
                   size="mini"
                   type="success"
@@ -342,7 +342,7 @@ export default {
                   审核
                 </el-button>
                 <el-button
-                  on-click={e => e.stopPropagation()}
+                  on-click={(e) => e.stopPropagation()}
                   style="padding:4px 8px"
                   size="mini"
                   type="danger"
@@ -351,7 +351,7 @@ export default {
                 </el-button>
               </div>
             )
-          }
+          },
         },
         { label: '销售员', prop: 'seller', align: 'center' },
         { label: '仓库', prop: 'warehouse', align: 'center' },
@@ -359,32 +359,32 @@ export default {
         {
           label: '折扣率',
           align: 'center',
-          formatter: row => row.discount.toFixed(2)
+          formatter: (row) => row.discount.toFixed(2),
         },
         {
           label: '折后价',
           align: 'center',
-          formatter: row => (row.discount * row.sale_price).toFixed(2)
+          formatter: (row) => (row.discount * row.sale_price).toFixed(2),
         },
         {
           label: '折扣时间',
           align: 'center',
           children: [
             { label: '折扣开始', prop: 'date', align: 'center' },
-            { label: '折扣结束', prop: 'date', align: 'center' }
-          ]
+            { label: '折扣结束', prop: 'date', align: 'center' },
+          ],
         },
         { label: '数量', prop: 'quantity', align: 'center' },
         {
           label: '是否启用',
           align: 'center',
-          render: prop => {
+          render: (prop) => {
             if (prop.row.enable) {
               return <div style="color:#67c23a">启用</div>
             } else {
               return <div style="color:#f56c6c">禁用</div>
             }
-          }
+          },
         },
         { label: '创建人', prop: 'seller', align: 'center' },
         { label: '创建时间', prop: 'date', align: 'center' },
@@ -393,18 +393,18 @@ export default {
           align: 'center',
           children: [
             { label: '修改人', prop: 'seller', align: 'center' },
-            { label: '修改时间', prop: 'date', align: 'center' }
-          ]
-        }
-      ]
+            { label: '修改时间', prop: 'date', align: 'center' },
+          ],
+        },
+      ],
     }
   },
 
   methods: {
     showMessage(msg) {
       this.$message.success(msg)
-    }
-  }
+    },
+  },
 }
 </script>
 
