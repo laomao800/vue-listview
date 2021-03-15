@@ -97,3 +97,7 @@ export function isPromise(obj) {
 export function hasOwn(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
+
+export function isDef(val) {
+  return val !== undefined
+}

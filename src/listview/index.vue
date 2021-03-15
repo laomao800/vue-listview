@@ -16,15 +16,45 @@
         :filter-fields="filterFields"
         :filter-model="filterModel"
         :filterbar-fold.sync="filterbarFold"
-        :show-filter-search="showFilterSearch"
-        :show-filter-reset="showFilterReset"
+        :search-button="overrideProps.searchButton"
+        :reset-button="overrideProps.resetButton"
         @filter-submit="onFilterSubmit"
         @filter-reset="onFilterReset"
       >
-        <template slot="prepend-filterbar-submit">
+        <template v-if="$slots['filterbar-top']" slot="filterbar-top">
+          <slot name="filterbar-top" />
+        </template>
+        <template v-if="$slots['filterbar-bottom']" slot="filterbar-bottom">
+          <slot name="filterbar-bottom" />
+        </template>
+        <template v-if="$slots['filterbar-left']" slot="filterbar-left">
+          <slot name="filterbar-left" />
+        </template>
+        <template v-if="$slots['filterbar-right']" slot="filterbar-right">
+          <slot name="filterbar-right" />
+        </template>
+        <template
+          v-if="$slots['prepend-filterbar-more']"
+          slot="prepend-filterbar-more"
+        >
+          <slot name="prepend-filterbar-more" />
+        </template>
+        <template
+          v-if="$slots['append-filterbar-more']"
+          slot="append-filterbar-more"
+        >
+          <slot name="append-filterbar-more" />
+        </template>
+        <template
+          v-if="$slots['prepend-filterbar-submit']"
+          slot="prepend-filterbar-submit"
+        >
           <slot name="prepend-filterbar-submit" />
         </template>
-        <template slot="append-filterbar-submit">
+        <template
+          v-if="$slots['append-filterbar-submit']"
+          slot="append-filterbar-submit"
+        >
           <slot name="append-filterbar-submit" />
         </template>
       </filterbar>
@@ -54,25 +84,27 @@
               @row-click="handleRowClick"
               v-on="normalizeTableEvents"
             >
-              <template v-if="internalContentMessage" slot="empty">
-                <span
-                  :class="[
-                    'content-message',
-                    {
-                      [`content-message--${internalContentMessage.type}`]: internalContentMessage.type,
-                    },
-                  ]"
-                >
-                  <span
-                    v-if="internalContentMessage.icon"
-                    class="content-message--icon"
-                  >
-                    <i :class="internalContentMessage.icon" />
-                  </span>
-                  <span class="content-message--message">
-                    {{ internalContentMessage.message }}
-                  </span>
-                </span>
+              <template slot="empty">
+                <slot name="empty" v-bind="internalContentMessage">
+                  <template v-if="internalContentMessage">
+                    <span
+                      :class="{
+                        'content-message': true,
+                        [`content-message--${internalContentMessage.type}`]: internalContentMessage.type,
+                      }"
+                    >
+                      <span
+                        v-if="internalContentMessage.icon"
+                        class="content-message--icon"
+                      >
+                        <i :class="internalContentMessage.icon" />
+                      </span>
+                      <span class="content-message--message">
+                        {{ internalContentMessage.message }}
+                      </span>
+                    </span>
+                  </template>
+                </slot>
               </template>
 
               <template v-if="!!selectionColumn">
@@ -122,7 +154,10 @@
           <div class="listview__footer-left">
             <slot name="footer-left">
               <el-pagination
-                v-if="usePage && pagePosition !== 'right'"
+                v-if="
+                  overrideProps.usePage &&
+                  overrideProps.pagePosition !== 'right'
+                "
                 v-bind="mergedPageProps"
                 ref="pagination"
                 class="listview__pager"
@@ -137,7 +172,10 @@
           <div class="listview__footer-right">
             <slot name="footer-right">
               <el-pagination
-                v-if="usePage && pagePosition === 'right'"
+                v-if="
+                  overrideProps.usePage &&
+                  overrideProps.pagePosition === 'right'
+                "
                 v-bind="mergedPageProps"
                 ref="pagination"
                 class="listview__pager"
@@ -165,6 +203,7 @@ import {
   isValidFieldValue,
   nodeParents,
   hasOwn,
+  isDef,
 } from '@/utils/utils'
 import './style.less'
 
@@ -249,6 +288,21 @@ const DEFAULT_PROPS = {
     items: 'result.items',
     total: 'result.total_count',
   },
+  usePage: true,
+  pagePosition: undefined,
+  pageProps: undefined,
+  pageSizes: [20, 50, 100],
+  pageSize: 20,
+  searchButton: {
+    text: '搜索',
+    icon: 'el-icon-search',
+    type: 'primary',
+  },
+  resetButton: {
+    text: '重置',
+    icon: '',
+    type: 'default',
+  },
 }
 
 export default {
@@ -295,8 +349,8 @@ export default {
     filterButtons: { type: Array, default: () => [] },
     filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
-    showFilterSearch: { type: Boolean, default: true },
-    showFilterReset: { type: Boolean, default: true },
+    searchButton: {},
+    resetButton: {},
 
     // Table
     tableColumns: { type: Array, default: () => [] },
@@ -306,10 +360,12 @@ export default {
     tableSelection: { type: Array, default: () => [] },
 
     // Pager
-    usePage: { type: [Boolean, Object], default: true },
-    pageSizes: { type: Array, default: () => [20, 50, 100] },
-    pageSize: { type: Number, default: 20 },
-    pageProps: { type: Object, default: () => ({}) },
+    usePage: {
+      /** type: [Object, Boolean] */
+    },
+    pageSizes: { type: Array },
+    pageSize: { type: Number },
+    pageProps: { type: Object },
     pagePosition: { type: String },
   },
 
@@ -424,23 +480,22 @@ export default {
       const globalConfig = this.$LISTVIEW || {}
       const overrides = {}
       Object.keys(DEFAULT_PROPS).forEach((prop) => {
-        overrides[prop] =
-          this[prop] || globalConfig[prop] || DEFAULT_PROPS[prop]
+        overrides[prop] = isDef(this.$props[prop])
+          ? this.$props[prop]
+          : isDef(globalConfig[prop])
+          ? globalConfig[prop]
+          : DEFAULT_PROPS[prop]
       })
-      overrides['usePage'] =
-        this.usePage === true && hasOwn(globalConfig, 'usePage')
-          ? globalConfig['usePage']
-          : this.usePage
       return overrides
     },
 
     mergedPageProps() {
       return {
-        pageSizes: this.pageSizes,
-        pageSize: this.pageSize,
+        pageSizes: this.overrideProps['pageSizes'],
+        pageSize: this.overrideProps['pageSize'],
         background: true,
         layout: 'total, sizes, prev, pager, next, jumper',
-        ...this.pageProps,
+        ...this.overrideProps['pageProps'],
         total: this.contentData.total,
         currentPage: this.currentPage,
       }
