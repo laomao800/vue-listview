@@ -1095,6 +1095,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@juggle/resize-observer@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/@juggle/resize-observer/-/resize-observer-3.3.0.tgz#2e7a2935adbfae46f9efbd1e1455254ee7ea2219"
+  integrity sha512-P1v2nvK7z2gOLVM/bveIRLG9L99uEahTGgTltyF03zixZAjI9YmKLj5Z9MpS9wBIUt5WDoQORT2lXvLOIF89iA==
+
 "@laomao800/parse-size-with-unit@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@laomao800/parse-size-with-unit/-/parse-size-with-unit-1.0.3.tgz#ed7147dd8efb1c6d350927e37836fbe5960ddc5b"

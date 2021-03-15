@@ -23,6 +23,7 @@
     "types.d.ts"
   ],
   "dependencies": {
+    "@juggle/resize-observer": "^3.3.0",
     "@laomao800/parse-size-with-unit": "^1.0.3",
     "axios": "^0.21.1",
     "core-js": "^3.3.2",

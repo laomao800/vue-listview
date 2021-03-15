@@ -191,6 +191,7 @@
 </template>
 
 <script>
+import { ResizeObserver as Polyfill } from '@juggle/resize-observer'
 import _ from 'lodash'
 import axios from 'axios'
 import parseSize from '@laomao800/parse-size-with-unit'
@@ -206,6 +207,8 @@ import {
   isDef,
 } from '@/utils/utils'
 import './style.less'
+
+const ResizeObserver = window.ResizeObserver || Polyfill
 
 /**
  * 验证 fields 内是否有重复的 model 属性
@@ -537,10 +540,10 @@ export default {
       this.requestData()
     }
 
-    this.ro = new ResizeObserver(entries => {
+    this.ro = new ResizeObserver((entries) => {
       for (let entry of entries) {
         if (entry.target === this.$refs.listview) {
-          this.updateContentLayout()
+          this.updateLayout()
         }
       }
     })
@@ -549,8 +552,6 @@ export default {
   },
 
   beforeDestroy: /* istanbul ignore next */ function () {
-    window.removeEventListener('resize', this.updateContentLayout)
-    window.removeEventListener('resize', this.updateFilterbarLayout)
     this.ro.disconnect()
   },
 
