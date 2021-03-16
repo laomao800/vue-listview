@@ -466,6 +466,7 @@ export default {
 }
 
 .listview__filterbar {
+  flex: 1;
   padding-top: @filter-gap-size;
   margin-top: -@filter-gap-size;
   margin-bottom: @filter-gap-size;
