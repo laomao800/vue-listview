@@ -336,16 +336,16 @@ export default {
 
     // Adv request
     requestHandler: { type: Function, default: null },
-    transformRequestData: { type: Function, default: null },
+    transformRequestData: { type: Function },
 
     // Adv response
-    transformResponseData: { type: Function, default: null },
-    contentDataMap: { type: Object, default: null },
+    transformResponseData: { type: Function },
+    contentDataMap: { type: Object },
 
     // Request error handler
     contentMessage: { type: [Object, String], default: null },
-    validateResponse: { type: Function, default: null },
-    resolveResponseErrorMessage: { type: Function, default: null },
+    validateResponse: { type: Function },
+    resolveResponseErrorMessage: { type: Function },
 
     // Filterbar
     // TODO: validator
