@@ -31,8 +31,8 @@ config.stubs['el-pagination'] = Vue.extend({
 
 Vue.use(ElementUI)
 
-_.mixin({
-  pascalCase: _.flow(_.camelCase, _.upperFirst),
+mixin({
+  pascalCase: flow(camelCase, upperFirst),
 })
 
 Vue.config.productionTip = false
