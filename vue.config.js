@@ -52,7 +52,7 @@ module.exports = {
           },
         },
         nodeExternals({
-          whitelist: [/^@babel/, /current-script-polyfill/],
+          allowlist: [/^@babel/, /current-script-polyfill/],
         }),
       ]
     }
