@@ -192,7 +192,17 @@
 
 <script>
 import { ResizeObserver as Polyfill } from '@juggle/resize-observer'
-import _ from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
+import countBy from 'lodash/countBy'
+import debounce from 'lodash/debounce'
+import isEmpty from 'lodash/isEmpty'
+import isFunction from 'lodash/isFunction'
+import isPlainObject from 'lodash/isPlainObject'
+import kebabCase from 'lodash/kebabCase'
+import mapKeys from 'lodash/mapKeys'
+import merge from 'lodash/merge'
+import omitBy from 'lodash/omitBy'
+import pickBy from 'lodash/pickBy'
 import axios from 'axios'
 import parseSize from '@laomao800/parse-size-with-unit'
 import VNode from '@/components/v-node'
@@ -218,16 +228,16 @@ const validateFilterFields = (fields) => {
   if (Array.isArray(fields)) {
     const hasModelKey = fields.filter((field) => {
       return (
-        _.isPlainObject(field) &&
+        isPlainObject(field) &&
         hasOwn(field, 'model') &&
         typeof field.model === 'string'
       )
     })
-    const duplicateFields = _.pickBy(
-      _.countBy(hasModelKey, 'model'),
+    const duplicateFields = pickBy(
+      countBy(hasModelKey, 'model'),
       (count) => count > 1
     )
-    if (!_.isEmpty(duplicateFields)) {
+    if (!isEmpty(duplicateFields)) {
       error(
         "FilterFields 配置内有重复的 'model' : " +
           Object.keys(duplicateFields).join(', ')
@@ -263,7 +273,7 @@ const resolvefilterModelGetters = (fields, getters = {}) =>
     if (Array.isArray(field)) {
       resolvefilterModelGetters(field, getters)
     } else {
-      if (_.isFunction(field.get) && field.model) {
+      if (isFunction(field.get) && field.model) {
         result[field.model] = field.get
       }
     }
@@ -400,10 +410,10 @@ export default {
       let finalColumn = {}
       if (column === 'single') {
         finalColumn.type = 'single'
-      } else if (_.isPlainObject(column)) {
+      } else if (isPlainObject(column)) {
         finalColumn.type = column.type === 'single' ? 'single' : 'selection'
       }
-      finalColumn.selectable = _.isFunction(column.selectable)
+      finalColumn.selectable = isFunction(column.selectable)
         ? column.selectable
         : null
       return finalColumn
@@ -433,7 +443,7 @@ export default {
      */
     normalizeTableEvents() {
       /* istanbul ignore next */
-      return _.mapKeys(this.tableEvents, (value, key) => _.kebabCase(key))
+      return mapKeys(this.tableEvents, (value, key) => kebabCase(key))
     },
 
     /**
@@ -447,13 +457,13 @@ export default {
         border: true,
         stripe: true,
       }
-      const mergedPros = _.mapKeys(
-        _.merge(defaultProps, this.tableProps),
-        (value, key) => _.kebabCase(key)
+      const mergedPros = mapKeys(
+        merge(defaultProps, this.tableProps),
+        (value, key) => kebabCase(key)
       )
       const rowClassName = mergedPros['row-class-name']
       if (rowClassName) {
-        if (_.isFunction(rowClassName)) {
+        if (isFunction(rowClassName)) {
           mergedPros['row-class-name'] = (...args) =>
             [this.selectionRowClassName(...args), rowClassName(...args)].join(
               ' '
@@ -526,7 +536,7 @@ export default {
     if (this.contentMessage) {
       if (typeof this.contentMessage === 'string') {
         this.setContentMessage(this.contentMessage)
-      } else if (_.isPlainObject(this.contentMessage)) {
+      } else if (isPlainObject(this.contentMessage)) {
         const { type, message } = this.contentMessage
         this.setContentMessage(message, type)
       }
@@ -565,7 +575,7 @@ export default {
     /**
      * 更新所有布局数据，包括内容高度和 filterbar
      */
-    updateLayout: _.debounce(
+    updateLayout: debounce(
       function () {
         this.updateContentLayout()
         this.updateFilterbarLayout()
@@ -659,13 +669,13 @@ export default {
       this.$emit('before-request', this)
 
       // 请求参数合并转换
-      let payloadData = _.cloneDeep(this.filterModel)
+      let payloadData = cloneDeep(this.filterModel)
 
       // 应用 filter 设置内的 getter
       applyFieldGetter(payloadData, this.filterModelGetters)
 
       // 删除搜索条件中的无效数据
-      payloadData = _.omitBy(payloadData, (val) => {
+      payloadData = omitBy(payloadData, (val) => {
         return !isValidFieldValue(val)
       })
 
@@ -674,7 +684,7 @@ export default {
       let sizeKey = 'page_size'
       const usePage = this.overrideProps['usePage']
       if (usePage) {
-        if (_.isPlainObject(usePage)) {
+        if (isPlainObject(usePage)) {
           indexKey = usePage['pageIndex'] || indexKey
           sizeKey = usePage['pageSize'] || sizeKey
         }
@@ -724,7 +734,7 @@ export default {
           _requestConfig.data = requestData
         }
 
-        const requestConfig = _.merge(_requestConfig, this.requestConfig)
+        const requestConfig = merge(_requestConfig, this.requestConfig)
 
         // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
         requestConfig.cancelToken = new axios.CancelToken((cancel) => {
@@ -849,7 +859,7 @@ export default {
         return this.$createElement('el-table-column', VNodeData, VNodeChildren)
       }
       // TODO: tableColumn validator
-      return _.isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
+      return isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },
 
     setContentMessage(message = '', type = null) {

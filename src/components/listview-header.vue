@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import isPlainObject from 'lodash/isPlainObject'
 
 export default {
   name: 'ListviewHeader',
@@ -31,7 +31,7 @@ export default {
         let text, to
         if (typeof nav === 'string' && !!nav) {
           text = nav
-        } else if (_.isPlainObject(nav)) {
+        } else if (isPlainObject(nav)) {
           text = nav.text
           to = nav.to
         }

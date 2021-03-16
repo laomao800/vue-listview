@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Listview from './listview'
 import ListviewContainer from './listview-container'
 

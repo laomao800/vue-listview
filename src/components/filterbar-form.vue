@@ -1,5 +1,5 @@
 <script>
-import _ from 'lodash'
+import isFunction from 'lodash/isFunction'
 import hasValues from 'has-values'
 import VNode from '@/components/v-node.js'
 import { allComponents, getFieldComponentName } from '@/components/fields'
@@ -25,10 +25,6 @@ export default {
   },
 
   methods: {
-    isVNode,
-
-    isFunction: _.isFunction,
-
     getFieldComponentName,
 
     getFieldValue(field) {
@@ -51,9 +47,9 @@ export default {
       ) : null
       const key = field.key || field.model || null
       let content
-      if (_.isFunction(field)) {
+      if (isFunction(field)) {
         content = <v-node node={field()} key={key} />
-      } else if (_.isFunction(field.render)) {
+      } else if (isFunction(field.render)) {
         content = <v-node node={field.render(field)} key={key} />
       } else if (isVNode(field)) {
         content = <v-node node={field} key={key} />

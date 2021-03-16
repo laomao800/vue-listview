@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import isFunction from 'lodash/isFunction'
 import fieldMixin from './field-mixin'
 import { isPromise } from '@/utils/utils'
 
@@ -35,7 +35,7 @@ export default {
     const isPromiseOption = isPromise(optionConfig)
     if (Array.isArray(optionConfig)) {
       this.internalOptions = optionConfig
-    } else if (_.isFunction(optionConfig) || isPromiseOption) {
+    } else if (isFunction(optionConfig) || isPromiseOption) {
       this.loading = true
       const resolver = (options) => {
         if (Array.isArray(options)) {

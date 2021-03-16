@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import _ from 'lodash'
+import mixin from 'lodash/mixin'
+import flow from 'lodash/flow'
+import camelCase from 'lodash/camelCase'
+import upperFirst from 'lodash/upperFirst'
 import { config, mount, shallowMount, createLocalVue } from '@vue/test-utils'
 
 config.stubs['el-table'] = {

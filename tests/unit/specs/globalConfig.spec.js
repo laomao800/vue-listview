@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import pick from 'lodash/pick'
 import { config, createLocalVue } from '@vue/test-utils'
 import Listview from '@/index.js'
 import { createRequestSpyWrapper } from '../helpers'
@@ -36,7 +36,7 @@ describe('Global config', () => {
 
   it('Use global config', () => {
     const { wrapper, requestSpy } = createRequestSpyWrapper()
-    expect(_.pick(wrapper.vm.overrideProps, Object.keys(globalConfig))).toEqual(
+    expect(pick(wrapper.vm.overrideProps, Object.keys(globalConfig))).toEqual(
       globalConfig
     )
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('global_page_index')
@@ -66,7 +66,7 @@ describe('Global config', () => {
       },
     }
     const { wrapper, requestSpy } = createRequestSpyWrapper(propsData)
-    expect(_.pick(wrapper.vm.overrideProps, Object.keys(propsData))).toEqual(
+    expect(pick(wrapper.vm.overrideProps, Object.keys(propsData))).toEqual(
       propsData
     )
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('inter_page_index')

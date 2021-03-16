@@ -161,7 +161,7 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import isFunction from 'lodash/isFunction'
 import VNode from '@/components/v-node.js'
 import { isVNode, isValidFieldConfig, hasOwn } from '@/utils/utils.js'
 import FilterbarForm from './filterbar-form.vue'
@@ -249,7 +249,7 @@ export default {
 
   methods: {
     isVNode,
-    isFunction: _.isFunction,
+    isFunction,
 
     getAllFieldsDom() {
       const filterForm = this.$refs['filterForm']
@@ -257,7 +257,7 @@ export default {
     },
 
     applyButtonClick(item, $event) {
-      if (item && _.isFunction(item.click)) {
+      if (item && isFunction(item.click)) {
         return item.click($event)
       }
     },

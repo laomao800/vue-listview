@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import isPlainObject from 'lodash/isPlainObject'
+import isEmpty from 'lodash/isEmpty'
+import isFunction from 'lodash/isFunction'
 import Vue from 'vue'
 import get from './getValue'
 import { getFieldComponentName } from '@/components/fields'
@@ -51,7 +53,7 @@ export function isValidFieldValue(val) {
     val === null ||
     val === undefined ||
     val === '' ||
-    ((Array.isArray(val) || _.isPlainObject(val)) && _.isEmpty(val))
+    ((Array.isArray(val) || isPlainObject(val)) && isEmpty(val))
   )
 }
 
@@ -60,8 +62,8 @@ export function isValidFieldValue(val) {
  */
 export function isValidFieldConfig(field) {
   return (
-    _.isFunction(field) ||
-    _.isFunction(field.render) ||
+    isFunction(field) ||
+    isFunction(field.render) ||
     isVNode(field) ||
     getFieldComponentName(field.type)
   )

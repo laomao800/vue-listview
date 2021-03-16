@@ -16,13 +16,6 @@ module.exports = {
 
   chainWebpack: (config) => {
     config.module.rule('js').exclude.add(/dist/)
-    config.module
-      .rule('js')
-      .use('babel-loader')
-      .loader('babel-loader')
-      .tap(() => ({
-        plugins: ['lodash'],
-      }))
     config.module.rule('md').test(/\.md$/)
     config.module.rule('md').use('html-loader').loader('html-loader')
     config.module.rule('md').use('markdown-loader').loader('markdown-loader')
@@ -30,14 +23,6 @@ module.exports = {
   },
 
   configureWebpack: (config) => {
-    const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-    config.plugins.push(
-      new LodashModuleReplacementPlugin({
-        collections: true,
-        shorthands: true,
-      })
-    )
-
     if (process.env.BUILD_MODE === 'component') {
       const nodeExternals = require('webpack-node-externals')
       config.externals = config.externals || {}

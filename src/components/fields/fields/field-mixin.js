@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import merge from 'lodash/merge'
+import camelCase from 'lodash/camelCase'
+import isPlainObject from 'lodash/isPlainObject'
 import get from '@/utils/getValue'
 
 export default {
@@ -15,7 +17,7 @@ export default {
         if (modelProperty) {
           value = get(this.formModel, modelProperty)
         }
-        if (_.camelCase(this.field.type) === 'multipleSelect') {
+        if (camelCase(this.field.type) === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
           value = Array.isArray(value) ? value : []
         }
@@ -35,16 +37,16 @@ export default {
       },
     },
     mergedProps() {
-      const defaultProps = _.isPlainObject(this.defaultProps)
+      const defaultProps = isPlainObject(this.defaultProps)
         ? this.defaultProps
         : {}
-      const componentProps = _.isPlainObject(this.field.componentProps)
+      const componentProps = isPlainObject(this.field.componentProps)
         ? this.field.componentProps
         : {}
-      return _.merge(defaultProps, componentProps)
+      return merge(defaultProps, componentProps)
     },
     mergedEvents() {
-      return _.isPlainObject(this.field.componentEvents)
+      return isPlainObject(this.field.componentEvents)
         ? this.field.componentEvents
         : {}
     },
