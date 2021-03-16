@@ -14,8 +14,12 @@ describe('Events', () => {
     `,
     components: { Listview },
   })
-  const searchBtn = wrapper.findAll('.filterbar__submit-btn button').at(0)
-  const resetBtn = wrapper.findAll('.filterbar__submit-btn button').at(1)
+  const filterBtns = wrapper
+    .findComponent({ name: 'FilterBar' })
+    .findComponent({ name: 'ElFormItem' })
+    .findAllComponents({ name: 'ElButton' })
+  const searchBtn = filterBtns.at(0)
+  const resetBtn = filterBtns.at(1)
 
   it('filter-submit', () => {
     searchBtn.trigger('click')

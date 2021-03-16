@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import vueTestUtils, { config } from '@vue/test-utils'
 import _ from 'lodash'
-require('babel-plugin-require-context-hook/register')()
+import { config, mount, shallowMount, createLocalVue } from '@vue/test-utils'
 
-// 使用内建的 transition 组件，避免 <ElSelectDropdown> 组件在测试中报错
-config.stubs.transition = false
 config.stubs['el-table'] = {
   template:
     '<div class="mock-el-table" :row-class-name="internalRowClassName" />',
@@ -20,9 +17,10 @@ config.stubs['el-table'] = {
     },
   },
 }
-config.stubs['el-select'] = '<div class="mock-el-select" />'
-config.stubs['el-input-number'] = '<div class="mock-el-input-number" />'
-// config.stubs['el-pagination'] = '<div class="mock-el-pagination" />'
+config.stubs['el-select'] = { template: '<div class="mock-el-select" />' }
+config.stubs['el-input-number'] = {
+  template: '<div class="mock-el-input-number" />',
+}
 config.stubs['el-pagination'] = Vue.extend({
   name: 'ElPagination',
   template: '<div class="mock-el-pagination" />',
@@ -64,15 +62,15 @@ Object.defineProperty(window, 'localStorage', {
 
 // 全局辅助方法
 // https://vue-test-utils.vuejs.org/zh/api/mount.html
-global.mount = vueTestUtils.mount
+global.mount = mount
 
 // https://vue-test-utils.vuejs.org/zh/api/shallowMount.html
-global.shallowMount = vueTestUtils.shallowMount
+global.shallowMount = shallowMount
 
 // 创建带 store ， route ， style 的组件配置
 global.createComponentMocks = ({ store, router, style, mocks, stubs }) => {
   // https://vue-test-utils.vuejs.org/zh/api/createLocalVue.html
-  const localVue = vueTestUtils.createLocalVue()
+  const localVue = createLocalVue()
   const returnOptions = { localVue }
 
   // https://vue-test-utils.vuejs.org/zh/api/options.html#stubs

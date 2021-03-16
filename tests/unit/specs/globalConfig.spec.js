@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import VueTestUtils, { mount, createLocalVue } from '@vue/test-utils'
+import { config, createLocalVue } from '@vue/test-utils'
 import Listview from '@/index.js'
 import { createRequestSpyWrapper } from '../helpers'
 
@@ -27,7 +27,7 @@ const globalConfig = {
 
 const localVue = createLocalVue()
 localVue.use(Listview, globalConfig)
-VueTestUtils.config.mocks['$LISTVIEW'] = globalConfig
+config.mocks['$LISTVIEW'] = globalConfig
 
 describe('Global config', () => {
   it('Vue.prototype.$LISTVIEW', () => {

@@ -96,9 +96,9 @@ describe('Request params', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', testString)
 
     wrapper
-      .find({ ref: 'filterbar' })
-      .find({ ref: 'filterForm' })
-      .findAll({ name: 'ElInput' })
+      .findComponent({ ref: 'filterbar' })
+      .findComponent({ ref: 'filterForm' })
+      .findAllComponents({ name: 'ElInput' })
       .wrappers.forEach((inputWrapper) => {
         inputWrapper.vm.$emit('blur')
       })
@@ -117,7 +117,7 @@ describe('分页参数', () => {
     const { wrapper, requestSpy } = createRequestSpyWrapper({
       pageSize: 2,
     })
-    expect(wrapper.find({ ref: 'pagination' }).exists()).toBe(true)
+    expect(wrapper.findComponent({ ref: 'pagination' }).exists()).toBe(true)
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('page_index', 1)
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('page_size', 2)
   })
@@ -126,7 +126,7 @@ describe('分页参数', () => {
     const { wrapper, requestSpy } = createRequestSpyWrapper({
       usePage: false,
     })
-    expect(wrapper.find({ ref: 'pagination' }).exists()).toBe(false)
+    expect(wrapper.findComponent({ ref: 'pagination' }).exists()).toBe(false)
     expect(requestSpy.mock.calls[0][0]).not.toHaveProperty('page_index')
     expect(requestSpy.mock.calls[0][0]).not.toHaveProperty('page_size')
   })
@@ -159,7 +159,7 @@ describe('分页参数', () => {
     const { wrapper } = createRequestSpyWrapper({
       pageSize: 2,
     })
-    const $pagination = wrapper.find({ name: 'ElPagination' })
+    const $pagination = wrapper.findComponent({ name: 'ElPagination' })
     $pagination.vm.$emit('size-change', 3)
     expect(wrapper.vm.currentPageSize).toBe(3)
   })
@@ -168,7 +168,7 @@ describe('分页参数', () => {
     const { wrapper } = createRequestSpyWrapper({
       pageSize: 2,
     })
-    const $pagination = wrapper.find({ name: 'ElPagination' })
+    const $pagination = wrapper.findComponent({ name: 'ElPagination' })
     $pagination.vm.$emit('current-change', 20)
     wrapper.vm.search(true)
     expect(wrapper.vm.currentPage).toBe(20)

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`layout listview header empty 1`] = `undefined`;
+exports[`layout listview header empty 1`] = `""`;
 
 exports[`layout listview header nav 1`] = `
 <div class="listview__header">

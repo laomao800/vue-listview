@@ -4,8 +4,8 @@ import ListviewHeader from '@/components/listview-header'
 
 describe('layout', () => {
   describe('listview header', () => {
-    it('empty', () => {
-      const wrapper = mount(ListviewHeader)
+    it('empty', async () => {
+      const wrapper = await mount(ListviewHeader)
       expect(wrapper.html()).toMatchSnapshot()
     })
 
@@ -18,8 +18,8 @@ describe('layout', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('nav', () => {
-      const wrapper = mount(ListviewHeader, {
+    it('nav', async () => {
+      const wrapper = await mount(ListviewHeader, {
         propsData: {
           nav: ['home', { text: 'list', to: '/list' }],
         },
@@ -27,8 +27,8 @@ describe('layout', () => {
       expect(wrapper.html()).toMatchSnapshot()
     })
 
-    it('title & nav', () => {
-      const wrapper = mount(ListviewHeader, {
+    it('title & nav', async () => {
+      const wrapper = await mount(ListviewHeader, {
         propsData: {
           title: 'headerTitle',
           nav: [
@@ -74,7 +74,7 @@ describe('layout', () => {
 
   describe('row class name', () => {
     it('row string class', async () => {
-      const wrapper = mount(Listview, {
+      const wrapper = await mount(Listview, {
         propsData: {
           tableProps: {
             rowClassName: 'row-view-class',
@@ -83,13 +83,13 @@ describe('layout', () => {
       })
       expect(
         wrapper
-          .find({ ref: 'contentTable' })
+          .findComponent({ ref: 'contentTable' })
           .element.getAttribute('row-class-name')
       ).toContain('row-view-class')
     })
 
-    it('row func class', () => {
-      const wrapper = mount(Listview, {
+    it('row func class', async () => {
+      const wrapper = await mount(Listview, {
         propsData: {
           tableProps: {
             rowClassName: () => 'row-view-class-fn',
@@ -98,20 +98,22 @@ describe('layout', () => {
       })
       expect(
         wrapper
-          .find({ ref: 'contentTable' })
+          .findComponent({ ref: 'contentTable' })
           .element.getAttribute('row-class-name')
       ).toContain('row-view-class-fn')
     })
   })
 
   describe('listview footer', () => {
-    it('pager off', () => {
-      const wrapper = mount(Listview, { propsData: { usePage: false } })
+    it('pager off', async () => {
+      const wrapper = await mount(Listview, { propsData: { usePage: false } })
       expect(wrapper.vm.$el.querySelector('.listview__pager')).toBe(null)
     })
 
-    it('pager on right', () => {
-      const wrapper = mount(Listview, { propsData: { pagePosition: 'right' } })
+    it('pager on right', async () => {
+      const wrapper = await mount(Listview, {
+        propsData: { pagePosition: 'right' },
+      })
       expect(
         wrapper.vm.$el.querySelector('.listview__footer-left .listview__pager')
       ).toBe(null)
@@ -120,13 +122,13 @@ describe('layout', () => {
       ).not.toBe(null)
     })
 
-    it('footer slots', () => {
+    it('footer slots', async () => {
       const slots = {
         'footer-left': 'footer left',
         'footer-center': 'footer center',
         'footer-right': 'footer right',
       }
-      const wrapper = mount(Listview, {
+      const wrapper = await mount(Listview, {
         slots,
       })
       expect(
@@ -142,8 +144,8 @@ describe('layout', () => {
   })
 
   describe('Others', () => {
-    it('specify height', () => {
-      const wrapper = mount(Listview, {
+    it('specify height', async () => {
+      const wrapper = await mount(Listview, {
         propsData: {
           autoload: false,
           usePage: false,
