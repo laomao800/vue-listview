@@ -33,6 +33,13 @@ npm i -S @laomao800/vue-listview element-ui
 - `transformRequestData`
 - `transformResponseData`
 - `contentDataMap`
+- `usePage`
+- `pagePosition`
+- `pageProps`
+- `pageSizes`
+- `pageSize`
+- `searchButton`
+- `resetButton`
 
 ```js
 // main.js
