@@ -390,7 +390,7 @@ export default {
       internalContentMessage: null,
       internalListSelection: [],
       currentPage: 1,
-      currentPageSize: this.pageSize,
+      currentPageSize: null,
     }
   },
 
@@ -538,6 +538,8 @@ export default {
       }
     }
     validateFilterFields(this.filterFields)
+
+    this.currentPageSize = this.overrideProps['pageSize']
   },
 
   mounted() {
