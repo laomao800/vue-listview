@@ -1,4 +1,4 @@
-/*! Vue Listview v1.5.0-1 */
+/*! Vue Listview v1.5.0-2 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -984,8 +984,8 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: external "core-js/modules/es.function.name.js"
 var es_function_name_js_ = __webpack_require__("db0a");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"15cb8e24-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=501df06c&
-var listviewvue_type_template_id_501df06c_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"15cb8e24-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/listview/index.vue?vue&type=template&id=d28f44e6&
+var listviewvue_type_template_id_d28f44e6_render = function () {
 var _obj;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"listview",style:({
     height: _vm.fixedHeight,
@@ -1009,7 +1009,7 @@ return [_c('el-radio',{attrs:{"value":_vm.internalListSelection.indexOf(row) > -
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=501df06c&
+// CONCATENATED MODULE: ./src/listview/index.vue?vue&type=template&id=d28f44e6&
 
 // EXTERNAL MODULE: external "core-js/modules/es.symbol.js"
 var es_symbol_js_ = __webpack_require__("9b22");
@@ -3786,7 +3786,7 @@ var DEFAULT_PROPS = {
       internalContentMessage: null,
       internalListSelection: [],
       currentPage: 1,
-      currentPageSize: this.pageSize
+      currentPageSize: null
     };
   },
   computed: {
@@ -3933,6 +3933,7 @@ var DEFAULT_PROPS = {
     }
 
     listviewvue_type_script_lang_js_validateFilterFields(this.filterFields);
+    this.currentPageSize = this.overrideProps['pageSize'];
   },
   mounted: function mounted() {
     this.initLayout();
@@ -4424,7 +4425,7 @@ var DEFAULT_PROPS = {
 
 var listview_component = normalizeComponent(
   src_listviewvue_type_script_lang_js_,
-  listviewvue_type_template_id_501df06c_render,
+  listviewvue_type_template_id_d28f44e6_render,
   staticRenderFns,
   false,
   null,
