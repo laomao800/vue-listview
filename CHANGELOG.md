@@ -1,3 +1,12 @@
+# [1.5.0-2](https://github.com/laomao800/vue-listview/compare/v1.5.0-1...v1.5.0-2) (2021-03-29)
+
+
+### Bug Fixes
+
+* 修复初始化 pageSize 值丢失 ([864052d](https://github.com/laomao800/vue-listview/commit/864052d1a92978ee79a63a06866b8fa3b9765094))
+
+
+
 # [1.5.0-1](https://github.com/laomao800/vue-listview/compare/v1.4.0...v1.5.0-1) (2021-03-16)
 
 
