@@ -1,6 +1,6 @@
 {
   "name": "@laomao800/vue-listview",
-  "version": "1.5.0-1",
+  "version": "1.5.0-2",
   "author": "laomao800 <laomao800@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
