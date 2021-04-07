@@ -14,7 +14,7 @@
           <slot name="filterbar-left" />
         </div>
         <div
-          v-if="showFilterButtons || showFilterSubmit || showFilterFields"
+          v-if="isShowFilterButtons || isShowFilterSubmit || isShowFilterFields"
           :class="[
             'listview__filterbar',
             { 'listview__filterbar--fold': internalFilterbarFold },
@@ -22,12 +22,12 @@
         >
           <!-- 提交、重置按钮区域 -->
           <div
-            v-if="showFilterSubmit"
+            v-if="isShowFilterSubmit"
             ref="submit"
             :class="[
               'filterbar__submit',
               {
-                'filterbar__submit--nomore': !filterbarHasMore,
+                'filterbar__submit--nomore': !isHasMore,
                 'filterbar__submit--onleft': isNoneFields,
               },
             ]"
@@ -39,14 +39,14 @@
               <el-form-item>
                 <slot name="prepend-filterbar-submit" />
                 <el-button
-                  v-if="searchButton !== false"
+                  v-if="isShowSearchButton"
                   v-bind="searchButton"
                   @click="handleFilterSearch"
                 >
                   {{ searchButton.text }}
                 </el-button>
                 <el-button
-                  v-if="resetButton !== false"
+                  v-if="isShowFilterButton"
                   v-bind="resetButton"
                   @click="handleFilterReset"
                 >
@@ -74,7 +74,7 @@
           </div>
 
           <!-- 操作按钮区域 -->
-          <div v-if="showFilterButtons" class="filterbar__buttons">
+          <div v-if="isShowFilterButtons" class="filterbar__buttons">
             <el-form-item>
               <template v-for="(button, index) in filterButtons">
                 <v-node
@@ -142,7 +142,7 @@
 
           <!-- 搜索栏控件区域 -->
           <filterbar-form
-            v-if="showFilterFields"
+            v-if="isShowFilterFields"
             ref="filterForm"
             :fields="validFilterFields"
             :model="filterModel"
@@ -180,8 +180,8 @@ export default {
     filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
     filterbarFold: { type: Boolean, default: true },
-    searchButton: { type: Object },
-    resetButton: { type: Object },
+    searchButton: { type: [Object, Boolean] },
+    resetButton: { type: [Object, Boolean] },
   },
 
   data() {
@@ -201,27 +201,27 @@ export default {
     isNoneFields() {
       return this.validFilterFields.length === 0
     },
-    showFilterButtons() {
+    isShowFilterButtons() {
       return this.filterButtons.length > 0
     },
-    showFilterFields() {
+    isShowFilterFields() {
       return this.validFilterFields.length > 0
     },
-    showFilterSearch() {
-      return this.searchButton !== false
+    isShowSearchButton() {
+      return !!this.searchButton
     },
-    showFilterReset() {
-      return this.resetButton !== false
+    isShowFilterButton() {
+      return !!this.resetButton
     },
-    showFilterSubmit() {
+    isShowFilterSubmit() {
       return (
-        this.showFilterSearch ||
-        this.showFilterReset ||
+        this.isShowSearchButton ||
+        this.isShowFilterButton ||
         this.$slots['prepend-filterbar-submit'] ||
         this.$slots['append-filterbar-submit']
       )
     },
-    filterbarHasMore() {
+    isHasMore() {
       return (
         this.topRightFilterIndex >= 0 &&
         this.topRightFilterIndex < this.validFilterFields.length - 1
@@ -230,10 +230,10 @@ export default {
   },
 
   watch: {
-    showFilterSearch() {
+    isShowSearchButton() {
       this.updateLayout()
     },
-    showFilterReset() {
+    isShowFilterButton() {
       this.updateLayout()
     },
     filterbarFold() {
@@ -460,7 +460,8 @@ export default {
     }
 
     &--onleft {
-      float: inherit;
+      float: none;
+      display: inline-block;
     }
   }
 }

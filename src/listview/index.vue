@@ -495,6 +495,7 @@ export default {
           ? globalConfig[prop]
           : DEFAULT_PROPS[prop]
       })
+
       return overrides
     },
 
