@@ -709,7 +709,7 @@ export default {
       // 自定义请求参数转换方法
       const transformRequestFn = this.overrideProps['transformRequestData']
       const requestData = transformRequestFn
-        ? transformRequestFn(payloadData)
+        ? await transformRequestFn(payloadData)
         : payloadData
 
       // transformRequestData 返回 false 阻止提交动作，可用于提交前验证等
@@ -781,7 +781,7 @@ export default {
             'transformResponseData'
           ]
           contentResponse = transformResponseFn
-            ? transformResponseFn(response)
+            ? await transformResponseFn(response)
             : response
         } else {
           const resolveErrorMessageFn = this.overrideProps[
