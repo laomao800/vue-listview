@@ -1,3 +1,17 @@
+# [1.5.0-4](https://github.com/laomao800/vue-listview/compare/v1.5.0-2...v1.5.0-4) (2021-04-30)
+
+
+### Bug Fixes
+
+* 修复 searchButton & resetButton props 失效 ([520f8fd](https://github.com/laomao800/vue-listview/commit/520f8fd7e5f1bc08f668cc89a544dd47f2dc0b47))
+
+
+### Features
+
+* transformResponseFn & transformRequestFn 支持返回 promise ([d883a2d](https://github.com/laomao800/vue-listview/commit/d883a2d13590f043e1073f11c40fa11dc1577778))
+
+
+
 # [1.5.0-2](https://github.com/laomao800/vue-listview/compare/v1.5.0-1...v1.5.0-2) (2021-03-29)
 
 
@@ -81,8 +95,8 @@
 
 ### Bug Fixes
 
-* 更新依赖包版本，修正部分项目 'core-js-pure' 引用错误 ([fb55831](https://github.com/laomao800/vue-listview/commit/fb558316260ba2cdd438abe8d1a01508dd84a3d9))
 * 修正单选表格模式下 selectable 失效 ([cad00fb](https://github.com/laomao800/vue-listview/commit/cad00fb5814fa372df15115a7b2cf9030dd1ca46))
+* 更新依赖包版本，修正部分项目 'core-js-pure' 引用错误 ([fb55831](https://github.com/laomao800/vue-listview/commit/fb558316260ba2cdd438abe8d1a01508dd84a3d9))
 
 
 
@@ -163,8 +177,8 @@
 
 ### Bug Fixes
 
-* 修复在 <listview-container/> 内 table-selection.sync 无法更新成功 ([b55f913](https://github.com/laomao800/vue-listview/commit/b55f9139b6a41babc0410fe1dd09d7e782fbddfe))
 * requestMethod 默认值修改为 'post' ([3eb08a2](https://github.com/laomao800/vue-listview/commit/3eb08a267581b4dac85d35f4ae224e2c4046cec2))
+* 修复在 <listview-container/> 内 table-selection.sync 无法更新成功 ([b55f913](https://github.com/laomao800/vue-listview/commit/b55f9139b6a41babc0410fe1dd09d7e782fbddfe))
 
 
 ### Features
@@ -190,8 +204,8 @@
 
 ### Performance Improvements
 
-* 更新布局类方法增加 debounce ([561ecea](https://github.com/laomao800/vue-listview/commit/561eceab00a9efc182fcc8b84f22d65ff74a599e))
 * external axios lodash ([d958894](https://github.com/laomao800/vue-listview/commit/d958894e619e2d47cca62e8b044e98c5cea7a74b))
+* 更新布局类方法增加 debounce ([561ecea](https://github.com/laomao800/vue-listview/commit/561eceab00a9efc182fcc8b84f22d65ff74a599e))
 
 
 
@@ -209,8 +223,8 @@
 
 ### Features
 
-* **filterFields:** 支持通过数组形式对搜索字段进行分组展示 ([2ba6046](https://github.com/laomao800/vue-listview/commit/2ba60461844aee53d97c4387b60ce5474a4c5bb9))
 * **filterFields:** select, multipleSelect, cascader 类型 options 属性支持函数返回 Promise 或通过 done 参数异步填充选项 ([f726095](https://github.com/laomao800/vue-listview/commit/f7260953164bd1ee6b3965fd63d6a922aa6142ba))
+* **filterFields:** 支持通过数组形式对搜索字段进行分组展示 ([2ba6046](https://github.com/laomao800/vue-listview/commit/2ba60461844aee53d97c4387b60ce5474a4c5bb9))
 
 
 
@@ -229,10 +243,10 @@
 
 ### Bug Fixes
 
-* 请求内容数据后重置 el-table 垂直滚动距离 ([c92f6e6](https://github.com/laomao800/vue-listview/commit/c92f6e63dbcd47230faef3a83dedade80d51f027))
+* types fix ([06965dc](https://github.com/laomao800/vue-listview/commit/06965dc118fa736d1caacb1b784d6e69435f1fa3))
 * 事件 filter-submit 增加返回参数 filterModel ([f43ea94](https://github.com/laomao800/vue-listview/commit/f43ea94bc10942b27853d4f1b7848b7ee9f3996e))
 * 修复 full-height 为 `false` 时表格自动高度样式展示问题 ([647c285](https://github.com/laomao800/vue-listview/commit/647c285be44a15039c8f82e84d657a3b41d08327))
-* types fix ([06965dc](https://github.com/laomao800/vue-listview/commit/06965dc118fa736d1caacb1b784d6e69435f1fa3))
+* 请求内容数据后重置 el-table 垂直滚动距离 ([c92f6e6](https://github.com/laomao800/vue-listview/commit/c92f6e63dbcd47230faef3a83dedade80d51f027))
 
 
 ### chore
@@ -295,16 +309,16 @@
 ### Bug Fixes
 
 * **filterFields:** 仅对有 model 属性的配置项进行重复 model 判断 ([5ec8959](https://github.com/laomao800/vue-listview/commit/5ec8959c84787facf8165e7f99befe146b68f0f0))
+* get-value isObject 方法与原始库保持一致，并增加原始单元测试 ([b810ee7](https://github.com/laomao800/vue-listview/commit/b810ee799d14eaeb8e243a7a4b90e166e891cdaf))
 * 修复 listview-contaier 在部分浏览器下边框显示样式问题 ([cb1aba0](https://github.com/laomao800/vue-listview/commit/cb1aba08103f998bac1a8b571eac2e41ae792fb2))
 * 修复部分国产浏览器下在开发模式 isValidObject 报错问题 ([6b7208e](https://github.com/laomao800/vue-listview/commit/6b7208e6a15021bcd12cd5976dae74011eb12cce))
 * 修复部分浏览器 getBoundingClientRect 获取不到 x 值导致按钮偏移量无法计算问题 ([eafc8d8](https://github.com/laomao800/vue-listview/commit/eafc8d8e0b29beccdfdc6d7144ba9cfc15c6b201))
-* get-value isObject 方法与原始库保持一致，并增加原始单元测试 ([b810ee7](https://github.com/laomao800/vue-listview/commit/b810ee799d14eaeb8e243a7a4b90e166e891cdaf))
 
 
 ### Features
 
-* 提示 filterFields 内的重复 model 值 ([d760242](https://github.com/laomao800/vue-listview/commit/d7602426175fddc3cd551471f1a0b93d323d89c1))
 * filterFields 支持 get 属性配置获取值的方法 ([aa628bd](https://github.com/laomao800/vue-listview/commit/aa628bdbcb84ee94f4031aea6add5ced3f28f7f5))
+* 提示 filterFields 内的重复 model 值 ([d760242](https://github.com/laomao800/vue-listview/commit/d7602426175fddc3cd551471f1a0b93d323d89c1))
 
 
 ### Performance Improvements
@@ -323,8 +337,8 @@
 
 ### Features
 
-* 使用 abstract 组件替代原 functional v-node 组件 ([8142afd](https://github.com/laomao800/vue-listview/commit/8142afd54f95f6f1b6cd135f911497deb452173e))
 * add types ([62dbb31](https://github.com/laomao800/vue-listview/commit/62dbb31bd66e9ff2b50cecd97799f3e3643f9411))
+* 使用 abstract 组件替代原 functional v-node 组件 ([8142afd](https://github.com/laomao800/vue-listview/commit/8142afd54f95f6f1b6cd135f911497deb452173e))
 
 
 
@@ -333,9 +347,9 @@
 
 ### Bug Fixes
 
-* 更新 Element-UI v2.4.9 ([ae382bc](https://github.com/laomao800/vue-listview/commit/ae382bc69666b0f53e7c5f92baa67ba9dc3da3d8))
-* 修复在内容已有数据情况下无法显示报错信息问题 ([69368a6](https://github.com/laomao800/vue-listview/commit/69368a641d0cef48e0ca955ab8700978638d68fe))
 * Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错 ([30cec60](https://github.com/laomao800/vue-listview/commit/30cec60cfdada69fbdd3d6afc99c43e9edd7d6d8))
+* 修复在内容已有数据情况下无法显示报错信息问题 ([69368a6](https://github.com/laomao800/vue-listview/commit/69368a641d0cef48e0ca955ab8700978638d68fe))
+* 更新 Element-UI v2.4.9 ([ae382bc](https://github.com/laomao800/vue-listview/commit/ae382bc69666b0f53e7c5f92baa67ba9dc3da3d8))
 
 
 ### Code Refactoring
@@ -368,17 +382,17 @@
 
 ### Bug Fixes
 
-* 修正 lint 错误 ([5fea1cf](https://github.com/laomao800/vue-listview/commit/5fea1cf833813abe0d6b775efa32c636ddd83a17))
-* 修正测试用例及 snapshots ([d39a880](https://github.com/laomao800/vue-listview/commit/d39a880a9166878f46a74ac41be7dcf5d8c5bcf8))
 * update eslint-plugin-vue to 5.0.0-beta.3 ([6b772cb](https://github.com/laomao800/vue-listview/commit/6b772cb41c2a564a5707181c2e5f90d554f7d5d6))
 * update storybook-readme ([1cd6d81](https://github.com/laomao800/vue-listview/commit/1cd6d8112a67ded546fd752c437e3fcba1c467ce))
+* 修正 lint 错误 ([5fea1cf](https://github.com/laomao800/vue-listview/commit/5fea1cf833813abe0d6b775efa32c636ddd83a17))
+* 修正测试用例及 snapshots ([d39a880](https://github.com/laomao800/vue-listview/commit/d39a880a9166878f46a74ac41be7dcf5d8c5bcf8))
 
 
 ### Features
 
-* 搜索栏 select 与 multiple-select 默认开启搜索功能 ([dbff66e](https://github.com/laomao800/vue-listview/commit/dbff66ece0710261fc1cca39d978bb4fa9b850b0))
 * filterButton 支持 plain 类型 ([59a4bb7](https://github.com/laomao800/vue-listview/commit/59a4bb70fb4288c001498ca4837c75081c58c047))
 * headerNav 支持只传入 string 类型 ([625f8ff](https://github.com/laomao800/vue-listview/commit/625f8ff607cb151d263fb09a0bbfd338a067f62f))
+* 搜索栏 select 与 multiple-select 默认开启搜索功能 ([dbff66e](https://github.com/laomao800/vue-listview/commit/dbff66ece0710261fc1cca39d978bb4fa9b850b0))
 
 
 
@@ -387,22 +401,22 @@
 
 ### Bug Fixes
 
-* 点击搜索栏页码重置回第一页 ([6d31b0a](https://github.com/laomao800/vue-listview/commit/6d31b0ab96319b9839300d79cf435ec033119ca5))
-* 搜索时提交前先过滤掉条件中的无效数据 ([6424222](https://github.com/laomao800/vue-listview/commit/64242223f4e45b6f544e7f269277518f5f2e06cd))
-* 搜索时提交前先过滤掉条件中的无效数据 ([64a2b02](https://github.com/laomao800/vue-listview/commit/64a2b029bbe4bc487c217d596a83460391f93fd9))
 * 修复接口报错不显示错误信息问题 ([ef63c0d](https://github.com/laomao800/vue-listview/commit/ef63c0d93b293a1a2ef76e1e335c858007f166f8))
 * 修复自动以 requestHandler 时 loading 状态不消失问题 ([5e8b26b](https://github.com/laomao800/vue-listview/commit/5e8b26bb5113063b1669e00d5e984929c0e383d4))
+* 搜索时提交前先过滤掉条件中的无效数据 ([6424222](https://github.com/laomao800/vue-listview/commit/64242223f4e45b6f544e7f269277518f5f2e06cd))
+* 搜索时提交前先过滤掉条件中的无效数据 ([64a2b02](https://github.com/laomao800/vue-listview/commit/64a2b029bbe4bc487c217d596a83460391f93fd9))
+* 点击搜索栏页码重置回第一页 ([6d31b0a](https://github.com/laomao800/vue-listview/commit/6d31b0ab96319b9839300d79cf435ec033119ca5))
 
 
 ### Features
 
 * **storybook:** 添加 storybook 演示 ([d5c8978](https://github.com/laomao800/vue-listview/commit/d5c89786019526f4347f4bbd57a8100db7cdd72a))
-* 搜索栏回车触发搜索操作 ([12e11d1](https://github.com/laomao800/vue-listview/commit/12e11d1beceb8506b306bab60d8a233055c988c4))
 * filterButtons 支持 loading 属性 （仅支持通过 methods 返回 loading 状态） ([46035df](https://github.com/laomao800/vue-listview/commit/46035df277455a5ad657fbd8b12cd8e5d2d4633b))
-* filterField 新增 label 、 number 2 种类型 ([41c3d41](https://github.com/laomao800/vue-listview/commit/41c3d418f490adbe52444d9330d27bbdbe4e633f))
 * filterField 增加 componentSlots 配置属性用于配置字段组件 slot ([28e28d9](https://github.com/laomao800/vue-listview/commit/28e28d975fa7616d333abdfff4665b89921f2287))
+* filterField 新增 label 、 number 2 种类型 ([41c3d41](https://github.com/laomao800/vue-listview/commit/41c3d418f490adbe52444d9330d27bbdbe4e633f))
 * listview-container ([0d6cba6](https://github.com/laomao800/vue-listview/commit/0d6cba6f3692e02bb2c16e2e5aaa2b8c3a4687ef))
 * search(keepInPage) 增加 keepInPage 控制数据请求保留在当前页码 ([25563d4](https://github.com/laomao800/vue-listview/commit/25563d47c189cd0d55e30f6fd2eb3f8356980ff3))
+* 搜索栏回车触发搜索操作 ([12e11d1](https://github.com/laomao800/vue-listview/commit/12e11d1beceb8506b306bab60d8a233055c988c4))
 
 
 
@@ -488,13 +502,13 @@
 
 ### Features
 
-* 增加 requestDataKeyCase 可进行简单的配置请求参数拼写方案 ([b4edbc8](https://github.com/laomao800/vue-listview/commit/b4edbc807bd71d16fe61f85953d832bfaa68bfef))
 * add release scripts ([7868764](https://github.com/laomao800/vue-listview/commit/7868764af08a7a1c8225e39ef24f4d3fc879c395))
 * contentDataMap ([2a255a2](https://github.com/laomao800/vue-listview/commit/2a255a2e8b3554e8f47f6ba3b32e5a08ab6bad30))
 * contentMessage (validateResponse, resolveRequestErrorMessage) ([543b460](https://github.com/laomao800/vue-listview/commit/543b460a583248fe5e2b1ce892e6e195cf955900))
 * filterbar 代码优化 ([94d9d3d](https://github.com/laomao800/vue-listview/commit/94d9d3d4aaca1d8c399ff1867f4ec8903a957e5b))
 * filterButtons, filterFields 支持 render() 属性 ([fbd4043](https://github.com/laomao800/vue-listview/commit/fbd4043a90993ff984d499fe13aa99725af1e494))
 * table-columns, table-props, table-events, table-select-enable, table-selection ([cd8e582](https://github.com/laomao800/vue-listview/commit/cd8e582ce282b8c885a8737bee3b147105eaa870))
+* 增加 requestDataKeyCase 可进行简单的配置请求参数拼写方案 ([b4edbc8](https://github.com/laomao800/vue-listview/commit/b4edbc807bd71d16fe61f85953d832bfaa68bfef))
 
 
 
