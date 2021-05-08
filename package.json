@@ -28,7 +28,7 @@
     "core-js": "^3.3.2",
     "element-ui": "2.x",
     "has-values": "^2.0.1",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "vue": "^2.6.10"
   },
   "devDependencies": {
