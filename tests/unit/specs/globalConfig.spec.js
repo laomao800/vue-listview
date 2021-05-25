@@ -34,8 +34,8 @@ describe('Global config', () => {
     expect(localVue.prototype.$LISTVIEW).toEqual(globalConfig)
   })
 
-  it('Use global config', () => {
-    const { wrapper, requestSpy } = createRequestSpyWrapper()
+  it('Use global config', async () => {
+    const { wrapper, requestSpy } = await createRequestSpyWrapper()
     expect(pick(wrapper.vm.overrideProps, Object.keys(globalConfig))).toEqual(
       globalConfig
     )
@@ -43,7 +43,7 @@ describe('Global config', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('global_page_size')
   })
 
-  it('Props will override global config', () => {
+  it('Props will override global config', async () => {
     const propsData = {
       validateResponse: () => true,
       resolveResponseErrorMessage: () => 'config error',
@@ -65,7 +65,7 @@ describe('Global config', () => {
         pageSize: 'inter_page_size',
       },
     }
-    const { wrapper, requestSpy } = createRequestSpyWrapper(propsData)
+    const { wrapper, requestSpy } = await createRequestSpyWrapper(propsData)
     expect(pick(wrapper.vm.overrideProps, Object.keys(propsData))).toEqual(
       propsData
     )

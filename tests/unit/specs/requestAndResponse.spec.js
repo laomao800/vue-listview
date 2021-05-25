@@ -1,10 +1,8 @@
-import { mount } from '@vue/test-utils'
-import { wait } from '../helpers'
-import { createRequestSpyWrapper, mockDataList } from '../helpers'
+import { createRequestSpyWrapper, mockDataList, wait } from '../helpers'
 
 describe('Request params', () => {
-  it('常规参数验证', () => {
-    const { requestSpy } = createRequestSpyWrapper({
+  it('常规参数验证', async () => {
+    const { requestSpy } = await createRequestSpyWrapper({
       filterModel: {
         static_text: 'abc',
         multipleSelect: [1, 2, 3],
@@ -18,8 +16,8 @@ describe('Request params', () => {
     ])
   })
 
-  it('transformRequestData', () => {
-    const { requestSpy } = createRequestSpyWrapper({
+  it('transformRequestData', async () => {
+    const { requestSpy } = await createRequestSpyWrapper({
       filterModel: {
         static_text: 'abc',
         multipleSelect: [1, 2, 3],
@@ -46,8 +44,8 @@ describe('Request params', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('addonStr', 'listview')
   })
 
-  it('自定义参数 getter', () => {
-    const { requestSpy } = createRequestSpyWrapper({
+  it('自定义参数 getter', async () => {
+    const { requestSpy } = await createRequestSpyWrapper({
       filterModel: {
         multipleSelect: [1, 2, 3],
         text1: 'text1',
@@ -80,9 +78,9 @@ describe('Request params', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', 'text2-addon')
   })
 
-  it('text 字段默认开启 trim', () => {
+  it('text 字段默认开启 trim', async () => {
     const testString = '  text string  '
-    const { wrapper, requestSpy } = createRequestSpyWrapper({
+    const { wrapper, requestSpy } = await createRequestSpyWrapper({
       filterModel: {
         text1: testString,
         text2: testString,
@@ -113,8 +111,8 @@ describe('Request params', () => {
 })
 
 describe('分页参数', () => {
-  it('默认分页参数', () => {
-    const { wrapper, requestSpy } = createRequestSpyWrapper({
+  it('默认分页参数', async () => {
+    const { wrapper, requestSpy } = await createRequestSpyWrapper({
       pageSize: 2,
     })
     expect(wrapper.findComponent({ ref: 'pagination' }).exists()).toBe(true)
@@ -122,8 +120,8 @@ describe('分页参数', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('page_size', 2)
   })
 
-  it('不带分页参数', () => {
-    const { wrapper, requestSpy } = createRequestSpyWrapper({
+  it('不带分页参数', async () => {
+    const { wrapper, requestSpy } = await createRequestSpyWrapper({
       usePage: false,
     })
     expect(wrapper.findComponent({ ref: 'pagination' }).exists()).toBe(false)
@@ -131,8 +129,8 @@ describe('分页参数', () => {
     expect(requestSpy.mock.calls[0][0]).not.toHaveProperty('page_size')
   })
 
-  it('自定义分页参数', () => {
-    const { requestSpy } = createRequestSpyWrapper({
+  it('自定义分页参数', async () => {
+    const { requestSpy } = await createRequestSpyWrapper({
       pageSize: 2,
       usePage: {
         pageIndex: 'customPageIndex',
@@ -143,8 +141,8 @@ describe('分页参数', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('customPageSize', 2)
   })
 
-  it('无效自定义分页参数', () => {
-    const { requestSpy } = createRequestSpyWrapper({
+  it('无效自定义分页参数', async () => {
+    const { requestSpy } = await createRequestSpyWrapper({
       pageSize: 2,
       usePage: {
         errorPageIndex: 'errorPageIndex',
@@ -155,8 +153,8 @@ describe('分页参数', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('page_size', 2)
   })
 
-  it('切换 pageSize', () => {
-    const { wrapper } = createRequestSpyWrapper({
+  it('切换 pageSize', async () => {
+    const { wrapper } = await createRequestSpyWrapper({
       pageSize: 2,
     })
     const $pagination = wrapper.findComponent({ name: 'ElPagination' })
@@ -164,8 +162,8 @@ describe('分页参数', () => {
     expect(wrapper.vm.currentPageSize).toBe(3)
   })
 
-  it('search(true) 保持当前页码', () => {
-    const { wrapper } = createRequestSpyWrapper({
+  it('search(true) 保持当前页码', async () => {
+    const { wrapper } = await createRequestSpyWrapper({
       pageSize: 2,
     })
     const $pagination = wrapper.findComponent({ name: 'ElPagination' })
@@ -179,7 +177,7 @@ describe('分页参数', () => {
 
 describe('Response', () => {
   it('contentDataMap', async () => {
-    const { wrapper } = createRequestSpyWrapper({
+    const { wrapper } = await createRequestSpyWrapper({
       contentDataMap: {
         items: 'result.items',
         total: 'result.total_count',
@@ -187,7 +185,6 @@ describe('Response', () => {
         unknow: 'result.unknow.prop',
       },
     })
-    await wait()
     expect(wrapper.vm.contentData).toEqual({
       items: mockDataList,
       total: 40,
@@ -201,7 +198,7 @@ describe('Response', () => {
       items: mockDataList,
       total_count: 40,
     }
-    const { wrapper } = createRequestSpyWrapper({
+    const { wrapper } = await createRequestSpyWrapper({
       requestHandler() {
         return Promise.resolve({
           custom_is_success: 'done',
@@ -210,7 +207,6 @@ describe('Response', () => {
       },
       validateResponse: (response) => response.custom_is_success === 'done',
     })
-    await wait()
     expect(wrapper.vm.contentData).toEqual({
       items: result.items,
       total: result.total_count,
@@ -218,7 +214,7 @@ describe('Response', () => {
   })
 
   it('resolveResponseErrorMessage', async () => {
-    const { wrapper } = createRequestSpyWrapper({
+    const { wrapper } = await createRequestSpyWrapper({
       requestHandler() {
         return Promise.resolve({
           custom_is_success: 'fail',
@@ -238,7 +234,6 @@ describe('Response', () => {
         }
       },
     })
-    await wait()
     expect(wrapper.vm.internalContentMessage).toEqual({
       type: 'error',
       icon: 'el-icon-error',
@@ -247,7 +242,7 @@ describe('Response', () => {
   })
 
   it('transformResponseData', async () => {
-    const { wrapper } = createRequestSpyWrapper({
+    const { wrapper } = await createRequestSpyWrapper({
       contentDataMap: {
         success: 'is_success',
         items: 'new_data.items',
@@ -263,7 +258,7 @@ describe('Response', () => {
         },
       }),
     })
-    await wait()
+    await wait(100)
     expect(wrapper.vm.contentData).toEqual({
       success: true,
       items: mockDataList,

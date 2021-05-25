@@ -1,4 +1,4 @@
-export function createRequestSpyWrapper(propsData = {}, options = {}) {
+export async function createRequestSpyWrapper(propsData = {}, options = {}) {
   const Listview = require('@/index').default
   const { successWrap } = require('../mock-api/utils')
 
@@ -11,7 +11,7 @@ export function createRequestSpyWrapper(propsData = {}, options = {}) {
     )
   )
 
-  const wrapper = mount(Listview, {
+  const wrapper = await mount(Listview, {
     propsData: {
       requestHandler: requestSpy,
       ...propsData,
