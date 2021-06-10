@@ -1,32 +1,45 @@
 <template>
-  <el-cascader
+  <el-select
     v-model="value"
     :placeholder="field.label"
     :disabled="field.disabled"
-    :options="internalOptions"
+    :loading="loading"
     v-bind="mergedProps"
     v-on="mergedEvents"
-  />
+  >
+    <el-option
+      v-for="(option, index) in internalOptions"
+      v-bind="option"
+      :key="index"
+    />
+  </el-select>
 </template>
 
 <script>
+import camelCase from 'lodash/camelCase'
 import isFunction from 'lodash/isFunction'
 import fieldMixin from './field-mixin'
-import { isPromise } from '@/utils/utils'
+import { isPromise } from '@/utils'
 
 export default {
-  name: 'FieldCascader',
+  name: 'FieldSelect',
 
   mixins: [fieldMixin],
 
   data() {
+    const defaultProps = {
+      clearable: true,
+      filterable: true,
+      style: { width: '180px' },
+    }
+    if (camelCase(this.field.type) === 'multipleSelect') {
+      defaultProps.multiple = true
+      defaultProps.collapseTags = true
+    }
     return {
-      defaultProps: {
-        clearable: true,
-        style: { width: '180px' },
-        expandTrigger: 'hover',
-      },
+      defaultProps,
       internalOptions: [],
+      loading: false,
     }
   },
 

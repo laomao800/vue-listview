@@ -1,11 +1,14 @@
-function noop() {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function noop(_msg: string) {
+  // noop
+}
 
 export let warn = noop
 export let error = noop
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
-  warn = (msg) => {
+  warn = (msg: string) => {
     // eslint-disable-next-line no-console
     console.warn(
       `%c Listview warn %c ${msg}`,
@@ -14,7 +17,7 @@ if (process.env.NODE_ENV !== 'test') {
     )
   }
 
-  error = (msg) => {
+  error = (msg: string) => {
     // eslint-disable-next-line no-console
     console.error(
       `%c Listview error %c ${msg}`,

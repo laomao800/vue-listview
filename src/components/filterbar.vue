@@ -162,8 +162,8 @@
 
 <script>
 import isFunction from 'lodash/isFunction'
-import VNode from '@/components/v-node.js'
-import { isVNode, isValidFieldConfig, hasOwn } from '@/utils/utils.js'
+import VNode from '@/components/v-node'
+import { isVNode, isValidFieldConfig, hasOwn } from '@/utils'
 import FilterbarForm from './filterbar-form.vue'
 
 export default {

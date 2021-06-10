@@ -1,5 +1,5 @@
 <script>
-import VNode from '@/components/v-node.js'
+import VNode from '@/components/v-node'
 import ListviewHeader from '@/components/listview-header.vue'
 import './style.less'
 

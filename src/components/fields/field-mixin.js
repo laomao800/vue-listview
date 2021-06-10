@@ -1,9 +1,10 @@
+import Vue from 'vue'
 import merge from 'lodash/merge'
 import camelCase from 'lodash/camelCase'
 import isPlainObject from 'lodash/isPlainObject'
-import get from '@/utils/getValue'
+import { getValue, error } from '@/utils'
 
-export default {
+export default Vue.extend({
   props: {
     formModel: { type: Object, default: () => ({}) },
     field: { type: Object, default: () => ({}) },
@@ -15,7 +16,7 @@ export default {
         const modelProperty = this.field.model
         let value = null
         if (modelProperty) {
-          value = get(this.formModel, modelProperty)
+          value = getValue(this.formModel, modelProperty)
         }
         if (camelCase(this.field.type) === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
@@ -29,7 +30,7 @@ export default {
           this.$set(this.formModel, modelProperty, newVal)
         } else {
           if (process.env.NODE_ENV !== 'production') {
-            console.error(
+            error(
               `${JSON.stringify(this.field)}\n 未配置 model 属性，无法写入值。`
             )
           }
@@ -54,4 +55,4 @@ export default {
       return this.field.componentSlots || {}
     },
   },
-}
+})

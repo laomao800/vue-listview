@@ -1,13 +1,69 @@
-const fs = require('fs')
-const path = require('path')
-const bodyParser = require('body-parser')
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const express = require('express')
+const { successWrap, errorWrap } = require('./utils')
+const Mock = require('mockjs')
 
 module.exports = (app) => {
-  app.use(bodyParser.json())
+  app.use(express.json())
 
-  // 将 tests/mock-api/routes 下的所有 mock 路由配置注册在 mockPath 路径下
-  const mockPath = '/mock'
-  fs.readdirSync(path.join(__dirname, 'routes')).forEach((routeFileName) => {
-    app.use(mockPath, require(`./routes/${routeFileName}`)(app))
+  app.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Content-Type, Content-Length, Authorization, Accept, X-Requested-With'
+    )
+    res.header(
+      'Access-Control-Allow-Methods',
+      'PUT, POST, GET, DELETE, OPTIONS'
+    )
+
+    if (req.method === 'OPTIONS') {
+      res.send(200)
+    } else {
+      next()
+    }
+  })
+
+  app.all('/mock/listview', (req, res) => {
+    if (req.body.error) {
+      return res.json(errorWrap('演示接口返回错误信息'))
+    }
+    const pageSize = req.body.page_size || 20
+    const data = Mock.mock({
+      [`items|${pageSize}`]: [
+        {
+          id: '@guid',
+          sku: /SKU\d{6}/,
+          name: '@ctitle(10, 30)',
+          'warehouse|1': ['中仓', '英仓', '美仓', '香港仓'],
+          sale_price: '@integer(100, 2000)',
+          discount: '@float(0, 0, 1, 99)',
+          seller: '@cname',
+          date: '@date',
+          quantity: '@integer(10, 200)',
+          'enable|1': true,
+        },
+      ],
+      total_count: 800,
+    })
+    const responseData = successWrap(data)
+    return res.json(responseData)
+  })
+
+  app.all('/mock/listview-empty', (req, res) => {
+    const responseData = successWrap({
+      items: [],
+      total_count: 0,
+    })
+    return res.json(responseData)
+  })
+
+  app.all('/mock/listview-error', (req, res) => {
+    return res.json(errorWrap('演示接口返回错误信息'))
+  })
+
+  app.all('/mock/500', (req, res) => {
+    return res.status(500).json(errorWrap('演示接口返回 500 错误信息'))
   })
 }

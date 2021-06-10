@@ -1,4 +1,4 @@
 /node_modules/**
 /dist/**
-/test/unit/coverage/**
+/tests/unit/coverage/**
 package.json

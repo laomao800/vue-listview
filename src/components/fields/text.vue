@@ -16,8 +16,8 @@
 
 <script>
 import fieldMixin from './field-mixin'
-import VNode from '@/components/v-node.js'
-import { isVNode, hasOwn } from '@/utils/utils.js'
+import VNode from '@/components/v-node'
+import { isVNode, hasOwn } from '@/utils'
 
 export default {
   name: 'FieldText',

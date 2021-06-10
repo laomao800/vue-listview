@@ -1,17 +1,18 @@
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isFunction from 'lodash/isFunction'
-import Vue from 'vue'
-import get from './getValue'
 import { getFieldComponentName } from '@/components/fields'
+import { getValue } from '@/utils'
 
 /**
  * 判断 node 是否为 Vue 内部的 VNode 类型
  */
-export function isVNode(node) {
-  const vm = new Vue()
-  const emptyVNode = vm.$createElement()
-  return node instanceof emptyVNode.constructor
+export function isVNode(node: any) {
+  return (
+    node !== null &&
+    typeof node === 'object' &&
+    hasOwn(node, 'componentOptions')
+  )
 }
 
 /**
@@ -30,14 +31,14 @@ export function isVNode(node) {
  * @param {Object} data 目标数据
  * @param {Object} dataMap 映射表
  */
-export function dataMapping(data = {}, dataMap = {}) {
-  const result = {}
+export function dataMapping(data = {}, dataMap: Record<string, any> = {}) {
+  const result: Record<string, any> = {}
   const keysMap = Object.keys(dataMap)
 
   keysMap.forEach((key) => {
     try {
       const dataKey = key.toString()
-      const dataValue = get(data, dataMap[key])
+      const dataValue = getValue(data, dataMap[key])
       result[dataKey] = dataValue
     } catch (e) {}
   })
@@ -48,7 +49,7 @@ export function dataMapping(data = {}, dataMap = {}) {
 /**
  * 判断值是否为搜索栏内合法的值，通过验证的值才可继续作为参数随请求提交
  */
-export function isValidFieldValue(val) {
+export function isValidFieldValue(val: any) {
   return !(
     val === null ||
     val === undefined ||
@@ -60,7 +61,7 @@ export function isValidFieldValue(val) {
 /**
  * 判断一个值是否有效的搜索栏 field 配置项
  */
-export function isValidFieldConfig(field) {
+export function isValidFieldConfig(field: any) {
   return (
     isFunction(field) ||
     isFunction(field.render) ||
@@ -69,17 +70,17 @@ export function isValidFieldConfig(field) {
   )
 }
 
-export function nodeParents(node, selector) {
+export function nodeParents(node: Element, selector: string) {
   const allMatchs = Array.from(document.querySelectorAll(selector))
   if (allMatchs.length === 0) {
     return null
   }
-  function find(curNode) {
-    const parentNode = curNode.parentNode
-    if (allMatchs.includes(parentNode)) {
-      return parentNode
-    } else {
-      if (parentNode.parentNode) {
+  function find(curNode: Element): Element | null {
+    const parentNode = curNode.parentNode as Element | null
+    if (parentNode) {
+      if (allMatchs.includes(parentNode)) {
+        return parentNode
+      } else if (parentNode.parentNode) {
         return find(parentNode)
       }
     }
@@ -88,7 +89,7 @@ export function nodeParents(node, selector) {
   return find(node)
 }
 
-export function isPromise(obj) {
+export function isPromise(obj: any) {
   return (
     !!obj &&
     (typeof obj === 'object' || typeof obj === 'function') &&
@@ -96,10 +97,10 @@ export function isPromise(obj) {
   )
 }
 
-export function hasOwn(obj, key) {
+export function hasOwn(obj: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
 
-export function isDef(val) {
+export function isDef(val: any): val is undefined {
   return val !== undefined
 }

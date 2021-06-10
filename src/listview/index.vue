@@ -89,7 +89,8 @@
                     <span
                       :class="{
                         'content-message': true,
-                        [`content-message--${internalContentMessage.type}`]: internalContentMessage.type,
+                        [`content-message--${internalContentMessage.type}`]:
+                          internalContentMessage.type,
                       }"
                     >
                       <span
@@ -213,7 +214,7 @@ import {
   nodeParents,
   hasOwn,
   isDef,
-} from '@/utils/utils'
+} from '@/utils'
 import './style.less'
 
 /**
@@ -486,7 +487,7 @@ export default {
 
     overrideProps() {
       // 非 .use 引入的 Listview 未注册 $LISTVIEW
-      const globalConfig = this.$LISTVIEW || {}
+      const globalConfig = this.presetProps || {}
       const overrides = {}
       Object.keys(DEFAULT_PROPS).forEach((prop) => {
         overrides[prop] = isDef(this.$props[prop])
@@ -777,16 +778,14 @@ export default {
         if (validateFunc(response)) {
           // 清空错误信息
           this.setContentMessage(null)
-          const transformResponseFn = this.overrideProps[
-            'transformResponseData'
-          ]
+          const transformResponseFn =
+            this.overrideProps['transformResponseData']
           contentResponse = transformResponseFn
             ? await transformResponseFn(response)
             : response
         } else {
-          const resolveErrorMessageFn = this.overrideProps[
-            'resolveResponseErrorMessage'
-          ]
+          const resolveErrorMessageFn =
+            this.overrideProps['resolveResponseErrorMessage']
           this.setContentMessage(resolveErrorMessageFn(response), 'error')
         }
       }

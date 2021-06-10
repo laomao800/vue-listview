@@ -1,9 +1,9 @@
 <script>
 import isFunction from 'lodash/isFunction'
 import hasValues from 'has-values'
-import VNode from '@/components/v-node.js'
+import VNode from '@/components/v-node'
 import { allComponents, getFieldComponentName } from '@/components/fields'
-import { isVNode } from '@/utils/utils.js'
+import { isVNode } from '@/utils'
 
 export default {
   name: 'FilterbarForm',

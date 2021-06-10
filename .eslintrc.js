@@ -3,30 +3,32 @@ module.exports = {
   env: {
     node: true,
   },
+  extends: [
+    'plugin:vue/essential',
+    'eslint:recommended',
+    '@vue/typescript/recommended',
+    '@vue/prettier',
+    '@vue/prettier/@typescript-eslint',
+  ],
   parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module',
+    ecmaVersion: 2020,
   },
-  extends: ['plugin:vue/essential', '@vue/prettier'],
   rules: {
-    // Only allow debugger in development
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-empty': ['error', { allowEmptyCatch: true }],
-    'no-debugger': process.env.PRE_COMMIT ? 'error' : 'off',
-    // Only allow `console.log` in development
-    'no-console': process.env.PRE_COMMIT
-      ? ['error', { allow: ['warn', 'error'] }]
-      : 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   overrides: [
     {
-      files: ['tests/unit/specs/**/*.unit.js'],
-      env: { jest: true },
-      globals: {
-        mount: false,
-        shallowMount: false,
-        shallowMountView: false,
-        createComponentMocks: false,
-        createModuleStore: false,
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+      ],
+      env: {
+        jest: true,
       },
     },
   ],

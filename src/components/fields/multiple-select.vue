@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import FieldSelect from './field-select'
+import FieldSelect from './select'
 
 export default {
   name: 'FieldMultipleSelect',

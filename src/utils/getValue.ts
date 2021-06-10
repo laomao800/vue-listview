@@ -2,7 +2,19 @@
  * get-value
  * fork from <https://github.com/jonschlinkert/get-value>
  */
-export default function getValue(target, path, options) {
+
+interface IOptions {
+  default: any
+  separator: string
+  joinChar: string
+  join: (seg: string[]) => string
+  split: (path: string) => string[]
+  isValid: (key: string, target: any) => boolean
+}
+
+type Options = Partial<IOptions>
+
+export function getValue(target: any, path: string, options?: Options) {
   if (!isObject(options)) {
     options = { default: options }
   }
@@ -29,8 +41,8 @@ export default function getValue(target, path, options) {
     return isValid(path, target, options) ? target[path] : options.default
   }
 
-  let segs = isArray ? path : split(path, splitChar, options)
-  let len = segs.length
+  const segs = isArray ? path : split(path, splitChar, options)
+  const len = segs.length
   let idx = 0
 
   do {
@@ -80,31 +92,31 @@ export default function getValue(target, path, options) {
   return options.default
 }
 
-function join(segs, joinChar, options) {
+function join(segs: [string, string], joinChar: string, options: Options) {
   if (typeof options.join === 'function') {
     return options.join(segs)
   }
   return segs[0] + joinChar + segs[1]
 }
 
-function split(path, splitChar, options) {
+function split(path: string, splitChar: string, options: Options) {
   if (typeof options.split === 'function') {
     return options.split(path)
   }
   return path.split(splitChar)
 }
 
-function isValid(key, target, options) {
+function isValid(key: string, target: any, options: Options) {
   if (typeof options.isValid === 'function') {
     return options.isValid(key, target)
   }
   return true
 }
 
-function isValidObject(val) {
+function isValidObject(val: any) {
   return isObject(val) || Array.isArray(val) || typeof val === 'function'
 }
 
-function isObject(val) {
+function isObject(val: any): val is Record<string, unknown> {
   return val != null && typeof val === 'object' && Array.isArray(val) === false
 }
