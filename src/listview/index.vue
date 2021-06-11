@@ -6,8 +6,6 @@
     }"
     class="listview"
   >
-    <listview-header :title="headerTitle" :nav="headerNav" />
-
     <div ref="main" class="listview__main">
       <filterbar
         ref="filterbar"
@@ -205,7 +203,6 @@ import pickBy from 'lodash/pickBy'
 import axios from 'axios'
 import parseSize from '@laomao800/parse-size-with-unit'
 import VNode from '@/components/v-node'
-import ListviewHeader from '@/components/listview-header.vue'
 import Filterbar from '@/components/filterbar.vue'
 import { warn, error } from '@/utils/debug'
 import {
@@ -321,7 +318,6 @@ export default {
   components: {
     VNode,
     Filterbar,
-    ListviewHeader,
   },
 
   inheritAttrs: false,
