@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import _Listview from '@/listview'
+import _Listview from '@/Listview'
 import { pick } from 'lodash'
 
 const allowPresetProps = [
