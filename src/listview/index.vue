@@ -202,8 +202,8 @@ import omitBy from 'lodash/omitBy'
 import pickBy from 'lodash/pickBy'
 import axios from 'axios'
 import parseSize from '@laomao800/parse-size-with-unit'
-import VNode from '@/components/v-node'
-import Filterbar from '@/components/filterbar.vue'
+import VNode from '@/components/VNode'
+import Filterbar from '@/components/Filterbar.vue'
 import { warn, error } from '@/utils/debug'
 import {
   dataMapping,
@@ -572,8 +572,7 @@ export default {
     },
 
     initFilterEvent() {
-      const validFilterFields = this.$refs.filterbar.validFilterFields
-      if (validFilterFields.length > 0) {
+      if (this.filterFields.length > 0) {
         window.addEventListener('resize', this.updateFilterbarLayout)
       } else {
         window.removeEventListener('resize', this.updateFilterbarLayout)

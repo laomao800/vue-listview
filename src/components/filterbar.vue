@@ -141,11 +141,11 @@
           </div>
 
           <!-- 搜索栏控件区域 -->
-          <filterbar-form
+          <FieldsWrapper
             v-if="isShowFilterFields"
             ref="filterForm"
-            :fields="validFilterFields"
             :model="filterModel"
+            :fields="filterFields"
             class="filterbar__form"
           />
         </div>
@@ -162,16 +162,16 @@
 
 <script>
 import isFunction from 'lodash/isFunction'
-import VNode from '@/components/v-node'
-import { isVNode, isValidFieldConfig, hasOwn } from '@/utils'
-import FilterbarForm from './filterbar-form.vue'
+import { isVNode, hasOwn } from '@/utils'
+import VNode from './VNode'
+import FieldsWrapper from './FieldsWrapper.vue'
 
 export default {
-  name: 'FilterBar',
+  name: 'Filterbar',
 
   components: {
     VNode,
-    FilterbarForm,
+    FieldsWrapper,
   },
 
   props: {
@@ -193,19 +193,14 @@ export default {
   },
 
   computed: {
-    validFilterFields() {
-      return this.filterFields.filter(
-        (field) => isValidFieldConfig(field) || Array.isArray(field)
-      )
-    },
     isNoneFields() {
-      return this.validFilterFields.length === 0
+      return this.filterFields.length === 0
     },
     isShowFilterButtons() {
       return this.filterButtons.length > 0
     },
     isShowFilterFields() {
-      return this.validFilterFields.length > 0
+      return this.filterFields.length > 0
     },
     isShowSearchButton() {
       return !!this.searchButton
@@ -224,7 +219,7 @@ export default {
     isHasMore() {
       return (
         this.topRightFilterIndex >= 0 &&
-        this.topRightFilterIndex < this.validFilterFields.length - 1
+        this.topRightFilterIndex < this.filterFields.length - 1
       )
     },
   },

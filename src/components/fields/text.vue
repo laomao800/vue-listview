@@ -16,7 +16,7 @@
 
 <script>
 import fieldMixin from './field-mixin'
-import VNode from '@/components/v-node'
+import VNode from '../VNode'
 import { isVNode, hasOwn } from '@/utils'
 
 export default {
