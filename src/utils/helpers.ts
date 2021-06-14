@@ -1,7 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isFunction from 'lodash/isFunction'
-import { getFieldComponentName } from '@/components/fields'
 import { getValue } from '@/utils'
 
 /**
@@ -49,7 +48,7 @@ export function dataMapping(data = {}, dataMap: Record<string, any> = {}) {
 /**
  * 判断值是否为搜索栏内合法的值，通过验证的值才可继续作为参数随请求提交
  */
-export function isValidFieldValue(val: any) {
+export function isValidFieldDef(val: any) {
   return !(
     val === null ||
     val === undefined ||
@@ -63,10 +62,11 @@ export function isValidFieldValue(val: any) {
  */
 export function isValidFieldConfig(field: any) {
   return (
-    isFunction(field) ||
-    isFunction(field.render) ||
-    isVNode(field) ||
-    getFieldComponentName(field.type)
+    field &&
+    (hasOwn(field, 'type') ||
+      isFunction(field.render) ||
+      isFunction(field) ||
+      isVNode(field))
   )
 }
 

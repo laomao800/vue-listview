@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function noop(_msg: string, ..._args: any[]) {
   // noop
 }

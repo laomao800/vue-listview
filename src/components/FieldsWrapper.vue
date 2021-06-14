@@ -35,7 +35,11 @@ export default {
       ) : null
     },
     renderField(field = {}) {
-      return isValidFieldDef(field) ? <FilterbarField field={field} /> : null
+      return isValidFieldDef(field) ? (
+        <FilterbarField
+          {...{ ref: 'field', refInFor: true, props: { field } }}
+        />
+      ) : null
     },
   },
 

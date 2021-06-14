@@ -143,7 +143,7 @@
           <!-- 搜索栏控件区域 -->
           <FieldsWrapper
             v-if="isShowFilterFields"
-            ref="filterForm"
+            ref="FieldsWrapper"
             :model="filterModel"
             :fields="filterFields"
             class="filterbar__form"
@@ -246,8 +246,8 @@ export default {
     isVNode,
     isFunction,
 
-    getAllFieldsDom() {
-      const filterForm = this.$refs['filterForm']
+    getAllFieldsVm() {
+      const filterForm = this.$refs['FieldsWrapper']
       return filterForm ? filterForm.$refs.field || [] : []
     },
 
@@ -292,13 +292,13 @@ export default {
     // 此处不添加 debounce 避免展开时由于父级出现滚动条更新不及时导致界面跳动
     async updateLayout() {
       await this.$nextTick()
-      const allFields = this.getAllFieldsDom()
+      const allFields = this.getAllFieldsVm()
       if (allFields.length > 0) {
-        let lastFilterTop = allFields[0].getBoundingClientRect().top
+        let lastFilterTop = allFields[0].$el.getBoundingClientRect().top
         let lastFilterIndex = -1
         for (let i = 0; i < allFields.length; i++) {
           // debugger
-          const formItemTop = allFields[i].getBoundingClientRect().top
+          const formItemTop = allFields[i].$el.getBoundingClientRect().top
           if (lastFilterTop !== formItemTop) {
             break
           }
@@ -306,16 +306,15 @@ export default {
           lastFilterIndex = i
         }
         this.topRightFilterIndex = lastFilterIndex
-        this.updateSubmitOffset()
+        this.updateSubmitOffset(allFields)
       }
     },
 
-    updateSubmitOffset() {
-      const allFields = this.getAllFieldsDom()
+    updateSubmitOffset(allFields) {
       let offset = 0
       if (this.topRightFilterIndex >= 0) {
         const originOffset = this.$refs.submit.getBoundingClientRect().left
-        const lastItem = allFields[this.topRightFilterIndex]
+        const lastItem = allFields[this.topRightFilterIndex].$el
         const { left, width } = lastItem.getBoundingClientRect()
         offset = left + width - originOffset + 10
         offset = Math.min(0, offset)

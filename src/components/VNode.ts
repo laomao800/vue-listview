@@ -1,4 +1,7 @@
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
+  // @ts-ignore
   abstract: true,
   name: 'VNode',
   props: ['node'],
@@ -6,4 +9,4 @@ export default {
     /* istanbul ignore next */
     return this.node
   },
-}
+})
