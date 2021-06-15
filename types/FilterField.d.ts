@@ -1,6 +1,24 @@
 import { VNode } from 'vue'
 
-type FieldType =
+interface SelectOption {
+  label: string
+  value: any
+  children?: SelectOption[]
+}
+
+interface FilterFieldBase {
+  /** 字段参数名 */
+  model: string
+
+  /** 字段文本说明 */
+  label: string
+
+  key?: string
+
+  width: string | number
+}
+
+export type FieldType =
   | 'label'
   | 'text'
   | 'number'
@@ -15,21 +33,11 @@ type FieldType =
   | 'dateTimeRange'
   | 'cascader'
 
-interface SelectOption {
-  label: string
-  value: any
-  children?: SelectOption[]
-}
+export interface FilterFieldObjectDefinition extends FilterFieldBase {
+  type: FieldType
 
-export interface FilterFieldBase {
-  /** 字段提交参数名 */
-  model: string
-
-  /** 字段文本说明 */
-  label: string
-
-  /** 是否显示为禁用状态 */
-  disabled?: boolean
+  // /** 显示为禁用状态 */
+  // disabled?: boolean
 
   /** 类型为 select 或 multipleSelect 时的选项配置 */
   options?:
@@ -47,12 +55,10 @@ export interface FilterFieldBase {
   componentSlots?: { [k: string]: any }
 }
 
-export interface FilterFieldObjectDefinition extends FilterFieldBase {
-  type: FieldType
-}
-
 export interface FilterFieldRenderDefinition extends FilterFieldBase {
   render: () => VNode
 }
 
-type FilterField = FilterFieldObjectDefinition | FilterFieldRenderDefinition
+export type FilterField =
+  | FilterFieldObjectDefinition
+  | FilterFieldRenderDefinition

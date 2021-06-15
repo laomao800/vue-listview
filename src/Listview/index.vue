@@ -207,7 +207,7 @@ import Filterbar from '@/components/Filterbar.vue'
 import { warn, error } from '@/utils/debug'
 import {
   dataMapping,
-  isValidFieldDef,
+  isValidFieldValue,
   nodeParents,
   hasOwn,
   isDef,
@@ -683,7 +683,7 @@ export default {
 
       // 删除搜索条件中的无效数据
       payloadData = omitBy(payloadData, (val) => {
-        return !isValidFieldDef(val)
+        return !isValidFieldValue(val)
       })
 
       // 附加分页参数

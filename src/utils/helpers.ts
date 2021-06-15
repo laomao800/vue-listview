@@ -1,12 +1,14 @@
+import { VNode } from 'vue'
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isFunction from 'lodash/isFunction'
 import { getValue } from '@/utils'
+import { FilterField } from '~/types'
 
 /**
  * 判断 node 是否为 Vue 内部的 VNode 类型
  */
-export function isVNode(node: any) {
+export function isVNode(node: any): node is VNode {
   return (
     node !== null &&
     typeof node === 'object' &&
@@ -48,7 +50,7 @@ export function dataMapping(data = {}, dataMap: Record<string, any> = {}) {
 /**
  * 判断值是否为搜索栏内合法的值，通过验证的值才可继续作为参数随请求提交
  */
-export function isValidFieldDef(val: any) {
+export function isValidFieldValue(val: any): val is FilterField {
   return !(
     val === null ||
     val === undefined ||
@@ -101,6 +103,6 @@ export function hasOwn(obj: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
 
-export function isDef(val: any): val is undefined {
+export function isDef(val: any) {
   return val !== undefined
 }

@@ -1,8 +1,5 @@
 import Vue, { VueConstructor, VNode } from 'vue'
 import { AxiosRequestConfig } from 'axios'
-import { FilterButton } from './FilterButton'
-import { FilterField } from './FilterField'
-import { TableColumn } from './TableColumn'
 
 type MessageType = 'success' | 'warning' | 'info' | 'error'
 
@@ -124,12 +121,7 @@ declare class ListviewContainer extends ListviewContainerProps {
 }
 
 export default Listview
-export {
-  Listview,
-  ListviewContainer,
-  ListviewProps,
-  ListviewContainerProps,
-  FilterButton,
-  FilterField,
-  TableColumn,
-}
+export { Listview, ListviewContainer, ListviewProps, ListviewContainerProps }
+export * from './FilterButton'
+export * from './FilterField'
+export * from './TableColumn'
