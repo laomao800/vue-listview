@@ -10,10 +10,6 @@ export default Vue.extend({
   name: 'FieldsWrapper',
 
   props: {
-    model: {
-      type: Object as PropType<any>,
-      default: /* istanbul ignore next */ () => ({}),
-    },
     fields: {
       type: Array as PropType<FilterField[]>,
       default: /* istanbul ignore next */ () => [],
@@ -42,7 +38,7 @@ export default Vue.extend({
               ref: 'field',
               key,
               refInFor: true,
-              props: { field: field as any, model: this.model },
+              props: { field: field as any },
             }}
           />
         )

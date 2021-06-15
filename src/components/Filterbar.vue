@@ -144,7 +144,6 @@
           <FieldsWrapper
             v-if="isShowFilterFields"
             ref="FieldsWrapper"
-            :model="filterModel"
             :fields="filterFields"
             class="filterbar__form"
           />
@@ -168,6 +167,12 @@ import FieldsWrapper from './FieldsWrapper.vue'
 
 export default {
   name: 'Filterbar',
+
+  provide() {
+    return {
+      filterModel: this.filterModel,
+    }
+  },
 
   components: {
     VNode,

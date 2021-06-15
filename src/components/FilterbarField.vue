@@ -64,28 +64,25 @@ function isRenderDefField(input: any): input is FilterFieldRenderDefinition {
 export default Vue.extend({
   name: 'FilterbarField',
 
+  inject: {
+    filterModel: {
+      default: () => ({}),
+    },
+  },
+
   components: { ...allFieldComponents },
 
   props: {
-    model: {
-      type: Object as PropType<any>,
-      default: /* istanbul ignore next */ () => ({}),
-    },
     field: {
       type: Object as PropType<FilterField>,
     },
   },
 
-  methods: { getValue },
-
   computed: {
     showLabel(): boolean {
-      const value = getValue(this.model, this.field.model)
+      const value = getValue((this as any).filterModel, this.field.model)
       // hasValues(null) -> true
       return value !== null && hasValues(value)
-    },
-    vv(): any {
-      return getValue(this.model, this.field.model)
     },
   },
 
@@ -116,7 +113,6 @@ export default Vue.extend({
             <FieldComponent
               {...{
                 props: {
-                  formModel: this.model,
                   field: field,
                   style: field.width ? { width: `${field.width}px` } : null,
                 },

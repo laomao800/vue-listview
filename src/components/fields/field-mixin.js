@@ -5,8 +5,13 @@ import isPlainObject from 'lodash/isPlainObject'
 import { getValue, error } from '@/utils'
 
 export default Vue.extend({
+  inject: {
+    filterModel: {
+      default: () => ({}),
+    },
+  },
+
   props: {
-    formModel: { type: Object, default: () => ({}) },
     field: { type: Object, default: () => ({}) },
   },
 
@@ -16,7 +21,7 @@ export default Vue.extend({
         const modelProperty = this.field.model
         let value = null
         if (modelProperty) {
-          value = getValue(this.formModel, modelProperty)
+          value = getValue(this.filterModel, modelProperty)
         }
         if (camelCase(this.field.type) === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
@@ -27,7 +32,7 @@ export default Vue.extend({
       set(newVal) {
         const modelProperty = this.field.model
         if (modelProperty) {
-          this.$set(this.formModel, modelProperty, newVal)
+          this.$set(this.filterModel, modelProperty, newVal)
         } else {
           if (process.env.NODE_ENV !== 'production') {
             error(
