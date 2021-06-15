@@ -34,7 +34,7 @@ export function getValue(target: any, path: string, options?: Options) {
     options.joinChar || (typeof splitChar === 'string' ? splitChar : '.')
 
   if (!isString && !isArray) {
-    return target
+    return options.default
   }
 
   if (isString && path in target) {
