@@ -1,29 +1,28 @@
-<script>
-import { isValidFieldDef } from '@/utils'
-import VNode from './VNode'
+<script lang="tsx">
+import Vue, { VNode, PropType } from 'vue'
+import { isValidFieldConfig } from '@/utils'
 import FilterbarField from './FilterbarField.vue'
+import { FilterField } from '~/types'
 
-export default {
+let uid = 0
+
+export default Vue.extend({
   name: 'FieldsWrapper',
-
-  components: {
-    VNode,
-  },
 
   props: {
     model: {
-      type: Object,
+      type: Object as PropType<any>,
       default: /* istanbul ignore next */ () => ({}),
     },
     fields: {
-      type: Array,
+      type: Array as PropType<FilterField[]>,
       default: /* istanbul ignore next */ () => [],
     },
   },
 
   methods: {
-    renderFieldsGroup(group = []) {
-      const subFieldsVm = []
+    renderFieldsGroup(group: FilterField[] = []) {
+      const subFieldsVm: VNode[] = []
       group.forEach((subField) => {
         const vm = this.renderField(subField)
         vm && subFieldsVm.push(vm)
@@ -34,12 +33,21 @@ export default {
         </div>
       ) : null
     },
-    renderField(field = {}) {
-      return isValidFieldDef(field) ? (
-        <FilterbarField
-          {...{ ref: 'field', refInFor: true, props: { field } }}
-        />
-      ) : null
+    renderField(field = {} as FilterField) {
+      if (isValidFieldConfig(field)) {
+        const key = field.key || field.model || `unnamed-field-${uid++}`
+        return (
+          <FilterbarField
+            {...{
+              ref: 'field',
+              key,
+              refInFor: true,
+              props: { field: field as any, model: this.model },
+            }}
+          />
+        )
+      }
+      return null
     },
   },
 
@@ -55,5 +63,5 @@ export default {
       </div>
     )
   },
-}
+})
 </script>

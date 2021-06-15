@@ -1,9 +1,11 @@
-<script>
+<script lang="tsx">
+import Vue, { Component, PropType } from 'vue'
 import hasValues from 'has-values'
 import isFunction from 'lodash/isFunction'
-import camelCase from 'lodash/camelCase'
+import isPlainObject from 'lodash/isPlainObject'
 
-import { error, getValue, isVNode } from '@/utils'
+import { getValue, isVNode } from '@/utils'
+import { FilterField, FieldType, FilterFieldRenderDefinition } from '~/types'
 
 import fieldCascader from './fields/Cascader.vue'
 import fieldDateTime from './fields/DateTime.vue'
@@ -19,7 +21,7 @@ import fieldLabel from './fields/Label.vue'
 import fieldNumber from './fields/Number.vue'
 import fieldTimePicker from './fields/TimePicker.vue'
 
-const allComponents = {
+const allFieldComponents = {
   fieldCascader,
   fieldDateTime,
   fieldSelect,
@@ -35,84 +37,103 @@ const allComponents = {
   fieldTimePicker,
 }
 
-function getFieldComponentName(type) {
-  if (type) {
-    const fieldKey = camelCase(`field-${type}`)
-    return allComponents[fieldKey] || null
-  }
-  /* istanbul ignore next */
-  return null
+const fieldComponentsMap: Record<FieldType, Component> = {
+  cascader: fieldCascader,
+  dateTime: fieldDateTime,
+  select: fieldSelect,
+  timePickerRange: fieldTimePickerRange,
+  date: fieldDate,
+  dateTimeRange: fieldDateTimeRange,
+  multipleSelect: fieldMultipleSelect,
+  text: fieldText,
+  timeSelect: fieldTimeSelect,
+  dateRange: fieldDateRange,
+  label: fieldLabel,
+  number: fieldNumber,
+  timePicker: fieldTimePicker,
 }
 
-export default {
-  components: { ...allComponents },
+function getFieldComponent(key: FieldType) {
+  return fieldComponentsMap[key] || null
+}
+
+function isRenderDefField(input: any): input is FilterFieldRenderDefinition {
+  return isPlainObject(input) && isFunction(input.render)
+}
+
+export default Vue.extend({
+  name: 'FilterbarField',
+
+  components: { ...allFieldComponents },
 
   props: {
-    model: { type: Object, default: () => ({}) },
-    field: { type: Object, default: () => ({}) },
+    model: {
+      type: Object as PropType<any>,
+      default: /* istanbul ignore next */ () => ({}),
+    },
+    field: {
+      type: Object as PropType<FilterField>,
+    },
   },
 
+  methods: { getValue },
+
   computed: {
-    showLabel() {
+    showLabel(): boolean {
       const value = getValue(this.model, this.field.model)
       // hasValues(null) -> true
       return value !== null && hasValues(value)
     },
-  },
-
-  methods: {
-    renderField(field) {
-      const label = field.label ? (
-        <transition name="label-trans">
-          {this.showLabel && (
-            <div class="filterbar__field-label">{field.label}</div>
-          )}
-        </transition>
-      ) : null
-
-      const key = field.key || field.model || null
-      let content = null
-
-      if (isFunction(field)) {
-        content = <v-node node={field()} key={key} />
-      } else if (isFunction(field.render)) {
-        content = <v-node node={field.render(field)} key={key} />
-      } else if (isVNode(field)) {
-        content = <v-node node={field} key={key} />
-      } else {
-        const FieldComponent = getFieldComponentName(field.type)
-        if (FieldComponent) {
-          content = (
-            <el-form-item key={key}>
-              <FieldComponent
-                form-model={this.model}
-                field={field}
-                style={field.width ? { width: `${field.width}px` } : null}
-              />
-            </el-form-item>
-          )
-        }
-      }
-
-      return (
-        <div ref="field" refInFor={true} class="filterbar__field">
-          {label}
-          {content}
-        </div>
-      )
+    vv(): any {
+      return getValue(this.model, this.field.model)
     },
   },
 
   render() {
-    try {
-      return this.renderField(this.field)
-    } catch (err) {
-      error(err, this.field)
-    }
+    const field = this.field
+    const label = field.label ? (
+      <transition name="label-trans">
+        {this.showLabel && (
+          <div class="filterbar__field-label">{field.label}</div>
+        )}
+      </transition>
+    ) : null
+    let content = null
 
-    return null
+    if (isFunction(field)) {
+      const fieldVm = field()
+      content = <v-node node={fieldVm} />
+    } else if (isRenderDefField(field)) {
+      const fieldVm = field.render()
+      content = <v-node node={fieldVm} />
+    } else if (isVNode(field)) {
+      content = <v-node node={field} />
+    } else {
+      const FieldComponent = getFieldComponent(field.type) as any
+      if (FieldComponent) {
+        content = (
+          <el-form-item>
+            <FieldComponent
+              {...{
+                props: {
+                  formModel: this.model,
+                  field: field,
+                  style: field.width ? { width: `${field.width}px` } : null,
+                },
+              }}
+            />
+          </el-form-item>
+        )
+      }
+    }
+    return (
+      <div class="filterbar__field">
+        {label}
+        {content}
+      </div>
+    )
   },
-}
+})
 </script>
 
 <style>
