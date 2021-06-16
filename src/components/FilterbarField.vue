@@ -106,10 +106,8 @@ export default Vue.extend({
           <el-form-item>
             <FieldComponent
               {...{
-                props: {
-                  field: field,
-                  style: field.width ? { width: `${field.width}px` } : null,
-                },
+                attrs: { field },
+                style: field.width ? { width: `${field.width}px` } : null,
               }}
             />
           </el-form-item>
