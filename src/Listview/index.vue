@@ -4,9 +4,9 @@
       height: fixedHeight,
       minHeight: fixedHeight && 'inherit',
     }"
-    class="listview"
+    class="lv__wrapper"
   >
-    <div ref="main" class="listview__main">
+    <div ref="main" class="lv__main">
       <filterbar
         ref="filterbar"
         :filter-buttons="filterButtons"
@@ -59,17 +59,15 @@
       <div v-loading="contentLoading">
         <div
           ref="content"
-          :style="{
-            height: contentHeight ? `${contentHeight}px` : null,
-          }"
-          class="listview__content"
+          :style="{ height: parseSize(contentHeight) }"
+          class="lv__content"
         >
           <slot
             :filter-model="filterModel"
             :content-height="contentHeight"
             :content-loading="contentLoading"
             :content-data="contentData"
-            :content-message="internalContentMessage"
+            :lv__message="internalContentMessage"
           >
             <el-table
               ref="contentTable"
@@ -86,18 +84,18 @@
                   <template v-if="internalContentMessage">
                     <span
                       :class="{
-                        'content-message': true,
-                        [`content-message--${internalContentMessage.type}`]:
+                        lv__message: true,
+                        [`lv__message--${internalContentMessage.type}`]:
                           internalContentMessage.type,
                       }"
                     >
                       <span
                         v-if="internalContentMessage.icon"
-                        class="content-message--icon"
+                        class="lv__message-icon"
                       >
                         <i :class="internalContentMessage.icon" />
                       </span>
-                      <span class="content-message--message">
+                      <span class="lv__message-text">
                         {{ internalContentMessage.message }}
                       </span>
                     </span>
@@ -148,8 +146,8 @@
           </slot>
         </div>
 
-        <div ref="footer" class="listview__footer">
-          <div class="listview__footer-left">
+        <div ref="footer" class="lv__footer">
+          <div class="lv__footer-left">
             <slot name="footer-left">
               <el-pagination
                 v-if="
@@ -158,16 +156,16 @@
                 "
                 v-bind="mergedPageProps"
                 ref="pagination"
-                class="listview__pager"
+                class="lv__pager"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
               />
             </slot>
           </div>
-          <div class="listview__footer-center">
+          <div class="lv__footer-center">
             <slot name="footer-center" />
           </div>
-          <div class="listview__footer-right">
+          <div class="lv__footer-right">
             <slot name="footer-right">
               <el-pagination
                 v-if="
@@ -176,7 +174,7 @@
                 "
                 v-bind="mergedPageProps"
                 ref="pagination"
-                class="listview__pager"
+                class="lv__pager"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
               />
@@ -553,6 +551,8 @@ export default {
   },
 
   methods: {
+    parseSize,
+
     async initLayout() {
       // 需要 nextTick 等待 filterbar 渲染后再开始更新布局
       await this.$nextTick()

@@ -89,10 +89,8 @@ export default Vue.extend({
   render() {
     const field = this.field
     const label = field.label ? (
-      <transition name="label-trans">
-        {this.showLabel && (
-          <div class="filterbar__field-label">{field.label}</div>
-        )}
+      <transition name="lv__field-label-trans">
+        {this.showLabel && <div class="lv__field-label">{field.label}</div>}
       </transition>
     ) : null
     let content = null
@@ -123,7 +121,7 @@ export default Vue.extend({
       }
     }
     return (
-      <div class="filterbar__field">
+      <div class="lv__field">
         {label}
         {content}
       </div>
@@ -132,32 +130,51 @@ export default Vue.extend({
 })
 </script>
 
-<style>
-.filterbar__field-label {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  z-index: 1;
-  padding: 0 0.2em;
-  font-size: 12px;
-  line-height: 12px;
-  color: #999;
-  white-space: nowrap;
-  cursor: default;
-  background-color: #fff;
-  opacity: 1;
-  transform: translateY(-50%) scale(0.9);
-  transform-origin: center bottom;
-}
-.label-trans-enter-active,
-.label-trans-leave-active {
-  top: 0;
-  opacity: 1;
-  transition: 0.2s;
-}
-.label-trans-enter,
-.label-trans-leave-active {
-  top: 50%;
-  opacity: 0;
+<style lang="less">
+@filter-gap-size: 10px;
+
+.lv__field {
+  position: relative;
+  display: inline-block;
+  margin: 0 @filter-gap-size @filter-gap-size 0;
+  vertical-align: top;
+
+  &-label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    z-index: 1;
+    padding: 0 0.2em;
+    font-size: 12px;
+    line-height: 12px;
+    color: #999;
+    white-space: nowrap;
+    cursor: default;
+    background-color: #fff;
+    opacity: 1;
+    transform: translateY(-50%) scale(0.9);
+    transform-origin: center bottom;
+
+    &-trans-enter-active,
+    &-trans-leave-active {
+      top: 0;
+      opacity: 1;
+      transition: 0.2s;
+    }
+    &-trans-enter,
+    &-trans-leave-active {
+      top: 50%;
+      opacity: 0;
+    }
+  }
+
+  .el-form-item__content {
+    > *,
+    > .el-input .el-input__inner,
+    > .el-select .el-input__inner,
+    > .el-cascader .el-input__inner {
+      vertical-align: top;
+    }
+  }
 }
 </style>

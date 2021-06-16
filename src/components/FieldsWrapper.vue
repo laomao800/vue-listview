@@ -24,9 +24,7 @@ export default Vue.extend({
         vm && subFieldsVm.push(vm)
       })
       return subFieldsVm.length > 0 ? (
-        <div class="filterbar__field filterbar__field--group">
-          {subFieldsVm}
-        </div>
+        <div class="lv__field-group">{subFieldsVm}</div>
       ) : null
     },
     renderField(field = {} as FilterField) {
@@ -49,7 +47,7 @@ export default Vue.extend({
 
   render() {
     return (
-      <div class="fields-wrapper">
+      <div class="lv__fields-wrapper">
         {this.fields.map((item) =>
           // 仅对第一层嵌套的 array 作组合
           Array.isArray(item)
@@ -61,3 +59,11 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="less">
+.lv__field-group {
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
+}
+</style>

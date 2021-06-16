@@ -1,14 +1,4 @@
-.listview {
-  overflow: auto;
-
-  .el-table .el-table__body tr.el-table__row.row--selected td {
-    background-color: #ffd;
-  }
-
-  .el-table th {
-    background: #f5f7fa;
-  }
-
+.lv {
   &__main {
     padding: 10px;
     padding-bottom: 5px;
@@ -29,14 +19,14 @@
     }
   }
 
-  .content-message {
+  &__message {
     display: flex;
     padding: 15px 20px;
     line-height: 30px;
     border-radius: 5px;
     box-shadow: 0 0 15px #ddd;
 
-    &--icon {
+    &-icon {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -44,30 +34,26 @@
       font-size: 24px;
     }
 
-    &--message {
+    &-text {
       font-size: 14px;
       text-align: left;
     }
 
-    &--success .content-message--icon {
+    &--success &-icon {
       color: #6ac243;
     }
 
-    &--warning .content-message--icon {
+    &--warning &-icon {
       color: #f90;
     }
 
-    &--info .content-message--icon {
+    &--info &-icon {
       color: #459ffc;
     }
 
-    &--error .content-message--icon {
+    &--error &-icon {
       color: #f56c6c;
     }
-  }
-
-  .el-table-column--single-selection .el-radio__label {
-    display: none;
   }
 
   &__footer {
@@ -92,6 +78,22 @@
     &-right {
       justify-content: flex-end;
     }
+  }
+}
+
+.lv__wrapper {
+  overflow: auto;
+
+  .el-table .el-table__body tr.el-table__row.row--selected td {
+    background-color: #ffd;
+  }
+
+  .el-table th {
+    background: #f5f7fa;
+  }
+
+  .el-table-column--single-selection .el-radio__label {
+    display: none;
   }
 
   // Element-ui overwrite
