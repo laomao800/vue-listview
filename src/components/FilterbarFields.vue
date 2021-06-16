@@ -7,7 +7,7 @@ import { FilterField } from '~/types'
 let uid = 0
 
 export default Vue.extend({
-  name: 'FieldsWrapper',
+  name: 'FilterbarFields',
 
   props: {
     fields: {

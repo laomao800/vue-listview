@@ -135,9 +135,9 @@
         </el-form-item>
 
         <!-- 搜索栏控件区域 -->
-        <FieldsWrapper
+        <FilterbarFields
           v-if="isShowFilterFields"
-          ref="FieldsWrapper"
+          ref="FilterbarFields"
           :fields="filterFields"
           class="lv__filterbar-fields"
         />
@@ -159,7 +159,7 @@ import Vue, { PropType } from 'vue'
 import isFunction from 'lodash/isFunction'
 import { isVNode, hasOwn } from '@/utils'
 import VNode from './VNode'
-import FieldsWrapper from './FieldsWrapper.vue'
+import FilterbarFields from './FilterbarFields.vue'
 import { FilterButton, FilterField } from '~/types'
 
 export default Vue.extend({
@@ -173,7 +173,7 @@ export default Vue.extend({
 
   components: {
     VNode,
-    FieldsWrapper,
+    FilterbarFields,
   },
 
   props: {
@@ -255,7 +255,7 @@ export default Vue.extend({
 
     getAllFieldsVm(): Vue[] {
       try {
-        return (this as any).$refs['FieldsWrapper'].$refs['field'] || []
+        return (this as any).$refs['FilterbarFields'].$refs['field'] || []
       } catch (error) {
         return []
       }
