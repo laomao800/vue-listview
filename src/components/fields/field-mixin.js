@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import merge from 'lodash/merge'
-import camelCase from 'lodash/camelCase'
 import isPlainObject from 'lodash/isPlainObject'
 import { getValue, error } from '@/utils'
 
@@ -23,7 +22,7 @@ export default Vue.extend({
         if (modelProperty) {
           value = getValue(this.filterModel, modelProperty)
         }
-        if (camelCase(this.field.type) === 'multipleSelect') {
+        if (this.field.type === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
           value = Array.isArray(value) ? value : []
         }

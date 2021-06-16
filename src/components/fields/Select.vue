@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import camelCase from 'lodash/camelCase'
 import isFunction from 'lodash/isFunction'
 import fieldMixin from './field-mixin'
 import { isPromise } from '@/utils'
@@ -32,7 +31,7 @@ export default {
       filterable: true,
       style: { width: '180px' },
     }
-    if (camelCase(this.field.type) === 'multipleSelect') {
+    if (this.field.type === 'multipleSelect') {
       defaultProps.multiple = true
       defaultProps.collapseTags = true
     }
