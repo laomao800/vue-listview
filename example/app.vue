@@ -1,6 +1,15 @@
 <template>
   <div id="app">
-    <listview1 v-bind="config1" />
+    <listview1 v-bind="config1">
+      <!-- <div slot="filterbar-top"><el-button>button</el-button></div>
+      <div slot="filterbar-bottom"><el-button>button</el-button></div>
+      <div slot="filterbar-left"><el-button>button</el-button></div>
+      <div slot="filterbar-right"><el-button>button</el-button></div>
+      <div slot="prepend-more"><el-button>button</el-button></div>
+      <div slot="append-more"><el-button>button</el-button></div>
+      <div slot="prepend-submit"><el-button>button</el-button></div>
+      <div slot="append-submit"><el-button>button</el-button></div> -->
+    </listview1>
     <listview2 v-if="false" />
   </div>
 </template>
@@ -98,7 +107,8 @@ export default {
           ],
         },
       ],
-      filterFields: [
+      filterFields: Array(5).fill({ type: 'text', label: 'text' }),
+      filterFields1: [
         {
           type: 'select',
           model: 'error',

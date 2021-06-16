@@ -19,13 +19,13 @@
         v-if="isShowFilterButtons || isShowFilterSubmit || isShowFilterFields"
         :class="[
           'lv__filterbar-inner',
-          { 'lv__filterbar-inner--fold': internalFilterbarFold },
+          { 'lv__filterbar-inner--fold': isFold },
         ]"
       >
         <!-- 提交、重置按钮区域 -->
         <div
           v-if="isShowFilterSubmit"
-          ref="submit"
+          ref="action"
           :class="[
             'lv__filterbar-action',
             {
@@ -34,38 +34,36 @@
             },
           ]"
         >
-          <div
+          <el-form-item
             :style="{ transform: `translateX(${searchBtnOffset}px)` }"
             class="lv__filterbar-action-submit"
           >
-            <el-form-item>
-              <slot name="prepend-filterbar-submit" />
-              <el-button
-                v-if="isShowSearchButton"
-                v-bind="searchButton"
-                @click="handleFilterSearch"
-              >
-                {{ searchButton.text }}
-              </el-button>
-              <el-button
-                v-if="isShowFilterButton"
-                v-bind="resetButton"
-                @click="handleFilterReset"
-              >
-                {{ resetButton.text }}
-              </el-button>
-              <slot name="append-filterbar-submit" />
-            </el-form-item>
-          </div>
+            <slot name="prepend-submit" />
+            <el-button
+              v-if="isShowSearchButton"
+              v-bind="searchButton"
+              @click="handleFilterSearch"
+            >
+              {{ searchButton.text }}
+            </el-button>
+            <el-button
+              v-if="isShowResetButton"
+              v-bind="resetButton"
+              @click="handleFilterReset"
+            >
+              {{ resetButton.text }}
+            </el-button>
+            <slot name="append-submit" />
+          </el-form-item>
           <div class="lv__filterbar-action-ext">
-            <slot name="prepend-filterbar-more" />
+            <slot name="prepend-more" />
             <el-button
               icon="el-icon-caret-top"
               type="primary"
               class="lv__filterbar-action-more"
               @click="toggleFilterbar"
             />
-            <slot name="append-filterbar-more" />
+            <slot name="append-more" />
           </div>
         </div>
 
@@ -106,6 +104,8 @@ import { FilterButton, FilterField } from '~/types'
 export default Vue.extend({
   name: 'Filterbar',
 
+  inheritAttrs: false,
+
   provide(): any {
     return {
       filterModel: (this as any).filterModel,
@@ -127,15 +127,29 @@ export default Vue.extend({
       default: /* istanbul ignore next */ () => [],
     },
     filterModel: { type: Object, default: () => ({}) },
-    filterbarFold: { type: Boolean, default: true },
-    searchButton: { type: [Object, Boolean] },
-    resetButton: { type: [Object, Boolean] },
+    searchButton: {
+      type: [Object, Boolean],
+      default: () => ({
+        text: '搜索',
+        icon: 'el-icon-search',
+        type: 'primary',
+      }),
+    },
+    resetButton: {
+      type: [Object, Boolean],
+      default: () => ({
+        text: '重置',
+        icon: '',
+        type: 'default',
+      }),
+    },
   },
 
   data() {
     return {
-      internalFilterbarFold: true,
-      topRightFilterIndex: -1,
+      isFold: true,
+      topRightItemIndex: -1,
+      actionOffsetLeft: 0,
       searchBtnOffset: 0,
     }
   },
@@ -153,52 +167,47 @@ export default Vue.extend({
     isShowSearchButton(): boolean {
       return !!this.searchButton
     },
-    isShowFilterButton(): boolean {
+    isShowResetButton(): boolean {
       return !!this.resetButton
     },
     isShowFilterSubmit(): boolean {
       return !!(
         this.isShowSearchButton ||
-        this.isShowFilterButton ||
+        this.isShowResetButton ||
         this.$slots['prepend-filterbar-submit'] ||
         this.$slots['append-filterbar-submit']
       )
     },
     isHasMore(): boolean {
       return (
-        this.topRightFilterIndex >= 0 &&
-        this.topRightFilterIndex < this.filterFields.length - 1
+        this.topRightItemIndex >= 0 &&
+        this.topRightItemIndex < this.filterFields.length - 1
       )
     },
-  },
-
-  watch: {
-    isShowSearchButton() {
-      this.updateLayout()
-    },
-    isShowFilterButton() {
-      this.updateLayout()
-    },
-    filterbarFold() {
-      this.internalFilterbarFold = this.filterbarFold
-      this.updateLayout()
-    },
-  },
-
-  mounted() {
-    this.internalFilterbarFold = this.filterbarFold
-    this.updateLayout()
-  },
-
-  methods: {
-    getAllFieldsVm(): Vue[] {
+    allFieldsVm(): Vue[] {
       try {
         return (this as any).$refs['FilterbarFields'].$refs['field'] || []
       } catch (error) {
         return []
       }
     },
+  },
 
+  watch: {
+    isShowSearchButton: 'updateLayout',
+    isShowResetButton: 'updateLayout',
+  },
+
+  // 更新布局方法改由父级 ListviewLayout 触发
+  // mounted() {
+  //   this.updateLayout()
+  //   window.addEventListener('resize', this.updateLayout)
+  // },
+  // beforeDestroy: /* istanbul ignore next */ function () {
+  //   window.removeEventListener('resize', this.updateLayout)
+  // },
+
+  methods: {
     handleFilterSearch() {
       this.$emit('filter-submit', this.filterModel)
     },
@@ -227,44 +236,58 @@ export default Vue.extend({
     },
 
     toggleFilterbar() {
-      this.internalFilterbarFold = !this.internalFilterbarFold
-      this.$emit('update:filterbarFold', this.internalFilterbarFold)
+      this.isFold = !this.isFold
+      this.$emit('fold-change', this.isFold)
     },
 
-    // 此处不添加 debounce 避免展开时由于父级出现滚动条更新不及时导致界面跳动
-    async updateLayout() {
-      await this.$nextTick()
-      const allFields = this.getAllFieldsVm()
+    updateLayout() {
+      // updateTopRightItemIndex 影响 isMore 按钮显示，需计算后再执行按钮偏移量计算
+      this.updateTopRightItemIndex()
+      this.$nextTick().then(() => {
+        this.updateActionOffset()
+        this.updateBtnOffset()
+      })
+    },
+
+    getAllFieldsDom() {
+      try {
+        return (this as any).$refs['FilterbarFields'].$refs['field'] || []
+      } catch (error) {
+        return []
+      }
+    },
+
+    updateTopRightItemIndex() {
+      let lastFilterIndex = -1
+      const allFields = this.allFieldsVm
       if (allFields.length > 0) {
         let lastFilterTop = allFields[0].$el.getBoundingClientRect().top
-        let lastFilterIndex = -1
         for (let i = 0; i < allFields.length; i++) {
-          // debugger
           const formItemTop = allFields[i].$el.getBoundingClientRect().top
           if (lastFilterTop !== formItemTop) {
             break
           }
-          lastFilterTop = formItemTop
           lastFilterIndex = i
         }
-        this.topRightFilterIndex = lastFilterIndex
-        this.updateSubmitOffset(allFields)
       }
+      this.topRightItemIndex = lastFilterIndex
     },
 
-    updateSubmitOffset(allFields: Vue[]) {
-      if (this.$refs.submit) {
-        let offset = 0
-        if (this.topRightFilterIndex >= 0) {
-          const originOffset = (
-            this.$refs.submit as any
-          ).getBoundingClientRect().left
-          const lastItem = allFields[this.topRightFilterIndex].$el
-          const { left, width } = lastItem.getBoundingClientRect()
-          offset = left + width - originOffset + 10
-          offset = Math.min(0, offset)
-        }
-        this.searchBtnOffset = Math.floor(offset)
+    updateBtnOffset() {
+      let offset = 0
+      if (this.topRightItemIndex >= 0) {
+        const lastItem = this.allFieldsVm[this.topRightItemIndex].$el
+        const { left, width } = lastItem.getBoundingClientRect()
+        offset = left + width - this.actionOffsetLeft + 10
+        offset = Math.min(0, offset)
+      }
+      this.searchBtnOffset = Math.floor(offset)
+    },
+
+    updateActionOffset() {
+      const $action = this.$refs.action as Element
+      if ($action) {
+        this.actionOffsetLeft = $action.getBoundingClientRect().left
       }
     },
   },
@@ -316,7 +339,9 @@ export default Vue.extend({
   .el-form-item {
     margin: 0;
   }
+}
 
+.lv__filterbar {
   &-buttons {
     float: left;
     margin-right: 0;
@@ -332,41 +357,39 @@ export default Vue.extend({
   }
 
   &-action {
+    display: flex;
     float: right;
     margin: 0;
     margin-bottom: 10px;
 
-    &-submit {
-      display: inline-block;
-
-      // stylelint-disable-next-line
-      .el-form-item__content > * {
+    &-submit .el-form-item__content,
+    &-ext {
+      display: flex;
+      & > * {
         display: inline-block;
         transition: inherit;
       }
-      .el-form-item__content > *:not(:nth-child(1)) {
+      & > *:not(:nth-child(1)) {
         margin-left: 10px;
-      }
-      .el-button {
-        float: left;
       }
     }
 
     &-ext {
+      // display: flex;
       float: right;
+      margin-left: 10px;
     }
 
     &-more {
       width: 40px;
       padding: 0;
-      margin-left: 10px;
       line-height: 30px;
       transition: none;
     }
 
     &--nomore {
       .lv__filterbar-action-more {
-        visibility: hidden;
+        display: none;
       }
     }
 
