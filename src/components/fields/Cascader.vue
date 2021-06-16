@@ -24,7 +24,7 @@ export default {
       defaultProps: {
         clearable: true,
         style: { width: '180px' },
-        expandTrigger: 'hover',
+        props: { expandTrigger: 'hover' },
       },
       internalOptions: [],
     }
