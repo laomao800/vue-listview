@@ -2,11 +2,11 @@
 import Vue, { Component, PropType } from 'vue'
 import hasValues from 'has-values'
 import isFunction from 'lodash/isFunction'
-import isPlainObject from 'lodash/isPlainObject'
 
-import { getValue, isVNode } from '@/utils'
-import { FilterField, FieldType, FilterFieldRenderDefinition } from '~/types'
+import { getValue, isVNode, hasRenderFn } from '@/utils'
+import { FilterField, FieldType, FilterFieldHasRender } from '~/types'
 
+import vNode from './VNode'
 import fieldCascader from './fields/Cascader.vue'
 import fieldDateTime from './fields/DateTime.vue'
 import fieldSelect from './fields/Select.vue'
@@ -57,10 +57,6 @@ function getFieldComponent(key: FieldType) {
   return fieldComponentsMap[key] || null
 }
 
-function isRenderDefField(input: any): input is FilterFieldRenderDefinition {
-  return isPlainObject(input) && isFunction(input.render)
-}
-
 export default Vue.extend({
   name: 'FilterbarField',
 
@@ -70,7 +66,7 @@ export default Vue.extend({
     },
   },
 
-  components: { ...allFieldComponents },
+  components: { ...allFieldComponents, vNode },
 
   props: {
     field: {
@@ -97,12 +93,12 @@ export default Vue.extend({
 
     if (isFunction(field)) {
       const fieldVm = field()
-      content = <v-node node={fieldVm} />
-    } else if (isRenderDefField(field)) {
+      content = <vNode node={fieldVm} />
+    } else if (hasRenderFn<FilterFieldHasRender>(field)) {
       const fieldVm = field.render()
-      content = <v-node node={fieldVm} />
+      content = <vNode node={fieldVm} />
     } else if (isVNode(field)) {
-      content = <v-node node={field} />
+      content = <vNode node={field} />
     } else {
       const FieldComponent = getFieldComponent(field.type) as any
       if (FieldComponent) {

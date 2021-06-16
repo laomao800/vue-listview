@@ -106,3 +106,7 @@ export function hasOwn(obj: Record<string, unknown>, key: string) {
 export function isDef(val: any) {
   return val !== undefined
 }
+
+export function hasRenderFn<T>(item: any): item is T {
+  return isPlainObject(item) && isFunction(item.render)
+}

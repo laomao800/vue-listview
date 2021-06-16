@@ -6,18 +6,6 @@ interface SelectOption {
   children?: SelectOption[]
 }
 
-interface FilterFieldBase {
-  /** 字段参数名 */
-  model: string
-
-  /** 字段文本说明 */
-  label: string
-
-  key?: string
-
-  width: string | number
-}
-
 export type FieldType =
   | 'label'
   | 'text'
@@ -33,8 +21,18 @@ export type FieldType =
   | 'dateTimeRange'
   | 'cascader'
 
-export interface FilterFieldObjectDefinition extends FilterFieldBase {
+export interface FilterField {
   type: FieldType
+
+  /** 字段参数名 */
+  model: string
+
+  /** 字段文本说明 */
+  label: string
+
+  key?: string
+
+  width: string | number
 
   // /** 显示为禁用状态 */
   // disabled?: boolean
@@ -53,12 +51,10 @@ export interface FilterFieldObjectDefinition extends FilterFieldBase {
 
   /** 可传入对应控件原始的 slots */
   componentSlots?: { [k: string]: any }
+
+  render?: () => VNode
 }
 
-export interface FilterFieldRenderDefinition extends FilterFieldBase {
+export interface FilterFieldHasRender extends FilterField {
   render: () => VNode
 }
-
-export type FilterField =
-  | FilterFieldObjectDefinition
-  | FilterFieldRenderDefinition

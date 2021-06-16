@@ -26,8 +26,16 @@ export interface FilterButton {
     icon?: FilterButton['icon']
     text?: FilterButton['text']
     click?: FilterButton['click']
-  }
+  }[]
 
   /** 自定义渲染方法 */
   render?: () => VNode
+}
+
+export interface FilterButtonHasRender extends FilterButton {
+  render: Required<FilterButton>['render']
+}
+
+export interface FilterButtonHasChildren extends FilterButton {
+  children: Required<FilterButton>['children']
 }

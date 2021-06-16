@@ -70,69 +70,11 @@
         </div>
 
         <!-- 操作按钮区域 -->
-        <el-form-item v-if="isShowFilterButtons" class="lv__filterbar-buttons">
-          <template v-for="(button, index) in filterButtons">
-            <v-node
-              v-if="isFunction(button)"
-              :key="button.key || index"
-              :node="button()"
-            />
-            <v-node
-              v-else-if="button.render"
-              :key="button.key || index"
-              :node="button.render()"
-            />
-            <v-node
-              v-else-if="isVNode(button)"
-              :key="button.key || index"
-              :node="button"
-            />
-            <el-dropdown
-              v-else-if="Array.isArray(button.children)"
-              :key="button.key || index"
-              :type="button.type"
-              :split-button="button.splitButton"
-              :trigger="button.trigger || 'click'"
-              placement="bottom"
-              @click="applyButtonClick(button, $event)"
-            >
-              <template v-if="button.splitButton">
-                <i v-if="button.icon" :class="button.icon" />
-                {{ button.text }}
-              </template>
-              <template v-else>
-                <el-button
-                  :type="button.type"
-                  :icon="button.icon"
-                  @click="applyButtonClick(button, $event)"
-                >
-                  {{ button.text }}
-                  <i class="el-icon-arrow-down el-icon--right" />
-                </el-button>
-              </template>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  v-for="(child, childIndex) in button.children"
-                  :key="childIndex"
-                  @click.native="applyButtonClick(child, $event)"
-                >
-                  <i v-if="child.icon" :class="child.icon" />
-                  {{ child.text }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <el-button
-              v-else
-              :key="button.key || index"
-              :type="button.type"
-              :plain="button.plain"
-              :icon="button.icon"
-              @click="applyButtonClick(button, $event)"
-            >
-              {{ button.text }}
-            </el-button>
-          </template>
-        </el-form-item>
+        <FilterbarButtons
+          v-if="isShowFilterButtons"
+          :buttons="filterButtons"
+          class="lv__filterbar-buttons"
+        />
 
         <!-- 搜索栏控件区域 -->
         <FilterbarFields
@@ -156,9 +98,8 @@
 
 <script lang="tsx">
 import Vue, { PropType } from 'vue'
-import isFunction from 'lodash/isFunction'
-import { isVNode, hasOwn } from '@/utils'
-import VNode from './VNode'
+import { hasOwn } from '@/utils'
+import FilterbarButtons from './FilterbarButtons.vue'
 import FilterbarFields from './FilterbarFields.vue'
 import { FilterButton, FilterField } from '~/types'
 
@@ -172,7 +113,7 @@ export default Vue.extend({
   },
 
   components: {
-    VNode,
+    FilterbarButtons,
     FilterbarFields,
   },
 
@@ -250,20 +191,11 @@ export default Vue.extend({
   },
 
   methods: {
-    isVNode,
-    isFunction,
-
     getAllFieldsVm(): Vue[] {
       try {
         return (this as any).$refs['FilterbarFields'].$refs['field'] || []
       } catch (error) {
         return []
-      }
-    },
-
-    applyButtonClick(item: FilterButton, $event: MouseEvent) {
-      if (item && isFunction(item.click)) {
-        return item.click($event)
       }
     },
 
