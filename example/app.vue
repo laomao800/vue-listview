@@ -45,7 +45,9 @@ export default {
           type: 'success',
           icon: 'el-icon-circle-plus-outline',
           text: '添加',
-          click: () => this.showMessage('添加'),
+          click: () => {
+            this.$message('添加')
+          },
         },
         () => (
           <el-button
@@ -76,21 +78,21 @@ export default {
           trigger: 'click',
           splitButton: true,
           click: () => {
-            this.showMessage('下拉按钮')
+            this.$message.success('下拉按钮')
           },
           children: [
             {
               icon: 'el-icon-circle-plus-outline',
               text: '菜单1',
               click: () => {
-                this.showMessage('菜单1')
+                this.$message.success('菜单1')
               },
             },
             {
               icon: 'el-icon-remove-outline',
               text: '菜单2',
               click: () => {
-                this.showMessage('菜单2')
+                this.$message.success('菜单2')
               },
             },
           ],
