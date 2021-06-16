@@ -66,7 +66,7 @@ declare class ListviewProps {
   filterFields: FilterField[] | (() => VNode) | VNode
 
   /** 可选，存储搜索栏的搜索条件值。 default: {} */
-  filterModel: { [k: string]: any }
+  filterModel: Record<string, any>
 
   /** 是否显示搜索栏的“提交”按钮。 default: true */
   showFilterSearch: boolean
@@ -78,10 +78,10 @@ declare class ListviewProps {
   tableColumns: TableColumn[]
 
   /** 可传入 <el-table> 的所有支持属性。 default: {} */
-  tableProps: { [k: string]: any }
+  tableProps: Record<string, any>
 
   /** 可传入 <el-table> 的所有支持事件。 default: {} */
-  tableEvents: { [k: string]: () => void }
+  tableEvents: Record<string, (...args: any[]) => void>
 
   /** 是否开启表格行选择功能，传入 'single' 为表格单选效果。 default: true */
   tableSelectionColumn:

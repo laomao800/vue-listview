@@ -16,7 +16,7 @@ export interface FilterButton {
   text?: string
 
   /** 按钮点击事件 */
-  click?: () => void
+  click?: ($event: MouseEvent) => void
 
   /** 是否展示为分裂按钮 */
   splitButton?: boolean

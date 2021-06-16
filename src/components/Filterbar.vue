@@ -154,18 +154,20 @@
   </el-form>
 </template>
 
-<script>
+<script lang="tsx">
+import Vue, { PropType } from 'vue'
 import isFunction from 'lodash/isFunction'
 import { isVNode, hasOwn } from '@/utils'
 import VNode from './VNode'
 import FieldsWrapper from './FieldsWrapper.vue'
+import { FilterButton, FilterField } from '~/types'
 
-export default {
+export default Vue.extend({
   name: 'Filterbar',
 
-  provide() {
+  provide(): any {
     return {
-      filterModel: this.filterModel,
+      filterModel: (this as any).filterModel,
     }
   },
 
@@ -175,9 +177,14 @@ export default {
   },
 
   props: {
-    // TODO: validator
-    filterButtons: { type: Array, default: () => [] },
-    filterFields: { type: Array, default: () => [] },
+    filterButtons: {
+      type: Array as PropType<FilterButton[]>,
+      default: /* istanbul ignore next */ () => [],
+    },
+    filterFields: {
+      type: Array as PropType<FilterField[]>,
+      default: /* istanbul ignore next */ () => [],
+    },
     filterModel: { type: Object, default: () => ({}) },
     filterbarFold: { type: Boolean, default: true },
     searchButton: { type: [Object, Boolean] },
@@ -193,30 +200,30 @@ export default {
   },
 
   computed: {
-    isNoneFields() {
+    isNoneFields(): boolean {
       return this.filterFields.length === 0
     },
-    isShowFilterButtons() {
+    isShowFilterButtons(): boolean {
       return this.filterButtons.length > 0
     },
-    isShowFilterFields() {
+    isShowFilterFields(): boolean {
       return this.filterFields.length > 0
     },
-    isShowSearchButton() {
+    isShowSearchButton(): boolean {
       return !!this.searchButton
     },
-    isShowFilterButton() {
+    isShowFilterButton(): boolean {
       return !!this.resetButton
     },
-    isShowFilterSubmit() {
-      return (
+    isShowFilterSubmit(): boolean {
+      return !!(
         this.isShowSearchButton ||
         this.isShowFilterButton ||
         this.$slots['prepend-filterbar-submit'] ||
         this.$slots['append-filterbar-submit']
       )
     },
-    isHasMore() {
+    isHasMore(): boolean {
       return (
         this.topRightFilterIndex >= 0 &&
         this.topRightFilterIndex < this.filterFields.length - 1
@@ -246,12 +253,15 @@ export default {
     isVNode,
     isFunction,
 
-    getAllFieldsVm() {
-      const filterForm = this.$refs['FieldsWrapper']
-      return filterForm ? filterForm.$refs.field || [] : []
+    getAllFieldsVm(): Vue[] {
+      try {
+        return (this as any).$refs['FieldsWrapper'].$refs['field'] || []
+      } catch (error) {
+        return []
+      }
     },
 
-    applyButtonClick(item, $event) {
+    applyButtonClick(item: FilterButton, $event: MouseEvent) {
       if (item && isFunction(item.click)) {
         return item.click($event)
       }
@@ -263,7 +273,7 @@ export default {
 
     handleFilterReset() {
       const model = this.filterModel
-      const _resetField = (field) => {
+      const _resetField = (field: FilterField) => {
         const name = field.model
         if (name && hasOwn(model, name)) {
           const value = model[name]
@@ -310,19 +320,23 @@ export default {
       }
     },
 
-    updateSubmitOffset(allFields) {
-      let offset = 0
-      if (this.topRightFilterIndex >= 0) {
-        const originOffset = this.$refs.submit.getBoundingClientRect().left
-        const lastItem = allFields[this.topRightFilterIndex].$el
-        const { left, width } = lastItem.getBoundingClientRect()
-        offset = left + width - originOffset + 10
-        offset = Math.min(0, offset)
+    updateSubmitOffset(allFields: Vue[]) {
+      if (this.$refs.submit) {
+        let offset = 0
+        if (this.topRightFilterIndex >= 0) {
+          const originOffset = (
+            this.$refs.submit as any
+          ).getBoundingClientRect().left
+          const lastItem = allFields[this.topRightFilterIndex].$el
+          const { left, width } = lastItem.getBoundingClientRect()
+          offset = left + width - originOffset + 10
+          offset = Math.min(0, offset)
+        }
+        this.searchBtnOffset = Math.floor(offset)
       }
-      this.searchBtnOffset = Math.floor(offset)
     },
   },
-}
+})
 </script>
 
 <style lang="less">
