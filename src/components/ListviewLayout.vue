@@ -174,7 +174,6 @@ export default Vue.extend({
   padding: 10px;
   padding-bottom: 5px;
   background-color: #fff;
-  border: 5px solid #f0f2f5;
 }
 
 .lv__wrapper > * {
