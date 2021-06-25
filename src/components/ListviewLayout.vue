@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import parseSize from '@laomao800/parse-size-with-unit'
 import debounce from 'lodash/debounce'
+import storeProviderMixin from '@/mixins/storeProviderMixin'
 
 function isDom(item: any): item is Element {
   return item instanceof Element
@@ -24,6 +25,8 @@ export default Vue.extend({
 
   inheritAttrs: false,
 
+  mixins: [storeProviderMixin],
+
   props: {
     height: { type: [String, Number], default: null },
     fullHeight: { type: Boolean, default: true },
@@ -40,8 +43,14 @@ export default Vue.extend({
   },
 
   computed: {
+    contentLoading(): boolean {
+      return this.lvStore.contentLoading
+    },
     bottomOffset(): number {
       return getElBottomOffset(this.$el)
+    },
+    footerHeight(): number {
+      return this.getSlotHeight('footer')
     },
   },
 
@@ -94,18 +103,26 @@ export default Vue.extend({
         return
       }
 
-      // 指定高度时，需要从 $el 位置开始计算 top 高度，
-      // 确保处于 listview-container 容器内的高度能铺满
-      const wrapOffsetTop = this.wrapperHeight
-        ? this.$el.getBoundingClientRect().top
-        : 0
-
       if (isDom(this.$refs.content)) {
+        // 指定高度时，需要从 $el 位置开始计算 top 高度，
+        // 确保处于 listview-container 容器内的高度能铺满
+        const wrapOffsetTop = this.wrapperHeight
+          ? this.$el.getBoundingClientRect().top
+          : 0
         const contentOffsetTop = this.$refs.content.getBoundingClientRect().top
-        const restHeight =
-          maxHeight + wrapOffsetTop - contentOffsetTop - this.bottomOffset
-        this.contentHeight = restHeight
+        const contentHeight =
+          maxHeight +
+          wrapOffsetTop -
+          contentOffsetTop -
+          this.bottomOffset -
+          this.footerHeight
+        this.contentHeight = contentHeight
       }
+    },
+
+    getSlotHeight(name: string): number {
+      const slot = this.$refs[name] as Element
+      return slot ? slot.getBoundingClientRect().height : 0
     },
 
     renderSlot(name: string, scopeProps = {}) {
@@ -124,9 +141,12 @@ export default Vue.extend({
     const scopeProps = { contentHeight: this.contentHeight }
     return (
       <div style={style} class="lv__wrapper">
-        {this.renderSlot('header', scopeProps)}
-        {this.renderSlot('filterbar', scopeProps)}
-        {this.renderSlot('content', scopeProps)}
+        {this.renderSlot('header')}
+        {this.renderSlot('filterbar')}
+        <div v-loading={this.contentLoading}>
+          {this.renderSlot('content', scopeProps)}
+          {this.renderSlot('footer')}
+        </div>
       </div>
     )
   },

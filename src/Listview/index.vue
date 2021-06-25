@@ -23,7 +23,12 @@
         </Filterbar>
       </template>
       <template #content="props">
-        <ListviewContent v-bind="mergedAttrs" :height="props.contentHeight" />
+        <ListviewContent v-bind="mergedAttrs" :height="props.contentHeight">
+          <slot v-bind="props" />
+        </ListviewContent>
+      </template>
+      <template #footer>
+        <ListviewContentFooter />
       </template>
     </ListviewLayout>
   </StoreProvider>
@@ -35,6 +40,7 @@ import StoreProvider from '@/components/StoreProvider.vue'
 import ListviewLayout from '@/components/ListviewLayout.vue'
 import Filterbar from '@/components/Filterbar.vue'
 import ListviewContent from '@/components/ListviewContent.vue'
+import ListviewContentFooter from '@/components/ListviewContentFooter.vue'
 
 export default Vue.extend({
   name: 'Listview',
@@ -46,6 +52,7 @@ export default Vue.extend({
     ListviewLayout,
     Filterbar,
     ListviewContent,
+    ListviewContentFooter,
   },
 
   computed: {

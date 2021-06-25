@@ -1,76 +1,64 @@
 <template>
-  <div class="lv__content lv__table-content" v-loading="contentLoading">
-    <div ref="content" class="lv__content">
-      <slot
-        :filter-model="requestData"
-        :content-height="contentHeight"
-        :content-loading="contentLoading"
-        :content-data="contentData"
-        :content-message="contentMessage"
-      >
-        <el-table
-          ref="contentTable"
-          :data="contentData.items"
-          :height="contentHeight"
-          :style="{ width: '100%' }"
-          v-bind="normalizeTableProps"
-          @selection-change="handleTableSelectionChange"
-          @row-click="handleRowClick"
-          v-on="normalizeTableEvents"
+  <div class="lv__content lv__table-content">
+    <el-table
+      ref="contentTable"
+      :data="contentData.items"
+      :height="_height"
+      :style="{ width: '100%' }"
+      v-bind="normalizeTableProps"
+      @selection-change="handleTableSelectionChange"
+      @row-click="handleRowClick"
+      v-on="normalizeTableEvents"
+    >
+      <template #empty>
+        <slot name="empty" v-bind="contentMessage">
+          <MessageBlock
+            v-if="contentMessage.text"
+            :type="contentMessage.type"
+            :text="contentMessage.text"
+          />
+        </slot>
+      </template>
+
+      <template v-if="!!selectionColumn">
+        <el-table-column
+          v-if="selectionColumn.type === 'single'"
+          :resizable="false"
+          fixed
+          width="50"
+          align="center"
+          class-name="el-table-column--selection el-table-column--single-selection"
         >
-          <template #empty>
-            <slot name="empty" v-bind="contentMessage">
-              <MessageBlock
-                v-if="contentMessage.text"
-                :type="contentMessage.type"
-                :text="contentMessage.text"
-              />
-            </slot>
-          </template>
-
-          <template v-if="!!selectionColumn">
-            <el-table-column
-              v-if="selectionColumn.type === 'single'"
-              :resizable="false"
-              fixed
-              width="50"
-              align="center"
-              class-name="el-table-column--selection el-table-column--single-selection"
-            >
-              <template slot-scope="{ row, $index }">
-                <el-radio
-                  :value="internalSelection.indexOf(row) > -1 ? '' : null"
-                  :disabled="
-                    selectionColumn.selectable
-                      ? !selectionColumn.selectable.call(null, row, $index)
-                      : false
-                  "
-                  label
-                  @click.native.stop.prevent="
-                    ($event) => handleRowClick(row, null, $event)
-                  "
-                />
-              </template>
-            </el-table-column>
-
-            <el-table-column
-              v-else
-              v-bind="selectionColumn"
-              fixed
-              type="selection"
-              width="50"
-              align="center"
+          <template slot-scope="{ row, $index }">
+            <el-radio
+              :value="internalSelection.indexOf(row) > -1 ? '' : null"
+              :disabled="
+                selectionColumn.selectable
+                  ? !selectionColumn.selectable.call(null, row, $index)
+                  : false
+              "
+              label
+              @click.native.stop.prevent="
+                ($event) => handleRowClick(row, null, $event)
+              "
             />
           </template>
+        </el-table-column>
 
-          <template v-for="(column, index) in tableColumns">
-            <v-node :key="index" :node="renderTableColumn(column)" />
-          </template>
-        </el-table>
-      </slot>
-    </div>
+        <el-table-column
+          v-else
+          v-bind="selectionColumn"
+          fixed
+          type="selection"
+          width="50"
+          align="center"
+        />
+      </template>
 
-    <ListviewContentFooter ref="footer" />
+      <template v-for="(column, index) in tableColumns">
+        <v-node :key="index" :node="renderTableColumn(column)" />
+      </template>
+    </el-table>
   </div>
 </template>
 
@@ -85,7 +73,6 @@ import parseSize from '@laomao800/parse-size-with-unit'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
 import { nodeParents } from '@/utils'
 import VNode from '@/components/VNode'
-import ListviewContentFooter from '@/components/ListviewContentFooter.vue'
 import MessageBlock from '@/components/MessageBlock.vue'
 
 export default Vue.extend({
@@ -95,7 +82,7 @@ export default Vue.extend({
 
   mixins: [storeProviderMixin],
 
-  components: { VNode, ListviewContentFooter, MessageBlock },
+  components: { VNode, MessageBlock },
 
   props: {
     height: {
@@ -111,13 +98,10 @@ export default Vue.extend({
     tableSelection: { type: Array, default: () => [] },
   },
 
-  data(): any {
-    return {
-      contentHeight: null,
-    }
-  },
-
   computed: {
+    _height(): string | null {
+      return parseSize(this.height)
+    },
     internalSelection: {
       get() {
         return this.lvStore.internalSelection
@@ -168,6 +152,7 @@ export default Vue.extend({
      * 因此先通过 computed 合并所需的 props ，再统一绑定最后的合并结果
      */
     normalizeTableProps(): any {
+      // TODO: 合并逻辑优化
       const defaultProps = {
         size: 'small',
         border: true,
@@ -181,11 +166,13 @@ export default Vue.extend({
       if (rowClassName) {
         if (isFunction(rowClassName)) {
           mergedPros['row-class-name'] = (...args: any[]) =>
+            // @ts-ignore
             [this.selectionRowClassName(...args), rowClassName(...args)].join(
               ' '
             )
         } else {
           mergedPros['row-class-name'] = (...args: any[]) =>
+            // @ts-ignore
             [this.selectionRowClassName(...args), rowClassName].join(' ')
         }
       } else {
@@ -205,30 +192,17 @@ export default Vue.extend({
   },
 
   watch: {
-    height: {
-      immediate: true,
-      handler() {
-        this.$nextTick(() => this.updateLayout())
-      },
-    },
     contentData() {
       try {
         // 重置表格垂直滚动距离
-        if (this.$refs.contentTable) {
-          this.$refs.contentTable.bodyWrapper.scrollTop = 0
+        if (this.$refs.contentTable as any) {
+          ;(this.$refs.contentTable as any).bodyWrapper.scrollTop = 0
         }
       } catch (e) {}
     },
   },
 
   methods: {
-    updateLayout() {
-      if (this.height) {
-        const footerHeight = this.getFooterHeight()
-        this.contentHeight = parseSize(this.height - footerHeight)
-      }
-    },
-
     /**
      * el-table 表格选中数据同步至父组件
      */
@@ -286,9 +260,9 @@ export default Vue.extend({
         }
         // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
         if (this.selectionColumn.type === 'single') {
-          this.$refs.contentTable.store.states.selection = []
+          ;(this.$refs.contentTable as any).store.states.selection = []
         }
-        this.$refs.contentTable.toggleRowSelection(row)
+        ;(this.$refs.contentTable as any).toggleRowSelection(row)
       }
     },
 
@@ -297,17 +271,6 @@ export default Vue.extend({
      */
     selectionRowClassName(row: any): string {
       return this.internalSelection.indexOf(row.row) > -1 ? 'row--selected' : ''
-    },
-
-    /**
-     * 获取页码区域所占高度，用于计算内容高度
-     */
-    getFooterHeight() {
-      const footerEl = this.$refs.footer.$el
-      const footerHeight = footerEl
-        ? footerEl.getBoundingClientRect().height
-        : 0
-      return footerHeight
     },
   },
 })
