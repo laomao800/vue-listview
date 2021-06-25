@@ -1,6 +1,6 @@
 <script lang="tsx">
 import Vue from 'vue'
-// import pick from 'lodash/pick'
+import isNil from 'lodash/isNil'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
 
 export default Vue.extend({
@@ -32,13 +32,15 @@ export default Vue.extend({
       },
     },
     mergedPageProps(): any {
+      let total = this.lvStore.contentData.total
+      total = isNil(total) ? 0 : total
       return {
         pageSize: this.currentPageSize,
         pageSizes: this.lvStore.pageSizes,
         background: true,
         layout: 'total, sizes, prev, pager, next, jumper',
         ...this.lvStore.pageProps,
-        total: this.lvStore.contentData.total,
+        total,
         currentPage: this.currentPage,
       }
     },
