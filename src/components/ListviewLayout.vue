@@ -138,6 +138,7 @@ export default Vue.extend({
   overflow: hidden;
   box-sizing: border-box;
   padding: 10px;
+  padding-bottom: 5px;
   background-color: #fff;
   border: 5px solid #f0f2f5;
 }

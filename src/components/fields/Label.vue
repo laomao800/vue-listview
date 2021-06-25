@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import fieldMixin from './field-mixin'
+import fieldMixin from '../../mixins/fieldMixin'
 
 export default {
   name: 'FieldLabel',

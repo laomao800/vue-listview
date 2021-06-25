@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <listview1 v-bind="config1">
+    <listview1 v-bind="config1" @selection-change="selectionChange">
       <!-- <div slot="filterbar-top"><el-button>button</el-button></div>
       <div slot="filterbar-bottom"><el-button>button</el-button></div>
       <div slot="filterbar-left"><el-button>button</el-button></div>
@@ -47,8 +47,28 @@ export default {
     Listview2: component2,
   },
 
+  computed: {
+    config1() {
+      return {
+        // autoload: false,
+        // contentMessage: '请使用查询条件检索',
+        requestUrl: '/mock/listview',
+        requestMethod: 'post',
+        // pageProps: { pagerCount: 5 },
+        validateResponse: (res) => res.is_success,
+        resolveResponseErrorMessage: (err) => err.error_info.msg,
+        filterButtons: this.filterButtons,
+        filterFields: this.filterFields,
+        filterModel: this.filterModel,
+        tableColumns: this.tableColumns,
+        // tableSelection: this.tableSelection,
+      }
+    },
+  },
+
   data() {
     return {
+      tableSelection: [],
       filterButtons: [
         {
           type: 'success',
@@ -107,13 +127,16 @@ export default {
           ],
         },
       ],
-      filterFields: Array(5).fill({ type: 'text', label: 'text' }),
-      filterFields1: [
+      filterFields: [
         {
           type: 'select',
           model: 'error',
-          label: '接口错误',
-          options: [{ label: '触发500错误', value: 1 }],
+          label: '特定数据',
+          options: [
+            { label: '响应成功，内容错误', value: 'apiError' },
+            { label: '响应错误', value: 'httpError' },
+            { label: '响应空内容', value: 'empty' },
+          ],
         },
         {
           type: 'text',
@@ -274,7 +297,6 @@ export default {
         hidden: 'hidden',
         multipleSelect: [],
       },
-      tableSelection: [],
       tableColumns: [
         {
           label: '自定义标签',
@@ -365,18 +387,9 @@ export default {
     }
   },
 
-  computed: {
-    config1() {
-      return {
-        requestUrl: '/mock/listview',
-        requestMethod: 'post',
-        pageProps: { pagerCount: 5 },
-        filterButtons: this.filterButtons,
-        filterFields: this.filterFields,
-        filterModel: this.filterModel,
-        tableColumns: this.tableColumns,
-        tableSelection: this.tableSelection,
-      }
+  methods: {
+    selectionChange(val) {
+      console.log('selectionChange', val)
     },
   },
 }

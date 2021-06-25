@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import fieldMixin from './field-mixin'
+import fieldMixin from '../../mixins/fieldMixin'
 import VNode from '../VNode'
 import { isVNode, hasOwn } from '@/utils'
 

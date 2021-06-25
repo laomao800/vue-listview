@@ -32,17 +32,21 @@ export function isVNode(node: any): node is VNode {
  * @param {Object} data 目标数据
  * @param {Object} dataMap 映射表
  */
-export function dataMapping(data = {}, dataMap: Record<string, any> = {}) {
+export function dataMapping(
+  data: Record<string, any> = {},
+  dataMap: Record<string, any> = {}
+) {
   const result: Record<string, any> = {}
-  const keysMap = Object.keys(dataMap)
 
-  keysMap.forEach((key) => {
-    try {
-      const dataKey = key.toString()
-      const dataValue = getValue(data, dataMap[key])
-      result[dataKey] = dataValue
-    } catch (e) {}
-  })
+  if (isPlainObject(dataMap)) {
+    Object.keys(dataMap).forEach((key) => {
+      try {
+        const dataKey = key.toString()
+        const dataValue = getValue(data, dataMap[key])
+        result[dataKey] = dataValue
+      } catch (e) {}
+    })
+  }
 
   return result
 }
@@ -109,4 +113,12 @@ export function isDef(val: any) {
 
 export function hasRenderFn<T>(item: any): item is T {
   return isPlainObject(item) && isFunction(item.render)
+}
+
+export function ensurePromise<T>(data: T) {
+  return isPromise(data) ? data : Promise.resolve(data)
+}
+
+export function noop() {
+  // noop
 }

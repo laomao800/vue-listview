@@ -1,26 +1,25 @@
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
 import merge from 'lodash/merge'
 import isPlainObject from 'lodash/isPlainObject'
 import { getValue, error } from '@/utils'
+import storeProviderMixin from '@/mixins/storeProviderMixin'
+import { FilterField } from '~/types'
 
 export default Vue.extend({
-  inject: {
-    filterModel: {
-      default: () => ({}),
-    },
-  },
+  mixins: [storeProviderMixin],
 
   props: {
-    field: { type: Object, default: () => ({}) },
+    field: { type: Object as PropType<FilterField> },
+    default: () => ({}),
   },
 
   computed: {
     value: {
-      get() {
+      get(): any {
         const modelProperty = this.field.model
         let value = null
         if (modelProperty) {
-          value = getValue(this.filterModel, modelProperty)
+          value = getValue(this.lvStore.requestData, modelProperty)
         }
         if (this.field.type === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
@@ -28,10 +27,10 @@ export default Vue.extend({
         }
         return value
       },
-      set(newVal) {
+      set(newVal: any) {
         const modelProperty = this.field.model
         if (modelProperty) {
-          this.$set(this.filterModel, modelProperty, newVal)
+          this.$set(this.lvStore.requestData, modelProperty, newVal)
         } else {
           if (process.env.NODE_ENV !== 'production') {
             error(
@@ -41,21 +40,20 @@ export default Vue.extend({
         }
       },
     },
-    mergedProps() {
-      const defaultProps = isPlainObject(this.defaultProps)
-        ? this.defaultProps
-        : {}
+    mergedProps(): FilterField['componentProps'] {
+      let defaultProps = (this as any).defaultProps
+      defaultProps = isPlainObject(defaultProps) ? defaultProps : {}
       const componentProps = isPlainObject(this.field.componentProps)
         ? this.field.componentProps
         : {}
       return merge(defaultProps, componentProps)
     },
-    mergedEvents() {
+    mergedEvents(): FilterField['componentEvents'] {
       return isPlainObject(this.field.componentEvents)
         ? this.field.componentEvents
         : {}
     },
-    componentSlots() {
+    componentSlots(): FilterField['componentSlots'] {
       return this.field.componentSlots || {}
     },
   },

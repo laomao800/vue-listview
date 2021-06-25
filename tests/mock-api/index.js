@@ -4,6 +4,9 @@ const express = require('express')
 const { successWrap, errorWrap } = require('./utils')
 const Mock = require('mockjs')
 
+const sleep = (time = 200) =>
+  new Promise((resolve) => setTimeout(resolve, time))
+
 module.exports = (app) => {
   app.use(express.json())
 
@@ -25,11 +28,17 @@ module.exports = (app) => {
     }
   })
 
-  app.all('/mock/listview', (req, res) => {
-    if (req.body.error) {
-      return res.json(errorWrap('演示接口返回错误信息'))
+  app.all('/mock/listview', async (req, res) => {
+    const errorFlag = req.body.error || req.query.error
+    if (errorFlag === 'apiError') {
+      return res.json(errorWrap('apiError'))
+    } else if (errorFlag === 'httpError') {
+      return res.status(500).json(errorWrap('httpError'))
+    } else if (errorFlag === 'empty') {
+      return res.json(successWrap({ items: [], total: 0 }))
     }
-    const pageSize = req.body.page_size || 20
+
+    const pageSize = req.query.page_size || req.body.page_size || 20
     const data = Mock.mock({
       [`items|${pageSize}`]: [
         {
@@ -45,25 +54,10 @@ module.exports = (app) => {
           'enable|1': true,
         },
       ],
-      total_count: 800,
+      total: 800,
     })
     const responseData = successWrap(data)
+    await sleep()
     return res.json(responseData)
-  })
-
-  app.all('/mock/listview-empty', (req, res) => {
-    const responseData = successWrap({
-      items: [],
-      total_count: 0,
-    })
-    return res.json(responseData)
-  })
-
-  app.all('/mock/listview-error', (req, res) => {
-    return res.json(errorWrap('演示接口返回错误信息'))
-  })
-
-  app.all('/mock/500', (req, res) => {
-    return res.status(500).json(errorWrap('演示接口返回 500 错误信息'))
   })
 }

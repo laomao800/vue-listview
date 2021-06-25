@@ -3,6 +3,7 @@ import Vue, { Component, PropType } from 'vue'
 import hasValues from 'has-values'
 import isFunction from 'lodash/isFunction'
 
+import storeProviderMixin from '@/mixins/storeProviderMixin'
 import { getValue, isVNode, hasRenderFn } from '@/utils'
 import { FilterField, FieldType, FilterFieldHasRender } from '~/types'
 
@@ -60,11 +61,7 @@ function getFieldComponent(key: FieldType) {
 export default Vue.extend({
   name: 'FilterbarField',
 
-  inject: {
-    filterModel: {
-      default: () => ({}),
-    },
-  },
+  mixins: [storeProviderMixin],
 
   components: { ...allFieldComponents, vNode },
 
@@ -76,7 +73,7 @@ export default Vue.extend({
 
   computed: {
     showLabel(): boolean {
-      const value = getValue((this as any).filterModel, this.field.model)
+      const value = getValue(this.lvStore.requestData, this.field.model)
       // hasValues(null) -> true
       return value !== null && hasValues(value)
     },

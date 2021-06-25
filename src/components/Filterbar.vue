@@ -99,18 +99,15 @@ import Vue, { PropType } from 'vue'
 import { hasOwn } from '@/utils'
 import FilterbarButtons from './FilterbarButtons.vue'
 import FilterbarFields from './FilterbarFields.vue'
+import storeProviderMixin from '@/mixins/storeProviderMixin'
 import { FilterButton, FilterField } from '~/types'
 
 export default Vue.extend({
   name: 'Filterbar',
 
-  inheritAttrs: false,
+  mixins: [storeProviderMixin],
 
-  provide(): any {
-    return {
-      filterModel: (this as any).filterModel,
-    }
-  },
+  inheritAttrs: false,
 
   components: {
     FilterbarButtons,
@@ -126,7 +123,6 @@ export default Vue.extend({
       type: Array as PropType<FilterField[]>,
       default: /* istanbul ignore next */ () => [],
     },
-    filterModel: { type: Object, default: () => ({}) },
     searchButton: {
       type: [Object, Boolean],
       default: () => ({
@@ -209,19 +205,19 @@ export default Vue.extend({
 
   methods: {
     handleFilterSearch() {
-      this.$emit('filter-submit', this.filterModel)
+      this.$emit('submit')
     },
 
     handleFilterReset() {
-      const model = this.filterModel
+      const requestData = this.lvStore.requestData
       const _resetField = (field: FilterField) => {
         const name = field.model
-        if (name && hasOwn(model, name)) {
-          const value = model[name]
+        if (name && hasOwn(requestData, name)) {
+          const value = requestData[name]
           if (Array.isArray(value)) {
-            this.$set(model, name, [])
+            this.$set(requestData, name, [])
           } else {
-            this.$set(model, name, undefined)
+            this.$set(requestData, name, undefined)
           }
         }
       }
@@ -232,7 +228,7 @@ export default Vue.extend({
           _resetField(field)
         }
       })
-      this.$emit('filter-reset', this.filterModel)
+      this.$emit('filter-reset', this.lvStore.requestData)
     },
 
     toggleFilterbar() {
