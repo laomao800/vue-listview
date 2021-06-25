@@ -109,19 +109,11 @@ export default Vue.extend({
     tableEvents: { type: Object, default: () => ({}) },
     tableSelectionColumn: { type: [Boolean, String, Object], default: true },
     tableSelection: { type: Array, default: () => [] },
-
-    // Pager
-    usePage: { type: [Object, Boolean], default: true },
-    pageSizes: { type: Array },
-    pageSize: { type: Number },
-    pageProps: { type: Object },
-    pagePosition: { type: String },
   },
 
   data(): any {
     return {
       contentHeight: null,
-      // internalSelection: [],
     }
   },
 
@@ -229,16 +221,12 @@ export default Vue.extend({
     },
   },
 
-  // mounted() {
-  //   this.$nextTick(() => {
-  //     this.updateLayout()
-  //   })
-  // },
-
   methods: {
     updateLayout() {
-      const footerHeight = this.getFooterHeight()
-      this.contentHeight = parseSize(this.height - footerHeight)
+      if (this.height) {
+        const footerHeight = this.getFooterHeight()
+        this.contentHeight = parseSize(this.height - footerHeight)
+      }
     },
 
     /**
