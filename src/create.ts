@@ -1,19 +1,20 @@
 import Vue from 'vue'
+import pick from 'lodash/pick'
 import _Listview from '@/Listview'
-import { pick } from 'lodash'
+import StoreProvider from '@/components/StoreProvider.vue'
+import ListviewLayout from '@/components/ListviewLayout.vue'
+import Filterbar from '@/components/Filterbar.vue'
+import ListviewContent from '@/components/ListviewContent.vue'
 
 const allowPresetProps = [
-  'searchButton',
-  'resetButton',
-  'usePage',
-  'pagePosition',
-  'pageSizes',
-  'pageSize',
-  'pageProps',
-  'transformRequestData',
-  'transformResponseData',
-  'resolveResponseErrorMessage',
-  'contentDataMap',
+  // @ts-ignore
+  ...Object.keys(StoreProvider.options.props),
+  // @ts-ignore
+  ...Object.keys(ListviewLayout.options.props),
+  // @ts-ignore
+  ...Object.keys(Filterbar.options.props),
+  // @ts-ignore
+  ...Object.keys(ListviewContent.options.props),
 ]
 
 export function create(options: any = {}) {
