@@ -137,14 +137,28 @@ export default Vue.extend({
   },
 
   render() {
-    const style = { height: parseSize(this.wrapperHeight) }
-    const scopeProps = { contentHeight: this.contentHeight }
+    const scopeProps = {
+      contentHeight: this.lvStore.contentHeight,
+      contentLoading: this.lvStore.contentLoading,
+      contentData: this.lvStore.contentData,
+      filterModel: this.lvStore.requestData,
+      contentMessage: this.lvStore.internalContentMessage,
+    }
+
     return (
-      <div style={style} class="lv__wrapper">
+      <div
+        style={{ height: parseSize(this.wrapperHeight) }}
+        class="lv__wrapper"
+      >
         {this.renderSlot('header')}
         {this.renderSlot('filterbar')}
         <div v-loading={this.contentLoading}>
-          {this.renderSlot('content', scopeProps)}
+          {this.renderSlot('content', scopeProps, {
+            style: {
+              height: parseSize(this.contentHeight),
+              overflow: 'auto',
+            },
+          })}
           {this.renderSlot('footer')}
         </div>
       </div>
