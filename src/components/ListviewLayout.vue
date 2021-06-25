@@ -138,7 +138,7 @@ export default Vue.extend({
 
   render() {
     const scopeProps = {
-      contentHeight: this.lvStore.contentHeight,
+      contentHeight: this.contentHeight,
       contentLoading: this.lvStore.contentLoading,
       contentData: this.lvStore.contentData,
       filterModel: this.lvStore.requestData,
