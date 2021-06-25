@@ -389,6 +389,7 @@ export default {
 
   methods: {
     selectionChange(val) {
+      // eslint-disable-next-line no-console
       console.log('selectionChange', val)
     },
   },
