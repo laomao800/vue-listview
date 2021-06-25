@@ -23,9 +23,9 @@
         </Filterbar>
       </template>
       <template #content="props">
-        <ListviewContent v-bind="mergedAttrs" :height="props.contentHeight">
-          <slot v-bind="props" />
-        </ListviewContent>
+        <slot v-bind="props">
+          <ListviewContent v-bind="mergedAttrs" :height="props.contentHeight" />
+        </slot>
       </template>
       <template #footer>
         <ListviewContentFooter />

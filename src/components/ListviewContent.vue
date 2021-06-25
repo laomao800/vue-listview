@@ -120,10 +120,7 @@ export default Vue.extend({
       return this.lvStore.contentLoading
     },
     contentMessage() {
-      return {
-        type: this.lvStore.contentMessageType,
-        text: this.lvStore.contentMessageText,
-      }
+      return this.lvStore.internalContentMessage
     },
 
     /**

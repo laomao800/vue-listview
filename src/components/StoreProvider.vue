@@ -65,11 +65,11 @@ export default Vue.extend({
       currentPage: 1,
       currentPageSize: this.pageSize,
       contentData: { items: [], total: 0 },
-      contentMessageText: null,
-      contentMessageType: null,
+      internalContentMessage: {
+        type: null,
+        text: null,
+      },
       internalSelection: [],
-      // contentItems: [],
-      // contentItemsTotal: 0,
     }
   },
 
@@ -239,11 +239,9 @@ export default Vue.extend({
 
     setContentMessage(text = '', type = null) {
       if (text === null) {
-        this.contentMessageText = null
-        this.contentMessageType = null
+        this.internalContentMessage = { text: null, type: null }
       } else {
-        this.contentMessageText = text
-        this.contentMessageType = type
+        this.internalContentMessage = { text, type }
       }
     },
   },

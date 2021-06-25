@@ -9,6 +9,9 @@
       <div slot="append-more"><el-button>button</el-button></div>
       <div slot="prepend-submit"><el-button>button</el-button></div>
       <div slot="append-submit"><el-button>button</el-button></div> -->
+      <template #default="props">
+        <div style="height: 1200px; background: #ddd">props: {{ props }}</div>
+      </template>
     </listview1>
     <listview2 v-if="false" />
   </div>

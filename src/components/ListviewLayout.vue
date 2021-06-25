@@ -125,10 +125,10 @@ export default Vue.extend({
       return slot ? slot.getBoundingClientRect().height : 0
     },
 
-    renderSlot(name: string, scopeProps = {}) {
+    renderSlot(name: string, scopeProps = {}, attrs = {}) {
       return (
         this.$scopedSlots[name] && (
-          <div class={`lv__${name}-wrapper`} ref={name}>
+          <div class={`lv__${name}-wrapper`} ref={name} {...attrs}>
             {(this.$scopedSlots as any)[name](scopeProps)}
           </div>
         )
