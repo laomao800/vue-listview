@@ -9,7 +9,7 @@
       <div slot="append-more"><el-button>button</el-button></div>
       <div slot="prepend-submit"><el-button>button</el-button></div>
       <div slot="append-submit"><el-button>button</el-button></div> -->
-      <template #default="props">
+      <template #default1="props">
         <div style="height: 1200px; background: #ddd">props: {{ props }}</div>
       </template>
     </listview1>
@@ -20,11 +20,14 @@
 <script>
 import './common.less'
 import { create as createListview } from '@/create'
+import CustomFilterbar from './CustomFilterbar.vue'
+import CustomContent from './CustomContent.vue'
 
 const { component: component1 } = createListview({
-  defaultSlots: {
-    filterbar: (props) => <filterbar {...{ attrs: { props } }} />,
-    content: () => <div>123</div>,
+  replaceComponents: {
+    filterbar: CustomFilterbar,
+    content: CustomContent,
+    // footer: CustomFooter,
   },
   searchButton: { type: 'primary', text: '123' },
   resetButton: { text: '333' },
