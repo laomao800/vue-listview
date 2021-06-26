@@ -18,11 +18,14 @@ const allowPresetProps = [
 ]
 
 export function create(options: any = {}) {
+  const { replaceComponents = {}, ..._options } = options
+
   const component = Vue.extend({
     extends: _Listview,
     data() {
       return {
-        presetProps: pick(options, allowPresetProps),
+        presetProps__: pick(_options, allowPresetProps),
+        replaceComponents__: replaceComponents,
       }
     },
   })

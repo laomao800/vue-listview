@@ -6,7 +6,8 @@
       @update-layout="updateLayout"
     >
       <template #filterbar>
-        <Filterbar
+        <component
+          :is="_filterbar"
           ref="filterbar"
           v-bind="mergedAttrs"
           @fold-change="filterbarUpdateLayout"
@@ -20,22 +21,27 @@
           <slot slot="append-more" name="append-more" />
           <slot slot="prepend-submit" name="prepend-submit" />
           <slot slot="append-submit" name="append-submit" />
-        </Filterbar>
+        </component>
       </template>
       <template #content="props">
         <slot v-bind="props">
-          <ListviewContent v-bind="mergedAttrs" :height="props.contentHeight" />
+          <component
+            :is="_content"
+            v-bind="mergedAttrs"
+            :height="props.contentHeight"
+          />
         </slot>
       </template>
       <template #footer>
-        <ListviewContentFooter />
+        <component :is="_footer" v-bind="mergedAttrs" />
       </template>
     </ListviewLayout>
   </StoreProvider>
 </template>
 
 <script lang="tsx">
-import Vue from 'vue'
+import Vue, { Component } from 'vue'
+import isFunction from 'lodash/isFunction'
 import StoreProvider from '@/components/StoreProvider.vue'
 import ListviewLayout from '@/components/ListviewLayout.vue'
 import Filterbar from '@/components/Filterbar.vue'
@@ -50,18 +56,24 @@ export default Vue.extend({
   components: {
     StoreProvider,
     ListviewLayout,
-    Filterbar,
-    ListviewContent,
-    ListviewContentFooter,
   },
 
   computed: {
-    mergedAttrs() {
+    mergedAttrs(): Record<string, any> {
       return {
         // presetProps 由 create 时提供
-        ...((this as any).presetProps || {}),
+        ...((this as any).presetProps__ || {}),
         ...this.$attrs,
       }
+    },
+    _filterbar(): Component {
+      return this.getReplaceComponent('filterbar', Filterbar)
+    },
+    _content(): Component {
+      return this.getReplaceComponent('content', ListviewContent)
+    },
+    _footer(): Component {
+      return this.getReplaceComponent('footer', ListviewContentFooter)
     },
   },
 
@@ -69,7 +81,8 @@ export default Vue.extend({
     updateLayout() {
       setTimeout(() => {
         // 搜索栏展开完成后再执行重算布局
-        ;(this.$refs.filterbar as any).updateLayout()
+        const $filterbar = this.$refs.filterbar as any
+        isFunction($filterbar.updateLayout) && $filterbar.updateLayout()
       })
     },
     filterbarUpdateLayout() {
@@ -79,6 +92,14 @@ export default Vue.extend({
     },
     handleFilterSubmit() {
       ;(this.$refs.storeProvider as any).startRequest()
+    },
+    getReplaceComponent(name: string, defaultComp: Component): Component {
+      const comp = (this as any).replaceComponents__[name]
+      if (comp) {
+        return isFunction(comp) ? comp() : comp
+      } else {
+        return defaultComp
+      }
     },
   },
 })
