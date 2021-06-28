@@ -12,7 +12,7 @@
 <script>
 import isFunction from 'lodash/isFunction'
 import fieldMixin from '../../mixins/fieldMixin'
-import { isPromise } from '@/utils'
+import { ensurePromise, isPromise } from '@/utils'
 
 export default {
   name: 'FieldCascader',
@@ -27,27 +27,31 @@ export default {
         props: { expandTrigger: 'hover' },
       },
       internalOptions: [],
+      loading: false,
     }
   },
 
   async mounted() {
-    const optionConfig = this.field.options
-    const isPromiseOption = isPromise(optionConfig)
-    if (Array.isArray(optionConfig)) {
-      this.internalOptions = optionConfig
-    } else if (isFunction(optionConfig) || isPromiseOption) {
-      this.loading = true
-      const resolver = (options) => {
-        if (Array.isArray(options)) {
-          this.internalOptions = options
-          this.loading = false
-        }
+    const setOptions = (options) => {
+      if (Array.isArray(options)) {
+        this.internalOptions = options
       }
-      const result = isPromiseOption
-        ? await optionConfig
-        : await optionConfig(resolver)
-      resolver(result)
     }
+
+    let optionsPromise
+    const options = this.field.options
+    if (isPromise(options)) {
+      optionsPromise = options
+    } else if (Array.isArray(options)) {
+      optionsPromise = ensurePromise(options)
+    } else if (isFunction(options)) {
+      optionsPromise = ensurePromise(options(setOptions))
+    }
+
+    this.loading = true
+    optionsPromise.then(setOptions).finally(() => {
+      this.loading = false
+    })
   },
 }
 </script>

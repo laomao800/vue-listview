@@ -25,9 +25,10 @@ export default {
   },
 
   watch: {
-    async activeTab(index) {
-      await this.$nextTick()
-      childListviews[index].componentInstance.updateLayout()
+    activeTab(index) {
+      this.$nextTick().then(() => {
+        childListviews[index].componentInstance.updateLayout()
+      })
     },
   },
 
