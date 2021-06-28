@@ -20,24 +20,22 @@
 <script>
 import './common.less'
 import { create as createListview } from '@/create'
-import CustomFilterbar from './CustomFilterbar.vue'
-import CustomContent from './CustomContent.vue'
+// import CustomFilterbar from './CustomFilterbar.vue'
+// import CustomContent from './CustomContent.vue'
 
 const { component: component1 } = createListview({
-  replaceComponents: {
-    filterbar: CustomFilterbar,
-    content: CustomContent,
-    // footer: CustomFooter,
-  },
-  searchButton: { type: 'primary', text: '123' },
-  resetButton: { text: '333' },
-
+  // replaceComponents: {
+  //   filterbar: CustomFilterbar,
+  //   content: CustomContent,
+  //   // footer: CustomFooter,
+  // },
+  // searchButton: { type: 'primary', text: '123' },
+  // resetButton: { text: '333' },
   // usePage: '',
   // pagePosition: '',
   // pageSizes: '',
   // pageSize: '',
   // pageProps: '',
-
   // transformRequestData: '',
   // transformResponseData: '',
   // resolveResponseErrorMessage: '',
@@ -136,6 +134,71 @@ export default {
       filterFields: [
         {
           type: 'select',
+          model: 'select1',
+          label: 'select1',
+          options: [
+            { label: '选项 1', value: 1 },
+            { label: '选项 2', value: 2 },
+            { label: '选项 3', value: 3 },
+            { label: '禁用项', value: 4, disabled: true },
+          ],
+        },
+        {
+          type: 'select',
+          model: 'select2',
+          label: 'select2',
+          options: () => [
+            { label: '选项 1', value: 1 },
+            { label: '选项 2', value: 2 },
+            { label: '选项 3', value: 3 },
+            { label: '禁用项', value: 4, disabled: true },
+          ],
+        },
+        {
+          type: 'multipleSelect',
+          model: 'select3',
+          label: 'select3',
+          options: new Promise((resolve) => {
+            setTimeout(() => {
+              resolve([
+                { label: '单选项 1', value: 1 },
+                { label: '单选项 2', value: 2 },
+                { label: '单选项 3', value: 3 },
+              ])
+            }, 5000)
+          }),
+        },
+        {
+          type: 'select',
+          model: 'select4',
+          label: 'select4',
+          options: () =>
+            new Promise((resolve) => {
+              resolve([
+                { label: '单选项 1', value: 1 },
+                { label: '单选项 2', value: 2 },
+                { label: '单选项 3', value: 3 },
+              ])
+            }),
+        },
+        {
+          type: 'select',
+          model: 'select5',
+          label: 'select5',
+          options: (done) => {
+            setTimeout(() => {
+              done([
+                { label: '单选项 1', value: 1 },
+                { label: '单选项 2', value: 2 },
+                { label: '单选项 3', value: 3 },
+              ])
+            }, 5000)
+          },
+        },
+      ],
+      filterFields1: [
+        {
+          type: 'select',
           model: 'error',
           label: '特定数据',
           options: [
@@ -204,7 +267,6 @@ export default {
             { label: '选项 3', value: 3 },
             { label: '禁用项', value: 4, disabled: true },
           ],
-          get: (val) => val.join(','),
         },
         {
           type: 'select',

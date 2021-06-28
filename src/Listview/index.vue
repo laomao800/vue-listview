@@ -82,7 +82,9 @@ export default Vue.extend({
       setTimeout(() => {
         // 搜索栏展开完成后再执行重算布局
         const $filterbar = this.$refs.filterbar as any
-        isFunction($filterbar.updateLayout) && $filterbar.updateLayout()
+        $filterbar &&
+          isFunction($filterbar.updateLayout) &&
+          $filterbar.updateLayout()
       })
     },
     filterbarUpdateLayout() {
@@ -94,7 +96,8 @@ export default Vue.extend({
       ;(this.$refs.storeProvider as any).startRequest()
     },
     getReplaceComponent(name: string, defaultComp: Component): Component {
-      const comp = (this as any).replaceComponents__[name]
+      const replaceComponents__ = (this as any).replaceComponents__ || {}
+      const comp = replaceComponents__[name]
       if (comp) {
         return isFunction(comp) ? comp() : comp
       } else {

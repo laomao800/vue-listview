@@ -1,9 +1,12 @@
 import Vue, { VueConstructor, VNode } from 'vue'
 import { AxiosRequestConfig } from 'axios'
+import { FilterButton } from './FilterButton'
+import { FilterField } from './FilterField'
+import { TableColumn } from './TableColumn'
 
 type MessageType = 'success' | 'warning' | 'info' | 'error'
 
-declare class ListviewProps {
+declare class ListviewProps extends Vue {
   /** 设置页面顶部通栏内的页面标题文本。 default: '' */
   headerTitle: string
 
