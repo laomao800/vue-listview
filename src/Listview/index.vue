@@ -5,6 +5,9 @@
       v-bind="mergedAttrs"
       @update-layout="updateLayout"
     >
+      <template #header>
+        <component :is="_header" v-bind="mergedAttrs" />
+      </template>
       <template #filterbar>
         <component
           :is="_filterbar"
@@ -44,6 +47,7 @@ import Vue, { Component } from 'vue'
 import isFunction from 'lodash/isFunction'
 import StoreProvider from '@/components/StoreProvider.vue'
 import ListviewLayout from '@/components/ListviewLayout.vue'
+import ListviewHeader from '@/components/ListviewHeader.vue'
 import Filterbar from '@/components/Filterbar.vue'
 import ListviewContent from '@/components/ListviewContent.vue'
 import ListviewContentFooter from '@/components/ListviewContentFooter.vue'
@@ -65,6 +69,9 @@ export default Vue.extend({
         ...((this as any).presetProps__ || {}),
         ...this.$attrs,
       }
+    },
+    _header(): Component {
+      return this.getReplaceComponent('header', ListviewHeader)
     },
     _filterbar(): Component {
       return this.getReplaceComponent('filterbar', Filterbar)

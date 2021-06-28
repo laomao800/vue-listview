@@ -18,6 +18,8 @@ import {
   Input,
   TimePicker,
   TimeSelect,
+  Breadcrumb,
+  BreadcrumbItem,
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -39,3 +41,5 @@ Vue.use(Option)
 Vue.use(Input)
 Vue.use(TimePicker)
 Vue.use(TimeSelect)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)

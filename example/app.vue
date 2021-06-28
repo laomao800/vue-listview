@@ -54,6 +54,8 @@ export default {
   computed: {
     config1() {
       return {
+        headerTitle: 'title',
+        headerNav: ['nav1', 'nav2'],
         // autoload: false,
         // contentMessage: '请使用查询条件检索',
         requestUrl: '/mock/listview',

@@ -1,6 +1,6 @@
 <script>
 import VNode from '@/components/VNode'
-import ListviewHeader from '@/components/listview-header.vue'
+import ListviewHeader from '@/components/ListviewHeader.vue'
 import './style.less'
 
 let childListviews = []
