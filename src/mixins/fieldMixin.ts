@@ -1,7 +1,8 @@
 import Vue, { PropType } from 'vue'
 import merge from 'lodash/merge'
+import get from 'lodash/get'
 import isPlainObject from 'lodash/isPlainObject'
-import { getValue, error } from '@/utils'
+import { error } from '@/utils'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
 import { FilterField } from '~/types'
 
@@ -19,7 +20,7 @@ export default Vue.extend({
         const modelProperty = this.field.model
         let value = null
         if (modelProperty) {
-          value = getValue(this.lvStore.requestData, modelProperty)
+          value = get(this.lvStore.requestData, modelProperty)
         }
         if (this.field.type === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错

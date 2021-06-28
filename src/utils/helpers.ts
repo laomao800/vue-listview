@@ -2,7 +2,7 @@ import { VNode } from 'vue'
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isFunction from 'lodash/isFunction'
-import { getValue } from '@/utils'
+import get from 'lodash/get'
 import { FilterField } from '~/types'
 
 /**
@@ -42,7 +42,7 @@ export function dataMapping(
     Object.keys(dataMap).forEach((key) => {
       try {
         const dataKey = key.toString()
-        const dataValue = getValue(data, dataMap[key])
+        const dataValue = get(data, dataMap[key])
         result[dataKey] = dataValue
       } catch (e) {}
     })
