@@ -86,36 +86,27 @@ export default Vue.extend({
       if (this.height) {
         this.wrapperHeight = this.height
       } else if (this.fullHeight) {
-        this.wrapperHeight = window.innerHeight
+        const wrapOffsetTop = this.$el.getBoundingClientRect().top
+        this.wrapperHeight = window.innerHeight - wrapOffsetTop
       } else {
         this.wrapperHeight = null
       }
     },
 
     updateContentHeight() {
-      let maxHeight = 0
+      let maxHeight
       if (this.height) {
         maxHeight = this.$el.getBoundingClientRect().height
       } else if (this.fullHeight) {
-        maxHeight = window.innerHeight
-      } else {
-        // 自动高度
-        return
+        maxHeight = this.wrapperHeight as number
       }
 
-      if (isDom(this.$refs.content)) {
-        // 指定高度时，需要从 $el 位置开始计算 top 高度，
-        // 确保处于 listview-container 容器内的高度能铺满
-        const wrapOffsetTop = this.wrapperHeight
-          ? this.$el.getBoundingClientRect().top
-          : 0
-        const contentOffsetTop = this.$refs.content.getBoundingClientRect().top
+      if (maxHeight && isDom(this.$refs.content)) {
+        const contentOffsetTop =
+          this.$refs.content.getBoundingClientRect().top -
+          this.$el.getBoundingClientRect().top
         const contentHeight =
-          maxHeight +
-          wrapOffsetTop -
-          contentOffsetTop -
-          this.bottomOffset -
-          this.footerHeight
+          maxHeight - contentOffsetTop - this.bottomOffset - this.footerHeight
         this.contentHeight = contentHeight
       }
     },
