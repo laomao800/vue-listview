@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { mount } from '@vue/test-utils'
 
-export async function createRequestSpyWrapper(propsData = {}, options = {}) {
+export async function createRequestSpyWrapper(propsData = {}) {
   const Listview = require('@/index').default
   const { successWrap } = require('../mock-api/utils')
 
@@ -19,7 +19,6 @@ export async function createRequestSpyWrapper(propsData = {}, options = {}) {
       requestHandler: requestSpy,
       ...propsData,
     },
-    options,
   })
 
   return { wrapper, requestSpy }
@@ -29,7 +28,7 @@ export const wait = (time = 100) =>
   new Promise((resolve) => setTimeout(resolve, time))
 
 export const mockDataList = Array(10)
-  .fill()
+  .fill(undefined)
   .map((row, index) => ({ id: index, name: `row${index}` }))
 
 export const filterButtonsNormal = [
@@ -213,20 +212,10 @@ export const tableColumns = [
     render: () => {
       return (
         <div>
-          <el-button
-            on-click={(e) => e.stopPropagation()}
-            style="padding:4px 8px"
-            size="mini"
-            type="success"
-          >
+          <el-button style="padding:4px 8px" size="mini" type="success">
             审核
           </el-button>
-          <el-button
-            on-click={(e) => e.stopPropagation()}
-            style="padding:4px 8px"
-            size="mini"
-            type="danger"
-          >
+          <el-button style="padding:4px 8px" size="mini" type="danger">
             删除
           </el-button>
         </div>
@@ -239,12 +228,12 @@ export const tableColumns = [
   {
     label: '折扣率',
     align: 'center',
-    formatter: (row) => row.discount.toFixed(2),
+    formatter: (row: any) => row.discount.toFixed(2),
   },
   {
     label: '折后价',
     align: 'center',
-    formatter: (row) => (row.discount * row.sale_price).toFixed(2),
+    formatter: (row: any) => (row.discount * row.sale_price).toFixed(2),
   },
   {
     label: '折扣时间',
@@ -258,7 +247,7 @@ export const tableColumns = [
   {
     label: '是否启用',
     align: 'center',
-    render: (prop) => {
+    render: (prop: any) => {
       if (prop.row.enable) {
         return <div style="color:#67c23a">启用</div>
       } else {
