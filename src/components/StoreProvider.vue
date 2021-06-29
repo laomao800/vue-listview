@@ -66,10 +66,7 @@ export default Vue.extend({
       currentPage: 1,
       currentPageSize: this.pageSize,
       contentData: { items: [], total: 0 },
-      internalContentMessage: {
-        type: null,
-        text: null,
-      },
+      internalContentMessage: { type: null, text: null },
       internalSelection: [],
     }
   },
@@ -83,8 +80,8 @@ export default Vue.extend({
         if (isString(this.contentMessage)) {
           this.setContentMessage(this.contentMessage)
         } else if (isPlainObject(this.contentMessage)) {
-          const { type, message } = this.contentMessage
-          this.setContentMessage(message, type)
+          const { type, text } = this.contentMessage
+          this.setContentMessage(text, type)
         }
       },
     },
