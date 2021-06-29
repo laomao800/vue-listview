@@ -34,15 +34,21 @@ export default Vue.extend({
 
   data(): {
     wrapperHeight: null | number | string
-    contentHeight: null | number
   } {
     return {
       wrapperHeight: null,
-      contentHeight: null,
     }
   },
 
   computed: {
+    contentHeight: {
+      get() {
+        return this.lvStore.contentHeight
+      },
+      set(newVal) {
+        this.lvStore.contentHeight = newVal
+      },
+    },
     contentLoading(): boolean {
       return this.lvStore.contentLoading
     },
@@ -129,7 +135,7 @@ export default Vue.extend({
 
   render() {
     const scopeProps = {
-      contentHeight: this.contentHeight,
+      contentHeight: this.lvStore.contentHeight,
       contentLoading: this.lvStore.contentLoading,
       contentData: this.lvStore.contentData,
       filterModel: this.lvStore.requestData,

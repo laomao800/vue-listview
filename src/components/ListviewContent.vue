@@ -63,7 +63,7 @@
 </template>
 
 <script lang="tsx">
-import Vue, { PropType, VNodeData } from 'vue'
+import Vue, { VNodeData } from 'vue'
 import isPlainObject from 'lodash/isPlainObject'
 import isFunction from 'lodash/isFunction'
 import mapKeys from 'lodash/mapKeys'
@@ -85,11 +85,6 @@ export default Vue.extend({
   components: { VNode, MessageBlock },
 
   props: {
-    height: {
-      type: Number as PropType<number>,
-      default: /* istanbul ignore next */ () => [],
-    },
-
     // Table
     tableColumns: { type: Array, default: () => [] },
     tableProps: { type: Object, default: () => ({}) },
@@ -99,8 +94,8 @@ export default Vue.extend({
   },
 
   computed: {
-    _height(): string | null {
-      return parseSize(this.height)
+    _height() {
+      return parseSize(this.lvStore.contentHeight)
     },
     internalSelection: {
       get() {

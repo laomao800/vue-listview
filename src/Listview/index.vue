@@ -28,11 +28,7 @@
       </template>
       <template #content="props">
         <slot v-bind="props">
-          <component
-            :is="_content"
-            v-bind="mergedAttrs"
-            :height="props.contentHeight"
-          />
+          <component :is="_content" v-bind="mergedAttrs" />
         </slot>
       </template>
       <template #footer>

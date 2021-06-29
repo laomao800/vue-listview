@@ -60,6 +60,7 @@ export default Vue.extend({
 
   data(): any {
     return {
+      contentHeight: null,
       requestData: {},
       contentLoading: false,
       currentPage: 1,
