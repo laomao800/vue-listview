@@ -32,7 +32,11 @@
         </slot>
       </template>
       <template #footer>
-        <component :is="_footer" v-bind="mergedAttrs" />
+        <component :is="_footer" v-bind="mergedAttrs">
+          <slot slot="footer-left" name="footer-left" />
+          <slot slot="footer-center" name="footer-center" />
+          <slot slot="footer-right" name="footer-right" />
+        </component>
       </template>
     </ListviewLayout>
   </StoreProvider>

@@ -6,6 +6,8 @@ import storeProviderMixin from '@/mixins/storeProviderMixin'
 export default Vue.extend({
   name: 'ListviewContentFooter',
 
+  inheritAttrs: false,
+
   mixins: [storeProviderMixin],
 
   computed: {
@@ -70,19 +72,15 @@ export default Vue.extend({
     return (
       <div class="lv__footer">
         <div class="lv__footer-left">
-          <slot name="footer-left">
-            {this.pagePosition !== 'right' && pagination}
-          </slot>
+          {this.$slots['footer-left'] ||
+            (this.pagePosition !== 'right' && pagination)}
         </div>
 
-        <div class="lv__footer-center">
-          <slot name="footer-center" />
-        </div>
+        <div class="lv__footer-center">{this.$slots['footer-center']}</div>
 
         <div class="lv__footer-right">
-          <slot name="footer-right">
-            {this.pagePosition === 'right' && pagination}
-          </slot>
+          {this.$slots['footer-right'] ||
+            (this.pagePosition === 'right' && pagination)}
         </div>
       </div>
     )
