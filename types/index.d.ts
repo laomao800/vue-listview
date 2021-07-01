@@ -37,7 +37,7 @@ declare class ListviewProps extends Vue {
   requestConfig: AxiosRequestConfig
 
   /** 自定义请求方法，需要返回 Promise ，以返回的内容交由 `validateResponse` 进行验证 */
-  requestHandler: (requestData?: Dic) => Promise<any>
+  requestHandler: (requestData?: Dic) => Promise<any> | any
 
   /** 对接口发起请求参数在发送前作最后的更改 */
   transformRequestData: (requestData?: Dic) => Dic | boolean
@@ -54,7 +54,7 @@ declare class ListviewProps extends Vue {
     | string
     | {
         type: MessageType
-        message: string
+        text: string
       }
 
   /** 验证接口响应是否成功 */
@@ -112,6 +112,9 @@ declare class ListviewProps extends Vue {
 
   /** 默认每页分页数量。 default: 20 */
   pageSize: number
+
+  /** 页码位置。 default: 'left' */
+  pagePosition: 'left' | 'right'
 }
 
 declare class ListviewContainerProps extends Vue {}
