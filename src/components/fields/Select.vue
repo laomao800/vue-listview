@@ -51,18 +51,22 @@ export default {
 
     let optionsPromise
     const options = this.field.options
-    if (isPromise(options)) {
-      optionsPromise = options
-    } else if (Array.isArray(options)) {
-      optionsPromise = ensurePromise(options)
-    } else if (isFunction(options)) {
-      optionsPromise = ensurePromise(options(setOptions))
-    }
+    if (options) {
+      if (isPromise(options)) {
+        optionsPromise = options
+      } else if (Array.isArray(options)) {
+        optionsPromise = ensurePromise(options)
+      } else if (isFunction(options)) {
+        optionsPromise = ensurePromise(options(setOptions))
+      }
 
-    this.loading = true
-    optionsPromise.then(setOptions).finally(() => {
-      this.loading = false
-    })
+      if (optionsPromise) {
+        this.loading = true
+        optionsPromise.then(setOptions).finally(() => {
+          this.loading = false
+        })
+      }
+    }
   },
 }
 </script>
