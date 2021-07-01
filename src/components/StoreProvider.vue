@@ -117,15 +117,17 @@ export default Vue.extend({
       this.$rootEmitProxy('request-start')
 
       this.contentLoading = true
-      return this.getRequestData().then((data: any) => {
-        // transformRequestData 有可能返回 false 以阻止提交动作，可用于提交前验证等
-        if (data === false) {
-          this.$rootEmitProxy('request-error', 'invalid')
-          /* istanbul ignore next */
-          this.contentLoading = false
-          return
-        }
-        this.handleRequest(data)
+      const requestData = this.getRequestData()
+      // transformRequestData 有可能返回 false 以阻止提交动作，可用于提交前验证等
+      if (requestData === false) {
+        this.$rootEmitProxy('request-error', 'invalid')
+        /* istanbul ignore next */
+        this.contentLoading = false
+        return Promise.resolve()
+      }
+
+      return (
+        this.handleRequest(requestData)
           // 自定义 requestHandler 与内置请求响应都通过验证流程
           .then(this.validateResponseData)
           .then((data: any) => {
@@ -137,7 +139,7 @@ export default Vue.extend({
             this.$rootEmitProxy('request-success')
           })
           .catch(this.handleResponseError)
-      })
+      )
     },
 
     getContentData(data = {}) {
@@ -220,7 +222,7 @@ export default Vue.extend({
       return requestConfig
     },
 
-    getRequestData(): Promise<any> {
+    getRequestData() {
       let data = cloneDeep(this.filterModel)
 
       // 删除提交数据中的无效数据
@@ -246,7 +248,7 @@ export default Vue.extend({
         data = this.transformRequestData(data)
       }
 
-      return ensurePromise(data)
+      return data
     },
 
     setContentMessage(text = '', type = null, cleanList = false) {
