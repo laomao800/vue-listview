@@ -129,8 +129,8 @@ export default Vue.extend({
           // 自定义 requestHandler 与内置请求响应都通过验证流程
           .then(this.validateResponseData)
           .then((data: any) => {
-            if (isFunction(this.transformResponseFn)) {
-              data = this.transformResponseFn(data)
+            if (isFunction(this.transformResponseData)) {
+              data = this.transformResponseData(data)
             }
             this.contentData = this.getContentData(data)
             this.contentLoading = false
