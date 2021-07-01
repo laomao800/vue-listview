@@ -3,6 +3,7 @@ import { VNode } from 'vue'
 interface SelectOption {
   label: string
   value: any
+  disabled?: boolean
   children?: SelectOption[]
 }
 
@@ -28,11 +29,13 @@ export interface FilterField {
   model: string
 
   /** 字段文本说明 */
-  label: string
+  label?: string
 
   key?: string
 
-  width: string | number
+  width?: string | number
+
+  trim?: boolean
 
   // /** 显示为禁用状态 */
   // disabled?: boolean

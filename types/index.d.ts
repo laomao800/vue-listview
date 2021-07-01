@@ -5,6 +5,7 @@ import { FilterField } from './FilterField'
 import { TableColumn } from './TableColumn'
 
 type MessageType = 'success' | 'warning' | 'info' | 'error'
+type Dic<T> = Record<string, T>
 
 declare class ListviewProps extends Vue {
   /** 设置页面顶部通栏内的页面标题文本。 default: '' */
@@ -36,13 +37,13 @@ declare class ListviewProps extends Vue {
   requestConfig: AxiosRequestConfig
 
   /** 自定义请求方法，需要返回 Promise ，以返回的内容交由 `validateResponse` 进行验证 */
-  requestHandler: (requestData?: object) => Promise<any>
+  requestHandler: (requestData?: Dic) => Promise<any>
 
   /** 对接口发起请求参数在发送前作最后的更改 */
-  transformRequestData: (requestData?: object) => object | boolean
+  transformRequestData: (requestData?: Dic) => Dic | boolean
 
   /** 对原始响应数据的加工方法 default: null */
-  transformResponseData: (responseData?: object) => void
+  transformResponseData: (responseData?: Dic) => void
 
   /** 数据接口响应内容属性映射。 default: { items: 'result.items', total: 'result.total_count' } */
   contentDataMap: { [k: string]: string }
