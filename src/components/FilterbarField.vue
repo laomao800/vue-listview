@@ -74,7 +74,7 @@ export default Vue.extend({
 
   computed: {
     showLabel(): boolean {
-      const value = get(this.lvStore.requestData, this.field.model)
+      const value = get(this.lvStore.filterModel, this.field.model)
       // hasValues(null) -> true
       return value !== null && hasValues(value)
     },

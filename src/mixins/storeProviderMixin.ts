@@ -5,12 +5,9 @@ export default Vue.extend({
     lvStore: { default: () => ({}) },
   },
 
-  // computed: {
-  //   requestData() {
-  //     return this.lvStore.requestData
-  //   },
-  //   contentData() {
-  //     return this.lvStore.contentData
-  //   },
-  // },
+  methods: {
+    $rootEmitProxy(event: string, ...args: any[]) {
+      this.lvStore.$rootEmitProxy(event, ...args)
+    },
+  },
 })

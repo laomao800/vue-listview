@@ -11,7 +11,7 @@ import omitBy from 'lodash/omitBy'
 import { warn, dataMapping, isValidFieldValue, ensurePromise } from '@/utils'
 
 export default Vue.extend({
-  name: 'ListviewStoreProvider',
+  name: 'StoreProvider',
 
   // @ts-ignore
   // abstract: true,
@@ -30,6 +30,7 @@ export default Vue.extend({
     requestUrl: { type: String, default: '' },
     requestMethod: { type: String, default: 'post' },
     requestConfig: { type: Object, default: () => ({}) },
+    filterModel: { type: Object, default: () => ({}) },
 
     // Adv request
     requestHandler: { type: Function, default: null },
@@ -61,7 +62,6 @@ export default Vue.extend({
   data(): any {
     return {
       contentHeight: null,
-      requestData: {},
       contentLoading: false,
       currentPage: 1,
       currentPageSize: this.pageSize,
@@ -72,8 +72,8 @@ export default Vue.extend({
   },
 
   watch: {
-    currentPage: 'startRequest',
-    currentPageSize: 'startRequest',
+    currentPage: 'search',
+    currentPageSize: 'search',
     contentMessage: {
       immediate: true,
       handler() {
@@ -86,36 +86,38 @@ export default Vue.extend({
       },
     },
     internalSelection() {
-      this.$emit('selection-change', this.internalSelection)
       this.$emit('update:tableSelection', this.internalSelection)
     },
   },
 
   mounted() {
     if (this.autoload) {
-      this.startRequest()
+      this.search()
     }
   },
 
   methods: {
-    startRequest() {
-      this.$emit('before-request')
+    $rootEmitProxy(event: string) {
+      this.$emit('root-emit-proxy', event, this)
+    },
+    search() {
+      this.$rootEmitProxy('before-request')
       if (!this.requestUrl && !this.requestHandler) {
         return warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
       }
 
-      this.$emit('request-start')
+      this.$rootEmitProxy('request-start')
 
       this.contentLoading = true
-      this.getRequestData().then((requestData: any) => {
+      this.getRequestData().then((data: any) => {
         // transformRequestData 有可能返回 false 以阻止提交动作，可用于提交前验证等
-        if (requestData === false) {
-          this.$emit('request-error', 'invalid')
+        if (data === false) {
+          this.$rootEmitProxy('request-error', 'invalid')
           /* istanbul ignore next */
           this.contentLoading = false
           return
         }
-        this.handleRequest(requestData)
+        this.handleRequest(data)
           // 自定义 requestHandler 与内置请求响应都通过验证流程
           .then(this.validateResponseData)
           .then((data: any) => {
@@ -124,7 +126,7 @@ export default Vue.extend({
             }
             this.contentData = this.getContentData(data)
             this.contentLoading = false
-            this.$emit('request-success')
+            this.$rootEmitProxy('request-success')
           })
           .catch(this.handleResponseError)
       })
@@ -134,19 +136,19 @@ export default Vue.extend({
       return dataMapping(data, this.contentDataMap)
     },
 
-    handleRequest(requestData: any) {
+    handleRequest(data: any) {
       let responseDataPromise: Promise<any>
 
       if (isFunction(this.requestHandler)) {
         // 自定义请求方法
-        responseDataPromise = ensurePromise(this.requestHandler(requestData))
+        responseDataPromise = ensurePromise(this.requestHandler(data))
       } else {
         // 多次点击“搜索”会取消前面的请求，以最后一次的请求为准
         /* istanbul ignore next */
         // @ts-ignore
         this._requestCancelToken && this._requestCancelToken()
 
-        const requestConfig = this.getRequestConfig(requestData)
+        const requestConfig = this.getRequestConfig(data)
         const axiosService = axios.create()(requestConfig)
         responseDataPromise = axiosService.then((res) => res.data)
       }
@@ -179,7 +181,7 @@ export default Vue.extend({
         // 清空列表内容
         this.contentData = this.getContentData()
         this.contentLoading = false
-        this.$emit('request-error', error)
+        this.$rootEmitProxy('request-error', error)
       }
       return error
     },
@@ -207,7 +209,7 @@ export default Vue.extend({
     },
 
     getRequestData(): Promise<any> {
-      let data = cloneDeep(this.requestData)
+      let data = cloneDeep(this.filterModel)
 
       // 删除提交数据中的无效数据
       data = omitBy(data, (val) => !isValidFieldValue(val))

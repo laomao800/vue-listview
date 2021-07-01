@@ -20,7 +20,7 @@ export default Vue.extend({
         const modelProperty = this.field.model
         let value = null
         if (modelProperty) {
-          value = get(this.lvStore.requestData, modelProperty)
+          value = get(this.lvStore.filterModel, modelProperty)
         }
         if (this.field.type === 'multipleSelect') {
           // fix: Element-UI v2.4.9 多选 select 初始 value 需要提供 array 类型避免报错
@@ -31,7 +31,7 @@ export default Vue.extend({
       set(newVal: any) {
         const modelProperty = this.field.model
         if (modelProperty) {
-          this.$set(this.lvStore.requestData, modelProperty, newVal)
+          this.$set(this.lvStore.filterModel, modelProperty, newVal)
         } else {
           if (process.env.NODE_ENV !== 'production') {
             error(

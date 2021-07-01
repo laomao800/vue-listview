@@ -1,5 +1,10 @@
 <template>
-  <StoreProvider ref="storeProvider" v-bind="mergedAttrs" v-on="$listeners">
+  <StoreProvider
+    ref="storeProvider"
+    v-bind="mergedAttrs"
+    v-on="$listeners"
+    @root-emit-proxy="(event, store) => $emit(event, store)"
+  >
     <ListviewLayout
       ref="layout"
       v-bind="mergedAttrs"
@@ -13,8 +18,7 @@
           :is="_filterbar"
           ref="filterbar"
           v-bind="mergedAttrs"
-          @fold-change="filterbarUpdateLayout"
-          @submit="handleFilterSubmit"
+          @fold-change="_filterbarUpdateLayout"
         >
           <slot slot="filterbar-top" name="filterbar-top" />
           <slot slot="filterbar-bottom" name="filterbar-bottom" />
@@ -71,20 +75,30 @@ export default Vue.extend({
       }
     },
     _header(): Component {
-      return this.getReplaceComponent('header', ListviewHeader)
+      return this._getReplaceComponent('header', ListviewHeader)
     },
     _filterbar(): Component {
-      return this.getReplaceComponent('filterbar', Filterbar)
+      return this._getReplaceComponent('filterbar', Filterbar)
     },
     _content(): Component {
-      return this.getReplaceComponent('content', ListviewContent)
+      return this._getReplaceComponent('content', ListviewContent)
     },
     _footer(): Component {
-      return this.getReplaceComponent('footer', ListviewContentFooter)
+      return this._getReplaceComponent('footer', ListviewContentFooter)
     },
   },
 
   methods: {
+    search() {
+      ;(this.$refs.storeProvider as any).search()
+    },
+    setContentMessage(text: string, type: string) {
+      ;(this.$refs.storeProvider as any).setContentMessage(text, type)
+    },
+    resetFilter() {
+      ;(this.$refs.filterbar as any).handleFilterReset()
+    },
+    // TODO: 优化各 updateLayout 流程
     updateLayout() {
       setTimeout(() => {
         // 搜索栏展开完成后再执行重算布局
@@ -94,15 +108,7 @@ export default Vue.extend({
           $filterbar.updateLayout()
       })
     },
-    filterbarUpdateLayout() {
-      this.$nextTick().then(() => {
-        ;(this.$refs.layout as any).updateLayout()
-      })
-    },
-    handleFilterSubmit() {
-      ;(this.$refs.storeProvider as any).startRequest()
-    },
-    getReplaceComponent(name: string, defaultComp: Component): Component {
+    _getReplaceComponent(name: string, defaultComp: Component): Component {
       const replaceComponents__ = (this as any).replaceComponents__ || {}
       const comp = replaceComponents__[name]
       if (comp) {
@@ -110,6 +116,11 @@ export default Vue.extend({
       } else {
         return defaultComp
       }
+    },
+    _filterbarUpdateLayout() {
+      this.$nextTick().then(() => {
+        ;(this.$refs.layout as any).updateLayout()
+      })
     },
   },
 })

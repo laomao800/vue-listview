@@ -42,7 +42,7 @@ declare class ListviewProps extends Vue {
   transformRequestData: (requestData?: object) => object | boolean
 
   /** 对原始响应数据的加工方法 default: null */
-  transformResponseData: (requestData?: object) => void
+  transformResponseData: (responseData?: object) => void
 
   /** 数据接口响应内容属性映射。 default: { items: 'result.items', total: 'result.total_count' } */
   contentDataMap: { [k: string]: string }

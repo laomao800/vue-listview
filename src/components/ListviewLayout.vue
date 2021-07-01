@@ -138,7 +138,7 @@ export default Vue.extend({
       contentHeight: this.lvStore.contentHeight,
       contentLoading: this.lvStore.contentLoading,
       contentData: this.lvStore.contentData,
-      filterModel: this.lvStore.requestData,
+      filterModel: this.lvStore.filterModel,
       contentMessage: this.lvStore.internalContentMessage,
     }
 

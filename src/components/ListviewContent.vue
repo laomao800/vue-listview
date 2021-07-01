@@ -105,14 +105,8 @@ export default Vue.extend({
         this.lvStore.internalSelection = newVal
       },
     },
-    requestData() {
-      return this.lvStore.requestData
-    },
     contentData() {
       return this.lvStore.contentData
-    },
-    contentLoading() {
-      return this.lvStore.contentLoading
     },
     contentMessage() {
       return this.lvStore.internalContentMessage

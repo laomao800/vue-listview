@@ -194,30 +194,22 @@ export default Vue.extend({
     isShowResetButton: 'updateLayout',
   },
 
-  // 更新布局方法改由父级 ListviewLayout 触发
-  // mounted() {
-  //   this.updateLayout()
-  //   window.addEventListener('resize', this.updateLayout)
-  // },
-  // beforeDestroy: /* istanbul ignore next */ function () {
-  //   window.removeEventListener('resize', this.updateLayout)
-  // },
-
   methods: {
     handleFilterSearch() {
-      this.$emit('submit')
+      this.$rootEmitProxy('filter-submit')
+      this.lvStore.search()
     },
 
     handleFilterReset() {
-      const requestData = this.lvStore.requestData
+      const filterModel = this.lvStore.filterModel
       const _resetField = (field: FilterField) => {
         const name = field.model
-        if (name && hasOwn(requestData, name)) {
-          const value = requestData[name]
+        if (name && hasOwn(filterModel, name)) {
+          const value = filterModel[name]
           if (Array.isArray(value)) {
-            this.$set(requestData, name, [])
+            this.$set(filterModel, name, [])
           } else {
-            this.$set(requestData, name, undefined)
+            this.$set(filterModel, name, undefined)
           }
         }
       }
@@ -228,7 +220,7 @@ export default Vue.extend({
           _resetField(field)
         }
       })
-      this.$emit('filter-reset', this.lvStore.requestData)
+      this.$rootEmitProxy('filter-reset')
     },
 
     toggleFilterbar() {
