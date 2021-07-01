@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Methods setContentMessage("text") 1`] = `<span class="lv__message"><span class="lv__message-icon"><i class="el-icon-warning"></i></span><span class="lv__message-text">text</span></span>`;
+
+exports[`Methods setContentMessage("text", "error") 1`] = `<span class="lv__message lv__message--error"><span class="lv__message-icon"><i class="el-icon-error"></i></span><span class="lv__message-text">text</span></span>`;
+
+exports[`Methods setContentMessage("text", "error", true) 1`] = `<span class="lv__message"><span class="lv__message-icon"><i class="el-icon-warning"></i></span><span class="lv__message-text">text</span></span>`;
