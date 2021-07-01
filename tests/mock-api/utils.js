@@ -1,7 +1,7 @@
 module.exports = {
   successWrap(data) {
     return {
-      is_success: true,
+      success: true,
       result: data,
     }
   },
@@ -12,7 +12,7 @@ module.exports = {
         code: code || 500,
         msg,
       },
-      is_success: false,
+      success: false,
     }
   },
 }

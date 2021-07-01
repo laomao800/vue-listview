@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import { Component } from 'vue'
 import { mount } from '@vue/test-utils'
+import { ListviewProps } from '~/types'
 
-export async function createRequestSpyWrapper(propsData = {}) {
+export async function createRequestSpyWrapper(
+  propsData: Partial<ListviewProps>
+) {
   const Listview = require('@/index').default
   const { successWrap } = require('../mock-api/utils')
 
-  const requestSpy = jest.fn(() =>
+  const requestSpy = jest.fn<Promise<any>, any[]>(() =>
     Promise.resolve(
       successWrap({
         items: mockDataList,
@@ -20,8 +24,11 @@ export async function createRequestSpyWrapper(propsData = {}) {
       ...propsData,
     },
   })
+  const vm = wrapper.vm as any
+  const storeVm = wrapper.findComponent({ name: 'StoreProvider' }).vm as any
 
-  return { wrapper, requestSpy }
+  await wait()
+  return { requestSpy, wrapper, vm, storeVm }
 }
 
 export const wait = (time = 100) =>

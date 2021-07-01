@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { wait } from '../helpers'
 import Listview from '@/index'
 
 describe('Events', () => {
@@ -44,13 +43,11 @@ describe('Events', () => {
     })
     // this.$rootEmitProxy('request-error', 'invalid')
     // this.$rootEmitProxy('request-error', error)
-    ;(wrapper.vm as any).search()
-    await wait()
+    await (wrapper.vm as any).search()
     expect(wrapper.emitted('before-request')!.length).toBe(1)
     expect(wrapper.emitted('request-start')!.length).toBe(1)
     expect(wrapper.emitted('request-success')!.length).toBe(1)
-    ;(wrapper.vm as any).search()
-    await wait()
+    await (wrapper.vm as any).search()
     expect(wrapper.emitted('before-request')!.length).toBe(2)
     expect(wrapper.emitted('request-start')!.length).toBe(2)
     expect(wrapper.emitted('request-success')!.length).toBe(2)
