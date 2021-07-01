@@ -136,6 +136,10 @@ export default Vue.extend({
       return dataMapping(data, this.contentDataMap)
     },
 
+    cleanContentData() {
+      this.contentData = this.getContentData()
+    },
+
     handleRequest(data: any) {
       let responseDataPromise: Promise<any>
 
@@ -179,7 +183,7 @@ export default Vue.extend({
           : errorMessage
         this.setContentMessage(errorMessage, 'error')
         // 清空列表内容
-        this.contentData = this.getContentData()
+        this.cleanContentData()
         this.contentLoading = false
         this.$rootEmitProxy('request-error', error)
       }
@@ -237,12 +241,13 @@ export default Vue.extend({
       return ensurePromise(data)
     },
 
-    setContentMessage(text = '', type = null) {
+    setContentMessage(text = '', type = null, cleanList = false) {
       if (text === null) {
         this.internalContentMessage = { text: null, type: null }
       } else {
         this.internalContentMessage = { text, type }
       }
+      cleanList && this.cleanContentData()
     },
   },
 

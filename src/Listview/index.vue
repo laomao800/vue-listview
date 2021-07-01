@@ -92,8 +92,12 @@ export default Vue.extend({
     search() {
       ;(this.$refs.storeProvider as any).search()
     },
-    setContentMessage(text: string, type: string) {
-      ;(this.$refs.storeProvider as any).setContentMessage(text, type)
+    setContentMessage(text: string, type: string, cleanList = false) {
+      ;(this.$refs.storeProvider as any).setContentMessage(
+        text,
+        type,
+        cleanList
+      )
     },
     resetFilter() {
       ;(this.$refs.filterbar as any).handleFilterReset()
