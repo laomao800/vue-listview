@@ -89,8 +89,8 @@ export default Vue.extend({
   },
 
   methods: {
-    search() {
-      ;(this.$refs.storeProvider as any).search()
+    search(keep: boolean) {
+      return (this.$refs.storeProvider as any).search(keep)
     },
     setContentMessage(text: string, type: string, cleanList = false) {
       ;(this.$refs.storeProvider as any).setContentMessage(

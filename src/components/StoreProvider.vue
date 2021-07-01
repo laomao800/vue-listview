@@ -100,7 +100,15 @@ export default Vue.extend({
     $rootEmitProxy(event: string) {
       this.$emit('root-emit-proxy', event, this)
     },
-    search() {
+
+    search(keep = false) {
+      if (!keep) {
+        this.currentPage = 1
+      }
+      return this.doRequest()
+    },
+
+    doRequest() {
       this.$rootEmitProxy('before-request')
       if (!this.requestUrl && !this.requestHandler) {
         return warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
@@ -109,7 +117,7 @@ export default Vue.extend({
       this.$rootEmitProxy('request-start')
 
       this.contentLoading = true
-      this.getRequestData().then((data: any) => {
+      return this.getRequestData().then((data: any) => {
         // transformRequestData 有可能返回 false 以阻止提交动作，可用于提交前验证等
         if (data === false) {
           this.$rootEmitProxy('request-error', 'invalid')
