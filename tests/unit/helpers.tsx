@@ -3,8 +3,8 @@ import { Component } from 'vue'
 import { mount } from '@vue/test-utils'
 import { ListviewProps } from '~/types'
 
-export async function createRequestSpyWrapper(
-  propsData: Partial<ListviewProps>
+export async function createListviewWrapper(
+  propsData: Partial<ListviewProps> = {}
 ) {
   const Listview = require('@/index').default
   const { successWrap } = require('../mock-api/utils')

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { wait } from '../helpers'
+import { createListviewWrapper, wait } from '../helpers'
 import Listview from '@/Listview'
 import ListviewHeader from '@/components/ListviewHeader.vue'
 
@@ -12,8 +12,9 @@ describe('layout', () => {
         value: 800,
       })
 
-      const wrapper = await mount(Listview, {
-        propsData: { autoload: false, usePage: false },
+      const { wrapper } = await createListviewWrapper({
+        autoload: false,
+        usePage: false,
       })
       expect(wrapper.element.style.height).toBe('800px')
 
@@ -28,15 +29,19 @@ describe('layout', () => {
     })
 
     it('auto height', async () => {
-      const wrapper = await mount(Listview, {
-        propsData: { autoload: false, usePage: false, fullHeight: false },
+      const { wrapper } = await createListviewWrapper({
+        autoload: false,
+        usePage: false,
+        fullHeight: false,
       })
       expect(wrapper.element.style.height).toBe('')
     })
 
     it('specify height', async () => {
-      const wrapper = await mount(Listview, {
-        propsData: { autoload: false, usePage: false, height: 500 },
+      const { wrapper } = await createListviewWrapper({
+        autoload: false,
+        usePage: false,
+        height: 500,
       })
       expect(wrapper.element.style.height).toBe('500px')
     })
@@ -80,10 +85,11 @@ describe('layout', () => {
   })
 
   describe('contentMessage', () => {
-    it('string', () => {
+    it('string', async () => {
       const contentMessage = 'message text'
-      const wrapper = mount(Listview, {
-        propsData: { contentMessage },
+      const { wrapper } = await createListviewWrapper({
+        autoload: false,
+        contentMessage,
       })
       const messageBlock = wrapper.find('.lv__message')
       expect(messageBlock.find('.el-icon-warning').exists()).toBe(true)
@@ -92,13 +98,15 @@ describe('layout', () => {
       )
     })
 
-    it('object', () => {
-      const contentMessage = {
+    it('object', async () => {
+      const contentMessage: any = {
         type: 'info',
         text: 'message text',
       }
-      const wrapper = mount(Listview, {
-        propsData: { contentMessage },
+
+      const { wrapper } = await createListviewWrapper({
+        autoload: false,
+        contentMessage,
       })
       const messageBlock = wrapper.find('.lv__message')
       expect(messageBlock.find('.el-icon-info').exists()).toBe(true)
@@ -110,16 +118,13 @@ describe('layout', () => {
 
   describe('row class name', () => {
     it('row string class', async () => {
-      const wrapper = await mount(Listview, {
-        propsData: {
-          requestHandler: () => ({
-            result: { items: [{}], total: 1 },
-            is_success: true,
-          }),
-          tableProps: { rowClassName: 'row-view-class' },
-        },
+      const { wrapper } = await createListviewWrapper({
+        requestHandler: () => ({
+          result: { items: [{}], total: 1 },
+          is_success: true,
+        }),
+        tableProps: { rowClassName: 'row-view-class' },
       })
-      await wait()
       expect(
         wrapper.findAll('.el-table__body-wrapper .el-table__row.row-view-class')
           .length
@@ -127,18 +132,15 @@ describe('layout', () => {
     })
 
     it('row func class', async () => {
-      const wrapper = await mount(Listview, {
-        propsData: {
-          requestHandler: () => ({
-            result: { items: [{}], total: 1 },
-            is_success: true,
-          }),
-          tableProps: {
-            rowClassName: () => 'row-view-class-fn',
-          },
+      const { wrapper } = await createListviewWrapper({
+        requestHandler: () => ({
+          result: { items: [{}], total: 1 },
+          is_success: true,
+        }),
+        tableProps: {
+          rowClassName: () => 'row-view-class-fn',
         },
       })
-      await wait()
       expect(
         wrapper.findAll(
           '.el-table__body-wrapper .el-table__row.row-view-class-fn'
@@ -149,21 +151,19 @@ describe('layout', () => {
 
   describe('listview footer', () => {
     it('pager off', async () => {
-      const wrapper = await mount(Listview, { propsData: { usePage: false } })
+      const { wrapper } = await createListviewWrapper({ usePage: false })
       expect(wrapper.vm.$el.querySelector('.lv__pager')).toBe(null)
     })
 
     it('pager on left', async () => {
-      const wrapper = await mount(Listview, {
-        propsData: { pagePosition: 'left' },
-      })
+      const { wrapper } = await createListviewWrapper({ pagePosition: 'left' })
       expect(wrapper.find('.lv__footer-left .lv__pager').exists()).toBe(true)
       expect(wrapper.find('.lv__footer-right .lv__pager').exists()).toBe(false)
     })
 
     it('pager on right', async () => {
-      const wrapper = await mount(Listview, {
-        propsData: { pagePosition: 'right' },
+      const { wrapper } = await createListviewWrapper({
+        pagePosition: 'right',
       })
       expect(wrapper.find('.lv__footer-left .lv__pager').exists()).toBe(false)
       expect(wrapper.find('.lv__footer-right .lv__pager').exists()).toBe(true)

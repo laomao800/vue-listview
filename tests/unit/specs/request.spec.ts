@@ -1,8 +1,8 @@
-import { createRequestSpyWrapper, mockDataList, wait } from '../helpers'
+import { createListviewWrapper, mockDataList, wait } from '../helpers'
 
 describe('Request params', () => {
   it('常规参数验证', async () => {
-    const { requestSpy } = await createRequestSpyWrapper({
+    const { requestSpy } = await createListviewWrapper({
       filterModel: {
         static_text: 'abc',
         multipleSelect: [1, 2, 3],
@@ -16,7 +16,7 @@ describe('Request params', () => {
   })
 
   it('transformRequestData', async () => {
-    const { requestSpy } = await createRequestSpyWrapper({
+    const { requestSpy } = await createListviewWrapper({
       filterModel: {
         static_text: 'abc',
         multipleSelect: [1, 2, 3],
@@ -43,7 +43,7 @@ describe('Request params', () => {
 
   it('text 字段默认开启 trim', async () => {
     const testString = '  text string  '
-    const { wrapper, requestSpy } = await createRequestSpyWrapper({
+    const { wrapper, requestSpy } = await createListviewWrapper({
       filterModel: { text1: testString, text2: testString },
       filterFields: [
         { type: 'text', model: 'text1' },
@@ -69,7 +69,7 @@ describe('Request params', () => {
 
 describe('分页参数', () => {
   it('默认分页参数', async () => {
-    const { requestSpy } = await createRequestSpyWrapper({
+    const { requestSpy } = await createListviewWrapper({
       pageSize: 2,
     })
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('page_index', 1)
@@ -77,7 +77,7 @@ describe('分页参数', () => {
   })
 
   it('不带分页参数', async () => {
-    const { requestSpy } = await createRequestSpyWrapper({
+    const { requestSpy } = await createListviewWrapper({
       usePage: false,
     })
     expect(requestSpy.mock.calls[0][0]).not.toHaveProperty('page_index')
@@ -85,7 +85,7 @@ describe('分页参数', () => {
   })
 
   it('自定义分页参数', async () => {
-    const { requestSpy } = await createRequestSpyWrapper({
+    const { requestSpy } = await createListviewWrapper({
       pageSize: 2,
       usePage: {
         pageIndex: 'customPageIndex',
@@ -97,7 +97,7 @@ describe('分页参数', () => {
   })
 
   it('无效自定义分页参数', async () => {
-    const { requestSpy } = await createRequestSpyWrapper({
+    const { requestSpy } = await createListviewWrapper({
       pageSize: 2,
       usePage: {
         // @ts-ignore
@@ -111,7 +111,7 @@ describe('分页参数', () => {
   })
 
   it('切换 pageSize', async () => {
-    const { wrapper } = await createRequestSpyWrapper({
+    const { wrapper } = await createListviewWrapper({
       pageSize: 2,
     })
     const $pagination = wrapper.findComponent({ name: 'ElPagination' })
@@ -121,7 +121,7 @@ describe('分页参数', () => {
   })
 
   it('search(true) 保持当前页码', async () => {
-    const { wrapper, vm, storeVm } = await createRequestSpyWrapper({
+    const { wrapper, vm, storeVm } = await createListviewWrapper({
       pageSize: 2,
     })
 
@@ -138,7 +138,7 @@ describe('分页参数', () => {
 
 describe('Response', () => {
   it('contentDataMap', async () => {
-    const { storeVm } = await createRequestSpyWrapper({
+    const { storeVm } = await createListviewWrapper({
       contentDataMap: {
         custom_items: 'result.items',
         custom_total: 'result.total_count',
@@ -159,7 +159,7 @@ describe('Response', () => {
       items: mockDataList,
       total: 40,
     }
-    const { storeVm } = await createRequestSpyWrapper({
+    const { storeVm } = await createListviewWrapper({
       requestHandler: () =>
         Promise.resolve({
           custom_is_success: 'done',
@@ -171,7 +171,7 @@ describe('Response', () => {
   })
 
   it('resolveResponseErrorMessage', async () => {
-    const { storeVm } = await createRequestSpyWrapper({
+    const { storeVm } = await createListviewWrapper({
       requestHandler: () =>
         Promise.resolve({
           custom_is_success: 'fail',
@@ -193,7 +193,7 @@ describe('Response', () => {
   })
 
   it('transformResponseData', async () => {
-    const { storeVm } = await createRequestSpyWrapper({
+    const { storeVm } = await createListviewWrapper({
       contentDataMap: {
         success: 'is_success',
         items: 'new_data.items',
