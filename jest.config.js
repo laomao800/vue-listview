@@ -5,4 +5,11 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less)$': '<rootDir>/tests/unit/__mocks__/styleMock.js',
   },
+  coverageDirectory: '<rootDir>/tests/unit/coverage',
+  collectCoverageFrom: [
+    'src/**/*.{js,vue}',
+    '!src/index.ts',
+    '!src/index.component.ts',
+    '!src/importElementUI.ts',
+  ],
 }

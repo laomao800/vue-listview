@@ -1,6 +1,6 @@
 import { create } from '@/create'
 import Listview from './Listview'
-import './importElementUi'
+import './importElementUI'
 
 // @ts-ignore
 Listview.install = function (Vue) {
