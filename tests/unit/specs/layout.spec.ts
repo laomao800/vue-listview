@@ -48,8 +48,8 @@ describe('layout', () => {
   })
 
   describe('ListviewHeader', () => {
-    it('empty', async () => {
-      const wrapper = await mount(ListviewHeader)
+    it('empty', () => {
+      const wrapper = mount(ListviewHeader)
       expect(wrapper.html()).toMatchSnapshot()
     })
 

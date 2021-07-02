@@ -1,4 +1,4 @@
-import { createListviewWrapper, wait } from '../helpers'
+import { createListviewWrapper } from '../helpers'
 
 describe('Events', () => {
   it('filter-submit', async () => {
