@@ -37,3 +37,7 @@ export const wait = (time = 100) =>
 export const mockDataList = Array(10)
   .fill(undefined)
   .map((row, index) => ({ id: index, name: `row${index}` }))
+
+export function removeElCascaderHtmlId(html: string) {
+  return html.replace(/id="cascader-menu-\d+-\d+"/, '')
+}

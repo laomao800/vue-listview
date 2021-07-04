@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filterbar Filter buttons 1`] = `
+exports[`Filter buttons all 1`] = `
 <form class="el-form lv__filterbar el-form--inline">
   <!---->
   <div class="lv__filterbar-main">
@@ -54,6 +54,738 @@ exports[`Filterbar Filter buttons 1`] = `
         </div>
       </div>
       <!---->
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field cascader render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-cascader el-cascader--small" style="width: 180px;">
+                <div class="el-input el-input--small el-input--suffix">
+                  <!----><input type="text" readonly="readonly" autocomplete="off" placeholder="cascader" class="el-input__inner">
+                  <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon el-icon-arrow-down"></i><!----><!----><!----><!----></span>
+                  <!----></span>
+                  <!---->
+                  <!---->
+                </div>
+                <!---->
+                <transition-stub name="el-zoom-in-top">
+                  <div class="el-popper el-cascader__dropdown" style="display: none;">
+                    <div class="el-cascader-panel">
+                      <div class="el-scrollbar el-cascader-menu" role="menu">
+                        <div class="el-cascader-menu__wrap el-scrollbar__wrap el-scrollbar__wrap--hidden-default">
+                          <ul class="el-scrollbar__view el-cascader-menu__list is-empty">
+                            <div class="el-cascader-menu__empty-text">暂无数据</div>
+                          </ul>
+                        </div>
+                        <div class="el-scrollbar__bar is-horizontal">
+                          <div class="el-scrollbar__thumb" style="width: 0px; transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+                        </div>
+                        <div class="el-scrollbar__bar is-vertical">
+                          <div class="el-scrollbar__thumb" style="height: 0px; transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!---->
+                  </div>
+                </transition-stub>
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field date render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--date" style="width: 180px;">
+                <!----><input type="text" autocomplete="off" name="" placeholder="date" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-date"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----><!----></span>
+                <!----></span>
+                <!---->
+                <!---->
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field dateRange render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-range-editor el-input__inner el-date-editor--daterange el-range-editor--small" expandtrigger="hover" style="width: 240px;"><i class="el-input__icon el-range__icon el-icon-date"></i><input autocomplete="off" placeholder="开始日期" name="" class="el-range-input"><span class="el-range-separator">-</span><input autocomplete="off" placeholder="结束日期" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field dateTime render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--datetime" style="width: 200px;">
+                <!----><input type="text" autocomplete="off" name="" placeholder="dateTime" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----><!----></span>
+                <!----></span>
+                <!---->
+                <!---->
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field dateTimeRange render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-range-editor el-input__inner el-date-editor--datetimerange el-range-editor--small" expandtrigger="hover" style="width: 360px;"><i class="el-input__icon el-range__icon el-icon-time"></i><input autocomplete="off" placeholder="开始日期" name="" class="el-range-input"><span class="el-range-separator">-</span><input autocomplete="off" placeholder="结束日期" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field multipleSelect render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-select el-select--small" style="width: 180px;">
+                <div class="el-select__tags" style="max-width: -32px; width: 100%;">
+                  <!---->
+                  <!----><input type="text" autocomplete="off" class="el-select__input is-small" style="flex-grow: 1; width: -0.625%; max-width: -42px;">
+                </div>
+                <div class="el-input el-input--small el-input--suffix">
+                  <!----><input tabindex="-1" type="text" readonly="readonly" autocomplete="off" placeholder="multipleSelect" class="el-input__inner">
+                  <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----><!----><!----><!----></span>
+                  <!----></span>
+                  <!---->
+                  <!---->
+                </div>
+                <transition-stub name="el-zoom-in-top">
+                  <div class="el-select-dropdown el-popper is-multiple" style="display: none;">
+                    <div class="el-scrollbar" style="display: none;">
+                      <div class="el-select-dropdown__wrap el-scrollbar__wrap el-scrollbar__wrap--hidden-default">
+                        <ul class="el-scrollbar__view el-select-dropdown__list"></ul>
+                      </div>
+                      <div class="el-scrollbar__bar is-horizontal">
+                        <div class="el-scrollbar__thumb" style="width: 0px; transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+                      </div>
+                      <div class="el-scrollbar__bar is-vertical">
+                        <div class="el-scrollbar__thumb" style="height: 0px; transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+                      </div>
+                    </div>
+                    <p class="el-select-dropdown__empty">
+                      无数据
+                    </p>
+                  </div>
+                </transition-stub>
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field number render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-input-number el-input-number--small is-controls-right" style="width: 100px;"><span role="button" class="el-input-number__decrease"><i class="el-icon-arrow-down"></i></span><span role="button" class="el-input-number__increase"><i class="el-icon-arrow-up"></i></span>
+                <div class="el-input el-input--small">
+                  <!----><input type="text" autocomplete="off" placeholder="number" max="Infinity" min="-Infinity" class="el-input__inner" role="spinbutton" aria-valuemax="Infinity" aria-valuemin="-Infinity" aria-valuenow="undefined" aria-disabled="false">
+                  <!---->
+                  <!---->
+                  <!---->
+                  <!---->
+                </div>
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field select render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-select el-select--small" style="width: 180px;">
+                <!---->
+                <div class="el-input el-input--small el-input--suffix">
+                  <!----><input type="text" readonly="readonly" autocomplete="off" placeholder="select" class="el-input__inner">
+                  <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up"></i><!----><!----><!----><!----><!----></span>
+                  <!----></span>
+                  <!---->
+                  <!---->
+                </div>
+                <transition-stub name="el-zoom-in-top">
+                  <div class="el-select-dropdown el-popper" style="display: none;">
+                    <div class="el-scrollbar" style="display: none;">
+                      <div class="el-select-dropdown__wrap el-scrollbar__wrap el-scrollbar__wrap--hidden-default">
+                        <ul class="el-scrollbar__view el-select-dropdown__list"></ul>
+                      </div>
+                      <div class="el-scrollbar__bar is-horizontal">
+                        <div class="el-scrollbar__thumb" style="width: 0px; transform: translateX(0%); webkit-transform: translateX(0%);"></div>
+                      </div>
+                      <div class="el-scrollbar__bar is-vertical">
+                        <div class="el-scrollbar__thumb" style="height: 0px; transform: translateY(0%); webkit-transform: translateY(0%);"></div>
+                      </div>
+                    </div>
+                    <p class="el-select-dropdown__empty">
+                      无数据
+                    </p>
+                  </div>
+                </transition-stub>
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field text render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-input el-input--small el-input--suffix" style="width: 180px;">
+                <!----><input type="text" autocomplete="off" placeholder="text" class="el-input__inner">
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field timePicker render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--time" style="width: 120px;">
+                <!----><input type="text" autocomplete="off" name="" placeholder="timePicker" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----><!----></span>
+                <!----></span>
+                <!---->
+                <!---->
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field timePickerRange render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-range-editor el-input__inner el-date-editor--timerange el-range-editor--small" style="width: 200px;"><i class="el-input__icon el-range__icon el-icon-time"></i><input autocomplete="off" placeholder="开始时间" name="" class="el-range-input"><span class="el-range-separator">-</span><input autocomplete="off" placeholder="结束时间" name="" class="el-range-input"><i class="el-input__icon el-range__close-icon"></i></div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</form>
+`;
+
+exports[`Filter fields render Field timeSelect render 1`] = `
+<form class="el-form lv__filterbar el-form--inline">
+  <!---->
+  <div class="lv__filterbar-main">
+    <!---->
+    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+      <div class="lv__filterbar-action lv__filterbar-action--nomore">
+        <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
+          <!---->
+          <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
+              <!----><i class="el-icon-search"></i><span>
+            搜索
+          </span>
+            </button> <button type="button" class="el-button el-button--default el-button--small" text="重置">
+              <!---->
+              <!----><span>
+            重置
+          </span>
+            </button>
+            <transition-stub name="el-zoom-in-top">
+              <!---->
+            </transition-stub>
+          </div>
+        </div>
+        <div class="lv__filterbar-action-ext"> <button type="button" class="el-button lv__filterbar-action-more el-button--primary">
+            <!----><i class="el-icon-caret-top"></i>
+            <!---->
+          </button> </div>
+      </div>
+      <!---->
+      <div class="lv__filterbar-fields lv__fields-wrapper">
+        <div class="lv__field">
+          <transition-stub name="lv__field-label-trans"></transition-stub>
+          <div class="el-form-item el-form-item--small">
+            <!---->
+            <div class="el-form-item__content">
+              <div class="el-date-editor el-input el-input--small el-input--prefix el-input--suffix el-date-editor--time-select" style="width: 120px;">
+                <!----><input type="text" autocomplete="off" name="" placeholder="timeSelect" class="el-input__inner"><span class="el-input__prefix"><i class="el-input__icon el-icon-time"></i><!----></span><span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-input__icon"></i><!----><!----><!----><!----></span>
+                <!----></span>
+                <!---->
+                <!---->
+              </div>
+              <transition-stub name="el-zoom-in-top">
+                <!---->
+              </transition-stub>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!---->
   </div>

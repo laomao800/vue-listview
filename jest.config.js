@@ -7,7 +7,7 @@ module.exports = {
   },
   coverageDirectory: '<rootDir>/tests/unit/coverage',
   collectCoverageFrom: [
-    'src/**/*.{js,vue}',
+    'src/**/*.{js,ts,vue}',
     '!src/index.ts',
     '!src/index.component.ts',
     '!src/importElementUI.ts',
