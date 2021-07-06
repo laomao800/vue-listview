@@ -10,6 +10,16 @@ import {
   FilterButtonHasRender,
 } from '~/types'
 
+function isValidButtonConfig(button: any) {
+  return (
+    button &&
+    (isPlainObject(button) ||
+      isFunction(button) ||
+      isFunction(button.render) ||
+      isVNode(button))
+  )
+}
+
 function isDropdownButton(item: any): item is FilterButtonHasChildren {
   return isPlainObject(item) && Array.isArray(item.children)
 }
@@ -34,6 +44,8 @@ export default Vue.extend({
 
   methods: {
     renderButton(button: FilterButton) {
+      if (!isValidButtonConfig(button)) return null
+
       if (isFunction(button)) {
         return <vNode node={button()} />
       } else if (hasRenderFn<FilterButtonHasRender>(button)) {
