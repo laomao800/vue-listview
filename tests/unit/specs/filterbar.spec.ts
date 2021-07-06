@@ -1,7 +1,6 @@
-import Vue from 'vue'
-import { mount, Wrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import zipObject from 'lodash/zipObject'
-import { removeElCascaderHtmlId } from '../helpers'
+import { removeElCascaderHtmlId, wait } from '../helpers'
 import Filterbar from '@/components/Filterbar.vue'
 
 const DATE1 = new Date('2021/01/01 09:30:00')
@@ -210,4 +209,89 @@ describe('Filter fields default value', () => {
         expect(inputVm.value).toBe(lvStore.filterModel[modelKey])
       })
     })
+})
+
+describe('Filter fields options resolve', () => {
+  const options = [
+    { label: 'option1', value: 'option1' },
+    { label: 'option2', value: 'option2' },
+  ]
+
+  it('array', async () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [{ type: 'select', model: 'select', options }],
+      },
+    })
+    await wait()
+    expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
+      options.length
+    )
+  })
+
+  it('promise', async () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [
+          {
+            type: 'select',
+            model: 'select',
+            options: Promise.resolve(options),
+          },
+        ],
+      },
+    })
+    await wait()
+    expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
+      options.length
+    )
+  })
+
+  it('function return array', async () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [
+          { type: 'select', model: 'select', options: () => options },
+        ],
+      },
+    })
+    await wait()
+    expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
+      options.length
+    )
+  })
+
+  it('function return promise', async () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [
+          {
+            type: 'select',
+            model: 'select',
+            options: () => Promise.resolve(options),
+          },
+        ],
+      },
+    })
+    await wait()
+    expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
+      options.length
+    )
+  })
+
+  it('invalid options', async () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [
+          {
+            type: 'select',
+            model: 'select',
+            options: 'options',
+          },
+        ],
+      },
+    })
+    await wait()
+    expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(0)
+  })
 })

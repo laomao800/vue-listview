@@ -122,3 +122,20 @@ export function ensurePromise<T>(data: T) {
 export function noop() {
   // noop
 }
+
+export function resolveOptions(
+  optionsConfig: any,
+  done: (options: any[]) => void
+) {
+  let optionsPromise = null
+  if (optionsConfig) {
+    if (Array.isArray(optionsConfig)) {
+      optionsPromise = Promise.resolve(optionsConfig)
+    } else if (isFunction(optionsConfig)) {
+      optionsPromise = ensurePromise(optionsConfig(done))
+    } else if (isPromise(optionsConfig)) {
+      optionsPromise = optionsConfig
+    }
+  }
+  return optionsPromise
+}

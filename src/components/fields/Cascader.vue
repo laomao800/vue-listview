@@ -10,9 +10,8 @@
 </template>
 
 <script>
-import isFunction from 'lodash/isFunction'
-import fieldMixin from '../../mixins/fieldMixin'
-import { ensurePromise, isPromise } from '@/utils'
+import fieldMixin from '@/mixins/fieldMixin'
+import { resolveOptions } from '@/utils'
 
 export default {
   name: 'FieldCascader',
@@ -38,20 +37,13 @@ export default {
       }
     }
 
-    let optionsPromise
-    const options = this.field.options
-    if (isPromise(options)) {
-      optionsPromise = options
-    } else if (Array.isArray(options)) {
-      optionsPromise = ensurePromise(options)
-    } else if (isFunction(options)) {
-      optionsPromise = ensurePromise(options(setOptions))
+    const optionsPromise = resolveOptions(this.field.options, setOptions)
+    if (optionsPromise) {
+      this.loading = true
+      optionsPromise.then(setOptions).finally(() => {
+        this.loading = false
+      })
     }
-
-    this.loading = true
-    optionsPromise.then(setOptions).finally(() => {
-      this.loading = false
-    })
   },
 }
 </script>
