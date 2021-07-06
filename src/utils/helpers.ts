@@ -107,10 +107,6 @@ export function hasOwn(obj: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
 
-export function isDef(val: any) {
-  return val !== undefined
-}
-
 export function hasRenderFn<T>(item: any): item is T {
   return isPlainObject(item) && isFunction(item.render)
 }
@@ -119,6 +115,7 @@ export function ensurePromise<T>(data: T) {
   return isPromise(data) ? data : Promise.resolve(data)
 }
 
+/* istanbul ignore next */
 export function noop() {
   // noop
 }

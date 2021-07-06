@@ -9,5 +9,11 @@ export default {
   name: 'FieldMultipleSelect',
 
   components: { FieldSelect },
+
+  // created() {
+  //   if (!Array.isArray(this.value)) {
+  //     this.value = []
+  //   }
+  // },
 }
 </script>

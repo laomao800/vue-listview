@@ -1,4 +1,4 @@
-import { createListviewWrapper, mockDataList, wait } from '../helpers'
+import { createListviewWrapper, mockDataList } from '../helpers'
 
 describe('Request params', () => {
   it('常规参数验证', async () => {

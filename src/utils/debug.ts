@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function noop(_msg: string, ..._args: any[]) {
   // noop
@@ -6,10 +7,9 @@ function noop(_msg: string, ..._args: any[]) {
 export let warn = noop
 export let error = noop
 
-/* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
+  /* istanbul ignore next */
   warn = (msg: string, ...args: any[]) => {
-    // eslint-disable-next-line no-console
     console.warn(
       `%c Listview warn %c ${msg}`,
       'background:#f90;padding:1px;border-radius:3px;color:#fff',
@@ -18,6 +18,7 @@ if (process.env.NODE_ENV !== 'test') {
     )
   }
 
+  /* istanbul ignore next */
   error = (msg: string, ...args: any[]) => {
     // eslint-disable-next-line no-console
     console.error(
