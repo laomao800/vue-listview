@@ -49,6 +49,7 @@
 <script lang="tsx">
 import Vue, { Component } from 'vue'
 import isFunction from 'lodash/isFunction'
+import isPlainObject from 'lodash/isPlainObject'
 import StoreProvider from '@/components/StoreProvider.vue'
 import ListviewLayout from '@/components/ListviewLayout.vue'
 import ListviewHeader from '@/components/ListviewHeader.vue'
@@ -68,11 +69,8 @@ export default Vue.extend({
 
   computed: {
     mergedAttrs(): Record<string, any> {
-      return {
-        // presetProps 由 create 时提供
-        ...((this as any).presetProps__ || {}),
-        ...this.$attrs,
-      }
+      const preset = (this as any).presetProps__
+      return isPlainObject(preset) ? { ...preset, ...this.$attrs } : this.$attrs
     },
     _header(): Component {
       return this._getReplaceComponent('header', ListviewHeader)

@@ -1,34 +1,50 @@
 import Vue from 'vue'
 import pick from 'lodash/pick'
+import isPlainObject from 'lodash/isPlainObject'
 import _Listview from '@/Listview'
-import StoreProvider from '@/components/StoreProvider.vue'
-import ListviewLayout from '@/components/ListviewLayout.vue'
-import Filterbar from '@/components/Filterbar.vue'
-import ListviewContent from '@/components/ListviewContent.vue'
 
 const allowPresetProps = [
-  // @ts-ignore
-  ...Object.keys(StoreProvider.options.props),
-  // @ts-ignore
-  ...Object.keys(ListviewLayout.options.props),
-  // @ts-ignore
-  ...Object.keys(Filterbar.options.props),
-  // @ts-ignore
-  ...Object.keys(ListviewContent.options.props),
+  // StoreProvider
+  'pressEnterSearch',
+  'autoload',
+  'requestMethod',
+  'requestConfig',
+  'transformRequestData',
+  'transformResponseData',
+  'contentDataMap',
+  'contentMessage',
+  'validateResponse',
+  'resolveResponseErrorMessage',
+  'usePage',
+  'pageSize',
+  'pageSizes',
+  'pageProps',
+  'pagePosition',
+
+  // ListviewLayout
+  'height',
+  'fullHeight',
+
+  // Filterbar
+  'searchButton',
+  'resetButton',
 ]
 
-export function create(options: any = {}) {
-  const { replaceComponents = {}, ..._options } = options
+export function create(options?: any) {
+  let component = _Listview
 
-  const component = Vue.extend({
-    extends: _Listview,
-    data() {
-      return {
-        presetProps__: pick(_options, allowPresetProps),
-        replaceComponents__: replaceComponents,
-      }
-    },
-  })
+  if (isPlainObject(options)) {
+    const { replaceComponents = {}, ..._options } = options
+    component = Vue.extend({
+      extends: _Listview,
+      data() {
+        return {
+          presetProps__: pick(_options, allowPresetProps),
+          replaceComponents__: replaceComponents,
+        }
+      },
+    })
+  }
 
   return { component }
 }
