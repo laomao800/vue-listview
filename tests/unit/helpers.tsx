@@ -3,9 +3,9 @@ import { mount } from '@vue/test-utils'
 import { ListviewProps } from '~/types'
 
 export async function createListviewWrapper(
-  propsData: Partial<ListviewProps> = {}
+  propsData: Partial<ListviewProps> = {},
+  Listview = require('@/index').default
 ) {
-  const Listview = require('@/index').default
   const { successWrap } = require('../mock-api/utils')
 
   const requestSpy = jest.fn<Promise<any>, any[]>(() =>
