@@ -4,7 +4,7 @@
       :inline="true"
       size="small"
       @submit.native.prevent
-      @keydown.native.enter="handleFilterSearch"
+      @keydown.native.enter="handleSubmit"
     >
       <div v-if="$slots['filterbar-top']" class="listview__filterbar-top">
         <slot name="filterbar-top" />
@@ -175,7 +175,7 @@ export default {
   },
 
   props: {
-    // TODO: validator
+    pressEnterSearch: { type: Boolean, default: true },
     filterButtons: { type: Array, default: () => [] },
     filterFields: { type: Array, default: () => [] },
     filterModel: { type: Object, default: () => ({}) },
@@ -260,6 +260,10 @@ export default {
       if (item && isFunction(item.click)) {
         return item.click($event)
       }
+    },
+
+    handleSubmit() {
+      this.pressEnterSearch && this.handleFilterSearch()
     },
 
     handleFilterSearch() {

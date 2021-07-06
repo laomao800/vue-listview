@@ -11,6 +11,7 @@
     <div ref="main" class="listview__main">
       <filterbar
         ref="filterbar"
+        :press-enter-search="pressEnterSearch"
         :filter-buttons="filterButtons"
         :filter-fields="filterFields"
         :filter-model="filterModel"
@@ -335,6 +336,7 @@ export default {
     fullHeight: { type: Boolean, default: true },
 
     // Data request
+    pressEnterSearch: { type: Boolean, default: true },
     autoload: { type: Boolean, default: true },
     requestUrl: { type: String, default: '' },
     requestMethod: { type: String, default: 'post' },

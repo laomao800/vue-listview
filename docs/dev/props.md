@@ -95,6 +95,13 @@ sidebarDepth: 2
 
 传入 `false` 则不显示搜索栏的“重置”按钮。
 
+### pressEnterSearch
+
+- type: `Boolean`
+- default: `true`
+
+搜索栏内按 enter 键是否触发搜索请求。
+
 ## 分页
 
 ### usePage
