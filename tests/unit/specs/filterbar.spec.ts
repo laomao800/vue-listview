@@ -93,7 +93,7 @@ describe('Filter fields', () => {
     )
   })
 
-  it('Field fields render', () => {
+  it('Fields render', () => {
     const wrapper = mount(Filterbar, {
       propsData: {
         filterFields: [
@@ -130,6 +130,20 @@ describe('Filter fields', () => {
     ).toBe(1)
     expect(wrapper.findAllComponents({ name: 'FieldSelect' }).length).toBe(1)
     expect(wrapper.findAllComponents({ name: 'FieldCascader' }).length).toBe(1)
+  })
+
+  it('Group fields render', () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [
+          [
+            { type: 'text', model: 'text' },
+            { type: 'number', model: 'number' },
+          ],
+        ],
+      },
+    })
+    expect(wrapper.find('.lv__field-group').exists()).toBe(true)
   })
 
   it('Filter fields set value', () => {
