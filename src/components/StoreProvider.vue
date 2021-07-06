@@ -26,6 +26,7 @@ export default Vue.extend({
 
   props: {
     // Data request
+    pressEnterSearch: { type: Boolean, default: true },
     autoload: { type: Boolean, default: true },
     requestUrl: { type: String, default: '' },
     requestMethod: { type: String, default: 'post' },

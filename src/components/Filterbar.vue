@@ -4,7 +4,7 @@
     size="small"
     class="lv__filterbar"
     @submit.native.prevent
-    @keydown.native.enter="handleFilterSearch"
+    @keydown.native.enter="handleSubmit"
   >
     <div v-if="$slots['filterbar-top']" class="lv__filterbar-top">
       <slot name="filterbar-top" />
@@ -195,6 +195,10 @@ export default Vue.extend({
   },
 
   methods: {
+    handleSubmit() {
+      this.lvStore.pressEnterSearch && this.handleFilterSearch()
+    },
+
     handleFilterSearch() {
       this.$rootEmitProxy('filter-submit')
       this.lvStore.search()
