@@ -237,13 +237,19 @@ describe('Filter fields options resolve', () => {
   it('array', async () => {
     const wrapper = mount(Filterbar, {
       propsData: {
-        filterFields: [{ type: 'select', model: 'select', options }],
+        filterFields: [
+          { type: 'select', model: 'select', options },
+          { type: 'cascader', model: 'cascader', options },
+        ],
       },
     })
     await wait()
     expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
       options.length
     )
+    expect(
+      wrapper.findComponent({ name: 'ElCascader' }).vm.$props.options
+    ).toEqual(options)
   })
 
   it('promise', async () => {
@@ -255,6 +261,11 @@ describe('Filter fields options resolve', () => {
             model: 'select',
             options: Promise.resolve(options),
           },
+          {
+            type: 'cascader',
+            model: 'cascader',
+            options: Promise.resolve(options),
+          },
         ],
       },
     })
@@ -262,6 +273,9 @@ describe('Filter fields options resolve', () => {
     expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
       options.length
     )
+    expect(
+      wrapper.findComponent({ name: 'ElCascader' }).vm.$props.options
+    ).toEqual(options)
   })
 
   it('function return array', async () => {
@@ -269,6 +283,7 @@ describe('Filter fields options resolve', () => {
       propsData: {
         filterFields: [
           { type: 'select', model: 'select', options: () => options },
+          { type: 'cascader', model: 'cascader', options: () => options },
         ],
       },
     })
@@ -276,6 +291,9 @@ describe('Filter fields options resolve', () => {
     expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
       options.length
     )
+    expect(
+      wrapper.findComponent({ name: 'ElCascader' }).vm.$props.options
+    ).toEqual(options)
   })
 
   it('function return promise', async () => {
@@ -287,6 +305,11 @@ describe('Filter fields options resolve', () => {
             model: 'select',
             options: () => Promise.resolve(options),
           },
+          {
+            type: 'cascader',
+            model: 'cascader',
+            options: () => Promise.resolve(options),
+          },
         ],
       },
     })
@@ -294,18 +317,15 @@ describe('Filter fields options resolve', () => {
     expect(wrapper.findAllComponents({ name: 'ElOption' }).length).toBe(
       options.length
     )
+    expect(
+      wrapper.findComponent({ name: 'ElCascader' }).vm.$props.options
+    ).toEqual(options)
   })
 
   it('invalid options', async () => {
     const wrapper = mount(Filterbar, {
       propsData: {
-        filterFields: [
-          {
-            type: 'select',
-            model: 'select',
-            options: 'options',
-          },
-        ],
+        filterFields: [{ type: 'select', model: 'select', options: 'options' }],
       },
     })
     await wait()
