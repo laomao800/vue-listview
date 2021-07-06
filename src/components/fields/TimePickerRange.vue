@@ -12,7 +12,7 @@
 import fieldMixin from '@/mixins/fieldMixin'
 
 export default {
-  name: 'FieldTimeRange',
+  name: 'FieldTimePickerRange',
 
   mixins: [fieldMixin],
 

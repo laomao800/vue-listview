@@ -1,133 +1,14 @@
 import { mount } from '@vue/test-utils'
-import zipObject from 'lodash/zipObject'
-import { removeElCascaderHtmlId, wait } from '../helpers'
+import { wait } from '../helpers'
 import Filterbar from '@/components/Filterbar.vue'
 
 const DATE1 = new Date('2021/01/01 09:30:00')
 const DATE2 = new Date('2021/06/01 09:30:00')
-const ALL_TEST_FIELDS = [
-  {
-    fieldType: 'text',
-    fieldValue: 'test text',
-    fieldConfig: { type: 'text', model: 'name', label: 'text' },
-  },
-  {
-    fieldType: 'number',
-    fieldValue: 9527,
-    fieldConfig: { type: 'number', label: 'number', model: 'number' },
-  },
-  {
-    fieldType: 'date',
-    fieldValue: DATE1,
-    fieldConfig: { type: 'date', model: 'date', label: 'date' },
-  },
-  {
-    fieldType: 'dateRange',
-    fieldValue: [DATE1, DATE2],
-    fieldConfig: { type: 'dateRange', model: 'dateRange', label: 'dateRange' },
-  },
-  {
-    fieldType: 'timeSelect',
-    fieldValue: '10:00',
-    fieldConfig: {
-      type: 'timeSelect',
-      model: 'timeSelect',
-      label: 'timeSelect',
-    },
-  },
-  {
-    fieldType: 'timePicker',
-    fieldValue: DATE1,
-    fieldConfig: {
-      type: 'timePicker',
-      model: 'timePicker',
-      label: 'timePicker',
-    },
-  },
-  {
-    fieldType: 'timePickerRange',
-    fieldValue: [DATE1, DATE2],
-    fieldConfig: {
-      type: 'timePickerRange',
-      model: 'timePickerRange',
-      label: 'timePickerRange',
-    },
-  },
-  {
-    fieldType: 'dateTime',
-    fieldValue: DATE1,
-    fieldConfig: { type: 'dateTime', model: 'dateTime', label: 'dateTime' },
-  },
-  {
-    fieldType: 'dateTimeRange',
-    fieldValue: [DATE1, DATE2],
-    fieldConfig: {
-      type: 'dateTimeRange',
-      model: 'dateTimeRange',
-      label: 'dateTimeRange',
-    },
-  },
-  {
-    fieldType: 'select',
-    fieldValue: 'option1',
-    fieldConfig: {
-      type: 'select',
-      model: 'select',
-      label: 'select',
-      options: [
-        { label: 'option1', value: 'option1' },
-        { label: 'option2', value: 'option2' },
-      ],
-    },
-  },
-  {
-    fieldType: 'multipleSelect',
-    fieldValue: ['option1', 'option2'],
-    fieldConfig: {
-      type: 'multipleSelect',
-      model: 'multipleSelect',
-      label: 'multipleSelect',
-      options: [
-        { label: 'option1', value: 'option1' },
-        { label: 'option2', value: 'option2' },
-      ],
-    },
-  },
-  {
-    fieldType: 'cascader',
-    fieldValue: [1, 2, 3, 4],
-    fieldConfig: {
-      type: 'cascader',
-      model: 'cascader',
-      label: 'cascader',
-      options: [
-        {
-          value: '1',
-          label: 'menu1',
-          children: [
-            {
-              value: '2',
-              label: 'menu2',
-              children: [
-                {
-                  value: '3',
-                  label: 'menu3',
-                  children: [{ value: '4', label: 'menu4' }],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  },
-]
 
 describe('Filter buttons', () => {
-  it('all', async () => {
-    const mockFn = jest.fn()
+  it('normal', async () => {
     const filterButtons: any = [
-      { text: 'default', click: mockFn },
+      { text: 'default' },
       { type: 'text', text: 'text' },
       { type: 'primary', icon: 'el-icon-edit', text: 'primary' },
       { type: 'success', icon: 'el-icon-check', text: 'success' },
@@ -142,73 +23,209 @@ describe('Filter buttons', () => {
     expect(wrapper.html()).toMatchSnapshot()
     expect(buttons.length).toBe(filterButtons.length)
   })
+
+  it('dropdown', () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterButtons: [
+          {
+            type: 'primary',
+            text: '下拉按钮',
+            children: [
+              { icon: 'el-icon-circle-plus-outline', text: '菜单1' },
+              { icon: 'el-icon-remove-outline', text: '菜单2' },
+            ],
+          },
+        ],
+      },
+    })
+    const buttons = wrapper
+      .findComponent({ name: 'FilterbarButtons' })
+      .findAllComponents({ name: 'ElButton' })
+    const dropdownItem = wrapper.findAllComponents({
+      name: 'ElDropdownItem',
+    })
+    expect(buttons.length).toBe(1)
+    expect(dropdownItem.length).toBe(2)
+  })
+
+  it('click', () => {
+    const mockFn1 = jest.fn()
+    const mockFn2 = jest.fn()
+    const mockFn3 = jest.fn()
+    const filterButtons: any = [
+      { text: 'btn', click: mockFn1 },
+      {
+        text: 'btn',
+        children: [
+          { text: '菜单1', click: mockFn2 },
+          { text: '菜单2', click: mockFn3 },
+        ],
+      },
+    ]
+    const wrapper = mount(Filterbar, { propsData: { filterButtons } })
+    const button = wrapper
+      .findComponent({ name: 'FilterbarButtons' })
+      .findComponent({ name: 'ElButton' })
+    const childrenButtons = wrapper
+      .findComponent({ name: 'FilterbarButtons' })
+      .findAllComponents({ name: 'ElDropdownItem' }).wrappers
+    button.trigger('click')
+    childrenButtons[0].trigger('click')
+    childrenButtons[1].trigger('click')
+    expect(mockFn1.call.length).toBe(1)
+    expect(mockFn2.call.length).toBe(1)
+    expect(mockFn3.call.length).toBe(1)
+  })
 })
 
-describe('Filter fields render', () => {
+describe('Filter fields', () => {
   it('Field label render', () => {
     const wrapper = mount(Filterbar, {
-      propsData: { filterFields: [{ type: 'label', label: 'label text' }] },
+      propsData: {
+        searchButton: false,
+        resetButton: false,
+        filterFields: [{ type: 'label', label: 'label text' }],
+      },
     })
     expect(wrapper.find('div.el-form-item__label').element.innerHTML).toBe(
       'label text'
     )
   })
 
-  ALL_TEST_FIELDS.forEach(({ fieldType, fieldConfig }) => {
-    it(`Field ${fieldType} render`, () => {
-      const wrapper = mount(Filterbar, {
-        provide: { lvStore: { filterModel: {} } },
-        propsData: { filterFields: [fieldConfig] },
-      })
-      expect(removeElCascaderHtmlId(wrapper.html())).toMatchSnapshot()
+  it('Field fields render', () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterFields: [
+          { type: 'text', model: 'text' },
+          { type: 'number', model: 'number' },
+          { type: 'date', model: 'date' },
+          { type: 'dateRange', model: 'dateRange' },
+          { type: 'timeSelect', model: 'timeSelect' },
+          { type: 'timePicker', model: 'timePicker' },
+          { type: 'timePickerRange', model: 'timePickerRange' },
+          { type: 'dateTime', model: 'dateTime' },
+          { type: 'dateTimeRange', model: 'dateTimeRange' },
+          { type: 'select', model: 'select' },
+          { type: 'cascader', model: 'cascader' },
+        ],
+      },
     })
+    expect(wrapper.findAllComponents({ name: 'FieldText' }).length).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldNumber' }).length).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldDate' }).length).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldDateRange' }).length).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldTimeSelect' }).length).toBe(
+      1
+    )
+    expect(wrapper.findAllComponents({ name: 'FieldTimePicker' }).length).toBe(
+      1
+    )
+    expect(
+      wrapper.findAllComponents({ name: 'FieldTimePickerRange' }).length
+    ).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldDateTime' }).length).toBe(1)
+    expect(
+      wrapper.findAllComponents({ name: 'FieldDateTimeRange' }).length
+    ).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldSelect' }).length).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'FieldCascader' }).length).toBe(1)
   })
-})
 
-describe('Filter fields set value', () => {
-  let lvStore: any
-  beforeEach(() => {
-    lvStore = { filterModel: {} }
-  })
-
-  ALL_TEST_FIELDS.forEach(({ fieldType, fieldValue, fieldConfig }) => {
-    it(`Field ${fieldType} set value`, () => {
-      const wrapper = mount(Filterbar, {
-        provide: { lvStore },
-        propsData: { filterFields: [fieldConfig] },
-      })
-      const fieldVm = wrapper
-        .findComponent({ name: 'FilterbarField' })
-        .findComponent({ name: 'ElFormItem' }).vm.$children[1]
-      // @ts-ignore
-      fieldVm.value = fieldValue
-      expect(lvStore.filterModel[fieldConfig.model]).toBe(fieldValue)
+  it('Filter fields set value', () => {
+    const lvStore: any = { filterModel: {} }
+    const wrapper = mount(Filterbar, {
+      provide: { lvStore },
+      propsData: {
+        filterFields: [
+          { type: 'text', model: 'text' },
+          { type: 'number', model: 'number' },
+          { type: 'date', model: 'date' },
+          { type: 'dateRange', model: 'dateRange' },
+          { type: 'timeSelect', model: 'timeSelect' },
+          { type: 'timePicker', model: 'timePicker' },
+          { type: 'timePickerRange', model: 'timePickerRange' },
+          { type: 'dateTime', model: 'dateTime' },
+          { type: 'dateTimeRange', model: 'dateTimeRange' },
+          { type: 'select', model: 'select' },
+          { type: 'cascader', model: 'cascader' },
+        ],
+      },
+    })
+    const _findVm = (name: string): any => wrapper.findComponent({ name }).vm
+    _findVm('FieldText').value = 'text'
+    _findVm('FieldNumber').value = 9527
+    _findVm('FieldDate').value = DATE1
+    _findVm('FieldDateRange').value = [DATE1, DATE2]
+    _findVm('FieldTimeSelect').value = '10:00'
+    _findVm('FieldTimePicker').value = DATE1
+    _findVm('FieldTimePickerRange').value = [DATE1, DATE2]
+    _findVm('FieldDateTime').value = DATE1
+    _findVm('FieldDateTimeRange').value = [DATE1, DATE2]
+    _findVm('FieldSelect').value = 'option1'
+    _findVm('FieldCascader').value = [1, 2, 3, 4]
+    expect(lvStore.filterModel).toStrictEqual({
+      text: 'text',
+      number: 9527,
+      date: DATE1,
+      dateRange: [DATE1, DATE2],
+      timeSelect: '10:00',
+      timePicker: DATE1,
+      timePickerRange: [DATE1, DATE2],
+      dateTime: DATE1,
+      dateTimeRange: [DATE1, DATE2],
+      select: 'option1',
+      cascader: [1, 2, 3, 4],
     })
   })
 })
 
 describe('Filter fields default value', () => {
   const lvStore = {
-    filterModel: zipObject(
-      ALL_TEST_FIELDS.map((r) => r.fieldType),
-      ALL_TEST_FIELDS.map((r) => r.fieldValue)
-    ),
+    filterModel: {
+      text: 'text',
+      number: 9527,
+      date: DATE1,
+      dateRange: [DATE1, DATE2],
+      timeSelect: '10:00',
+      timePicker: DATE1,
+      timePickerRange: [DATE1, DATE2],
+      dateTime: DATE1,
+      dateTimeRange: [DATE1, DATE2],
+      select: 'option1',
+      cascader: [1, 2, 3, 4],
+    },
   }
   const wrapper = mount(Filterbar, {
     provide: { lvStore },
     propsData: {
-      filterFields: Object.values(ALL_TEST_FIELDS).map((r) => r.fieldConfig),
+      filterFields: [
+        { type: 'text', model: 'text' },
+        { type: 'number', model: 'number' },
+        { type: 'date', model: 'date' },
+        { type: 'dateRange', model: 'dateRange' },
+        { type: 'timeSelect', model: 'timeSelect' },
+        { type: 'timePicker', model: 'timePicker' },
+        { type: 'timePickerRange', model: 'timePickerRange' },
+        { type: 'dateTime', model: 'dateTime' },
+        { type: 'dateTimeRange', model: 'dateTimeRange' },
+        { type: 'select', model: 'select' },
+        { type: 'cascader', model: 'cascader' },
+      ],
     },
   })
-  wrapper
-    .findAllComponents({ name: 'FilterbarField' })
-    .wrappers.forEach((w: any) => {
-      const modelKey = w.vm.field.model
-      const inputVm = w.findComponent({ name: 'ElFormItem' }).vm.$children[1]
-      it(modelKey, () => {
-        expect(inputVm.value).toBe(lvStore.filterModel[modelKey])
-      })
-    })
+  const _findVm = (name: string): any => wrapper.findComponent({ name }).vm
+  expect(_findVm('FieldText').value).toBe('text')
+  expect(_findVm('FieldNumber').value).toBe(9527)
+  expect(_findVm('FieldDate').value).toBe(DATE1)
+  expect(_findVm('FieldDateRange').value).toEqual([DATE1, DATE2])
+  expect(_findVm('FieldTimeSelect').value).toBe('10:00')
+  expect(_findVm('FieldTimePicker').value).toBe(DATE1)
+  expect(_findVm('FieldTimePickerRange').value).toEqual([DATE1, DATE2])
+  expect(_findVm('FieldDateTime').value).toBe(DATE1)
+  expect(_findVm('FieldDateTimeRange').value).toEqual([DATE1, DATE2])
+  expect(_findVm('FieldSelect').value).toBe('option1')
+  expect(_findVm('FieldCascader').value).toEqual([1, 2, 3, 4])
 })
 
 describe('Filter fields options resolve', () => {
