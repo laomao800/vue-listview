@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/laomao800/vue-listview/compare/v1.5.0-4...v1.5.0) (2021-07-06)
+
+
+### Features
+
+* 添加 prop `pressEnterSearch` ([fb0bd8d](https://github.com/laomao800/vue-listview/commit/fb0bd8dcd9b1b14241c5a494d4d01d4a3394300c))
+
+
+
 # [1.5.0-4](https://github.com/laomao800/vue-listview/compare/v1.5.0-2...v1.5.0-4) (2021-04-30)
 
 
