@@ -11,7 +11,7 @@ export default Vue.extend({
 
   props: {
     field: { type: Object as PropType<FilterField> },
-    default: () => ({}),
+    default: /* istanbul ignore next */ () => ({}),
   },
 
   computed: {
@@ -29,6 +29,7 @@ export default Vue.extend({
         if (modelProperty) {
           this.$set(this.lvStore.filterModel, modelProperty, newVal)
         } else {
+          /* istanbul ignore next */
           if (process.env.NODE_ENV !== 'production') {
             error(
               `${JSON.stringify(this.field)}\n 未配置 model 属性，无法写入值。`

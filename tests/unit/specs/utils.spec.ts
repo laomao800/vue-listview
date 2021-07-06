@@ -1,15 +1,14 @@
-import { dataMapping, nodeParents } from '@/utils'
+import { dataMapping, isValidFieldValue, isPromise, nodeParents } from '@/utils'
 
-describe('dataMapping', () => {
-  const data = {
-    result: {
-      results: [1, 2, 3],
-      total_count: 3,
-    },
-    success: true,
-  }
-
+describe('utils', () => {
   it('dataMapping', () => {
+    const data = {
+      result: {
+        results: [1, 2, 3],
+        total_count: 3,
+      },
+      success: true,
+    }
     const result = dataMapping(data, {
       items: 'result.results',
       total: 'result.total_count',
@@ -22,6 +21,23 @@ describe('dataMapping', () => {
       success: true,
       unknow: undefined,
     })
+  })
+
+  it('isValidFieldValue', () => {
+    expect(isValidFieldValue('text')).toBe(true)
+    expect(isValidFieldValue(0)).toBe(true)
+    expect(isValidFieldValue([0])).toBe(true)
+    expect(isValidFieldValue({ text: 'text' })).toBe(true)
+    expect(isValidFieldValue('')).toBe(false)
+    expect(isValidFieldValue(null)).toBe(false)
+    expect(isValidFieldValue([])).toBe(false)
+    expect(isValidFieldValue({})).toBe(false)
+  })
+
+  it('isPromise', () => {
+    expect(isPromise(new Promise(() => {}))).toBe(true)
+    expect(isPromise(Promise.resolve())).toBe(true)
+    expect(isPromise(Promise.reject())).toBe(true)
   })
 })
 

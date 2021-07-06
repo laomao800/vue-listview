@@ -2,6 +2,7 @@ import { VNode } from 'vue'
 import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isFunction from 'lodash/isFunction'
+import isNil from 'lodash/isNil'
 import get from 'lodash/get'
 import { FilterField } from '~/types'
 
@@ -55,25 +56,10 @@ export function dataMapping(
  * 判断值是否为搜索栏内合法的值，通过验证的值才可继续作为参数随请求提交
  */
 export function isValidFieldValue(val: any): val is FilterField {
-  return !(
-    val === null ||
-    val === undefined ||
-    val === '' ||
-    ((Array.isArray(val) || isPlainObject(val)) && isEmpty(val))
-  )
-}
-
-/**
- * 判断一个值是否有效的搜索栏 field 配置项
- */
-export function isValidFieldConfig(field: any) {
-  return (
-    field &&
-    (hasOwn(field, 'type') ||
-      isFunction(field.render) ||
-      isFunction(field) ||
-      isVNode(field))
-  )
+  if (Array.isArray(val) || isPlainObject(val)) {
+    return !isEmpty(val)
+  }
+  return !isNil(val) && val !== ''
 }
 
 export function nodeParents(node: Element, selector: string) {
