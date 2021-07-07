@@ -72,6 +72,7 @@ export default {
   }
   .lv__header-breadcrumb {
     display: inline-block;
+    vertical-align: middle;
   }
 }
 </style>
