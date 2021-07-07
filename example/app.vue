@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <listview1 v-bind="config1" @selection-change="selectionChange">
+    <listview1 v-bind="config1" :table-selection.sync="tableSelection">
       <!-- <div slot="filterbar-top"><el-button>button</el-button></div>
       <div slot="filterbar-bottom"><el-button>button</el-button></div>
       <div slot="filterbar-left"><el-button>button</el-button></div>
@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script lang="jsx">
 import './common.less'
 import { create as createListview } from '@/create'
 // import CustomFilterbar from './CustomFilterbar.vue'
@@ -61,7 +61,7 @@ export default {
         requestUrl: '/mock/listview',
         requestMethod: 'post',
         // pageProps: { pagerCount: 5 },
-        validateResponse: (res) => res.is_success,
+        validateResponse: (res) => res.success,
         resolveResponseErrorMessage: (err) => err.error_info.msg,
         filterButtons: this.filterButtons,
         filterFields: this.filterFields,
@@ -76,6 +76,8 @@ export default {
     return {
       tableSelection: [],
       filterButtons: [
+        null,
+        {},
         {
           type: 'success',
           icon: 'el-icon-circle-plus-outline',
@@ -110,7 +112,6 @@ export default {
           type: 'primary',
           icon: 'el-icon-circle-plus-outline',
           text: '下拉按钮',
-          trigger: 'click',
           splitButton: true,
           click: () => {
             this.$message.success('下拉按钮')
@@ -133,7 +134,32 @@ export default {
           ],
         },
       ],
-      filterFields: [
+      filterFields1: [
+        {
+          label: 'label',
+          model: 'text',
+          render: () => (
+            <input
+              value={this.filterModel.text}
+              on-input={(e) =>
+                this.$set(this.filterModel, 'text', e.target.value)
+              }
+            />
+          ),
+        },
+        () => (
+          <input
+            value={this.filterModel.text}
+            on-input={(e) =>
+              this.$set(this.filterModel, 'text', e.target.value)
+            }
+          />
+        ),
+        <input
+          on-input={(e) => this.$set(this.filterModel, 'text', e.target.value)}
+        />,
+        null,
+        {},
         {
           type: 'select',
           model: 'select1',
@@ -141,8 +167,6 @@ export default {
           options: [
             { label: '选项 1', value: 1 },
             { label: '选项 2', value: 2 },
-            { label: '选项 3', value: 3 },
-            { label: '禁用项', value: 4, disabled: true },
           ],
         },
         {
@@ -198,7 +222,7 @@ export default {
           },
         },
       ],
-      filterFields1: [
+      filterFields: [
         {
           type: 'select',
           model: 'error',
