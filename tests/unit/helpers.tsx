@@ -24,10 +24,11 @@ export async function createListviewWrapper(
     },
   })
   const vm = wrapper.vm as any
+  const storeWrapper = wrapper.findComponent({ name: 'StoreProvider' })
   const storeVm = wrapper.findComponent({ name: 'StoreProvider' }).vm as any
 
   await wait()
-  return { requestSpy, wrapper, vm, storeVm }
+  return { requestSpy, wrapper, vm, storeWrapper, storeVm }
 }
 
 export const wait = (time = 100) =>

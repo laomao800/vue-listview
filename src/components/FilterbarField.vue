@@ -68,7 +68,7 @@ export default Vue.extend({
 
   props: {
     field: {
-      type: Object as PropType<FilterField>,
+      type: [Object, Function] as PropType<FilterField>,
     },
   },
 

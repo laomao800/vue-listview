@@ -1,7 +1,10 @@
+import Vue from 'vue'
 import { mount } from '@vue/test-utils'
 import { wait } from '../helpers'
 import Filterbar from '@/components/Filterbar.vue'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const h = new Vue().$createElement
 const DATE1 = new Date('2021/01/01 09:30:00')
 const DATE2 = new Date('2021/06/01 09:30:00')
 
@@ -53,7 +56,7 @@ describe('Filter buttons', () => {
     const mockFn1 = jest.fn()
     const mockFn2 = jest.fn()
     const mockFn3 = jest.fn()
-    const filterButtons: any = [
+    const filterButtons = [
       { text: 'btn', click: mockFn1 },
       {
         text: 'btn',
@@ -76,6 +79,16 @@ describe('Filter buttons', () => {
     expect(mockFn1.call.length).toBe(1)
     expect(mockFn2.call.length).toBe(1)
     expect(mockFn3.call.length).toBe(1)
+  })
+
+  it('other render type', () => {
+    const filterButtons = [
+      () => <div class="function-type">text</div>,
+      <div class="jsx-type">text</div>,
+    ]
+    const wrapper = mount(Filterbar, { propsData: { filterButtons } })
+    expect(wrapper.find('div.function-type').exists()).toBe(true)
+    expect(wrapper.find('div.jsx-type').exists()).toBe(true)
   })
 })
 
@@ -191,6 +204,22 @@ describe('Filter fields', () => {
       select: 'option1',
       cascader: [1, 2, 3, 4],
     })
+  })
+
+  it('other render type', () => {
+    const filterFields = [
+      {
+        label: 'label',
+        model: 'text',
+        render: () => <input class="object-type" />,
+      },
+      () => <input class="function-type" />,
+      <input class="vnode-type" />,
+    ]
+    const wrapper = mount(Filterbar, { propsData: { filterFields } })
+    expect(wrapper.find('.lv__field input.object-type').exists()).toBe(true)
+    expect(wrapper.find('.lv__field input.function-type').exists()).toBe(true)
+    expect(wrapper.find('.lv__field input.vnode-type').exists()).toBe(true)
   })
 })
 

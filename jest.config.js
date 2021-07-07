@@ -11,5 +11,7 @@ module.exports = {
     '!src/index.ts',
     '!src/index.component.ts',
     '!src/importElementUI.ts',
+    '!src/Listview/index.ts',
+    '!src/ListviewContainer/index.ts',
   ],
 }

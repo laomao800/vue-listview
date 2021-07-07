@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createListviewWrapper } from '../helpers'
 
 describe('Events', () => {
