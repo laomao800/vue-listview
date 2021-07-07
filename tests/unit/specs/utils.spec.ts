@@ -35,7 +35,7 @@ describe('utils', () => {
   })
 
   it('isPromise', () => {
-    expect(isPromise(new Promise(() => {}))).toBe(true)
+    expect(isPromise(new Promise((resolve) => resolve(1)))).toBe(true)
     expect(isPromise(Promise.resolve())).toBe(true)
     expect(isPromise(Promise.reject())).toBe(true)
   })

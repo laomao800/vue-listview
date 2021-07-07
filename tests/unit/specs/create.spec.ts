@@ -1,6 +1,6 @@
 import pick from 'lodash/pick'
-import ListviewOrigin from '@/index'
-import { create as createListview } from '@/index'
+import ListviewOrigin, { create as createListview } from '@/index'
+
 import { createListviewWrapper } from '../helpers'
 
 const globalConfig = {

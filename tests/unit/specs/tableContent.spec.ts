@@ -1,4 +1,4 @@
-import { createListviewWrapper, wait } from '../helpers'
+import { createListviewWrapper } from '../helpers'
 
 describe('Table content', () => {
   it('Column render', async () => {
