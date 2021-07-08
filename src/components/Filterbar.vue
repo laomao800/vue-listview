@@ -29,7 +29,7 @@
           :class="[
             'lv__filterbar-action',
             {
-              'lv__filterbar-action--nomore': !isHasMore,
+              'lv__filterbar-action--nomore': isNoMore,
               'lv__filterbar-action--onleft': isNoneFields,
             },
           ]"
@@ -144,6 +144,7 @@ export default Vue.extend({
   data() {
     return {
       isFold: true,
+      isNoMore: true,
       topRightItemIndex: -1,
       actionOffsetLeft: 0,
       searchBtnOffset: 0,
@@ -172,12 +173,6 @@ export default Vue.extend({
         this.isShowResetButton ||
         this.$slots['prepend-filterbar-submit'] ||
         this.$slots['append-filterbar-submit']
-      )
-    },
-    isHasMore(): boolean {
-      return (
-        this.topRightItemIndex >= 0 &&
-        this.topRightItemIndex < this.filterFields.length - 1
       )
     },
     allFieldsVm(): Vue[] {
@@ -233,7 +228,7 @@ export default Vue.extend({
     },
 
     updateLayout() {
-      // updateTopRightItemIndex 影响 isMore 按钮显示，需计算后再执行按钮偏移量计算
+      // updateTopRightItemIndex 影响 isNoMore 按钮显示，需计算后再执行按钮偏移量计算
       this.updateTopRightItemIndex()
       this.$nextTick().then(() => {
         this.updateActionOffset()
@@ -253,16 +248,18 @@ export default Vue.extend({
       let lastFilterIndex = -1
       const allFields = this.allFieldsVm
       if (allFields.length > 0) {
-        let lastFilterTop = allFields[0].$el.getBoundingClientRect().top
+        const $action = this.$refs.action as Element
+        let lastFilterTop = $action.getBoundingClientRect().top
         for (let i = 0; i < allFields.length; i++) {
-          const formItemTop = allFields[i].$el.getBoundingClientRect().top
-          if (lastFilterTop !== formItemTop) {
+          const curItemTop = allFields[i].$el.getBoundingClientRect().top
+          if (lastFilterTop < curItemTop) {
             break
           }
           lastFilterIndex = i
         }
       }
       this.topRightItemIndex = lastFilterIndex
+      this.isNoMore = this.topRightItemIndex === this.filterFields.length - 1
     },
 
     updateBtnOffset() {

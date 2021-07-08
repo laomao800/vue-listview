@@ -61,28 +61,28 @@ export default Vue.extend({
   },
 
   mounted() {
-    this.updateLayout()
+    this._updateLayout()
 
     if (this.fullHeight) {
-      window.addEventListener('resize', this._updateLayout)
+      window.addEventListener('resize', this.updateLayout)
     }
   },
 
   beforeDestroy: /* istanbul ignore next */ function () {
-    window.removeEventListener('resize', this._updateLayout)
+    window.removeEventListener('resize', this.updateLayout)
   },
 
   methods: {
-    _updateLayout: debounce(
+    updateLayout: debounce(
       function () {
         // @ts-ignore
-        this.updateLayout()
+        this._updateLayout()
       },
       0,
       { leading: true }
     ),
 
-    updateLayout() {
+    _updateLayout() {
       this.updateWrapperHeight()
       this.updateContentHeight()
       this.$emit('update-layout')
@@ -149,7 +149,7 @@ export default Vue.extend({
       >
         {this.renderSlot('header')}
         {this.renderSlot('filterbar')}
-        <div v-loading={this.contentLoading}>
+        <div class="lv__body-wrapper" v-loading={this.contentLoading}>
           {this.renderSlot('content', scopeProps, {
             style: {
               height: parseSize(this.contentHeight),

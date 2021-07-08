@@ -8,7 +8,7 @@
     <ListviewLayout
       ref="layout"
       v-bind="mergedAttrs"
-      @update-layout="updateLayout"
+      @update-layout="_handleUpdateLayout"
     >
       <template #header>
         <component :is="_header" v-bind="mergedAttrs" />
@@ -18,7 +18,7 @@
           :is="_filterbar"
           ref="filterbar"
           v-bind="mergedAttrs"
-          @fold-change="_filterbarUpdateLayout"
+          @fold-change="_handleFilterFold"
         >
           <slot slot="filterbar-top" name="filterbar-top" />
           <slot slot="filterbar-bottom" name="filterbar-bottom" />
@@ -48,6 +48,7 @@
 
 <script lang="tsx">
 import Vue, { Component } from 'vue'
+import debounce from 'lodash/debounce'
 import isFunction from 'lodash/isFunction'
 import isPlainObject from 'lodash/isPlainObject'
 import StoreProvider from '@/components/StoreProvider.vue'
@@ -100,15 +101,25 @@ export default Vue.extend({
     resetFilter() {
       ;(this.$refs.filterbar as any).handleFilterReset()
     },
-    // TODO: 优化各 updateLayout 流程
-    updateLayout() {
-      setTimeout(() => {
-        // 搜索栏展开完成后再执行重算布局
-        const $filterbar = this.$refs.filterbar as any
-        $filterbar &&
-          isFunction($filterbar.updateLayout) &&
-          $filterbar.updateLayout()
-      })
+    updateLayout: debounce(
+      function () {
+        // @ts-ignore
+        this._updateWrapperLayout()
+      },
+      0,
+      { leading: true }
+    ),
+    _updateWrapperLayout() {
+      ;(this.$refs.layout as any).updateLayout()
+    },
+    _updateFilterLayout() {
+      ;(this.$refs.filterbar as any).updateLayout()
+    },
+    _handleUpdateLayout() {
+      this.$nextTick().then(() => this._updateFilterLayout())
+    },
+    _handleFilterFold() {
+      this.$nextTick().then(() => this._updateWrapperLayout())
     },
     _getReplaceComponent(name: string, defaultComp: Component): Component {
       const replaceComponents__ = (this as any).replaceComponents__ || {}
@@ -118,11 +129,6 @@ export default Vue.extend({
       } else {
         return defaultComp
       }
-    },
-    _filterbarUpdateLayout() {
-      this.$nextTick().then(() => {
-        ;(this.$refs.layout as any).updateLayout()
-      })
     },
   },
 })
