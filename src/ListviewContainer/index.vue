@@ -1,11 +1,19 @@
-<script>
+<script lang="tsx">
+import Vue, { VNode as VNodeType } from 'vue'
+import get from 'lodash/get'
 import VNode from '@/components/VNode'
 import ListviewHeader from '@/components/ListviewHeader.vue'
 import './style.less'
 
-let childListviews = []
+function getListviewTitle(node: VNodeType, defaultTitle = '') {
+  return (
+    get(node, 'data.attrs.header-title') ||
+    get(node, 'data.attrs.headerTitle') ||
+    defaultTitle
+  )
+}
 
-export default {
+export default Vue.extend({
   name: 'ListviewContainer',
 
   components: {
@@ -16,6 +24,8 @@ export default {
   props: {
     headerTitle: { type: String, default: '' },
     headerNav: { type: Array, default: () => [] },
+    type: { type: String, default: '' },
+    tabPosition: { type: String, default: 'left' },
   },
 
   data() {
@@ -24,50 +34,45 @@ export default {
     }
   },
 
-  watch: {
-    activeTab(index) {
-      this.$nextTick().then(() => {
-        childListviews[index].componentInstance.updateLayout()
-      })
-    },
-  },
-
   render() {
-    // 在 computed 内计算出该值的话会和具体渲染实例不同，导致无法触发 tableSelection 的同步事件，
-    // 并且避免触发无限更新界面 childListviews 不放入组件数据内
-    childListviews = this.$slots.default.filter(
-      (slot) =>
-        slot.componentOptions &&
-        slot.componentOptions.Ctor.extendOptions.name.toLowerCase() ===
-          'listview'
+    const childListviews = this.$slots.default || []
+    const childListviewTitles = childListviews.map((node) =>
+      getListviewTitle(node, '未命名')
     )
-    const childListviewTitles = childListviews.map(
-      (child) => child.componentOptions.propsData.headerTitle || ''
-    )
+
     return (
-      <div class="listview-container">
+      <div class="lvc__wrapper">
         <listview-header title={this.headerTitle} nav={this.headerNav} />
-        <div class="listview-container__tabs">
+        <div
+          class={{
+            lvc__tabs: true,
+            'lvc__tabs--line': this.type === 'line',
+            'lvc__tabs--card': this.type !== 'line',
+            'lvc__tabs--center': this.tabPosition === 'center',
+          }}
+        >
           {childListviewTitles.map((title, index) => (
-            <span
+            <div
               class={{
-                'listview-container__tab': true,
-                'listview-container__tab--active': index === this.activeTab,
+                lvc__tab: true,
+                'lvc__tab--active': index === this.activeTab,
               }}
               on-click={() => (this.activeTab = index)}
             >
-              {title || '未命名'}
-            </span>
+              <span>{title}</span>
+            </div>
           ))}
         </div>
 
-        <div class="listview-container__content">
-          {childListviews.map((item, index) => (
-            <keep-alive>{index === this.activeTab ? item : null}</keep-alive>
-          ))}
+        <div class="lvc__content">
+          <keep-alive>
+            {childListviews.map((item, index) =>
+              index === this.activeTab ? item : null
+            )}
+          </keep-alive>
         </div>
       </div>
     )
   },
-}
+})
 </script>

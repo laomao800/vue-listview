@@ -1,6 +1,6 @@
 // import Vue from 'vue'
 import { create } from '@/create'
-import Listview from './index.component'
+import { Listview, ListviewContainer } from './index.component'
 
 export default Listview
-export { Listview, create }
+export { create, Listview, ListviewContainer }

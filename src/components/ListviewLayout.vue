@@ -60,29 +60,26 @@ export default Vue.extend({
     },
   },
 
-  mounted() {
-    this._updateLayout()
+  created() {
+    const _init = debounce(() => {
+      this.updateLayout()
+      if (this.fullHeight) {
+        window.addEventListener('resize', this.updateLayout)
+      }
+    }, 0)
+    const _cleanup = debounce(
+      () => window.removeEventListener('resize', this.updateLayout),
+      0
+    )
 
-    if (this.fullHeight) {
-      window.addEventListener('resize', this.updateLayout)
-    }
-  },
-
-  beforeDestroy: /* istanbul ignore next */ function () {
-    window.removeEventListener('resize', this.updateLayout)
+    this.$on('hook:mounted', _init)
+    this.$on('hook:beforeDestroy', _cleanup)
+    this.$on('hook:activated', _init)
+    this.$on('hook:deactivated', _cleanup)
   },
 
   methods: {
-    updateLayout: debounce(
-      function () {
-        // @ts-ignore
-        this._updateLayout()
-      },
-      0,
-      { leading: true }
-    ),
-
-    _updateLayout() {
+    updateLayout() {
       this.updateWrapperHeight()
       this.updateContentHeight()
       this.$emit('update-layout')

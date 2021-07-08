@@ -1,25 +1,67 @@
-.listview-container {
-  display: flex;
-  flex-direction: column;
+.lvc {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 
   &__tabs {
-    padding: 5px 5px 0;
-    background: #f4f7fa;
-    border-bottom: 1px solid #e2e6ec;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 2px solid #e4e7ed;
+    box-sizing: border-box;
+
+    &--center {
+      text-align: center;
+    }
+
+    &--card {
+      height: 40px;
+      padding: 4px 10px 0;
+      background: #f4f7fa;
+      border-bottom: 1px solid #e2e6ec;
+      box-sizing: border-box;
+
+      .lvc__tab {
+        padding: 0 16px;
+        margin-bottom: -1px;
+        margin-left: -1px;
+        height: 36px;
+        line-height: 36px;
+        border: solid transparent;
+        border-width: 1px 1px 0;
+        border-radius: 3px 3px 0 0;
+        transition: color 0.2s;
+
+        &--active {
+          background: #fff;
+          border-color: #dadee5;
+        }
+      }
+    }
+
+    &--line {
+      .lvc__tab {
+        padding: 0 20px;
+
+        &--active {
+          span {
+            height: 40px;
+            box-sizing: border-box;
+            display: block;
+            border-bottom: 2px solid #409eff;
+            // margin-bottom: -2px;
+          }
+        }
+      }
+    }
   }
+
   &__tab {
     display: inline-block;
-    padding: 0 16px;
-    margin-bottom: -1px;
-    margin-left: -1px;
+    vertical-align: top;
     font-size: 14px;
-    line-height: 36px;
-    color: #333;
     cursor: pointer;
-    border: solid transparent;
-    border-width: 1px 1px 0;
-    border-radius: 3px 3px 0 0;
-    transition: color 0.2s;
+    color: #333;
 
     &:hover {
       color: #409eff;
@@ -28,8 +70,6 @@
     &--active {
       color: #409eff;
       cursor: default;
-      background: #fff;
-      border-color: #dadee5;
     }
   }
 
@@ -37,11 +77,8 @@
     flex: 1;
     overflow: hidden;
 
-    .listview__header {
+    .lv__header {
       display: none;
-    }
-    .listview__main {
-      border-top: none;
     }
   }
 }

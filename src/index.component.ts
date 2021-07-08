@@ -1,16 +1,25 @@
+import Vue, { VueConstructor, PluginFunction } from 'vue'
 import { create } from '@/create'
-import Listview from './Listview'
+import _Listview from './Listview'
+import _ListviewContainer from './ListviewContainer'
 import './importElementUI'
 
-// @ts-ignore
-Listview.install = function (Vue) {
-  Vue.component(Listview.name, Listview)
+type SFCWithInstall<T> = T & { install(vue: Vue): void }
+
+function bindInstall(component: VueConstructor<Vue>) {
+  const install: PluginFunction<Vue> = (vue) =>
+    vue.component(component.name, component)
+
+  // @ts-ignore
+  component.install = install
+
+  window && window.Vue && install(window.Vue as any)
+
+  return component as SFCWithInstall<typeof component>
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  // @ts-ignore
-  Listview.install(window.Vue)
-}
+const Listview = bindInstall(_Listview)
+const ListviewContainer = bindInstall(_ListviewContainer)
 
 export default Listview
-export { Listview, create }
+export { create, Listview, ListviewContainer }
