@@ -137,32 +137,26 @@ export default Vue.extend({
      * 因此先通过 computed 合并所需的 props ，再统一绑定最后的合并结果
      */
     normalizeTableProps(): any {
-      // TODO: 合并逻辑优化
-      const defaultProps = {
-        size: 'small',
-        border: true,
-        stripe: true,
-      }
+      const defaultProps = { size: 'small', border: true, stripe: true }
       const mergedPros = mapKeys(
         merge(defaultProps, this.tableProps),
         (value, key) => kebabCase(key)
       )
-      const rowClassName = mergedPros['row-class-name']
-      if (rowClassName) {
-        if (isFunction(rowClassName)) {
-          mergedPros['row-class-name'] = (...args: any[]) =>
-            // @ts-ignore
-            [this.selectionRowClassName(...args), rowClassName(...args)].join(
-              ' '
-            )
-        } else {
-          mergedPros['row-class-name'] = (...args: any[]) =>
-            // @ts-ignore
-            [this.selectionRowClassName(...args), rowClassName].join(' ')
+      const _rowClassName = mergedPros['row-class-name']
+      const getRowClassName = (rowData: {
+        row: Record<string, any>
+        rowIndex: number
+      }) => {
+        const classNames = [this.getRowClassName(rowData)]
+        if (isFunction(_rowClassName)) {
+          classNames.push(_rowClassName(rowData))
+        } else if (_rowClassName) {
+          classNames.push(_rowClassName)
         }
-      } else {
-        mergedPros['row-class-name'] = this.selectionRowClassName
+        return classNames.join(' ')
       }
+
+      mergedPros['row-class-name'] = getRowClassName
 
       return mergedPros
     },
@@ -254,8 +248,10 @@ export default Vue.extend({
     /**
      * el-table 自定义选中行高亮
      */
-    selectionRowClassName(row: any): string {
-      return this.internalSelection.indexOf(row.row) > -1 ? 'row--selected' : ''
+    getRowClassName(rowData: any): string {
+      return this.internalSelection.indexOf(rowData.row) > -1
+        ? 'row--selected'
+        : ''
     },
   },
 })

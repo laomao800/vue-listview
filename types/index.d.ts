@@ -92,8 +92,8 @@ declare class ListviewProps extends Vue {
     | boolean
     | string
     | {
-        type: string
-        selectable: (row: any, index: number) => boolean
+        type?: string
+        selectable?: (row: any, index: number) => boolean
       }
 
   /** 表格行选择的选中数据，可通过 .sync 修饰符获取更新。 default: [] */
