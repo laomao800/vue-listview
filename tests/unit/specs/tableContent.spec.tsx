@@ -1,4 +1,8 @@
+import Vue from 'vue'
 import { createListviewWrapper } from '../helpers'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const h = new Vue().$createElement
 
 describe('Table content', () => {
   it('Column render', async () => {
@@ -12,6 +16,14 @@ describe('Table content', () => {
       // 加上选择列
       tableColumns.length + 1
     )
+  })
+
+  it('Column custom render', async () => {
+    const tableColumns = [
+      { render: () => <div class="custom-column-render"></div> },
+    ]
+    const { wrapper } = await createListviewWrapper({ tableColumns })
+    expect(wrapper.find('div.custom-column-render').exists()).toBe(true)
   })
 
   it('Row select', async () => {
