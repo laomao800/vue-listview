@@ -24,7 +24,7 @@
         <el-table-column
           v-if="selectionColumn.type === 'single'"
           :resizable="false"
-          fixed
+          :fixed="tableColumns.some((col) => col.fixed)"
           width="50"
           align="center"
           class-name="el-table-column--selection el-table-column--single-selection"
@@ -48,7 +48,6 @@
         <el-table-column
           v-else
           v-bind="selectionColumn"
-          fixed
           type="selection"
           width="50"
           align="center"
