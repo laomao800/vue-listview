@@ -13,7 +13,7 @@
         :filter-fields="filterFields2"
         :filter-model="filterModel"
         :table-columns="tableColumns"
-        :table-selection.sync="tableSelection"
+        :selection.sync="selection"
         :page-props="{ pagerCount: 5 }"
         key="1"
       />
@@ -64,7 +64,7 @@ export default {
         filterFields: this.filterFields,
         filterModel: this.filterModel,
         tableColumns: this.tableColumns,
-        // tableSelection: this.tableSelection,
+        selection: this.selection,
       }
     },
   },
@@ -85,13 +85,13 @@ export default {
             icon="el-icon-remove-outline"
             type="danger"
             on-click={() => {
-              if (this.tableSelection.length < 1) {
+              if (this.selection.length < 1) {
                 this.$message.error('请至少选择一条数据')
               } else {
                 this.loadingSelection = true
                 setTimeout(() => {
                   this.$message.success(
-                    JSON.stringify(this.tableSelection.map((row) => row.sku))
+                    JSON.stringify(this.selection.map((row) => row.sku))
                   )
                   this.loadingSelection = false
                 }, 500)
@@ -321,7 +321,7 @@ export default {
         },
       ],
 
-      tableSelection: [],
+      selection: [],
       tableColumns: [
         {
           label: '自定义标签',
@@ -414,7 +414,7 @@ export default {
 
   data1() {
     return {
-      tableSelection: [],
+      selection: [],
       filterButtons: [
         null,
         {},
@@ -432,13 +432,13 @@ export default {
             icon="el-icon-remove-outline"
             type="danger"
             on-click={() => {
-              if (this.tableSelection.length < 1) {
+              if (this.selection.length < 1) {
                 this.$message.error('请至少选择一条数据')
               } else {
                 this.loadingSelection = true
                 setTimeout(() => {
                   this.$message.success(
-                    JSON.stringify(this.tableSelection.map((row) => row.sku))
+                    JSON.stringify(this.selection.map((row) => row.sku))
                   )
                   this.loadingSelection = false
                 }, 500)
