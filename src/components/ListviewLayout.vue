@@ -147,12 +147,7 @@ export default Vue.extend({
         {this.renderSlot('header')}
         {this.renderSlot('filterbar')}
         <div class="lv__body-wrapper" v-loading={this.contentLoading}>
-          {this.renderSlot('content', scopeProps, {
-            style: {
-              height: parseSize(this.contentHeight),
-              overflow: 'auto',
-            },
-          })}
+          {this.renderSlot('content', scopeProps)}
           {this.renderSlot('footer')}
         </div>
       </div>
@@ -172,5 +167,14 @@ export default Vue.extend({
 
 .lv__wrapper > * {
   box-sizing: border-box;
+}
+
+.lv__body-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.lv__content-wrapper {
+  flex: 1;
 }
 </style>

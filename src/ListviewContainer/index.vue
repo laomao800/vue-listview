@@ -3,7 +3,6 @@ import Vue, { VNode as VNodeType } from 'vue'
 import get from 'lodash/get'
 import VNode from '@/components/VNode'
 import ListviewHeader from '@/components/ListviewHeader.vue'
-import './style.less'
 
 function getListviewTitle(node: VNodeType, defaultTitle = '') {
   return (

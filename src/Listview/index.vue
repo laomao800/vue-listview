@@ -110,10 +110,14 @@ export default Vue.extend({
       { leading: true }
     ),
     _updateWrapperLayout() {
-      ;(this.$refs.layout as any).updateLayout()
+      try {
+        ;(this.$refs.layout as any).updateLayout()
+      } catch (e) {}
     },
     _updateFilterLayout() {
-      ;(this.$refs.filterbar as any).updateLayout()
+      try {
+        ;(this.$refs.filterbar as any).updateLayout()
+      } catch (e) {}
     },
     _handleUpdateLayout() {
       this.$nextTick().then(() => this._updateFilterLayout())
