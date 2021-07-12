@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import pick from 'lodash/pick'
 import ListviewOrigin, { create as createListview } from '@/index'
 
@@ -75,4 +76,23 @@ describe('Create config', () => {
   })
 })
 
-// describe('Replace component', () => {})
+describe('Replace component', () => {
+  const CustomFilterbar = Vue.extend({
+    render: (h) => h('div', { class: 'custom-filter' }, 'CustomFilterbar'),
+  })
+  const CustomContent = Vue.extend({
+    render: (h) => h('div', { class: 'custom-content' }, 'CustomContent'),
+  })
+  const { component: Listview } = createListview({
+    replaceComponents: {
+      filterbar: CustomFilterbar,
+      content: CustomContent,
+    },
+  })
+
+  it('replaceComponents', async () => {
+    const { wrapper } = await createListviewWrapper({}, Listview)
+    expect(wrapper.find('div.custom-filter').exists()).toBe(true)
+    expect(wrapper.find('div.custom-content').exists()).toBe(true)
+  })
+})
