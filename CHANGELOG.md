@@ -1,3 +1,12 @@
+## [1.5.1](https://github.com/laomao800/vue-listview/compare/v1.5.0...v1.5.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* 修复 requestConfig 全局配置无效 ([3fb41d3](https://github.com/laomao800/vue-listview/commit/3fb41d3d85b884e25916e59061e4996aab53b70d))
+
+
+
 # [1.5.0](https://github.com/laomao800/vue-listview/compare/v1.5.0-4...v1.5.0) (2021-07-06)
 
 
