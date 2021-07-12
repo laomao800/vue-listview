@@ -87,7 +87,7 @@ export default Vue.extend({
       },
     },
     internalSelection() {
-      this.$emit('update:tableSelection', this.internalSelection)
+      this.$emit('update:selection', this.internalSelection)
     },
   },
 

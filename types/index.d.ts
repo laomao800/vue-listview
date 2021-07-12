@@ -49,13 +49,7 @@ declare class ListviewProps extends Vue {
   contentDataMap: { [k: string]: string }
 
   /** 可用在 autoload 为 false 时候，初始显示的提示信息。 default: null */
-  contentMessage:
-    | null
-    | string
-    | {
-        type: MessageType
-        text: string
-      }
+  contentMessage: null | string | { type: MessageType; text: string }
 
   /** 验证接口响应是否成功 */
   validateResponse: (response?: any) => boolean
@@ -78,34 +72,26 @@ declare class ListviewProps extends Vue {
   /** 是否显示搜索栏的“重置”按钮。 default: true */
   showFilterReset: boolean
 
-  /** 表格列配置。 default: [] */
-  tableColumns: TableColumn[]
-
   /** 可传入 <el-table> 的所有支持属性。 default: {} */
-  tableProps: Record<string, any>
+  contentProps: Record<string, any>
 
   /** 可传入 <el-table> 的所有支持事件。 default: {} */
-  tableEvents: Record<string, (...args: any[]) => void>
+  contentEvents: Record<string, (...args: any[]) => void>
+
+  /** 表格列配置。 default: [] */
+  tableColumns: TableColumn[]
 
   /** 是否开启表格行选择功能，传入 'single' 为表格单选效果。 default: true */
   tableSelectionColumn:
     | boolean
     | string
-    | {
-        type?: string
-        selectable?: (row: any, index: number) => boolean
-      }
+    | { type?: string; selectable?: (row: any, index: number) => boolean }
 
   /** 表格行选择的选中数据，可通过 .sync 修饰符获取更新。 default: [] */
-  tableSelection: any[]
+  selection: any[]
 
   /** 是否开启底部分页功能，或配置请求时分页参数的键名。 default: true */
-  usePage:
-    | boolean
-    | {
-        pageIndex: string
-        pageSize: string
-      }
+  usePage: boolean | { pageIndex: string; pageSize: string }
 
   /** 分页“每页数量”可选值。 default: [20, 50, 100] */
   pageSizes: number[]

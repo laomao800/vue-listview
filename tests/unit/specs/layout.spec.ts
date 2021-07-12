@@ -123,7 +123,7 @@ describe('layout', () => {
           result: { items: [{}], total: 1 },
           is_success: true,
         }),
-        tableProps: { rowClassName: 'row-view-class' },
+        contentProps: { rowClassName: 'row-view-class' },
       })
       expect(
         wrapper.findAll('.el-table__body-wrapper .el-table__row.row-view-class')
@@ -137,7 +137,7 @@ describe('layout', () => {
           result: { items: [{}], total: 1 },
           is_success: true,
         }),
-        tableProps: {
+        contentProps: {
           rowClassName: () => 'row-view-class-fn',
         },
       })

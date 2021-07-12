@@ -5,10 +5,10 @@
       :data="contentData.items"
       :height="_height"
       :style="{ width: '100%' }"
-      v-bind="normalizeTableProps"
+      v-bind="normalizedContentProps"
       @selection-change="handleTableSelectionChange"
       @row-click="handleRowClick"
-      v-on="normalizeTableEvents"
+      v-on="normalizedContentEvents"
     >
       <template #empty>
         <slot name="empty" v-bind="contentMessage">
@@ -84,12 +84,11 @@ export default Vue.extend({
   components: { VNode, MessageBlock },
 
   props: {
-    // Table
+    selection: { type: Array, default: () => [] },
+    contentProps: { type: Object, default: () => ({}) },
+    contentEvents: { type: Object, default: () => ({}) },
     tableColumns: { type: Array, default: () => [] },
-    tableProps: { type: Object, default: () => ({}) },
-    tableEvents: { type: Object, default: () => ({}) },
     tableSelectionColumn: { type: [Boolean, String, Object], default: true },
-    tableSelection: { type: Array, default: () => [] },
   },
 
   computed: {
@@ -133,15 +132,16 @@ export default Vue.extend({
 
     /**
      * 写在 $attrs 上的 prop 优先级会比 v-bind 内的高，以下 3 个属性需要可配置，
-     * 既 <el-table size="small" v-bind="tableProps" /> 无法修改 size 的值，
+     * 既 <el-table size="small" v-bind="contentProps" /> 无法修改 size 的值，
      * 因此先通过 computed 合并所需的 props ，再统一绑定最后的合并结果
      */
-    normalizeTableProps(): any {
+    normalizedContentProps(): any {
       const defaultProps = { size: 'small', border: true, stripe: true }
       const mergedPros = mapKeys(
-        merge(defaultProps, this.tableProps),
+        merge(defaultProps, this.contentProps),
         (value, key) => kebabCase(key)
       )
+
       const _rowClassName = mergedPros['row-class-name']
       const getRowClassName = (rowData: {
         row: Record<string, any>
@@ -155,18 +155,17 @@ export default Vue.extend({
         }
         return classNames.join(' ')
       }
-
       mergedPros['row-class-name'] = getRowClassName
 
       return mergedPros
     },
 
     /**
-     * 对传入的 tableEvents 的 key 统一转换为横线分隔格式
+     * 对传入的 contentEvents 的 key 统一转换为横线分隔格式
      */
-    normalizeTableEvents(): any {
+    normalizedContentEvents(): any {
       /* istanbul ignore next */
-      return mapKeys(this.tableEvents, (value, key) => kebabCase(key))
+      return mapKeys(this.contentEvents, (value, key) => kebabCase(key))
     },
   },
 
