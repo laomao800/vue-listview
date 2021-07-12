@@ -298,6 +298,7 @@ const DEFAULT_PROPS = {
     items: 'result.items',
     total: 'result.total_count',
   },
+  requestConfig: {},
   usePage: true,
   pagePosition: undefined,
   pageProps: undefined,
@@ -340,7 +341,7 @@ export default {
     autoload: { type: Boolean, default: true },
     requestUrl: { type: String, default: '' },
     requestMethod: { type: String, default: 'post' },
-    requestConfig: { type: Object, default: () => ({}) },
+    requestConfig: { type: Object },
 
     // Adv request
     requestHandler: { type: Function, default: null },
@@ -736,7 +737,8 @@ export default {
         // 构造 Axios 请求 requestConfig
         const _requestConfig = {
           url: this.requestUrl,
-          method: this.requestConfig.method || this.requestMethod,
+          method:
+            this.overrideProps['requestConfig'].method || this.requestMethod,
           withCredentials: true,
         }
 
@@ -747,7 +749,10 @@ export default {
           _requestConfig.data = requestData
         }
 
-        const requestConfig = merge(_requestConfig, this.requestConfig)
+        const requestConfig = merge(
+          _requestConfig,
+          this.overrideProps['requestConfig']
+        )
 
         // cancelToken 内部使用于取消前面的重复请求，因此不支持外部传入自定义
         requestConfig.cancelToken = new axios.CancelToken((cancel) => {
