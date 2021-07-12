@@ -521,8 +521,8 @@ export default {
       this.initContentEvent()
       this.updateLayout()
     },
-    showFilterSearch: 'updateLayout',
-    showFilterReset: 'updateLayout',
+    searchButton: 'updateLayout',
+    resetButton: 'updateLayout',
     filterbarFold: 'updateLayout',
     filterButtons: 'updateLayout',
     filterFields(val) {

@@ -125,7 +125,7 @@ interface TableColumn {
   render?: ({
     row,
     column,
-    $index
+    $index,
   }: {
     row: any
     column: any
@@ -204,11 +204,11 @@ declare class ListviewProps {
   /** 可选，存储搜索栏的搜索条件值。 default: {} */
   filterModel: { [k: string]: any }
 
-  /** 是否显示搜索栏的“提交”按钮。 default: true */
-  showFilterSearch: boolean
+  /** 是否显示搜索栏的“提交”按钮。 default: { text: '搜索', icon: 'el-icon-search', type: 'primary' } */
+  searchButton: Record<string, any> | boolean
 
-  /** 是否显示搜索栏的“重置”按钮。 default: true */
-  showFilterReset: boolean
+  /** 是否显示搜索栏的“重置”按钮。 default: { text: '重置', type: 'default' } */
+  resetButton: Record<string, any> | boolean
 
   /** 表格列配置。 default: [] */
   tableColumns: TableColumn[]
@@ -267,5 +267,5 @@ export {
   ListviewContainerProps,
   FilterButton,
   FilterField,
-  TableColumn
+  TableColumn,
 }
