@@ -49,7 +49,7 @@
 <script lang="tsx">
 import Vue, { Component } from 'vue'
 import debounce from 'lodash/debounce'
-import isFunction from 'lodash/isFunction'
+import get from 'lodash/get'
 import isPlainObject from 'lodash/isPlainObject'
 import StoreProvider from '@/components/StoreProvider.vue'
 import ListviewLayout from '@/components/ListviewLayout.vue'
@@ -126,13 +126,7 @@ export default Vue.extend({
       this.$nextTick().then(() => this._updateWrapperLayout())
     },
     _getReplaceComponent(name: string, defaultComp: Component): Component {
-      const replaceComponents__ = (this as any).replaceComponents__ || {}
-      const comp = replaceComponents__[name]
-      if (comp) {
-        return isFunction(comp) ? comp() : comp
-      } else {
-        return defaultComp
-      }
+      return get((this as any).replaceComponents__, name, defaultComp)
     },
   },
 })
