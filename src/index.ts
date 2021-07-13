@@ -1,4 +1,3 @@
-// import Vue from 'vue'
 import { create } from '@/create'
 import { Listview, ListviewContainer } from './index.component'
 

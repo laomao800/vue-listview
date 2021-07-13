@@ -7,7 +7,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import isString from 'lodash/isString'
 import isError from 'lodash/isError'
 import merge from 'lodash/merge'
-import omitBy from 'lodash/omitBy'
+import pickBy from 'lodash/pickBy'
 import { warn, dataMapping, isValidFieldValue, ensurePromise } from '@/utils'
 
 export default Vue.extend({
@@ -227,7 +227,7 @@ export default Vue.extend({
       let data = cloneDeep(this.filterModel)
 
       // 删除提交数据中的无效数据
-      data = omitBy(data, (val) => !isValidFieldValue(val))
+      data = pickBy(data, (val) => isValidFieldValue(val))
 
       let indexKey = 'page_index'
       let sizeKey = 'page_size'
