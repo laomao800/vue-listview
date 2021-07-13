@@ -2,6 +2,7 @@ import Vue from 'vue'
 import pick from 'lodash/pick'
 import isPlainObject from 'lodash/isPlainObject'
 import _Listview from '@/Listview'
+import { create as CreateFunction } from '~/types'
 
 const allowPresetProps = [
   // StoreProvider
@@ -30,21 +31,19 @@ const allowPresetProps = [
   'resetButton',
 ]
 
-export function create(options?: any) {
-  let component = _Listview
+const create: CreateFunction = (options = {}) => {
+  options = isPlainObject(options) ? options : {}
+  const { replaceComponents = {}, ..._options } = options
 
-  if (isPlainObject(options)) {
-    const { replaceComponents = {}, ..._options } = options
-    component = Vue.extend({
-      extends: _Listview,
-      data() {
-        return {
-          presetProps__: pick(_options, allowPresetProps),
-          replaceComponents__: replaceComponents,
-        }
-      },
-    })
-  }
-
-  return { component }
+  return Vue.extend({
+    extends: _Listview,
+    data() {
+      return {
+        presetProps__: pick(_options, allowPresetProps),
+        replaceComponents__: replaceComponents,
+      }
+    },
+  })
 }
+
+export { create }

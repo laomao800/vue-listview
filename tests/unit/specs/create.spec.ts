@@ -24,8 +24,8 @@ const globalConfig = {
   usePage: { pageIndex: 'global_page_index', pageSize: 'global_page_size' },
 }
 
-const { component: ListviewNormal } = createListview()
-const { component: ListviewCustom } = createListview(globalConfig)
+const ListviewNormal = createListview()
+const ListviewCustom = createListview(globalConfig)
 
 describe('Create config', () => {
   it('Create normal listview', async () => {
@@ -94,7 +94,7 @@ describe('Replace component', () => {
   const CustomContent = Vue.extend({
     render: (h) => h('div', { class: 'custom-content' }, 'CustomContent'),
   })
-  const { component: Listview } = createListview({
+  const Listview = createListview({
     replaceComponents: {
       filterbar: CustomFilterbar,
       content: CustomContent,

@@ -1,11 +1,11 @@
-import Vue, { VueConstructor, VNode } from 'vue'
+import Vue, { VueConstructor, VNode, Component } from 'vue'
 import { AxiosRequestConfig } from 'axios'
 import { FilterButton } from './FilterButton'
 import { FilterField } from './FilterField'
 import { TableColumn } from './TableColumn'
 
 type MessageType = 'success' | 'warning' | 'info' | 'error'
-type Dic<T> = Record<string, T>
+type Dic<T = any> = Record<string, T>
 
 declare class ListviewProps extends Vue {
   /** 设置页面顶部通栏内的页面标题文本。 default: '' */
@@ -37,13 +37,13 @@ declare class ListviewProps extends Vue {
   requestConfig: AxiosRequestConfig
 
   /** 自定义请求方法，需要返回 Promise ，以返回的内容交由 `validateResponse` 进行验证 */
-  requestHandler: (requestData?: Dic) => Promise<any> | any
+  requestHandler: (requestData: Dic) => Promise<any> | any
 
   /** 对接口发起请求参数在发送前作最后的更改 */
-  transformRequestData: (requestData?: Dic) => Dic | boolean
+  transformRequestData: (requestData: Dic) => Dic | boolean
 
   /** 对原始响应数据的加工方法 default: null */
-  transformResponseData: (responseData?: Dic) => void
+  transformResponseData: (responseData: Dic) => void
 
   /** 数据接口响应内容属性映射。 default: { items: 'result.items', total: 'result.total_count' } */
   contentDataMap: { [k: string]: string }
@@ -66,11 +66,22 @@ declare class ListviewProps extends Vue {
   /** 可选，存储搜索栏的搜索条件值。 default: {} */
   filterModel: Record<string, any>
 
-  /** 是否显示搜索栏的“提交”按钮。 default: true */
-  showFilterSearch: boolean
+  /** 在搜索栏按下回车键是否出发搜索请求。 default: true */
+  pressEnterSearch: boolean
 
-  /** 是否显示搜索栏的“重置”按钮。 default: true */
-  showFilterReset: boolean
+  /**
+   * boolean 是否显示搜索栏的“提交”按钮
+   * object 可自定义按钮配置。
+   * default: { text: '搜索', icon: 'el-icon-search', type: 'primary' }
+   */
+  searchButton: Record<string, any> | boolean
+
+  /**
+   * boolean 是否显示搜索栏的“重置”按钮。
+   * object 可自定义按钮配置。
+   * default: { text: '重置', type: 'default' }
+   */
+  resetButton: Record<string, any> | boolean
 
   /** 可传入 <el-table> 的所有支持属性。 default: {} */
   contentProps: Record<string, any>
@@ -101,6 +112,8 @@ declare class ListviewProps extends Vue {
 
   /** 页码位置。 default: 'left' */
   pagePosition: 'left' | 'right'
+
+  pageProps: Record<string, any>
 }
 
 declare class ListviewContainerProps extends Vue {}
@@ -113,8 +126,41 @@ declare class ListviewContainer extends ListviewContainerProps {
   static install(Vue: VueConstructor<Vue>, options: any): void
 }
 
+type AllowPresetProps =
+  | 'pressEnterSearch'
+  | 'autoload'
+  | 'requestMethod'
+  | 'requestConfig'
+  | 'transformRequestData'
+  | 'transformResponseData'
+  | 'contentDataMap'
+  | 'contentMessage'
+  | 'validateResponse'
+  | 'resolveResponseErrorMessage'
+  | 'usePage'
+  | 'pageSize'
+  | 'pageSizes'
+  | 'pageProps'
+  | 'pagePosition'
+  | 'height'
+  | 'fullHeight'
+  | 'searchButton'
+  | 'resetButton'
+
+type CreateOptions = Partial<
+  Pick<ListviewProps, typeof AllowPresetProps[number]>
+> & { replaceComponents?: Record<string, Component> }
+
+type create = (options?: CreateOptions) => Component
+
 export default Listview
-export { Listview, ListviewContainer, ListviewProps, ListviewContainerProps }
+export {
+  create,
+  Listview,
+  ListviewContainer,
+  ListviewProps,
+  ListviewContainerProps,
+}
 export * from './FilterButton'
 export * from './FilterField'
 export * from './TableColumn'

@@ -31,7 +31,7 @@ import CustomFilterbar from './CustomFilterbar.vue'
 import CustomContent from './CustomContent.vue'
 import ListPage from './ListPage.vue'
 
-const { component: component1 } = createListview({
+const component1 = createListview({
   replaceComponents: {
     filterbar: CustomFilterbar,
     content: CustomContent,
