@@ -1,7 +1,7 @@
-import { createListviewWrapper, mockDataList } from '../helpers'
+import { createListviewWrapper, mockDataList, wait } from '../helpers'
 
 describe('Request params', () => {
-  it('常规参数验证', async () => {
+  it('filterModel', async () => {
     const { requestSpy } = await createListviewWrapper({
       filterModel: {
         static_text: 'abc',
@@ -13,6 +13,31 @@ describe('Request params', () => {
       'multipleSelect',
       [1, 2, 3]
     )
+  })
+
+  it('text trim', async () => {
+    const testString = '  text string  '
+    const { wrapper, requestSpy } = await createListviewWrapper({
+      filterModel: { text1: testString, text2: testString },
+      filterFields: [
+        { type: 'text', model: 'text1' },
+        { type: 'text', model: 'text2', trim: false },
+      ],
+    })
+    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text1', testString)
+    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', testString)
+
+    wrapper
+      .findAllComponents({ name: 'ElInput' })
+      .wrappers.forEach((w) => w.vm.$emit('blur'))
+    const vm = wrapper.vm as any
+    await vm.search()
+
+    expect(requestSpy.mock.calls[1][0]).toHaveProperty(
+      'text1',
+      testString.trim()
+    )
+    expect(requestSpy.mock.calls[1][0]).toHaveProperty('text2', testString)
   })
 
   it('transformRequestData', async () => {
@@ -41,29 +66,15 @@ describe('Request params', () => {
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('addonStr', 'listview')
   })
 
-  it('text 字段默认开启 trim', async () => {
-    const testString = '  text string  '
-    const { wrapper, requestSpy } = await createListviewWrapper({
-      filterModel: { text1: testString, text2: testString },
-      filterFields: [
-        { type: 'text', model: 'text1' },
-        { type: 'text', model: 'text2', trim: false },
-      ],
+  it('request', async () => {
+    const { wrapper } = await createListviewWrapper({
+      requestHandler: undefined,
+      requestUrl: '/mock/listview',
     })
-    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text1', testString)
-    expect(requestSpy.mock.calls[0][0]).toHaveProperty('text2', testString)
-
-    wrapper
-      .findAllComponents({ name: 'ElInput' })
-      .wrappers.forEach((w) => w.vm.$emit('blur'))
-    const vm = wrapper.vm as any
-    await vm.search()
-
-    expect(requestSpy.mock.calls[1][0]).toHaveProperty(
-      'text1',
-      testString.trim()
-    )
-    expect(requestSpy.mock.calls[1][0]).toHaveProperty('text2', testString)
+    await wait(400)
+    expect(
+      (wrapper.findComponent({ ref: 'storeProvider' }).vm as any).contentData
+    ).toHaveProperty('total', 800)
   })
 })
 
@@ -180,7 +191,7 @@ describe('Response', () => {
       validateResponse: (response) => response.custom_is_success === 'done',
       resolveResponseErrorMessage: (response) => {
         try {
-          return response.error.msg.info
+          return `error: (${response.error.msg.info})`
         } catch (e) {
           return '未知错误'
         }
@@ -188,7 +199,7 @@ describe('Response', () => {
     })
     expect(storeVm.internalContentMessage).toEqual({
       type: 'error',
-      text: 'error info',
+      text: 'error: (error info)',
     })
   })
 

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const express = require('express')
 const { successWrap, errorWrap } = require('./utils')
 const Mock = require('mockjs')

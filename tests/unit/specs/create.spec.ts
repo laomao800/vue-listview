@@ -5,6 +5,7 @@ import ListviewOrigin, { create as createListview } from '@/index'
 import { createListviewWrapper } from '../helpers'
 
 const globalConfig = {
+  requestConfig: { headers: { 'my-header': 'text' } },
   validateResponse: () => false,
   resolveResponseErrorMessage: () => 'config error from global',
   transformRequestData(data: Record<string, any>) {
@@ -73,6 +74,16 @@ describe('Create config', () => {
     expect(pick(vm.mergedAttrs, Object.keys(propsData))).toEqual(propsData)
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('prop_page_index')
     expect(requestSpy.mock.calls[0][0]).toHaveProperty('prop_page_size')
+  })
+
+  it('requestConfig', async () => {
+    const { wrapper } = await createListviewWrapper({}, ListviewCustom)
+
+    expect(
+      (
+        wrapper.findComponent({ ref: 'storeProvider' }).vm as any
+      ).getRequestConfig()
+    ).toHaveProperty('headers', globalConfig.requestConfig.headers)
   })
 })
 

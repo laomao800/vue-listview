@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { mount } from '@vue/test-utils'
 import { ListviewProps } from '~/types'
 
