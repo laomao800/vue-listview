@@ -10,8 +10,8 @@ export default Vue.extend({
   },
 
   methods: {
-    $rootEmitProxy(event: string, ...args: any[]) {
-      this.lvStore.$rootEmitProxy(event, ...args)
+    $rootEmitProxy(event: string) {
+      this.lvStore.$rootEmitProxy(event)
     },
   },
 })

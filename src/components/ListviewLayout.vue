@@ -45,7 +45,7 @@ export default Vue.extend({
       get() {
         return this.lvStore.contentHeight
       },
-      set(newVal) {
+      set(newVal: number) {
         this.lvStore.contentHeight = newVal
       },
     },

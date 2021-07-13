@@ -99,7 +99,7 @@ export default Vue.extend({
       get() {
         return this.lvStore.internalSelection
       },
-      set(newVal) {
+      set(newVal: any[]) {
         this.lvStore.internalSelection = newVal
       },
     },
@@ -209,7 +209,6 @@ export default Vue.extend({
           </el-table-column>
         )
       }
-      // TODO: tableColumn validator
       return isPlainObject(tableColumn) ? _createColumn(tableColumn) : null
     },
 

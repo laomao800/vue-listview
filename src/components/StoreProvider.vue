@@ -121,7 +121,7 @@ export default Vue.extend({
       const requestData = this.getRequestData()
       // transformRequestData 有可能返回 false 以阻止提交动作，可用于提交前验证等
       if (requestData === false) {
-        this.$rootEmitProxy('request-error', 'invalid')
+        this.$rootEmitProxy('request-error')
         /* istanbul ignore next */
         this.contentLoading = false
         return Promise.resolve()

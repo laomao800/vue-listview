@@ -21,7 +21,7 @@ export default Vue.extend({
       get() {
         return this.lvStore.currentPage
       },
-      set(val) {
+      set(val: number) {
         this.lvStore.currentPage = val
       },
     },
@@ -29,7 +29,7 @@ export default Vue.extend({
       get() {
         return this.lvStore.currentPageSize
       },
-      set(val) {
+      set(val: number) {
         this.lvStore.currentPageSize = val
       },
     },
