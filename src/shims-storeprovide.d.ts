@@ -10,7 +10,7 @@ interface LvStore {
   // store
   pressEnterSearch: boolean
   filterModel: Record<string, any>
-  $rootEmitProxy: (event: string) => void
+  $rootEmitProxy: (event: string, ...args: any[]) => void
   search: (keepInPage = false) => Promise<>
 
   // layout

@@ -3,7 +3,7 @@
     ref="storeProvider"
     v-bind="mergedAttrs"
     v-on="$listeners"
-    @root-emit-proxy="(event, store) => $emit(event, store)"
+    @root-emit="$emit"
   >
     <ListviewLayout
       ref="layout"
