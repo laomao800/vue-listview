@@ -4,20 +4,22 @@ Listview 内置另一个组件 Listview Container 用于生成多个 Listview �
 
 ## 使用方法
 
+除 `<Listview />` 组件，也可包装其他自定义组件，用于将列表页独立以组件封装后再引入，减少单个页面代码长度。
+
 ```vue
 <template>
-  <listview-container
+  <ListviewContainer
     :header-title="'列表容器'"
     :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
   >
-    <listview
+    <Listview
       header-title="演示列表1"
-      :filter-fields="[
-        // ...
-      ]"
+      :filter-fields="[]"
     />
-    <listview header-title="演示列表2" />
-  </listview-container>
+    <Listview header-title="演示列表2" />
+    <OtherListPage header-title="列表页组件3">
+    <div header-title="自定义元素">content</div>
+  </ListviewContainer>
 </template>
 
 <script>
@@ -34,17 +36,9 @@ export default {
 </script>
 ```
 
-以上代码会生成如下表结构：
-
-<!-- markdownlint-disable MD033 -->
-<client-only>
-  <listview-container-demo style="border:1px solid #DADEE5" />
-</client-only>
-<!-- markdownlint-enable MD033 -->
-
 ## Tab 标题
 
-外部 `<listview-container>` 会自动获取内部 `<listview>` 的 `headerTitle` prop 作为在顶部 Tab 处显示的标题，并且内部 `<listview>` 的 `headerTitle` 和 `headerNav` prop 都不会显示。
+外部 `<ListviewContainer>` 会自动获取内部子级的 `headerTitle` 作为 Tab 题。
 
 ## Props
 
@@ -66,3 +60,19 @@ export default {
 | ------ | ----------------------------------------- |
 | `text` | 显示文字                                  |
 | `to`   | 可选，路由跳转对象，同 vue-router 的 `to` |
+
+### type
+
+- type: `String`
+- default: `'card'`
+- 可选值: `'card'` | `'line'`
+
+顶部 tab 样式，`'card'` 为原 1.x 样式，`'line'` 为 element-ui tab 样式。
+
+### tabPosition
+
+- type: `String`
+- default: `'left'`
+- 可选值: `'left'` | `'center'`
+
+顶部 tab 显示位置。

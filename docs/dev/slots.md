@@ -40,21 +40,30 @@
 
 因此如果有其他界面需求，甚至根据开关切换列表视图的需求，都可以通过 default slot 的自定义布局来实现。
 
-## prepend-filterbar-submit
+## prepend-submit
 
 插入在搜索栏右侧“搜索”按钮前面。一般可用于需要在该位置增加自定义操作按钮等特殊需求。
 
 ```vue
 <template>
   <listview>
-    <el-button type="danger" slot="prepend-filterbar-submit">一键重算</el-button>
+    <el-button type="danger" slot="prepend-submit">一键重算</el-button>
   </listview>
 </template>
 ```
 
-## append-filterbar-submit
+## append-submit
 
-同 [prepend-filterbar-submit](#prepend-filterbar-submit) ，但是插入在“重置”按钮后面。
+同 [prepend-submit](#prepend-submit) ，但是插入在“重置”按钮后面。
+
+## prepend-more
+
+搜索栏折叠按钮（更多）左侧。
+
+## append-more
+
+同 [prepend-more](#prepend-more) ，搜索栏折叠按钮（更多）右侧。
+
 
 ## footer-left
 
@@ -83,11 +92,3 @@
 ## filterbar-right
 
 同 [filterbar-top](#filterbar-top) ，搜索栏右侧。
-
-## prepend-filterbar-more
-
-搜索栏折叠按钮（更多）左侧。
-
-## append-filterbar-more
-
-同 [prepend-filterbar-more](#prepend-filterbar-more) ，搜索栏折叠按钮（更多）右侧。

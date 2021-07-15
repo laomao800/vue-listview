@@ -6,6 +6,20 @@ sidebarDepth: 2
 
 ## 布局类
 
+### height
+
+- type: `[String, Number]`
+- default: `null`
+
+优先级**最高**，设置整体布局高度，包含顶部标题栏、搜索栏、正文区域、页码区域所有内容的高度，支持百分比。
+
+### fullHeight
+
+- type: `Boolean`
+- default: `true`
+
+垂直高度是否铺满屏幕高度。
+
 ### headerTitle
 
 - type: `String`
@@ -25,20 +39,6 @@ sidebarDepth: 2
 | `text` | 显示文字                                  |
 | `to`   | 可选，路由跳转对象，同 vue-router 的 `to` |
 
-### height
-
-- type: `[String, Number]`
-- default: `null`
-
-优先级**最高**，设置整体布局高度，包含顶部标题栏、搜索栏、正文区域、页码区域所有内容的高度，支持百分比。
-
-### fullHeight
-
-- type: `Boolean`
-- default: `true`
-
-垂直高度是否铺满屏幕高度。
-
 ### contentMessage
 
 - type: `[Object, String]`
@@ -46,7 +46,7 @@ sidebarDepth: 2
 
 可用在 [autoload](#autoload) 为 `false` 时候，初始显示的提示信息。
 
-如果为 `String` 类型则不带图标只显示文本。如果为 `Object` 类型则支持格式为 `{ type: '', message: '' }` ，其中 type 支持 `success` , `warning` , `info` , `error` 。
+如果为 `String` 类型则不带图标只显示文本。如果为 `Object` 类型则支持格式为 `{ type: '', text: '' }` ，其中 type 支持 `warning` , `info` , `error` 。
 
 ## 搜索栏
 
@@ -55,14 +55,14 @@ sidebarDepth: 2
 - type: `Array`
 - default: `[]`
 
-搜索栏左侧按钮配置，具体可查看 [《Prop filterButtons》](prop-filter-buttons.md) 。
+搜索栏左侧按钮配置，具体可查看 [Prop filterButtons](prop-filter-buttons.md) 。
 
 ### filterFields
 
 - type: `Array`
 - default: `[]`
 
-搜索栏搜索字段配置，具体可查看 [《Prop filterFields》](prop-filter-fields.md) 。
+搜索栏搜索字段配置，具体可查看 [Prop filterFields](prop-filter-fields.md) 。
 
 ### filterModel
 
@@ -95,74 +95,16 @@ sidebarDepth: 2
 
 传入 `false` 则不显示搜索栏的“重置”按钮。
 
-## 分页
-
-### usePage
-
-- type: `Boolean | Object`
-- default: `true` | `{ pageIndex: 'page_index', pageSize: 'page_size' }`
-
-是否开启底部分页功能，传入 `Boolean` 类型，则表示功能开启与否，开启后在请求时参数上除了包含搜索栏内的数据，还会自动附加上 `page_index` 和 `page_size` 2 个参数。
-
-如果接口的分页参数与默认的不一致，可以通过传入 `Object` 类型，指定 pageIndex 和 pageSize 2 个 key 名，相应的分页参数值会以配置好的 key 名发送。
-
-### pageSizes
-
-- type: `Array`
-- default: `[20, 50, 100]`
-
-分页“每页数量”可选值。
-
-### pageSize
-
-- type: `Number`
-- default: `20`
-
-默认每页分页数量。
-
-### pageProps
-
-- type: `Object`
-- default: `{}`
-
-除了 `total` 和 `currentPage` 之外的所有 `<el-pagination>` 支持的 [Props](https://element.eleme.cn/#/zh-CN/component/pagination#attributes) 。
-
-### pagePosition
-
-- type: `String`
-- default: -
-- 可选值： `right`
-
-设置页码位置，传入 `right` 可让页码显示于底部右侧。注意 slot [`footer-right`](./slots.md#footer-right) 会覆盖出现于底部右侧的页码。
-
-## 表格
+## 内容区域/表格
 
 ### tableColumns
 
 - type: `Array`
 - default: `[]`
 
-表格列配置，具体可查看 [《Prop tableColumns》](prop-table-columns.md)。
+表格列配置，具体可查看 [Prop tableColumns](prop-table-columns.md)。
 
-### tableProps
-
-- type: `Object`
-- default: `{}`
-
-可传入 [《Element-UI table#table-attributes》](http://element.eleme.io/#/zh-CN/component/table#table-attributes) 的所有属性。
-
-内部通过 `v-bind` 绑定给 `<el-table>` 元素。
-
-### tableEvents
-
-- type: `Object`
-- default: `{}`
-
-可传入 [《Element-UI table#table-events》](http://element.eleme.io/#/zh-CN/component/table#table-events) 的所有支持事件。
-
-内部通过 `v-on` 绑定给 `<el-table>` 元素。
-
-### tableSelectionColumn <Badge text="1.2.0+" />
+### tableSelectionColumn
 
 - type: `Boolean` | `String` | `Object`
 - default: `true`
@@ -183,7 +125,7 @@ sidebarDepth: 2
 }
 ```
 
-### tableSelection
+### selection
 
 - type: `Array`
 - default: `[]`
@@ -191,17 +133,73 @@ sidebarDepth: 2
 表格行选择的选中数据。可通过 `.sync` 修饰符获取更新：
 
 ```vue
-<listview :table-selection.sync="tableSelection" />
+<listview :selection.sync="selection" />
 ```
+
+### contentProps
+
+- type: `Object`
+- default: `{}`
+
+可传入 [Element-UI table#table-attributes](http://element.eleme.io/#/zh-CN/component/table#table-attributes) 的所有属性。
+
+内部通过 `v-bind` 传递给 `<el-table>` 元素。
+
+### contentEvents
+
+- type: `Object`
+- default: `{}`
+
+可传入 [Element-UI table#table-events](http://element.eleme.io/#/zh-CN/component/table#table-events) 的所有支持事件。
+
+内部通过 `v-on` 绑定给 `<el-table>` 元素。
+
+## 分页
+
+### usePage
+
+- type: `Boolean | Object`
+- default: `true` | `{ pageIndex: 'page_index', pageSize: 'page_size' }`
+
+是否开启底部分页功能，传入 `Boolean` 类型，则表示功能开启与否，开启后在请求时参数上除了包含搜索栏内的数据，还会自动附加上 `page_index` 和 `page_size` 2 个参数。
+
+如果接口的分页参数与默认的不一致，可以通过传入 `Object` 类型，指定 pageIndex 和 pageSize 2 个 key 名，相应的分页参数值会以配置好的 key 名发送。
+
+### pageSize
+
+- type: `Number`
+- default: `20`
+
+默认每页分页数量。
+
+### pageSizes
+
+- type: `Array`
+- default: `[20, 50, 100]`
+
+分页“每页数量”可选值。
+
+### pagePosition
+
+- type: `String`
+- default: -
+- 可选值： `right`
+
+设置页码位置，传入 `right` 可让页码显示于底部右侧。注意 slot [`footer-right`](./slots.md#footer-right) 会覆盖出现于底部右侧的页码。
+
+### pageProps
+
+- type: `Object`
+- default: `{}`
+
+除了 `total` 和 `currentPage` 之外的所有 `<el-pagination>` 支持的 [Props](https://element.eleme.cn/#/zh-CN/component/pagination#attributes) 。
 
 ## 数据请求
 
 ::: tip 说明
-
 每次发起请求会自动将 [filterModel](#filtermodel) 中的数据作为参数提交。
 
 默认开启 `withCredentials: true` ，如需关闭请配置 [requestConfig](#requestconfig) 。
-
 :::
 
 ### autoload
@@ -301,7 +299,7 @@ sidebarDepth: 2
 
 ### resolveResponseErrorMessage
 
-- type: `Function`
+- type: `(res) => string`
 - default:
 
   ```js
@@ -321,22 +319,18 @@ sidebarDepth: 2
 
 ## 数据请求 - 高级配置
 
-如果对于数据接口请求在发送前、接受后有特殊的处理流程，或者接口数据格式与规范不一致，可通过以下几个参数对数据进行加工处理，内部处理流程为：
-
-<!-- ./request-flow.puml -->
-
-![request-flow](./request-flow.svg)
+如果对于数据接口请求在发送前、接受后有特殊的处理流程，或者接口数据格式与规范不一致，可通过以下几个 props 对数据进行加工处理。
 
 ### requestHandler
 
-- type: `Function(requestData)`
+- type: `(requestData) => Promise<data>`
 - default: `null`
 
-自定义请求方法，需要返回 Promise ，该方法优先级最高，若设置了该方法，会以返回的内容交由 [`validateResponse`](#validateresponse) 进行验证，具体流程可查看上方流程图。
+自定义请求方法，需要返回 Promise ，该方法优先级最高，若设置了该方法，会以返回的内容交由 [`validateResponse`](#validateresponse) 进行验证。
 
 ### transformRequestData
 
-- type: `Function(requestData)`
+- type: `(requestData) => requestData`
 - default: `null`
 
 该方法可对接口发起请求参数在发送前作最后的更改，方法最终 return 的数据会作为提交参数。参数 `requestData` 包含搜索栏的所有数据，如果有开启分页还会包含 `page_index` 和 `page_size` 。
@@ -345,9 +339,9 @@ sidebarDepth: 2
 
 ### transformResponseData
 
-- type: `Function(requestData)`
+- type: `(responseData) => responseData`
 - default: `null`
 
 对原始响应数据的加工方法，接收原始响应数据，方法处理后 return 的返回值会交由给 `contentDataMap` 进行映射。
 
-一般用于接口响应的数据无法简单一次映射到需要的数据（如需要根据条件重组、聚合）时，可使用该配置项。
+一般用于接口响应的数据无法简单一次映射到需要的数据（如需要根据其他条件重组、聚合）时，亦可使用该配置项对数据进行加工再返回。

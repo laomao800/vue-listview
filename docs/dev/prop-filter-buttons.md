@@ -119,35 +119,23 @@ export default {
     return {
       text: 'text from data',
       filterButtons: [
-        // 如果需要渲染本实例内的数据，可使用 render 属性。需要注意 `render` 对内部 this 指向有要求，因此需要通过以下的形式定义：
-        {
-          render: () => {
-            return <button>{this.text}</button>
-          }
-        },
-
-        // 或
-        {
-          render: function() {
-            return <button>{this.text}</button>
-          }.bind(this)
-        },
-
-        // 或者可以简写成（推荐）
+        // 支持函数类型
         () => <button>{this.text}</button>,
 
         // 如果按钮需要有 loading 状态也可以通过这种形式定义
         () => (
           <el-button
             loading={this.btnLoading}
-            on-click={(this.btnLoading = true)}
+            on-click={() => {
+              this.btnLoading = true
+              setTimeout(() => (this.btnLoading = false), 1000)
+            }}
           >
             导出
           </el-button>
         ),
 
-        // 对于非立即使用数据（输出数据到界面）的时候，如只在事件绑定内使用数据，
-        // 也可直接简写返回 JSX 内容无需通过函数包装。
+        // 若仅需要绑定事件，可简写为 JSX 元素无需通过函数包装返回。
         <button on-click={this.showDialog}>JSX 按钮</button>,
         <button on-click={() => this.showDialog(this.text)}>JSX 按钮</button>
       ]

@@ -7,23 +7,24 @@
 
 ## 常用属性
 
-| 参数         | 类型             | 说明                                                                  |
-| ------------ | ---------------- | --------------------------------------------------------------------- |
-| **render**   | function(scope)  | 接受参数为 { row, column, $index } ，支持返回字符串或 JSX             |
-| **children** | Array            | 子列配置，子项支持属性与父级一致                                      |
-| label        | String           | 表头显示的内容                                                        |
-| prop         | String           | 列字段名                                                              |
-| width        | String , Number  | 列宽度                                                                |
-| align        | String           | 列对齐方式 `left` , `center` , `right`                                |
-| fixed        | String , Boolean | 列是否固定在左侧或者右侧，true 表示固定在左侧                         |
-| formatter    | function(row)    | 如数据需要简单文本加工，可使用该配置处理后 return 即可                |
-| ...          | -                | **支持所有 [Element-UI Table column](#element-ui-table-column) 配置** |
+| 参数         | 类型                            | 说明                                                                  |
+| ------------ | ------------------------------- | --------------------------------------------------------------------- |
+| label        | String                          | 表头显示的内容                                                        |
+| renderHeader | Function(h, { column, $index }) | 支持 jsx 自定义表头内容                                               |
+| prop         | String                          | 列字段名                                                              |
+| width        | String , Number                 | 列宽度                                                                |
+| align        | String                          | 列对齐方式 `left` , `center` , `right`                                |
+| render       | function(scope)                 | 接受参数为 { row, column, $index } ，支持返回字符串或 JSX             |
+| formatter    | function(row)                   | 如数据需要简单文本加工，可使用该配置处理后 return 即可                |
+| fixed        | String , Boolean                | 列是否固定在左侧或者右侧，true 表示固定在左侧                         |
+| children     | Array                           | 子列配置，子项支持属性与父级一致                                      |
+| ...          | -                               | **支持所有 [Element-UI Table column](#element-ui-table-column) 配置** |
 
 其中除了 `children` 和 `render` 为 listview 新增的属性，其余完整列表请查阅 [Element-UI Table column](#element-ui-table-column) 。
 
 ### render
 
-在 `formatter` 不满足的情况下，可使用 `render` 返回复杂单元格结构，支持 JSX ，如：
+可使用 `render` 返回复杂单元格结构，支持 JSX ，如：
 
 ```js
 {
@@ -34,40 +35,18 @@
 }
 ```
 
-::: warning 注意
-
-此处注意和 Vue 本身的 `render` 方法作区分，二者无直接联系。
-
-`render` 对内部 this 指向有要求，因此需要通过以下的形式定义：
-
-:::
-
-```js
-{
-  render: ({ row, column, $index }) => {
-    return (
-      <el-button on-click={e => this.someMethod()}>查看</el-button>
-    )
-  }
-}
-
-// 或
-
-{
-  render: function({ row, column, $index }) {
-    return (
-      <el-button on-click={e => this.someMethod()}>查看</el-button>
-    )
-  }.bind(this)
-}
-```
-
 ## 配置演示
 
 ```js
 ;[
   // 常规调用，直接通过 prop 指定属性名
   { label: 'SKU', align: 'center', prop: 'sku', fixed: true },
+
+  // 需要对数据进行简单处理后再输出
+  {
+    label: '折扣率',
+    formatter: row => row.discount.toFixed(2)
+  },
 
   // 支持 JSX 以及绑定 method
   {
@@ -78,38 +57,16 @@
       return (
         <el-button
           size="mini"
-          type="primary"
-          on-click={e => {
+          icon={row.enable ? 'el-icon-check ' : 'el-icon-close'}
+          on-click={(e) => {
             e.stopPropagation()
-            this.$msgbox({
-              message: row,
-              callback: () => {}
-            })
+            this.$msgbox(row.title)
           }}
         >
-          查看
+          按钮
         </el-button>
       )
-    }
-  },
-
-  // 需要对数据进行简单处理后再输出
-  {
-    label: '折扣率',
-    formatter: row => row.discount.toFixed(2)
-  },
-
-  // 需要输出较复杂的结构或其他自定义组件可使用 render
-  {
-    label: '是否启用',
-    align: 'center',
-    render({ row, column, $index }) {
-      if (row.enable) {
-        return <span style="color:#67c23a">启用</span>
-      } else {
-        return <span style="color:#f56c6c">禁用</span>
-      }
-    }
+    },
   },
 
   // 支持子列，无限级别

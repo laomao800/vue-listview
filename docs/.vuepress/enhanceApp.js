@@ -1,4 +1,4 @@
-import { Listview, ListviewContainer } from '../../src'
+import { Listview, ListviewContainer } from '../../dist/listview.common'
 
 export default ({ Vue }) => {
   Vue.use(Listview)

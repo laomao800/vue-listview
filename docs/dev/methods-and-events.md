@@ -10,17 +10,17 @@
 
 参数 `keepInPage` 默认为 `false` ，传入 `true` 可以保留当前页码重新请求数据，可用于操作数据后的当页刷新。
 
-<Badge text="1.2.7+" vertical="middel" /> 以后该方法返回一个 Promise ，数据请求成功后响应。
+该方法返回一个 Promise ，数据请求成功后 resolve 。
 
 ### resetFilter()
 
 重置搜索栏数据，效果与点击“重置”按钮一致。
 
-### setContentMessage(message, type)
+### setContentMessage(text, type)
 
 - 参数
-  - `message` ：文本内容，设为 `null` 则会清空 `contentMessage`
-  - `type` ：可选，支持值有 `success` , `warning` , `info` , `error`
+  - `text` ：文本内容，设为 `null` 则会清空内容
+  - `type` ：可选，支持值有 `warning` , `info` , `error`
 
 设置无数据时内容区域的展示文本。
 
@@ -32,22 +32,37 @@
 
 ### filter-submit
 
-点击搜索栏“搜索”按钮后触发。
+点击搜索栏“搜索”按钮后，发起请求前触发。
 
 ### filter-reset
 
-点击搜索栏“重置”按钮后触发。
+点击搜索栏“重置”按钮后，重置完 `filterModel` 后触发。
 
-### before-request(instance) <Badge text="1.2.5+" />
+### before-request(store)
 
 - 参数：
-  - `{Object} instance` listview 实例
+  - `{Object} store` 内部数据 store 实例
 
 发起数据请求前触发。
 
-### requested(instance) <Badge text="1.2.5+" />
+### request-valid-error(store)
 
 - 参数：
-  - `{Object} instance` listview 实例
+  - `{Object} store` 内部数据 store 实例
 
-发起数据请求后触发。
+`transformRequestData(data)` 返回 `false` 时触发。
+
+### request-success(store)
+
+- 参数：
+  - `{Object} store` listview 实例
+
+数据请求成功，设置内容与关闭内部 loading 状态后触发。
+
+### request-error(store, error)
+
+- 参数：
+  - `{Object} store` listview 实例
+  - `Error error` 错误对象
+
+数据请求失败触发。
