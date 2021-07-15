@@ -185,6 +185,12 @@ export default Vue.extend({
   },
 
   watch: {
+    filterButtons() {
+      this.$nextTick(this.updateLayout)
+    },
+    filterFields() {
+      this.$nextTick(this.updateLayout)
+    },
     isShowSearchButton: 'updateLayout',
     isShowResetButton: 'updateLayout',
   },
