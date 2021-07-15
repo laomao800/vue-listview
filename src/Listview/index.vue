@@ -3,7 +3,7 @@
     ref="storeProvider"
     v-bind="mergedAttrs"
     v-on="$listeners"
-    @root-emit="$emit"
+    @root-emit="(...args) => $emit.bind(this)(...args)"
   >
     <ListviewLayout
       ref="layout"
@@ -91,15 +91,15 @@ export default Vue.extend({
     search(keep: boolean) {
       return (this.$refs.storeProvider as any).search(keep)
     },
+    resetFilter() {
+      ;(this.$refs.filterbar as any).handleFilterReset()
+    },
     setContentMessage(text: string, type: string, cleanList = false) {
       ;(this.$refs.storeProvider as any).setContentMessage(
         text,
         type,
         cleanList
       )
-    },
-    resetFilter() {
-      ;(this.$refs.filterbar as any).handleFilterReset()
     },
     updateLayout: debounce(
       function () {

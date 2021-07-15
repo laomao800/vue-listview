@@ -110,12 +110,11 @@ export default Vue.extend({
     },
 
     doRequest() {
-      this.$rootEmitProxy('before-request')
       if (!this.requestUrl && !this.requestHandler) {
         return warn('未配置 requestUrl 或 requestHandler ，无法发起数据请求。')
       }
 
-      this.$rootEmitProxy('request-start')
+      this.$rootEmitProxy('before-request')
 
       this.contentLoading = true
       const requestData = this.getRequestData()
