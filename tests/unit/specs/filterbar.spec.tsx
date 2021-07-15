@@ -107,7 +107,9 @@ describe('Filter fields', () => {
   })
 
   it('Fields render', () => {
+    const lvStore: any = { filterModel: {} }
     const wrapper = mount(Filterbar, {
+      provide: { lvStore },
       propsData: {
         filterFields: [
           { type: 'text', model: 'text' },
@@ -146,7 +148,9 @@ describe('Filter fields', () => {
   })
 
   it('Group fields render', () => {
+    const lvStore: any = { filterModel: {} }
     const wrapper = mount(Filterbar, {
+      provide: { lvStore },
       propsData: {
         filterFields: [
           [

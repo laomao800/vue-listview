@@ -3,9 +3,7 @@ import Vue from 'vue'
 export default Vue.extend({
   inject: {
     lvStore: {
-      default: () => ({
-        filterModel: {},
-      }),
+      default: () => ({}),
     },
   },
 
