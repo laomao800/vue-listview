@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const execa = require('execa')
 const semver = require('semver')
 const inquirer = require('inquirer')
@@ -9,12 +11,12 @@ const release = async () => {
 
   const bumps = ['patch', 'minor', 'major', 'prerelease']
   const versions = {}
-  bumps.forEach(b => {
+  bumps.forEach((b) => {
     versions[b] = semver.inc(curVersion, b)
   })
-  const bumpChoices = bumps.map(b => ({
+  const bumpChoices = bumps.map((b) => ({
     name: `${b} (${versions[b]})`,
-    value: b
+    value: b,
   }))
 
   const { bump, customVersion } = await inquirer.prompt([
@@ -22,14 +24,14 @@ const release = async () => {
       name: 'bump',
       message: 'Select release type:',
       type: 'list',
-      choices: [...bumpChoices, { name: 'custom', value: 'custom' }]
+      choices: [...bumpChoices, { name: 'custom', value: 'custom' }],
     },
     {
       name: 'customVersion',
       message: 'Input version:',
       type: 'input',
-      when: answers => answers.bump === 'custom'
-    }
+      when: (answers) => answers.bump === 'custom',
+    },
   ])
 
   const version = customVersion || versions[bump]
@@ -39,29 +41,29 @@ const release = async () => {
     {
       name: 'genDocs',
       message: `Generate ${version} docs?`,
-      type: 'confirm'
-    }
+      type: 'confirm',
+    },
   ])
 
   const { yes } = await inquirer.prompt([
     {
       name: 'yes',
       message: `Confirm releasing ${version}?`,
-      type: 'confirm'
-    }
+      type: 'confirm',
+    },
   ])
 
   if (yes) {
     await execa('npm', ['run', 'build'], { stdio: 'inherit' })
     await execa('git', ['add', 'dist'], { stdio: 'inherit' })
     await execa('git', ['commit', '-m', `build: build ${version}`], {
-      stdio: 'inherit'
+      stdio: 'inherit',
     })
     if (genDocs) {
       await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
       await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
       await execa('git', ['commit', '-m', `build: docs ${version}`], {
-        stdio: 'inherit'
+        stdio: 'inherit',
       })
     }
     await execa(
@@ -74,7 +76,7 @@ const release = async () => {
   require('./gen-changelog')(version)
 }
 
-release().catch(err => {
+release().catch((err) => {
   console.error(err)
   process.exit(1)
 })

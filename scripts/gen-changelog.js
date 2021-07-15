@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const execa = require('execa')
 const cc = require('conventional-changelog')
 const config = require('conventional-changelog-angular')
 
-module.exports = version => {
+module.exports = (version) => {
   const fileStream = require('fs').createWriteStream(`CHANGELOG.md`)
   cc({
     config,
-    releaseCount: 0,
+    releaseCount: 1,
     pkg: {
       transform(pkg) {
         pkg.version = `v${version}`
         return pkg
-      }
-    }
+      },
+    },
   })
     .pipe(fileStream)
     .on('close', async () => {
@@ -24,3 +25,5 @@ module.exports = version => {
       )
     })
 }
+
+module.exports()
