@@ -1,7 +1,6 @@
 <script lang="tsx">
 import Vue, { VNode as VNodeType } from 'vue'
 import get from 'lodash/get'
-import VNode from '@/components/VNode'
 import ListviewHeader from '@/components/ListviewHeader.vue'
 
 function getListviewTitle(node: VNodeType, defaultTitle = '') {
@@ -16,7 +15,6 @@ export default Vue.extend({
   name: 'ListviewContainer',
 
   components: {
-    VNode,
     ListviewHeader,
   },
 
@@ -33,14 +31,21 @@ export default Vue.extend({
     }
   },
 
-  render() {
-    const childListviews = (this.$slots.default || []).filter(
-      (item) => !!item.tag
-    )
-    const childListviewTitles = childListviews.map((node) =>
-      getListviewTitle(node, '未命名')
-    )
+  computed: {
+    childViews(): VNodeType[] {
+      return (this.$slots.default || [])
+        .filter((item) => !!item.tag)
+        .map((item, index) => {
+          item.key = `view-${index}`
+          return item
+        })
+    },
+    tabTitles(): string[] {
+      return this.childViews.map((node) => getListviewTitle(node, '未命名'))
+    },
+  },
 
+  render() {
     return (
       <div class="lvc__wrapper">
         <listview-header title={this.headerTitle} nav={this.headerNav} />
@@ -52,7 +57,7 @@ export default Vue.extend({
             'lvc__tabs--center': this.tabPosition === 'center',
           }}
         >
-          {childListviewTitles.map((title, index) => (
+          {this.tabTitles.map((title, index) => (
             <div
               class={{
                 lvc__tab: true,
@@ -67,7 +72,7 @@ export default Vue.extend({
 
         <div class="lvc__content">
           <keep-alive>
-            {childListviews.map((item, index) =>
+            {this.childViews.map((item, index) =>
               index === this.activeTab ? item : null
             )}
           </keep-alive>
