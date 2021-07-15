@@ -19,7 +19,7 @@ interface LvStore {
 
   // content
   contentData: { items: any[]; total: number }
-  internalSelection: any[]
+  selection: any[]
   internalContentMessage: ContentMessage
 
   // footer

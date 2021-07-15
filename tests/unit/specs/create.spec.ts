@@ -32,8 +32,9 @@ describe('Create config', () => {
     const { vm: vmOrigin } = await createListviewWrapper({}, ListviewOrigin)
     const { vm: vmNormal } = await createListviewWrapper({}, ListviewNormal)
     const { vm: vmCustom } = await createListviewWrapper({}, ListviewCustom)
-    expect(vmNormal.presetProps__).toEqual(vmOrigin.presetProps__)
-    expect(vmCustom.presetProps__).not.toEqual(vmOrigin.presetProps__)
+    expect(vmOrigin.presetProps__).toEqual(undefined)
+    expect(vmNormal.presetProps__).toEqual({})
+    expect(vmCustom.presetProps__).toEqual(globalConfig)
   })
 
   it('Use global config', async () => {

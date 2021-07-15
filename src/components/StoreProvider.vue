@@ -64,11 +64,11 @@ export default Vue.extend({
     return {
       contentHeight: null,
       contentLoading: false,
+      selection: [],
       currentPage: 1,
       currentPageSize: this.pageSize,
       contentData: { items: [], total: 0 },
       internalContentMessage: { type: null, text: null },
-      internalSelection: [],
     }
   },
 
@@ -86,8 +86,8 @@ export default Vue.extend({
         }
       },
     },
-    internalSelection() {
-      this.$emit('update:selection', this.internalSelection)
+    selection() {
+      this.$emit('update:selection', this.selection)
     },
   },
 

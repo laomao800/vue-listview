@@ -31,7 +31,7 @@
         >
           <template slot-scope="{ row, $index }">
             <el-radio
-              :value="internalSelection.indexOf(row) > -1 ? '' : null"
+              :value="selection.indexOf(row) > -1 ? '' : null"
               :disabled="
                 selectionColumn.selectable
                   ? !selectionColumn.selectable.call(null, row, $index)
@@ -84,23 +84,22 @@ export default Vue.extend({
   components: { VNode, MessageBlock },
 
   props: {
-    selection: { type: Array, default: () => [] },
-    contentProps: { type: Object, default: () => ({}) },
-    contentEvents: { type: Object, default: () => ({}) },
     tableColumns: { type: Array, default: () => [] },
     tableSelectionColumn: { type: [Boolean, String, Object], default: true },
+    contentProps: { type: Object, default: () => ({}) },
+    contentEvents: { type: Object, default: () => ({}) },
   },
 
   computed: {
     _height() {
       return parseSize(this.lvStore.contentHeight)
     },
-    internalSelection: {
+    selection: {
       get() {
-        return this.lvStore.internalSelection
+        return this.lvStore.selection
       },
       set(newVal: any[]) {
-        this.lvStore.internalSelection = newVal
+        this.lvStore.selection = newVal
       },
     },
     contentData() {
@@ -185,7 +184,7 @@ export default Vue.extend({
      * el-table 表格选中数据同步至父组件
      */
     handleTableSelectionChange(val: any) {
-      this.internalSelection = val
+      this.selection = val
     },
 
     /**
@@ -235,7 +234,7 @@ export default Vue.extend({
             }
           }
         }
-        // 如果使用单选效果，每次选择前清空 el-table 内部的存储值
+        // 单选效果每次选择前清空 el-table 内部的存储值
         if (this.selectionColumn.type === 'single') {
           ;(this.$refs.contentTable as any).store.states.selection = []
         }
@@ -247,9 +246,7 @@ export default Vue.extend({
      * el-table 自定义选中行高亮
      */
     getRowClassName(rowData: any): string {
-      return this.internalSelection.indexOf(rowData.row) > -1
-        ? 'row--selected'
-        : ''
+      return this.selection.indexOf(rowData.row) > -1 ? 'row--selected' : ''
     },
   },
 })
