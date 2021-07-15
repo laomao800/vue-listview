@@ -102,8 +102,8 @@ export default Vue.extend({
       this.$emit('root-emit', rootEvent, this, ...args)
     },
 
-    search(keep = false) {
-      if (!keep) {
+    search(keepInPage = false) {
+      if (!keepInPage) {
         this.currentPage = 1
       }
       return this.doRequest()

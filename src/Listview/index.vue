@@ -88,8 +88,8 @@ export default Vue.extend({
   },
 
   methods: {
-    search(keep: boolean) {
-      return (this.$refs.storeProvider as any).search(keep)
+    search(keepInPage: boolean) {
+      return (this.$refs.storeProvider as any).search(keepInPage)
     },
     resetFilter() {
       ;(this.$refs.filterbar as any).handleFilterReset()
