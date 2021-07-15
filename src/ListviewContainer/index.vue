@@ -34,7 +34,9 @@ export default Vue.extend({
   },
 
   render() {
-    const childListviews = this.$slots.default || []
+    const childListviews = (this.$slots.default || []).filter(
+      (item) => !!item.tag
+    )
     const childListviewTitles = childListviews.map((node) =>
       getListviewTitle(node, '未命名')
     )
