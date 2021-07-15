@@ -1,3 +1,4 @@
+import { LvStore } from '~/types'
 import Vue, { VNode } from 'vue'
 
 declare global {
@@ -9,5 +10,12 @@ declare global {
     interface IntrinsicElements {
       [elem: string]: any
     }
+  }
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    lvStore: LvStore
+    $rootEmitProxy: LvStore['$rootEmitProxy']
   }
 }

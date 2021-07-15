@@ -164,3 +164,4 @@ export {
 export * from './FilterButton'
 export * from './FilterField'
 export * from './TableColumn'
+export * from './LvStore'
