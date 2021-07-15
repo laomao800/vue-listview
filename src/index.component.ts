@@ -6,9 +6,8 @@ import './importElementUI'
 
 type SFCWithInstall<T> = T & { install(vue: Vue): void }
 
-function bindInstall(component: VueConstructor<Vue>) {
-  const install: PluginFunction<Vue> = (vue) =>
-    vue.component(component.name, component)
+function bindInstall(name: string, component: VueConstructor) {
+  const install: PluginFunction<Vue> = (vue) => vue.component(name, component)
 
   // @ts-ignore
   component.install = install
@@ -18,8 +17,8 @@ function bindInstall(component: VueConstructor<Vue>) {
   return component as SFCWithInstall<typeof component>
 }
 
-const Listview = bindInstall(_Listview)
-const ListviewContainer = bindInstall(_ListviewContainer)
+const Listview = bindInstall('Listview', _Listview)
+const ListviewContainer = bindInstall('ListviewContainer', _ListviewContainer)
 
 export default Listview
 export { create, Listview, ListviewContainer }
