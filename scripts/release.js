@@ -1,79 +1,117 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+const chalk = require('chalk')
 const execa = require('execa')
 const semver = require('semver')
-const inquirer = require('inquirer')
+const { prompt } = require('enquirer')
+const currentVersion = require('../package.json').version
 
-const curVersion = require('../package.json').version
+const preId =
+  semver.prerelease(currentVersion) && semver.prerelease(currentVersion)[0]
+const inc = (i) => semver.inc(currentVersion, i, preId)
+const bin = (name) => path.resolve(__dirname, '../node_modules/.bin/' + name)
+const run = (bin, args, opts = {}) =>
+  execa(bin, args, { stdio: 'inherit', ...opts })
+const step = (msg) => console.log(chalk.cyan(msg))
+
+const versionIncrements = [
+  'patch',
+  'minor',
+  'major',
+  ...(preId ? ['prepatch', 'preminor', 'premajor', 'prerelease'] : []),
+]
 
 const release = async () => {
-  console.log(`Current version: ${curVersion}`)
+  console.log(`Current version: ${currentVersion}`)
 
-  const bumps = ['patch', 'minor', 'major', 'prerelease']
-  const versions = {}
-  bumps.forEach((b) => {
-    versions[b] = semver.inc(curVersion, b)
+  const { release } = await prompt({
+    type: 'select',
+    name: 'release',
+    message: 'Select release type',
+    choices: versionIncrements
+      .map((i) => `${i} (${inc(i)})`)
+      .concat(['custom']),
   })
-  const bumpChoices = bumps.map((b) => ({
-    name: `${b} (${versions[b]})`,
-    value: b,
-  }))
 
-  const { bump, customVersion } = await inquirer.prompt([
-    {
-      name: 'bump',
-      message: 'Select release type:',
-      type: 'list',
-      choices: [...bumpChoices, { name: 'custom', value: 'custom' }],
-    },
-    {
-      name: 'customVersion',
-      message: 'Input version:',
-      type: 'input',
-      when: (answers) => answers.bump === 'custom',
-    },
-  ])
-
-  const version = customVersion || versions[bump]
-  process.env.VERSION = version
-
-  const { genDocs } = await inquirer.prompt([
-    {
-      name: 'genDocs',
-      message: `Generate ${version} docs?`,
-      type: 'confirm',
-    },
-  ])
-
-  const { yes } = await inquirer.prompt([
-    {
-      name: 'yes',
-      message: `Confirm releasing ${version}?`,
-      type: 'confirm',
-    },
-  ])
-
-  if (yes) {
-    await execa('npm', ['run', 'build'], { stdio: 'inherit' })
-    await execa('git', ['add', 'dist'], { stdio: 'inherit' })
-    await execa('git', ['commit', '-m', `build: build ${version}`], {
-      stdio: 'inherit',
-    })
-    if (genDocs) {
-      await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
-      await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
-      await execa('git', ['commit', '-m', `build: docs ${version}`], {
-        stdio: 'inherit',
+  let targetVersion
+  if (release === 'custom') {
+    targetVersion = (
+      await prompt({
+        type: 'input',
+        name: 'version',
+        message: 'Input custom version',
+        initial: currentVersion,
       })
-    }
-    await execa(
-      'npm',
-      ['version', version, '-m', `build: release ${version}`],
-      { stdio: 'inherit' }
-    )
+    ).version
+  } else {
+    targetVersion = release.match(/\((.*)\)/)[1]
   }
 
-  require('./gen-changelog')(version)
+  if (!semver.valid(targetVersion)) {
+    throw new Error(`invalid target version: ${targetVersion}`)
+  }
+
+  process.env.VERSION = targetVersion
+
+  const { genDocs } = await prompt([
+    {
+      name: 'genDocs',
+      message: `Generate v${targetVersion} docs?`,
+      type: 'confirm',
+    },
+  ])
+
+  const { yes } = await prompt({
+    type: 'confirm',
+    name: 'yes',
+    message: `Releasing v${targetVersion}. Confirm?`,
+  })
+
+  if (!yes) {
+    return
+  }
+
+  // run tests before release
+  step('\nRunning tests...')
+  await run(bin('jest'), ['--clearCache'])
+  await run('npm', ['run', 'test:unit', '--bail'])
+
+  // update all package versions and inter-dependencies
+  step('\nUpdating version...')
+  await run('npm', [
+    'version',
+    targetVersion,
+    '-m',
+    `build: release ${targetVersion}`,
+    '--git-tag-version=false',
+  ])
+
+  // build all packages with types
+  step('\nBuilding...')
+  await run('npm', ['run', 'build'])
+
+  if (genDocs) {
+    await run('npm', ['run', 'docs:build'])
+    await run('git', ['add', 'docs/.vuepress/dist'])
+    await run('git', ['commit', '-m', `build: docs ${targetVersion}`])
+  }
+
+  // generate changelog
+  await run(`npm`, ['run', 'changelog'])
+
+  const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
+  if (stdout) {
+    step('\nCommitting changes...')
+    await run('git', ['add', '-A'])
+    await run('git', ['commit', '-m', `release: v${targetVersion}`])
+  } else {
+    console.log('No changes to commit.')
+  }
+
+  // push to GitHub
+  step('\nPushing to GitHub...')
+  await run('git', ['tag', `v${targetVersion}`])
 }
 
 release().catch((err) => {

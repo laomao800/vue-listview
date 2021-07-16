@@ -1,6 +1,6 @@
 {
   "name": "@laomao800/vue-listview",
-  "version": "1.5.0-4",
+  "version": "2.0.0-beta.0",
   "author": "laomao800 <laomao800@gmail.com>",
   "publishConfig": {
     "access": "public"
@@ -21,7 +21,8 @@
     "docs:build": "vuepress build docs",
     "docs:serve": "vuepress dev docs",
     "release": "node scripts/release.js",
-    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages"
+    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "main": "dist/listview-component.common.js",
   "types": "types",
@@ -55,8 +56,8 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^1.0.3",
     "babel-plugin-component": "^1.1.1",
-    "conventional-changelog": "^3.1.24",
-    "conventional-changelog-angular": "^5.0.12",
+    "chalk": "^4.1.1",
+    "conventional-changelog-cli": "^2.1.1",
     "cross-env": "^7.0.3",
     "element-ui": "^2.15.3",
     "eslint": "^6.7.2",
