@@ -251,13 +251,13 @@ export default Vue.extend({
       return data
     },
 
-    setContentMessage(text = '', type = null, cleanList = false) {
+    setContentMessage(text = '', type = null, cleanData = false) {
       if (text === null) {
         this.internalContentMessage = { text: null, type: null }
       } else {
         this.internalContentMessage = { text, type }
       }
-      cleanList && this.cleanContentData()
+      cleanData && this.cleanContentData()
     },
   },
 

@@ -94,11 +94,11 @@ export default Vue.extend({
     resetFilter() {
       ;(this.$refs.filterbar as any).handleFilterReset()
     },
-    setContentMessage(text: string, type: string, cleanList = false) {
+    setContentMessage(text: string, type: string, cleanData = false) {
       ;(this.$refs.storeProvider as any).setContentMessage(
         text,
         type,
-        cleanList
+        cleanData
       )
     },
     updateLayout: debounce(
