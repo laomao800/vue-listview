@@ -43,118 +43,68 @@ module.exports = {
     repoLabel: '仓库地址',
     nav: [
       {
-        text: '基本使用',
-        link: '/',
-      },
-      {
-        text: '开发指南',
-        items: [
-          { text: 'Props 一览', link: '/dev/props.md' },
-          { text: 'Prop: filterButtons', link: '/dev/prop-filter-buttons.md' },
-          { text: 'Prop: filterFields', link: '/dev/prop-filter-fields.md' },
-          { text: 'Prop: tableColumns', link: '/dev/prop-table-columns.md' },
-          { text: 'Slots', link: '/dev/slots.md' },
-          { text: 'Methods & Events', link: '/dev/methods-and-events.md' },
-          { text: 'Listview Container', link: '/dev/listview-container.md' },
-        ],
-      },
-      {
-        text: 'Demo',
-        items: [
-          {
-            text: '布局',
-            items: [
-              { text: '完整布局一览', link: '/demo/layout/all.md' },
-              { text: '指定高度', link: '/demo/layout/fixed-height.md' },
-              { text: '自动高度', link: '/demo/layout/auto-height.md' },
-              {
-                text: '多表格容器 (Listview Container)',
-                link: '/demo/layout/listview-container.md',
-              },
-            ],
-          },
-          {
-            text: '常用实例',
-            items: [
-              { text: '常用操作按钮', link: '/demo/example/filter-buttons.md' },
-              {
-                text: '自定义搜索组件',
-                link: '/demo/example/custom-filter-field.md',
-              },
-              {
-                text: '提交前验证 / 初始提示',
-                link: '/demo/example/validate.md',
-              },
-              { text: '自定义布局', link: '/demo/example/custom-view.md' },
-              {
-                text: '自定义请求方法',
-                link: '/demo/example/request-handler.md',
-              },
-            ],
-          },
-        ],
-      },
-      {
         text: 'Changelog',
         link: 'https://github.com/laomao800/vue-listview/blob/master/CHANGELOG.md',
       },
     ],
-    sidebar: {
-      '/demo/': [
-        {
-          title: '布局',
-          collapsable: false,
-          children: [
-            ['/demo/layout/all.md', '完整布局一览'],
-            ['/demo/layout/fixed-height.md', '指定高度'],
-            ['/demo/layout/auto-height.md', '自动高度'],
-            [
-              '/demo/layout/listview-container.md',
-              '多表格容器 (ListviewContainer)',
+    sidebar: [
+      {
+        title: '基础',
+        collapsable: false,
+        children: [
+          ['/', '使用'],
+          ['/dev/migration.md', '从 1.x 迁移'],
+        ],
+      },
+      {
+        title: 'Listview',
+        collapsable: false,
+        children: [
+          ['/dev/props.md', 'Props'],
+          ['/dev/prop-filter-buttons.md', 'Prop: filterButtons'],
+          ['/dev/prop-filter-fields.md', 'Prop: filterFields'],
+          ['/dev/prop-table-columns.md', 'Prop: tableColumns'],
+          ['/dev/slots.md', 'Slots'],
+          ['/dev/methods-and-events.md', 'Methods & Events'],
+        ],
+      },
+      ['/dev/listview-container.md', 'ListviewContainer'],
+      {
+        title: '定制',
+        collapsable: false,
+        children: [
+          ['/dev/create.md', 'create'],
+          ['/dev/lv-store.md', 'lvStore'],
+        ],
+      },
+      {
+        title: 'Demo',
+        collapsable: false,
+        children: [
+          {
+            title: '布局',
+            children: [
+              ['/demo/layout/all.md', '完整布局一览'],
+              ['/demo/layout/fixed-height.md', '指定高度'],
+              ['/demo/layout/auto-height.md', '自动高度'],
+              [
+                '/demo/layout/listview-container.md',
+                '多表格容器 (ListviewContainer)',
+              ],
             ],
-          ],
-        },
-        {
-          title: '常用实例',
-          collapsable: false,
-          children: [
-            ['/demo/example/filter-buttons.md', '常用操作按钮'],
-            ['/demo/example/custom-filter-field.md', '自定义搜索组件'],
-            ['/demo/example/validate.md', '提交前验证 / 初始提示'],
-            ['/demo/example/custom-view.md', '自定义布局'],
-            ['/demo/example/request-handler.md', '自定义请求方法'],
-          ],
-        },
-      ],
-      '/': [
-        ['/', '基础'],
-        {
-          title: 'API',
-          collapsable: false,
-          children: [
-            ['/dev/props.md', 'Props'],
-            ['/dev/prop-filter-buttons.md', 'Prop: filterButtons'],
-            ['/dev/prop-filter-fields.md', 'Prop: filterFields'],
-            ['/dev/prop-table-columns.md', 'Prop: tableColumns'],
-            ['/dev/slots.md', 'Slots'],
-            ['/dev/methods-and-events.md', 'Methods & Events'],
-            ['/dev/listview-container.md', 'ListviewContainer'],
-          ],
-        },
-        {
-          title: '定制',
-          collapsable: false,
-          children: [
-            ['/dev/create.md', 'create'],
-            ['/dev/lv-store.md', 'lvStore'],
-          ],
-        },
-        {
-          title: '迁移',
-          collapsable: false,
-          children: [['/dev/migration.md', '从 1.x 迁移']],
-        },
-      ],
-    },
+          },
+          {
+            title: '常用实例',
+            children: [
+              ['/demo/example/filter-buttons.md', '常用操作按钮'],
+              ['/demo/example/custom-filter-field.md', '自定义搜索组件'],
+              ['/demo/example/validate.md', '提交前验证 / 初始提示'],
+              ['/demo/example/custom-view.md', '自定义布局'],
+              ['/demo/example/request-handler.md', '自定义请求方法'],
+            ],
+          },
+        ],
+      },
+    ],
   },
 }

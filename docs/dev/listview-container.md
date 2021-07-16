@@ -6,16 +6,15 @@ Listview 内置另一个组件 Listview Container 用于生成多个 Listview �
 
 除 `<Listview />` 组件，也可包装其他自定义组件，用于将列表页独立以组件封装后再引入，减少单个页面代码长度。
 
+外部 `<ListviewContainer>` 会自动获取内部一级子元素的 `header-title` attribute 作为 Tab 标题文本。
+
 ```vue
 <template>
   <ListviewContainer
     :header-title="'列表容器'"
     :header-nav="[{ text: '菜单1' }, { text: '菜单2' }]"
   >
-    <Listview
-      header-title="演示列表1"
-      :filter-fields="[]"
-    />
+    <Listview header-title="演示列表1" :filter-fields="[]" />
     <Listview header-title="演示列表2" />
     <OtherListPage header-title="列表页组件3">
     <div header-title="自定义元素">content</div>
@@ -23,22 +22,10 @@ Listview 内置另一个组件 Listview Container 用于生成多个 Listview �
 </template>
 
 <script>
-import { Listview, ListviewContainer } from '@laomao800/vue-listview'
-
-export default {
-  name: 'ListviewContainerDemo',
-
-  components: {
-    Listview,
-    ListviewContainer
-  }
-}
+import { ListviewContainer } from '@laomao800/vue-listview'
+// ...
 </script>
 ```
-
-## Tab 标题
-
-外部 `<ListviewContainer>` 会自动获取内部子级的 `headerTitle` 作为 Tab 题。
 
 ## Props
 

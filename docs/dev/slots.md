@@ -40,55 +40,18 @@
 
 因此如果有其他界面需求，甚至根据开关切换列表视图的需求，都可以通过 default slot 的自定义布局来实现。
 
-## prepend-submit
+## 其他
 
-插入在搜索栏右侧“搜索”按钮前面。一般可用于需要在该位置增加自定义操作按钮等特殊需求。
-
-```vue
-<template>
-  <listview>
-    <el-button type="danger" slot="prepend-submit">一键重算</el-button>
-  </listview>
-</template>
-```
-
-## append-submit
-
-同 [prepend-submit](#prepend-submit) ，但是插入在“重置”按钮后面。
-
-## prepend-more
-
-搜索栏折叠按钮（更多）左侧。
-
-## append-more
-
-同 [prepend-more](#prepend-more) ，搜索栏折叠按钮（更多）右侧。
-
-
-## footer-left
-
-底部页码栏左侧插槽，设置该插槽会覆盖默认情况下的页码组件。
-
-## footer-center
-
-底部页码栏中间位置的插槽。
-
-## footer-right
-
-底部页码栏右侧插槽，设置该插槽会覆盖页码[显示在右侧的页码组件](./props.md#pageposition)。
-
-## filterbar-top
-
-搜索栏顶部通栏。
-
-## filterbar-bottom
-
-同 [filterbar-top](#filterbar-top) ，搜索栏底部通栏。
-
-## filterbar-left
-
-同 [filterbar-top](#filterbar-top) ，搜索栏左侧。
-
-## filterbar-right
-
-同 [filterbar-top](#filterbar-top) ，搜索栏右侧。
+| Slot             | 说明                                                 |
+| ---------------- | ---------------------------------------------------- |
+| filterbar-top    | 搜索栏顶部                                           |
+| filterbar-bottom | 搜索栏底部                                           |
+| filterbar-left   | 搜索栏左侧                                           |
+| filterbar-right  | 搜索栏右侧                                           |
+| prepend-submit   | 搜索栏右侧“搜索”按钮左侧                             |
+| append-submit    | 搜索栏右侧“重置”按钮右侧                             |
+| prepend-more     | 搜索栏折叠按钮左侧                                   |
+| append-more      | 搜索栏折叠按钮右侧                                   |
+| footer-left      | 底部页码栏左侧，设置该插槽会覆盖默认情况下的页码组件 |
+| footer-center    | 底部页码栏中间位置                                   |
+| footer-right     | 底部页码栏右侧，若页码组件设置显示于右边会被覆盖     |

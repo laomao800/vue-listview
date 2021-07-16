@@ -4,25 +4,41 @@
 
 `<listview />` 实例上有可能需要被外部调用的方法，一些只在内部使用的方法略过。
 
-### search(keepInPage = false)
+### search(keepInPage)
 
-发起数据请求。请求默认开启 `withCredentials: true` ，如需关闭请配置 [Props: requestConfig](/dev/props.md#requestconfig) 。
+- 参数：
+  - `keepInPage`
+    - type: `boolean`
+    - default: `false`
+    - 重新请求数据时是否保留当前页码
 
-参数 `keepInPage` 默认为 `false` ，传入 `true` 可以保留当前页码重新请求数据，可用于操作数据后的当页刷新。
+- 用法：
 
-该方法返回一个 Promise ，数据请求成功后 resolve 。
+  发起数据请求。请求默认开启 `withCredentials: true` ，如需关闭请配置 [Props: requestConfig](/dev/props.md#requestconfig) 。
+
+  该方法返回一个 Promise ，数据请求成功后 resolve 。
 
 ### resetFilter()
 
 重置搜索栏数据，效果与点击“重置”按钮一致。
 
-### setContentMessage(text, type)
+### setContentMessage(text, type, cleanData)
 
-- 参数
-  - `text` ：文本内容，设为 `null` 则会清空内容
-  - `type` ：可选，支持值有 `warning` , `info` , `error`
+设置内容区域文字提示
 
-设置无数据时内容区域的展示文本。
+- 参数：
+  - `text`
+    - 类型： `string | null`
+    - 默认值： `''`
+    - 说明：：文本内容，设为 `null` 则会清空内容
+  - `type`
+    - 类型： `string | null`
+    - 默认值： `null`
+    - 说明：内容图标类型。支持 `warning'` `'info'` `'error'`
+  - `cleanData`
+    - 类型： `boolean`
+    - 默认值： `false`
+    - 说明：是否清空原有内容数据，若不清除内容区域会依然显示现有的内容数据
 
 ### updateLayout()
 
@@ -66,3 +82,7 @@
   - `Error error` 错误对象
 
 数据请求失败触发。
+
+### requested(store)
+
+完成数据请求后触发，无论成功失败。
