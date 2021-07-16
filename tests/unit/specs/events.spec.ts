@@ -25,7 +25,7 @@ describe('Events', () => {
     expect(wrapper.emitted('filter-reset')!.length).toBe(2)
   })
 
-  it('before-request & request-start & request-success', async () => {
+  it('before-request & request-start & request-success & requested', async () => {
     const { wrapper } = await createListviewWrapper({
       autoload: false,
       requestHandler: () => ({}),
@@ -36,5 +36,17 @@ describe('Events', () => {
     await (wrapper.vm as any).search()
     expect(wrapper.emitted('before-request')!.length).toBe(2)
     expect(wrapper.emitted('request-success')!.length).toBe(2)
+    expect(wrapper.emitted('requested')!.length).toBe(2)
+  })
+
+  it('request-error', async () => {
+    const { wrapper } = await createListviewWrapper({
+      autoload: false,
+      requestHandler: () => ({}),
+      validateResponse: () => false,
+    })
+    await (wrapper.vm as any).search()
+    expect(wrapper.emitted('before-request')!.length).toBe(1)
+    expect(wrapper.emitted('request-error')!.length).toBe(1)
   })
 })

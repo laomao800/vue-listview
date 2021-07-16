@@ -139,6 +139,7 @@ export default Vue.extend({
             this.$rootEmitProxy('request-success')
           })
           .catch(this.handleResponseError)
+          .finally(() => this.$rootEmitProxy('requested'))
       )
     },
 
