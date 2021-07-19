@@ -55,6 +55,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^1.0.3",
+    "async-validator": "1",
     "babel-plugin-component": "^1.1.1",
     "chalk": "^4.1.1",
     "conventional-changelog-cli": "^2.1.1",

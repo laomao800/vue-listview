@@ -14,6 +14,7 @@ specifiers:
   '@vue/eslint-config-prettier': ^6.0.0
   '@vue/eslint-config-typescript': ^7.0.0
   '@vue/test-utils': ^1.0.3
+  async-validator: '1'
   axios: ^0.21.1
   babel-plugin-component: ^1.1.1
   chalk: ^4.1.1
@@ -65,6 +66,7 @@ devDependencies:
   '@vue/eslint-config-prettier': 6.0.0_3bab2c9ee24879a838b89d7e1f3f1e41
   '@vue/eslint-config-typescript': 7.0.0_d844d2639d4119d652d004df35232884
   '@vue/test-utils': 1.2.0_9065e7474e033a8e4b95615fc8e6c36c
+  async-validator: 1.12.2
   babel-plugin-component: 1.1.1
   chalk: 4.1.1
   conventional-changelog-cli: 2.1.1
@@ -2296,7 +2298,7 @@ packages:
       webpack-dev-server: 3.11.2_webpack@4.46.0
       webpack-merge: 4.2.2
     optionalDependencies:
-      vue-loader-v16: /vue-loader/16.3.0
+      vue-loader-v16: /vue-loader/16.3.1
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -3009,6 +3011,10 @@ packages:
 
   /async-limiter/1.0.1:
     resolution: {integrity: sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==}
+    dev: true
+
+  /async-validator/1.12.2:
+    resolution: {integrity: sha512-57EETfCPFiB7M4QscvQzWSGNsmtkjjzZv318SK1CBlstk+hycV72ocjriMOOM48HjvmoAoJGpJNjC7Z76RlnZA==}
     dev: true
 
   /async-validator/1.8.5:
@@ -12619,8 +12625,8 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /vue-loader/16.3.0:
-    resolution: {integrity: sha512-UDgni/tUVSdwHuQo+vuBmEgamWx88SuSlEb5fgdvHrlJSPB9qMBRF6W7bfPWSqDns425Gt1wxAUif+f+h/rWjg==}
+  /vue-loader/16.3.1:
+    resolution: {integrity: sha512-QTtXgdqQ+4G3d8dmhnnfJSiKKHQtp53XiivSYAvAqNCOufL9aK0DYOc9MW9MSy7Xzj/1qdcghb28zKhOPvQYqQ==}
     dependencies:
       chalk: 4.1.1
       hash-sum: 2.0.0

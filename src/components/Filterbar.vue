@@ -332,7 +332,7 @@ export default Vue.extend({
     margin-right: -4px;
   }
   .el-form-item {
-    margin: 0;
+    margin: 0 !important;
   }
 }
 
@@ -341,13 +341,15 @@ export default Vue.extend({
     float: left;
     margin-right: 0;
 
-    .el-button + .el-dropdown,
-    .el-dropdown + .el-button,
-    .el-dropdown + .el-dropdown,
-    .el-form-item__content > * {
-      display: inline-block;
-      margin-right: @filter-gap-size;
-      margin-left: 0;
+    > div.el-form-item__content {
+      .el-button + .el-dropdown,
+      .el-dropdown + .el-button,
+      .el-dropdown + .el-dropdown,
+      > * {
+        display: inline-block;
+        margin-right: @filter-gap-size;
+        margin-left: 0;
+      }
     }
   }
 
@@ -356,31 +358,6 @@ export default Vue.extend({
     float: right;
     margin: 0;
     margin-bottom: 10px;
-
-    &-submit .el-form-item__content,
-    &-ext {
-      display: flex;
-      & > * {
-        display: inline-block;
-        transition: inherit;
-      }
-      & > *:not(:nth-child(1)) {
-        margin-left: 10px;
-      }
-    }
-
-    &-ext {
-      // display: flex;
-      float: right;
-      margin-left: 10px;
-    }
-
-    &-more {
-      width: 40px;
-      padding: 0;
-      line-height: 30px;
-      transition: none;
-    }
 
     &--nomore {
       .lv__filterbar-action-more {
@@ -392,6 +369,29 @@ export default Vue.extend({
       float: none;
       display: inline-block;
     }
+  }
+
+  &-action-submit .el-form-item__content,
+  &-action-ext {
+    display: flex;
+    & > * {
+      display: inline-block;
+      transition: inherit;
+    }
+    & > *:not(:nth-child(1)) {
+      margin-left: 10px;
+    }
+  }
+
+  &-action-ext {
+    float: right;
+    margin-left: 10px;
+  }
+
+  & &-action-more {
+    width: 40px;
+    padding: 0;
+    transition: none;
   }
 }
 

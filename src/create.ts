@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import pick from 'lodash/pick'
 import isPlainObject from 'lodash/isPlainObject'
-import _Listview from '@/Listview'
+import { Listview as _Listview } from '@/index'
 import { create as CreateFunction } from '~/types'
 
 const allowPresetProps = [
