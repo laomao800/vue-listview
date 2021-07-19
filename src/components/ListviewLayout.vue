@@ -81,8 +81,11 @@ export default Vue.extend({
   methods: {
     updateLayout() {
       this.updateWrapperHeight()
-      this.updateContentHeight()
-      this.$emit('update-layout')
+      this.$nextTick(() => {
+        // 非全屏情况下，内部内容高度需等待外部渲染后再执行计算
+        this.updateContentHeight()
+        this.$emit('update-layout')
+      })
     },
 
     updateWrapperHeight() {
@@ -99,7 +102,11 @@ export default Vue.extend({
     updateContentHeight() {
       let maxHeight
       if (this.height) {
-        maxHeight = this.$el.getBoundingClientRect().height
+        if (/\d+%/.test(String(this.height))) {
+          maxHeight = this.$el.getBoundingClientRect().height
+        } else {
+          maxHeight = parseInt(String(this.height), 10)
+        }
       } else if (this.fullHeight) {
         maxHeight = this.wrapperHeight as number
       }
