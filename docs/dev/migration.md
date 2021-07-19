@@ -10,6 +10,7 @@
 - `tableSelection` 更名为 `selection`
 - `validateResponse` 默认为 `null`
 - `resolveResponseErrorMessage` 默认为 `null`
+- `filterFields` 取消 `get` 属性，建议使用 `transformRequestData` 统一管理数据转换
 
 ### Slots
 

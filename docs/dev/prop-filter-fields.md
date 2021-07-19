@@ -11,17 +11,16 @@
 
 以下为所有类型都共有的属性配置：
 
-| 参数            | 必须 | 类型     | 说明                                                                         |
-| --------------- | ---- | -------- | ---------------------------------------------------------------------------- |
-| type            | √    | String   | 字段类型                                                                     |
-| model           | √    | String   | 提交时字段的 key 名                                                          |
-| label           | √    | String   | 字段中文说明                                                                 |
-| disabled        |      | Boolean  | 是否禁用                                                                     |
-| get             |      | Function | 配置字段的取值格式，具体请查看 [get](#get) 小节说明                          |
-| key             |      | String   | 同 vue 组件的 `:key` 属性，若不设置会直接使用子项的 `model` 值               |
-| componentProps  |      | Object   | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
-| componentEvents |      | Object   | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
-| componentSlots  |      | Object   | 可传入各自组件支持的 slots ，具体可查看 [componentSlots](#componentslots)    |
+| 参数            | 必须 | 类型    | 说明                                                                         |
+| --------------- | ---- | ------- | ---------------------------------------------------------------------------- |
+| type            | √    | String  | 字段类型                                                                     |
+| model           | √    | String  | 提交时字段的 key 名                                                          |
+| label           | √    | String  | 字段中文说明                                                                 |
+| disabled        |      | Boolean | 是否禁用                                                                     |
+| key             |      | String  | 同 vue 组件的 `:key` 属性，若不设置会直接使用子项的 `model` 值               |
+| componentProps  |      | Object  | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
+| componentEvents |      | Object  | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
+| componentSlots  |      | Object  | 可传入各自组件支持的 slots ，具体可查看 [componentSlots](#componentslots)    |
 
 #### `type` 字段类型可选值
 
@@ -42,53 +41,6 @@
 | dateTime        | 日期时间     | [DateTime][date-time]                |
 | dateTimeRange   | 日期时间范围 | [DateTimeRange][date-time-range]     |
 | cascader        | 级联选项     | [Cascader][cascader]                 |
-
-#### `get`
-
-- 参数： `get(value, filterModel)`
-
-可配置单个字段的取值方法，对内置组件的原始值进行加工后再提交到请求方法内。
-
-如，内置的多选组件 `multipleSelect` 默认值的格式为数组，如果接口参数要求为逗号分隔的字符串，一个方法是可以通过 [transformRequestData](./props.md#transformrequestdata) 在提交前对整个参数对象进行加工过滤，另一个方法则可以通过配置 `get` :
-
-```js
-;[
-  {
-    type: 'multipleSelect',
-    model: 'multipleSelect',
-    label: '多选字段',
-    options: [
-      { label: '选项 1', value: 1 },
-      { label: '选项 2', value: 2 },
-      { label: '选项 3', value: 3 }
-    ],
-    get: val => val.join(',')
-  }
-]
-```
-
-::: warning 注意
-
-**必须**返回[有效值](props.md#filtermodel)，不然提交参数内会丢失该参数。
-
-如果 `get()` 方法抛出错误，会以原始值提交，并在控制台给出相应的错误信息。
-
-第二个参数 `filterModel` 为所有字段内容，即 Props `filter-model` 的一个引用，因此对于 `dateRange` 等“范围”类型的字段，如果需要提交为单独 2 个字符串形式的话，可用以下方式：
-
-```js
-{
-  type: 'dateRange',
-  model: 'startDate',
-  label: '日期范围',
-  get(val, filterModel) {
-    const [startDate, endDate] = val
-    filterModel.endDate = endDate
-    return startDate
-  }
-}
-```
-
-:::
 
 ### 私有配置 `trim` <Badge text="1.2.11+" vertical="middel" />
 
