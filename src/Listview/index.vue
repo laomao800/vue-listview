@@ -51,6 +51,7 @@ import Vue, { Component } from 'vue'
 import debounce from 'lodash/debounce'
 import get from 'lodash/get'
 import isPlainObject from 'lodash/isPlainObject'
+import migrationMixin from './migrationMixin'
 import StoreProvider from '@/components/StoreProvider.vue'
 import ListviewLayout from '@/components/ListviewLayout.vue'
 import ListviewHeader from '@/components/ListviewHeader.vue'
@@ -62,6 +63,8 @@ export default Vue.extend({
   name: 'Listview',
 
   inheritAttrs: false,
+
+  mixins: [migrationMixin],
 
   components: {
     StoreProvider,
