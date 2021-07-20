@@ -180,8 +180,10 @@ export default Vue.extend({
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .lv__content-wrapper {
   flex: 1;
+  overflow: auto;
 }
 </style>
