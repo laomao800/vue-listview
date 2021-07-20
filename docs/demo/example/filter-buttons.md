@@ -2,7 +2,7 @@
 pageClass: demo-page-class
 ---
 
-<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD033 MD041 -->
 <client-only>
 <demo-box codesandbox="https://codesandbox.io/s/4jjqnxkjm0?module=%2Fsrc%2FApp.vue&view=preview">
 <div slot="demo">
@@ -19,4 +19,3 @@ pageClass: demo-page-class
 
 </demo-box>
 </client-only>
-<!-- markdownlint-enable MD033 -->
