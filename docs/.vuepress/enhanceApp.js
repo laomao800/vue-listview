@@ -1,6 +1,8 @@
-import { Listview, ListviewContainer } from '../../'
-
 export default ({ Vue }) => {
-  Vue.use(Listview)
-  Vue.use(ListviewContainer)
+  import('../../')
+    .then(({ Listview, ListviewContainer }) => {
+      Vue.use(Listview)
+      Vue.use(ListviewContainer)
+    })
+    .catch(() => {})
 }
