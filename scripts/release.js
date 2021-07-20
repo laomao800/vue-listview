@@ -52,7 +52,7 @@ const release = async () => {
     throw new Error(`invalid target version: ${targetVersion}`)
   }
 
-  process.env.VERSION = targetVersion
+  process.env.TARGET_VERSION = targetVersion
 
   const { genDocs } = await prompt([
     {

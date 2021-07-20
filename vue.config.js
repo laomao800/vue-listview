@@ -44,7 +44,8 @@ module.exports = {
       ]
     }
 
-    const version = process.env.VERSION || require('./package.json').version
+    const version =
+      process.env.TARGET_VERSION || require('./package.json').version
     const banner = `Vue Listview v${version}`
     const webpack = require('webpack')
     config.plugins.push(new webpack.BannerPlugin(banner))
