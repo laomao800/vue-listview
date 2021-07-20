@@ -144,7 +144,7 @@ export default Vue.extend({
     },
 
     getContentData(data = {}) {
-      return dataMapping(data, this.contentDataMap)
+      return this.contentDataMap ? dataMapping(data, this.contentDataMap) : data
     },
 
     cleanContentData() {
