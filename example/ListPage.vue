@@ -19,8 +19,8 @@ export default {
   data() {
     return {
       tableColumns: [
-        { label: '自定义标签', prop: 'sku', width: 120, fixed: !!1 },
-        { label: '产品名称', prop: 'name', width: 1000 },
+        { label: 'id', prop: 'id', width: 120 },
+        { label: 'name', prop: 'name', width: 1000 },
       ],
     }
   },

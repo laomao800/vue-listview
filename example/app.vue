@@ -42,7 +42,7 @@
                   />
                 </div>
                 <div class="info">
-                  <div class="sku">{{ item.sku }}</div>
+                  <div class="id">{{ item.id }}</div>
                   <div class="name">{{ item.name }}</div>
                 </div>
                 <div class="action">
@@ -111,7 +111,7 @@ export default {
                 this.loadingSelection = true
                 setTimeout(() => {
                   this.$message.success(
-                    JSON.stringify(this.selection.map((row) => row.sku))
+                    JSON.stringify(this.selection.map((row) => row.id))
                   )
                   this.loadingSelection = false
                 }, 500)
@@ -337,14 +337,14 @@ export default {
       selection: [],
       tableColumns: [
         {
-          label: '自定义标签',
-          prop: 'sku',
+          label: 'id',
+          prop: 'id',
           width: 100,
           align: 'center',
           fixed: true,
         },
         {
-          label: '产品名称',
+          label: 'name',
           prop: 'name',
           width: 200,
           align: 'center',
@@ -378,9 +378,9 @@ export default {
             )
           },
         },
-        { label: '销售员', prop: 'seller', align: 'center' },
-        { label: '仓库', prop: 'warehouse', align: 'center' },
-        { label: '零售价格', prop: 'sale_price', align: 'center' },
+        { label: '销售员', prop: 'seller' },
+        { label: '仓库', prop: 'warehouse' },
+        { label: '零售价格', prop: 'sale_price' },
         {
           label: '折扣率',
           align: 'center',
@@ -395,11 +395,11 @@ export default {
           label: '折扣时间',
           align: 'center',
           children: [
-            { label: '折扣开始', prop: 'date', align: 'center' },
-            { label: '折扣结束', prop: 'date', align: 'center' },
+            { label: '折扣开始', prop: 'date' },
+            { label: '折扣结束', prop: 'date' },
           ],
         },
-        { label: '数量', prop: 'quantity', align: 'center' },
+        { label: '数量', prop: 'quantity' },
         {
           label: '是否启用',
           align: 'center',
@@ -411,14 +411,14 @@ export default {
             }
           },
         },
-        { label: '创建人', prop: 'seller', align: 'center' },
-        { label: '创建时间', prop: 'date', align: 'center' },
+        { label: '创建人', prop: 'seller' },
+        { label: '创建时间', prop: 'date' },
         {
           label: '最后修改',
           align: 'center',
           children: [
-            { label: '修改人', prop: 'seller', align: 'center' },
-            { label: '修改时间', prop: 'date', align: 'center' },
+            { label: '修改人', prop: 'seller' },
+            { label: '修改时间', prop: 'date' },
           ],
         },
       ],
@@ -446,7 +446,6 @@ body,
   padding: 0;
   padding-bottom: 1px;
   margin: 0;
-  overflow: hidden;
   list-style: none;
 
   li {
@@ -464,7 +463,7 @@ body,
     .info {
       padding: 5px;
 
-      .sku {
+      .id {
         font-size: 12px;
         color: #999;
       }

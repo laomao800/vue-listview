@@ -40,8 +40,7 @@ module.exports = (app) => {
     const data = Mock.mock({
       [`items|${pageSize}`]: [
         {
-          id: '@guid',
-          sku: /SKU\d{6}/,
+          id: /\d{6}/,
           name: '@ctitle(10, 30)',
           'warehouse|1': ['中仓', '英仓', '美仓', '香港仓'],
           sale_price: '@integer(100, 2000)',
