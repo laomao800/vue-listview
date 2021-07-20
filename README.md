@@ -1,107 +1,76 @@
 # Vue Listview
 
-[![Build Status](https://travis-ci.org/laomao800/vue-listview.svg?branch=master)](https://travis-ci.org/laomao800/vue-listview)
-[![codecov](https://codecov.io/gh/laomao800/vue-listview/branch/master/graph/badge.svg)](https://codecov.io/gh/laomao800/vue-listview)
-[![npm](https://img.shields.io/npm/v/@laomao800/vue-listview.svg)](https://www.npmjs.com/package/@laomao800/vue-listview)
-
-Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) ，可用于生成列表类的页面布局组件。
-
-界面预览：
+Vue Listview 为一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) 的列表页面类布局组件：
 
 ![预览](./docs/preview.png)
 
-默认为表格类列表页，也可通过 [Slot](/dev/slots.md) 实现自定义列表布局。
-
 ## 文档 & Demo
 
-- 文档： <https://laomao800.github.io/vue-listview/>
-- Demo： <https://laomao800.github.io/vue-listview/demo/layout/all.html>
+- 文档：
+- Demo：
 
 ## 安装
 
 ```bash
-yarn add @laomao800/vue-listview element-ui
+yarn add @laomao800/vue-listview@beta
 
 # OR
 
-npm i -S @laomao800/vue-listview element-ui
+npm i @laomao800/vue-listview@beta
 ```
 
-**Element-UI 作为 peerDependencies 需要同步安装。**
+**`element-ui` 作为 peerDependencies 需要在宿主项目中独立安装。**
 
 ## 使用
-
-### 全局注册
-
-可以传入配置对象，用于全局配置 listview 。一般可用于项目接口与默认结构不同的场景，通过全局配置可不用在每个页面内重复写诸如 `validateResponse` 等“项目内通用”的配置。
-
-支持全局配置：
-
-- `validateResponse`
-- `resolveResponseErrorMessage`
-- `transformRequestData`
-- `transformResponseData`
-- `contentDataMap`
-
-```js
-// main.js
-import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import Listview from '@laomao800/vue-listview'
-
-Vue.use(ElementUI)
-Vue.use(Listview)
-/*
-Vue.use(Listview, {
-  validateResponse: response => response.different_success_status,
-  resolveResponseErrorMessage: () => 'global config error',
-  transformRequestData: requestData => {
-    requestData.addon = 'requestAddon'
-    return requestData
-  },
-  transformResponseData: response => {
-    response.addon = 'responseAddon'
-    return response
-  },
-  contentDataMap: {
-    addon: 'addon',
-    items: 'result.items',
-    total: 'result.total_count'
-  }
-})
-*/
-```
 
 ### 局部注册
 
 ```vue
 <template>
-  <listview />
+  <Listview />
 </template>
 
 <script>
-// import Vue from 'vue'
 import Listview from '@laomao800/vue-listview'
-
-/*
-Vue.prototype.$LISTVIEW = {
-  contentDataMap: {
-    addon: 'addon',
-    items: 'result.items',
-    total: 'result.total_count'
-  },
-  // ...
-}
-*/
-
 export default {
-  components: {
-    Listview
-  }
+  components: { Listview }
 }
 </script>
 ```
+
+### 全局注册
+
+```js
+// main.js
+import Vue from 'vue'
+import Listview from '@laomao800/vue-listview'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(Listview)
+Vue.use(ElementUI)
+```
+
+### 全局配置
+
+通过 create 方法可对部分 props 默认值进行全局配置，并生成全新的组件。
+
+可用于项目间接口格式不同，或者项目内部有多个不同默认布局等特殊场景。
+
+```js
+// main.js
+// ...
+import { create as createListview } from '@laomao800/vue-listview'
+
+const Listview = createListview({
+  validateResponse: res => res.other_success_status,
+  pagePosition: 'right',
+  // ...
+})
+Vue.use(Listview)
+```
+
+详细说明及支持配置可查看 [create](docs/create.md) 章节
 
 ### UMD
 
@@ -109,7 +78,7 @@ export default {
 
 ```html
 <div id="app">
-  <listview />
+  <Listview />
 </div>
 
 <script src="//unpkg.com/vue/dist/vue.js"></script>
