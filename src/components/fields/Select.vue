@@ -41,7 +41,7 @@ export default {
     }
   },
 
-  async mounted() {
+  mounted() {
     const setOptions = (options) => {
       if (Array.isArray(options)) {
         this.internalOptions = options
