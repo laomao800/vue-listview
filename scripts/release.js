@@ -109,8 +109,8 @@ const release = async () => {
     console.log('No changes to commit.')
   }
 
-  // push to GitHub
-  step('\nPushing to GitHub...')
+  // tag
+  step('\nTag commit...')
   await run('git', ['tag', `v${targetVersion}`])
 }
 
