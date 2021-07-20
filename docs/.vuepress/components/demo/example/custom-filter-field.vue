@@ -1,6 +1,5 @@
 <template>
   <listview
-    :request-url="requestUrl"
     :filter-model="filterModel"
     :filter-fields="filterFields"
     :table-columns="tableColumns"
@@ -12,11 +11,7 @@
 export default {
   data() {
     return {
-      requestUrl:
-        'https://easy-mock.com/mock/5aee142c96e73977996d13b6/listview/list',
-      filterModel: {
-        selectField: ''
-      },
+      filterModel: { selectField: '' },
       filterFields: [
         {
           model: 'selectField',
@@ -25,7 +20,7 @@ export default {
             <select
               style="height:32px;width:150px"
               value={this.filterModel.selectField}
-              on-change={e => {
+              on-change={(e) => {
                 this.$set(this.filterModel, 'selectField', e.target.value)
               }}
             >
@@ -33,27 +28,19 @@ export default {
               <option value="1">选项1</option>
               <option value="2">选项2</option>
             </select>
-          )
-        }
+          ),
+        },
       ],
       tableColumns: [
-        {
-          label: '自定义标签',
-          prop: 'sku',
-          align: 'center'
-        },
-        {
-          label: '产品名称',
-          prop: 'name',
-          align: 'center'
-        }
-      ]
+        { label: 'id', prop: 'id', width: 120 },
+        { label: 'name', prop: 'name' },
+      ],
     }
   },
   methods: {
     onSubmit({ filterModel }) {
-      this.$message(JSON.stringify(filterModel))
-    }
-  }
+      alert(JSON.stringify(filterModel))
+    },
+  },
 }
 </script>

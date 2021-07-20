@@ -40,7 +40,7 @@
 ```js
 ;[
   // 常规调用，直接通过 prop 指定属性名
-  { label: 'SKU', align: 'center', prop: 'sku', fixed: true },
+  { label: 'id', prop: 'id', fixed: true },
 
   // 需要对数据进行简单处理后再输出
   {

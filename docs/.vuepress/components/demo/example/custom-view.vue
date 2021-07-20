@@ -1,24 +1,16 @@
 <template>
-  <listview
-    :request-url="requestUrl"
-    :filter-buttons="filterButtons"
-    :filter-fields="filterFields"
-    :table-columns="tableColumns"
-  >
-    <template v-if="viewType === 'thumb'" slot-scope="{ contentData, contentMessage }">
-      <el-alert
-        v-if="contentMessage"
-        :title="contentMessage.message"
-        :type="contentMessage.type"
-        :closable="false"
-        center
-        show-icon
-      />
+  <listview v-bind="lvConfig">
+    <template
+      v-if="viewType === 'thumb'"
+      slot-scope="{ contentData, contentMessage }"
+    >
+      <div v-if="contentMessage.text">
+        <p>message type: {{ contentMessage.type }}</p>
+        <p>message text: {{ contentMessage.text }}</p>
+      </div>
       <ul v-else class="thumb-view">
         <li v-for="(item, index) in contentData.items" :key="index">
-          <div class="thumb">
-            <img src="https://dummyimage.com/200x200">
-          </div>
+          <div class="thumb"></div>
           <div class="info">
             <div class="sku">{{ item.sku }}</div>
             <div class="name">{{ item.name }}</div>
@@ -39,42 +31,49 @@ export default {
     return {
       viewType: 'table',
 
-      requestUrl:
-        'https://easy-mock.com/mock/5aee142c96e73977996d13b6/listview/list',
-      filterButtons: [
-        {
-          render: () => (
-            <el-radio-group
-              value={this.viewType}
-              on-input={val => (this.viewType = val)}
-            >
-              <el-radio-button label="table">表格视图</el-radio-button>
-              <el-radio-button label="thumb">缩略图</el-radio-button>
-            </el-radio-group>
-          )
-        }
-      ],
-      filterFields: [
-        {
-          type: 'text',
-          model: 'text1',
-          label: '文本字段'
-        }
-      ],
-      tableColumns: [
-        {
-          label: '自定义标签',
-          prop: 'sku',
-          align: 'center'
+      lvConfig: {
+        contentDataMap: null,
+        requestHandler() {
+          return {
+            items: Array.from(Array(30), (_n, i) => ({
+              id: i,
+              name: `name ${i}`,
+            })),
+            total: 30,
+          }
         },
-        {
-          label: '产品名称',
-          prop: 'name',
-          align: 'center'
-        }
-      ]
+        filterButtons: [
+          {
+            render: () => (
+              <div>
+                <label on-click={() => (this.viewType = 'table')}>
+                  <input
+                    type="radio"
+                    value="table"
+                    checked={this.viewType === 'table'}
+                  />
+                  表格视图
+                </label>
+                <label on-click={() => (this.viewType = 'thumb')}>
+                  <input
+                    type="radio"
+                    value="thumb"
+                    checked={this.viewType === 'thumb'}
+                  />
+                  缩略图
+                </label>
+              </div>
+            ),
+          },
+        ],
+        filterFields: [{ type: 'text', model: 'text1', label: '文本字段' }],
+        tableColumns: [
+          { label: 'id', prop: 'id', width: 120 },
+          { label: 'name', prop: 'name' },
+        ],
+      },
     }
-  }
+  },
 }
 </script>
 
@@ -83,7 +82,7 @@ export default {
   padding: 0;
   padding-bottom: 1px;
   margin: 0;
-  overflow: hidden;
+  // overflow: auto;
   list-style: none;
 
   li {
@@ -94,8 +93,16 @@ export default {
     margin: 0 -1px -1px 0;
     border: 1px solid #ddd;
 
-    .thumb img {
+    .thumb {
       width: 100%;
+      height: 160px;
+      background: #efefef;
+      &::after {
+        display: block;
+        color: #999;
+        content: 'Image';
+        text-align: center;
+      }
     }
 
     .info {

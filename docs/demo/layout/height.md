@@ -7,13 +7,13 @@ pageClass: demo-page-class
 <demo-box codesandbox="https://codesandbox.io/s/5l291wqlx?module=%2Fsrc%2FApp.vue&view=preview">
 <div slot="demo">
 
-  <demo-layout-fixed-height />
+  <demo-layout-height />
 
 </div>
 
 <div slot="code">
 
-<<< docs/.vuepress/components/demo/layout/fixed-height.vue
+<<< docs/.vuepress/components/demo/layout/height.vue
 
 </div>
 

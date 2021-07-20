@@ -1,5 +1,7 @@
 const path = require('path')
-const version = process.env.VERSION || require('../../package.json').version
+
+const version =
+  process.env.TARGET_VERSION || require('../../package.json').version
 
 const base = process.env.NODE_ENV === 'production' ? '/vue-listview/' : ''
 
@@ -8,11 +10,7 @@ module.exports = {
   head: [
     [
       'link',
-      {
-        rel: 'shortcut icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
+      { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   ],
   locales: {
@@ -85,7 +83,7 @@ module.exports = {
             title: '布局',
             children: [
               ['/demo/layout/all.md', '完整布局一览'],
-              ['/demo/layout/fixed-height.md', '指定高度'],
+              ['/demo/layout/height.md', '指定高度'],
               ['/demo/layout/auto-height.md', '自动高度'],
               [
                 '/demo/layout/listview-container.md',

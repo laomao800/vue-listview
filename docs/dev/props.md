@@ -283,7 +283,11 @@ sidebarDepth: 2
 ### validateResponse
 
 - type: `Function`
-- default:
+- default: `null`
+
+验证接口响应是否成功。若接口响应格式字段有差异，可修改该配置。
+
+例：
 
   ```js
   function (response) {
@@ -295,12 +299,17 @@ sidebarDepth: 2
   }
   ```
 
-验证接口响应是否成功。若接口响应格式字段有差异，可修改该配置，如果无需错误处理可直接返回 `true` 。
-
 ### resolveResponseErrorMessage
 
 - type: `(res) => string`
-- default:
+- default: `null`
+
+在 `validateResponse` 返回 `false` 标识请求失败后，会调用 `resolveResponseErrorMessage` 解析错误提示信息。
+
+- 【默认表格样式】错误信息会出现在表格内容区域内
+- 【自定义 slot 】数据挂载在 slot-scope 的 `content-message` 属性上。
+
+例：
 
   ```js
   function (response) {
@@ -312,21 +321,16 @@ sidebarDepth: 2
   }
   ```
 
-在 `validateResponse` 返回 `false` 表示请求失败后，会调用 `resolveResponseErrorMessage` 解析错误提示信息。
-
-- 【默认表格样式】错误信息会出现在表格内容区域内
-- 【自定义 slot 】数据挂载在 slot-scope 的 `content-message` 属性上。
-
 ## 数据请求 - 高级配置
 
 如果对于数据接口请求在发送前、接受后有特殊的处理流程，或者接口数据格式与规范不一致，可通过以下几个 props 对数据进行加工处理。
 
 ### requestHandler
 
-- type: `(requestData) => Promise<data>`
+- type: `(requestData) => Promise<data> | data`
 - default: `null`
 
-自定义请求方法，需要返回 Promise ，该方法优先级最高，若设置了该方法，会以返回的内容交由 [`validateResponse`](#validateresponse) 进行验证。
+自定义请求方法，需要返回 Promise ，该方法优先级最高。若设置了 [`validateResponse`](#validateresponse) 方法，亦会以返回的内容进行验证流程。
 
 ### transformRequestData
 
