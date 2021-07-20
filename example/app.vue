@@ -226,7 +226,6 @@ export default {
             { label: '选项 3', value: 3 },
             { label: '禁用项', value: 4, disabled: true },
           ],
-          get: (val) => val.join(','),
         },
         {
           type: 'select',
