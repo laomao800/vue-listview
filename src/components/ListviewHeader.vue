@@ -52,8 +52,10 @@ export default {
 </script>
 
 <style lang="less">
-.lv__header {
+.lv__wrapper .lv__header {
   margin: -10px -10px 10px;
+}
+.lv__header {
   padding: 8px 12px;
   line-height: 1.5;
   background-color: #fff;

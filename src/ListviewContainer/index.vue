@@ -48,7 +48,10 @@ export default Vue.extend({
   render() {
     return (
       <div class="lvc__wrapper">
-        <listview-header title={this.headerTitle} nav={this.headerNav} />
+        <listview-header
+          header-title={this.headerTitle}
+          header-nav={this.headerNav}
+        />
         <div
           class={{
             lvc__tabs: true,
