@@ -28,6 +28,8 @@ jobs:
         if: ${{ github.event.inputs.target_version_path != '' }}
         run: echo TARGET_VERSION_PATH=/version/${{ github.event.inputs.target_version_path }}/ >> $GITHUB_ENV
 
+      - run: echo TARGET_VERSION_PATH is ${{ env.TARGET_VERSION_PATH }}
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
