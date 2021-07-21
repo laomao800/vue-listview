@@ -54,14 +54,6 @@ const release = async () => {
 
   process.env.TARGET_VERSION = targetVersion
 
-  const { genDocs } = await prompt([
-    {
-      name: 'genDocs',
-      message: `Generate v${targetVersion} docs?`,
-      type: 'confirm',
-    },
-  ])
-
   const { yes } = await prompt({
     type: 'confirm',
     name: 'yes',
@@ -90,12 +82,6 @@ const release = async () => {
   // build all packages with types
   step('\nBuilding...')
   await run('npm', ['run', 'build'])
-
-  if (genDocs) {
-    await run('npm', ['run', 'docs:build'])
-    await run('git', ['add', 'docs/.vuepress/dist'])
-    await run('git', ['commit', '-m', `build: docs ${targetVersion}`])
-  }
 
   // generate changelog
   await run(`npm`, ['run', 'changelog'])
