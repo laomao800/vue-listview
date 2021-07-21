@@ -19,6 +19,7 @@ module.exports = {
     '!src/index.component.ts',
     '!src/importElementUI.ts',
     '!src/Listview/index.ts',
+    '!src/Listview/migrationMixin.ts',
     '!src/ListviewContainer/index.ts',
   ],
   testURL: `http://localhost:${process.env.MOCK_API_PORT}`,
