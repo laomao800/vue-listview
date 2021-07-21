@@ -1,6 +1,8 @@
 # Vue Listview
 
-Vue Listview 为一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) 的列表页面类布局组件：
+> 本分支为 Listivew v2.x 版本，v1.x 相关文档请查阅 [1.x](https://github.com/laomao800/vue-listview/tree/1.x) 。
+
+Vue Listview 为一个基于 [Vue.js 2.x](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) 的列表页面类布局组件：
 
 ![预览](./docs/preview.png)
 
@@ -12,11 +14,11 @@ Vue Listview 为一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 ## 安装
 
 ```bash
-yarn add @laomao800/vue-listview@beta
+yarn add @laomao800/vue-listview@next
 
 # OR
 
-npm i @laomao800/vue-listview@beta
+npm i @laomao800/vue-listview@next
 ```
 
 **`element-ui` 作为 peerDependencies 需要在宿主项目中独立安装。**
