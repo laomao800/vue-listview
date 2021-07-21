@@ -54,28 +54,28 @@ jobs:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
 
-  # deploy:
-  #   name: Publish to NPM
-  #   if: github.ref == 'refs/heads/master'
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 10
-  #   needs: test
+  deploy:
+    name: Publish to NPM
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: test
 
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
 
-  #     - name: Install Node
-  #       uses: actions/setup-node@v1
+      - name: Install Node
+        uses: actions/setup-node@v1
 
-  #     - name: Install dependencies
-  #       run: pnpm i
+      - name: Install dependencies
+        run: pnpm i
 
-  #     - name: Build the code
-  #       run: pnpm build
+      - name: Build the code
+        run: pnpm build
 
-  #     - name: Publish to NPM
-  #       uses: JS-DevTools/npm-publish@v1
-  #       with:
-  #         token: ${{ secrets.NPM_TOKEN }}
-  #         tag: next
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: next
