@@ -6,6 +6,14 @@ on:
       - v*
 
   workflow_dispatch:
+    inputs:
+      target_version_path:
+        description: 'Specify build to gh-pages version path. (e.g. 2.0)'
+        required: false
+        default: ''
+
+env:
+  TARGET_VERSION_PATH: /
 
 jobs:
   build:
@@ -15,6 +23,10 @@ jobs:
       - name: Update TARGET_VERSION_PATH
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run: echo TARGET_VERSION_PATH=/version/$(echo $GITHUB_REF | cut -d / -f 3 | cut -d v -f 2- | cut -d . -f 1,2)/ >> $GITHUB_ENV
+
+      - name: Specify TARGET_VERSION_PATH
+        if: ${{ github.event.inputs.target_version_path != '' }}
+        run: echo TARGET_VERSION_PATH=/version/${{ github.event.inputs.target_version_path }}/ >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -43,11 +55,9 @@ jobs:
           pnpm docs:build
 
       - name: Deploy doc
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: docs/.vuepress/dist # The folder the action should deploy.
-          TARGET_FOLDER: ${{ env.TARGET_VERSION_PATH }}
-          CLEAN: true # Automatically remove deleted files from the deploy branch
-          CLEAN_EXCLUDE: '["version"]'
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs/.vuepress/dist # The folder the action should deploy.
+          target-folder: ${{ env.TARGET_VERSION_PATH }}
+          clean-exclude: version/*
