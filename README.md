@@ -8,8 +8,8 @@ Vue Listview 为一个基于 [Vue.js 2.x](https://cn.vuejs.org/) 和 [Element-UI
 
 ## 文档 & Demo
 
-- 文档：
-- Demo：
+- 文档： <https://laomao800.github.io/vue-listview/>
+- Demo： <https://laomao800.github.io/vue-listview/demo/layout/all.html>
 
 ## 安装
 
