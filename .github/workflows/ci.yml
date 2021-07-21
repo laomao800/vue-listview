@@ -1,6 +1,11 @@
-name: Test
+name: CI-CD
 
 on:
+  push:
+  pull_request:
+  release:
+    types:
+      - created
   workflow_dispatch:
 
 jobs:
@@ -25,15 +30,12 @@ jobs:
           version: 6.0.2
           run_install: true
 
-      # - name: Run tests
-      #   run: pnpm test:unit:cover
-
       - name: Jest Annotations & Coverage
         uses: mattallty/jest-github-action@v1.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          test-command: 'pnpm run test:unit:cover --json --outputFile=jest.results.json'
+          test-command: 'npm run test:unit:cover --json --outputFile=jest.results.json'
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
@@ -55,21 +57,30 @@ jobs:
           parallel-finished: true
 
   deploy:
+    needs: coverage
     name: Publish to NPM
-    if: github.ref == 'refs/heads/master'
+    if: github.event_name == 'release' && github.event.action == 'created'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: test
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Install Node
-        uses: actions/setup-node@v1
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
 
-      - name: Install dependencies
-        run: pnpm i
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.0.2
+          run_install: true
 
       - name: Build the code
         run: pnpm build
