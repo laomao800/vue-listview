@@ -21,7 +21,6 @@
     "docs:serve": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "release": "node scripts/release.js",
-    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "main": "dist/listview-component.common.js",
