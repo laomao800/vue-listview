@@ -64,14 +64,13 @@ export default {
       this.loading = false
     },
     handleChange() {
-      console.log(1)
       let prePath = ''
       try {
         const path = window.location.pathname.toLowerCase()
-        prePath = path.match(/(.*\/version\/)/)[1]
+        prePath = path.match(/(.*)\/version\//)[1]
       } catch (e) {}
 
-      window.location.pathname = prePath + this.curVersion
+      window.location.pathname = prePath + '/version/' + this.curVersion
     },
   },
 }
