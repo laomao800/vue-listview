@@ -1,5 +1,8 @@
 # Vue Listview
 
+[![CI-CD](https://github.com/laomao800/vue-listview/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/laomao800/vue-listview/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/laomao800/vue-listview/badge.svg?branch=master)](https://coveralls.io/github/laomao800/vue-listview?branch=master)
+
 > 本分支为 Listivew v2.x 版本，v1.x 相关文档请查阅 [1.x](https://github.com/laomao800/vue-listview/tree/1.x) 。
 
 Vue Listview 为一个基于 [Vue.js 2.x](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) 的列表页面类布局组件：
