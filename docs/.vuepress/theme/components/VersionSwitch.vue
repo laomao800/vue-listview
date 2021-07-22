@@ -42,7 +42,7 @@ export default {
       pathVersion = path.match(/\/version\/([\d.]*)\//)[1]
     } catch (e) {}
 
-    this.curVersion = pathVersion
+    this.curVersion = pathVersion || this.versions[0]
   },
   methods: {
     async getVersions() {
@@ -64,13 +64,13 @@ export default {
       this.loading = false
     },
     handleChange() {
-      let prePath = ''
       try {
         const path = window.location.pathname.toLowerCase()
-        prePath = path.match(/(.*)\/version\//)[1]
+        const pathMatch = path.match(/(.*\/)version?\//)
+        prePath = pathMatch ? pathMatch[1] : path
       } catch (e) {}
 
-      window.location.pathname = prePath + '/version/' + this.curVersion
+      window.location.pathname = prePath + 'version/' + this.curVersion
     },
   },
 }
