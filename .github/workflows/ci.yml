@@ -1,9 +1,12 @@
-name: CI-CD
+name: CI
 
 on:
   push:
+    branches:
+      - '**'
   pull_request:
-  workflow_dispatch:
+    branches:
+      - master
 
 jobs:
   test:
