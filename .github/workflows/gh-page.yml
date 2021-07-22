@@ -1,0 +1,65 @@
+name: Publish GH Pages
+
+on:
+  push:
+    tags:
+      - v*
+
+  workflow_dispatch:
+    inputs:
+      target_version_path:
+        description: 'Specify build to gh-pages version path. (e.g. 1.5)'
+        required: false
+        default: ''
+
+env:
+  TARGET_VERSION_PATH: /
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update TARGET_VERSION_PATH
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        run: echo TARGET_VERSION_PATH=/version/$(echo $GITHUB_REF | cut -d / -f 3 | cut -d v -f 2- | cut -d . -f 1,2)/ >> $GITHUB_ENV
+
+      - name: Specify TARGET_VERSION_PATH
+        if: ${{ github.event.inputs.target_version_path != '' }}
+        run: echo TARGET_VERSION_PATH=/version/${{ github.event.inputs.target_version_path }}/ >> $GITHUB_ENV
+
+      - run: echo TARGET_VERSION_PATH is ${{ env.TARGET_VERSION_PATH }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.0.2
+          run_install: true
+
+      - name: Build doc
+        run: |
+          pnpm install
+          pnpm build:component
+          pnpm docs:build
+
+      - name: Deploy doc
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs/.vuepress/dist # The folder the action should deploy.
+          target-folder: ${{ env.TARGET_VERSION_PATH }}
+          clean-exclude: version/*

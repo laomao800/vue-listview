@@ -13,8 +13,7 @@
     "test:unit:watch": "vue-cli-service test:unit --watch --notify --notifyMode change",
     "docs:build": "vuepress build docs",
     "docs:serve": "vuepress dev docs",
-    "release": "node scripts/release.js",
-    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages"
+    "release": "node scripts/release.js"
   },
   "main": "dist/listview-component.common.js",
   "files": [
