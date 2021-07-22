@@ -65,6 +65,6 @@ Vue.use(Listview)
 ::: tip 注意
 
 1. listview 本身接受的所有 attrs 会全部传递给替换组件，可根据需要挑选使用，若命名与第三方组件有冲突，可对其包裹多一层数据转换层组件；
-2. 替换组件本身可获取名为 `lvStore` 的 inject ，可获取 Listview 内部底层的一些状态和方法，具体内容可查阅 [lvStore](store.md) 章节
+2. 替换组件本身可获取名为 `lvStore` 的 inject ，可获取 Listview 内部底层的一些状态和方法，具体内容可查阅 [lvStore](lv-store.md) 章节。
 
 :::

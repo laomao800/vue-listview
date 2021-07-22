@@ -2,8 +2,13 @@ name: Publish GH Pages
 
 on:
   push:
+    branches:
+      - master
     tags:
       - v*
+  release:
+    types:
+      - published
 
   workflow_dispatch:
     inputs:
