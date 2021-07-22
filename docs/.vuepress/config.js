@@ -1,8 +1,12 @@
 const path = require('path')
 const version = process.env.VERSION || require('../../package.json').version
+const base =
+  process.env.NODE_ENV === 'production'
+    ? `/vue-listview${process.env.TARGET_VERSION_PATH || '/'}`
+    : ''
 
 module.exports = {
-  base: '/vue-listview/',
+  base,
   head: [
     [
       'link',
