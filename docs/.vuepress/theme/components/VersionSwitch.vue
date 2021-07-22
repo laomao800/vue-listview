@@ -64,10 +64,13 @@ export default {
       this.loading = false
     },
     handleChange() {
+      const path = window.location.pathname.toLowerCase()
+      let prePath = path
       try {
-        const path = window.location.pathname.toLowerCase()
         const pathMatch = path.match(/(.*\/)version?\//)
-        prePath = pathMatch ? pathMatch[1] : path
+        if (pathMatch && pathMatch[1]) {
+          prePath = pathMatch[1]
+        }
       } catch (e) {}
 
       window.location.pathname = prePath + 'version/' + this.curVersion
