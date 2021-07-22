@@ -1,9 +1,5 @@
 # Vue Listview
 
-[![Build Status](https://travis-ci.org/laomao800/vue-listview.svg?branch=master)](https://travis-ci.org/laomao800/vue-listview)
-[![codecov](https://codecov.io/gh/laomao800/vue-listview/branch/master/graph/badge.svg)](https://codecov.io/gh/laomao800/vue-listview)
-[![npm](https://img.shields.io/npm/v/@laomao800/vue-listview.svg)](https://www.npmjs.com/package/@laomao800/vue-listview)
-
 Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](http://element.eleme.io/) ，可用于生成列表类的页面布局组件。
 
 界面预览：
@@ -14,17 +10,17 @@ Vue Listview 是一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 
 ## 文档 & Demo
 
-- 文档： <https://laomao800.github.io/vue-listview/>
-- Demo： <https://laomao800.github.io/vue-listview/demo/layout/all.html>
+- 文档： <https://laomao800.github.io/vue-listview/version/1.5/>
+- Demo： <https://laomao800.github.io/vue-listview/version/1.5/demo/layout/all.html>
 
 ## 安装
 
 ```bash
-yarn add @laomao800/vue-listview element-ui
+yarn add @laomao800/vue-listview@1 element-ui
 
 # OR
 
-npm i -S @laomao800/vue-listview element-ui
+npm i -S @laomao800/vue-listview@1 element-ui
 ```
 
 **Element-UI 作为 peerDependencies 需要同步安装。**
@@ -113,7 +109,7 @@ export default {
 </div>
 
 <script src="//unpkg.com/vue/dist/vue.js"></script>
-<script src="//unpkg.com/@laomao800/vue-listview/dist/listview.umd.min.js"></script>
+<script src="//unpkg.com/@laomao800/vue-listview@1/dist/listview.umd.min.js"></script>
 <script>
 new Vue().$mount('#app')
 </script>
