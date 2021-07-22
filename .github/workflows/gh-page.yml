@@ -63,12 +63,3 @@ jobs:
           folder: docs/.vuepress/dist # The folder the action should deploy.
           target-folder: ${{ env.TARGET_VERSION_PATH }}
           clean-exclude: version/*
-
-      - name: Deploy doc to root
-        if: ${{ startsWith(env.TARGET_VERSION_PATH, '2') }}
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: docs/.vuepress/dist
-          target-folder: /
-          clean-exclude: version/*
