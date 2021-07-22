@@ -3,7 +3,7 @@ name: Publish GH Pages
 on:
   push:
     tags:
-      - v*
+      - v1.*
 
   workflow_dispatch:
     inputs:
@@ -13,7 +13,7 @@ on:
         default: ''
 
 env:
-  TARGET_VERSION_PATH: /
+  TARGET_VERSION_PATH: /version/1.5
 
 jobs:
   build:
@@ -28,33 +28,15 @@ jobs:
         if: ${{ github.event.inputs.target_version_path != '' }}
         run: echo TARGET_VERSION_PATH=/version/${{ github.event.inputs.target_version_path }}/ >> $GITHUB_ENV
 
-      - run: echo TARGET_VERSION_PATH is ${{ env.TARGET_VERSION_PATH }}
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
           persist-credentials: false
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-modules
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
-
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.0.2
-          run_install: true
-
       - name: Build doc
         run: |
-          pnpm install
-          pnpm build:component
-          pnpm docs:build
+          yarn
+          yarn docs:build
 
       - name: Deploy doc
         uses: JamesIves/github-pages-deploy-action@4.1.4
