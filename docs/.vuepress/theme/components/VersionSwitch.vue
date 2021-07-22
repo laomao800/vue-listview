@@ -6,6 +6,7 @@
       :loading="loading"
       size="small"
       placeholder="选择版本"
+      @change="handleChange"
     >
       <ElOption v-for="version in versions" :key="version" :value="version">
         v{{ version }}
@@ -32,41 +33,46 @@ export default {
       loading: false,
     }
   },
-  watch: {
-    curVersion() {
+  created() {
+    this.getVersions()
+
+    let pathVersion = ''
+    try {
+      const path = window.location.pathname.toLowerCase()
+      pathVersion = path.match(/\/version\/([\d.]*)\//)[1]
+    } catch (e) {}
+
+    this.curVersion = pathVersion
+  },
+  methods: {
+    async getVersions() {
+      this.loading = true
+      let res = await Axios.get(
+        'https://api.github.com/repos/laomao800/vue-listview/git/trees/gh-pages'
+      )
+      const versionPath = res.data.tree.find((item) => item.path === 'version')
+      if (!versionPath) {
+        return
+      }
+
+      res = await Axios.get(versionPath.url)
+      const versions = res.data.tree
+        .map((item) => item.path)
+        .sort()
+        .reverse()
+      this.versions = versions
+      this.loading = false
+    },
+    handleChange() {
+      console.log(1)
       let prePath = ''
       try {
         const path = window.location.pathname.toLowerCase()
         prePath = path.match(/(.*\/version\/)/)[1]
       } catch (e) {}
+
       window.location.pathname = prePath + this.curVersion
     },
-  },
-  created: async function () {
-    this.loading = true
-    let res = await Axios.get(
-      'https://api.github.com/repos/laomao800/vue-listview/git/trees/gh-pages'
-    )
-    const versionPath = res.data.tree.find((item) => item.path === 'version')
-    if (!versionPath) {
-      return
-    }
-
-    res = await Axios.get(versionPath.url)
-    const versions = res.data.tree
-      .map((item) => item.path)
-      .sort()
-      .reverse()
-    this.versions = versions
-
-    let curVersion
-    try {
-      const path = window.location.pathname.toLowerCase()
-      curVersion = path.match(/\/version\/([\d.]*)\//)[1]
-    } catch (e) {}
-
-    this.curVersion = curVersion
-    this.loading = false
   },
 }
 </script>
