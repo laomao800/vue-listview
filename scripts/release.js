@@ -33,7 +33,7 @@ const release = async () => {
   ])
 
   const version = customVersion || versions[bump]
-  process.env.VERSION = version
+  process.env.TARGET_VERSION = version
 
   const { genDocs } = await inquirer.prompt([
     {
