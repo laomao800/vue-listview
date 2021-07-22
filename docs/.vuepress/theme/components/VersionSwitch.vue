@@ -33,8 +33,8 @@ export default {
       loading: false,
     }
   },
-  created() {
-    this.getVersions()
+  async created() {
+    await this.getVersions()
 
     let pathVersion = ''
     try {
