@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Methods &amp; Events | Vue Listview v1.5.2</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="shortcut icon" type="image/x-icon" href="/vue-listview/favicon.ico">
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/vue-listview/assets/css/0.styles.d54da8e8.css" as="style"><link rel="preload" href="/vue-listview/assets/js/app.25311140.js" as="script"><link rel="preload" href="/vue-listview/assets/js/2.47498aed.js" as="script"><link rel="preload" href="/vue-listview/assets/js/31.1a5b7b27.js" as="script"><link rel="preload" href="/vue-listview/assets/js/9.7dfb123b.js" as="script"><link rel="prefetch" href="/vue-listview/assets/js/10.5c71f0e2.js"><link rel="prefetch" href="/vue-listview/assets/js/11.5145430f.js"><link rel="prefetch" href="/vue-listview/assets/js/12.c985f4d7.js"><link rel="prefetch" href="/vue-listview/assets/js/13.5d0cb99a.js"><link rel="prefetch" href="/vue-listview/assets/js/14.717a3f69.js"><link rel="prefetch" href="/vue-listview/assets/js/15.8048c937.js"><link rel="prefetch" href="/vue-listview/assets/js/16.bc9370a2.js"><link rel="prefetch" href="/vue-listview/assets/js/17.43d7dda1.js"><link rel="prefetch" href="/vue-listview/assets/js/18.3f21c737.js"><link rel="prefetch" href="/vue-listview/assets/js/19.18516bb5.js"><link rel="prefetch" href="/vue-listview/assets/js/20.1920614e.js"><link rel="prefetch" href="/vue-listview/assets/js/21.015a6f5e.js"><link rel="prefetch" href="/vue-listview/assets/js/22.2821d871.js"><link rel="prefetch" href="/vue-listview/assets/js/23.d635d7e8.js"><link rel="prefetch" href="/vue-listview/assets/js/24.5cdded1c.js"><link rel="prefetch" href="/vue-listview/assets/js/25.5efb3691.js"><link rel="prefetch" href="/vue-listview/assets/js/26.12a7463c.js"><link rel="prefetch" href="/vue-listview/assets/js/27.c059a6cc.js"><link rel="prefetch" href="/vue-listview/assets/js/28.92c69a92.js"><link rel="prefetch" href="/vue-listview/assets/js/29.eedf78f5.js"><link rel="prefetch" href="/vue-listview/assets/js/3.3ad14515.js"><link rel="prefetch" href="/vue-listview/assets/js/30.0aa0c612.js"><link rel="prefetch" href="/vue-listview/assets/js/32.7e510482.js"><link rel="prefetch" href="/vue-listview/assets/js/33.d5a8c7a2.js"><link rel="prefetch" href="/vue-listview/assets/js/34.973d2707.js"><link rel="prefetch" href="/vue-listview/assets/js/35.6fd0d382.js"><link rel="prefetch" href="/vue-listview/assets/js/4.3b0f8bb3.js"><link rel="prefetch" href="/vue-listview/assets/js/5.f58de45d.js"><link rel="prefetch" href="/vue-listview/assets/js/6.e251cb34.js"><link rel="prefetch" href="/vue-listview/assets/js/7.7dd5bed7.js"><link rel="prefetch" href="/vue-listview/assets/js/8.7cd7c271.js">
+    <link rel="stylesheet" href="/vue-listview/assets/css/0.styles.d54da8e8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-listview/" class="home-link router-link-active"><!----> <span class="site-name">Vue Listview v1.5.2</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-listview/" class="nav-link">
+  基本使用
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="开发指南" class="dropdown-title"><span class="title">开发指南</span> <span class="arrow down"></span></button> <button type="button" aria-label="开发指南" class="mobile-dropdown-title"><span class="title">开发指南</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-listview/dev/props.html" class="nav-link">
+  Props 一览
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/prop-filter-buttons.html" class="nav-link">
+  Prop: filterButtons
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/prop-filter-fields.html" class="nav-link">
+  Prop: filterFields
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/prop-table-columns.html" class="nav-link">
+  Prop: tableColumns
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/slots.html" class="nav-link">
+  Slots
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/methods-and-events.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Methods &amp; Events
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/listview-container.html" class="nav-link">
+  Listview Container
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Demo" class="dropdown-title"><span class="title">Demo</span> <span class="arrow down"></span></button> <button type="button" aria-label="Demo" class="mobile-dropdown-title"><span class="title">Demo</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          布局
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/all.html" class="nav-link">
+  完整布局一览
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/fixed-height.html" class="nav-link">
+  指定高度
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/auto-height.html" class="nav-link">
+  自动高度
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/listview-container.html" class="nav-link">
+  多表格容器 (Listview Container)
+</a></li></ul></li><li class="dropdown-item"><h4>
+          常用实例
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vue-listview/demo/example/filter-buttons.html" class="nav-link">
+  常用操作按钮
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/custom-filter-field.html" class="nav-link">
+  自定义搜索组件
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/validate.html" class="nav-link">
+  提交前验证 / 初始提示
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/custom-view.html" class="nav-link">
+  自定义布局
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/request-handler.html" class="nav-link">
+  自定义请求方法
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/laomao800/vue-listview/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Changelog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/laomao800/vue-listview" target="_blank" rel="noopener noreferrer" class="repo-link">
+    仓库地址
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-listview/" class="nav-link">
+  基本使用
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="开发指南" class="dropdown-title"><span class="title">开发指南</span> <span class="arrow down"></span></button> <button type="button" aria-label="开发指南" class="mobile-dropdown-title"><span class="title">开发指南</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-listview/dev/props.html" class="nav-link">
+  Props 一览
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/prop-filter-buttons.html" class="nav-link">
+  Prop: filterButtons
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/prop-filter-fields.html" class="nav-link">
+  Prop: filterFields
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/prop-table-columns.html" class="nav-link">
+  Prop: tableColumns
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/slots.html" class="nav-link">
+  Slots
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/methods-and-events.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Methods &amp; Events
+</a></li><li class="dropdown-item"><!----> <a href="/vue-listview/dev/listview-container.html" class="nav-link">
+  Listview Container
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Demo" class="dropdown-title"><span class="title">Demo</span> <span class="arrow down"></span></button> <button type="button" aria-label="Demo" class="mobile-dropdown-title"><span class="title">Demo</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          布局
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/all.html" class="nav-link">
+  完整布局一览
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/fixed-height.html" class="nav-link">
+  指定高度
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/auto-height.html" class="nav-link">
+  自动高度
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/layout/listview-container.html" class="nav-link">
+  多表格容器 (Listview Container)
+</a></li></ul></li><li class="dropdown-item"><h4>
+          常用实例
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/vue-listview/demo/example/filter-buttons.html" class="nav-link">
+  常用操作按钮
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/custom-filter-field.html" class="nav-link">
+  自定义搜索组件
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/validate.html" class="nav-link">
+  提交前验证 / 初始提示
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/custom-view.html" class="nav-link">
+  自定义布局
+</a></li><li class="dropdown-subitem"><a href="/vue-listview/demo/example/request-handler.html" class="nav-link">
+  自定义请求方法
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/laomao800/vue-listview/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Changelog
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/laomao800/vue-listview" target="_blank" rel="noopener noreferrer" class="repo-link">
+    仓库地址
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/vue-listview/" aria-current="page" class="sidebar-link">基本使用</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>开发指南</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-listview/dev/props.html" class="sidebar-link">Props 一览</a></li><li><a href="/vue-listview/dev/prop-filter-buttons.html" class="sidebar-link">Prop: filterButtons</a></li><li><a href="/vue-listview/dev/prop-filter-fields.html" class="sidebar-link">Prop: filterFields</a></li><li><a href="/vue-listview/dev/prop-table-columns.html" class="sidebar-link">Prop: tableColumns</a></li><li><a href="/vue-listview/dev/slots.html" class="sidebar-link">Slots</a></li><li><a href="/vue-listview/dev/methods-and-events.html" aria-current="page" class="active sidebar-link">Methods &amp; Events</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue-listview/dev/methods-and-events.html#methods" class="sidebar-link">Methods</a></li><li class="sidebar-sub-header"><a href="/vue-listview/dev/methods-and-events.html#events" class="sidebar-link">Events</a></li></ul></li><li><a href="/vue-listview/dev/listview-container.html" class="sidebar-link">Listview Container</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="methods-events"><a href="#methods-events" class="header-anchor">#</a> Methods &amp; Events</h1> <h2 id="methods"><a href="#methods" class="header-anchor">#</a> Methods</h2> <p><code>&lt;listview /&gt;</code> 实例上有可能需要被外部调用的方法，一些只在内部使用的方法略过。</p> <h3 id="search-keepinpage-false"><a href="#search-keepinpage-false" class="header-anchor">#</a> search(keepInPage = false)</h3> <p>发起数据请求。请求默认开启 <code>withCredentials: true</code> ，如需关闭请配置 <a href="/vue-listview/dev/props.html#requestconfig">Props: requestConfig</a> 。</p> <p>参数 <code>keepInPage</code> 默认为 <code>false</code> ，传入 <code>true</code> 可以保留当前页码重新请求数据，可用于操作数据后的当页刷新。</p> <span class="badge tip" style="vertical-align:middel;" data-v-15b7b770>1.2.7+</span> 以后该方法返回一个 Promise ，数据请求成功后响应。
+<h3 id="resetfilter"><a href="#resetfilter" class="header-anchor">#</a> resetFilter()</h3> <p>重置搜索栏数据，效果与点击“重置”按钮一致。</p> <h3 id="setcontentmessage-message-type"><a href="#setcontentmessage-message-type" class="header-anchor">#</a> setContentMessage(message, type)</h3> <ul><li>参数
+<ul><li><code>message</code> ：文本内容，设为 <code>null</code> 则会清空 <code>contentMessage</code></li> <li><code>type</code> ：可选，支持值有 <code>success</code> , <code>warning</code> , <code>info</code> , <code>error</code></li></ul></li></ul> <p>设置无数据时内容区域的展示文本。</p> <h3 id="updatelayout"><a href="#updatelayout" class="header-anchor">#</a> updateLayout()</h3> <p>刷新布局，包括搜索栏和内容区域，但正常情况下无需手动调用。</p> <h2 id="events"><a href="#events" class="header-anchor">#</a> Events</h2> <h3 id="filter-submit"><a href="#filter-submit" class="header-anchor">#</a> filter-submit</h3> <p>点击搜索栏“搜索”按钮后触发。</p> <h3 id="filter-reset"><a href="#filter-reset" class="header-anchor">#</a> filter-reset</h3> <p>点击搜索栏“重置”按钮后触发。</p> <h3 id="before-request-instance"><a href="#before-request-instance" class="header-anchor">#</a> before-request(instance) <span class="badge tip" style="vertical-align:top;" data-v-15b7b770>1.2.5+</span></h3> <ul><li>参数：
+<ul><li><code>{Object} instance</code> listview 实例</li></ul></li></ul> <p>发起数据请求前触发。</p> <h3 id="requested-instance"><a href="#requested-instance" class="header-anchor">#</a> requested(instance) <span class="badge tip" style="vertical-align:top;" data-v-15b7b770>1.2.5+</span></h3> <ul><li>参数：
+<ul><li><code>{Object} instance</code> listview 实例</li></ul></li></ul> <p>发起数据请求后触发。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2021/7/22 上午3:02:36</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue-listview/dev/slots.html" class="prev">
+        Slots
+      </a></span> <span class="next"><a href="/vue-listview/dev/listview-container.html">
+        Listview Container
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-listview/assets/js/app.25311140.js" defer></script><script src="/vue-listview/assets/js/2.47498aed.js" defer></script><script src="/vue-listview/assets/js/31.1a5b7b27.js" defer></script><script src="/vue-listview/assets/js/9.7dfb123b.js" defer></script>
+  </body>
+</html>
