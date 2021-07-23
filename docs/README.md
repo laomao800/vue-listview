@@ -7,11 +7,11 @@ Vue Listview 为一个基于 [Vue.js](https://cn.vuejs.org/) 和 [Element-UI](ht
 ## 安装
 
 ```bash
-yarn add @laomao800/vue-listview
+yarn add @laomao800/vue-listview@next
 
 # OR
 
-npm i @laomao800/vue-listview
+npm i @laomao800/vue-listview@next
 ```
 
 ::: tip 提示
