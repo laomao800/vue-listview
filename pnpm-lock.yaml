@@ -51,7 +51,6 @@ dependencies:
   has-values: 2.0.1
   lodash: 4.17.21
   normalize.css: 8.0.1
-  vue: 2.6.14
 
 devDependencies:
   '@types/jest': 24.9.1
@@ -86,6 +85,7 @@ devDependencies:
   rimraf: 3.0.2
   semver: 7.3.5
   typescript: 4.1.5
+  vue: 2.6.14
   vue-template-compiler: 2.6.14
   vuepress: 1.8.2
   webpack-node-externals: 3.0.0
@@ -2298,7 +2298,7 @@ packages:
       webpack-dev-server: 3.11.2_webpack@4.46.0
       webpack-merge: 4.2.2
     optionalDependencies:
-      vue-loader-v16: /vue-loader/16.3.1
+      vue-loader-v16: /vue-loader/16.3.3_webpack@4.46.0
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -12625,12 +12625,19 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /vue-loader/16.3.1:
-    resolution: {integrity: sha512-QTtXgdqQ+4G3d8dmhnnfJSiKKHQtp53XiivSYAvAqNCOufL9aK0DYOc9MW9MSy7Xzj/1qdcghb28zKhOPvQYqQ==}
+  /vue-loader/16.3.3_webpack@4.46.0:
+    resolution: {integrity: sha512-/1GzCuQ6MRORbC+leKTKoTGtpQt60bYe0gDGEextSteA2OM+v201FPha5jzmjQzVhRcwieZeUvezAtG5a/e5cw==}
+    peerDependencies:
+      '@vue/compiler-sfc': ^3.0.8
+      webpack: ^4.1.0 || ^5.0.0-0
+    peerDependenciesMeta:
+      '@vue/compiler-sfc':
+        optional: true
     dependencies:
       chalk: 4.1.1
       hash-sum: 2.0.0
       loader-utils: 2.0.0
+      webpack: 4.46.0
     dev: true
     optional: true
 
@@ -12671,6 +12678,7 @@ packages:
 
   /vue/2.6.14:
     resolution: {integrity: sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==}
+    dev: true
 
   /vuepress-html-webpack-plugin/3.2.0_webpack@4.46.0:
     resolution: {integrity: sha512-BebAEl1BmWlro3+VyDhIOCY6Gef2MCBllEVAP3NUAtMguiyOwo/dClbwJ167WYmcxHJKLl7b0Chr9H7fpn1d0A==}
