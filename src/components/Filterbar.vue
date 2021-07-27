@@ -96,11 +96,12 @@
 
 <script lang="tsx">
 import Vue, { PropType } from 'vue'
+
+import { FilterButton, FilterField } from '~/types'
 import { hasOwn } from '@/utils'
+import storeProviderMixin from '@/mixins/storeProviderMixin'
 import FilterbarButtons from './FilterbarButtons.vue'
 import FilterbarFields from './FilterbarFields.vue'
-import storeProviderMixin from '@/mixins/storeProviderMixin'
-import { FilterButton, FilterField } from '~/types'
 
 export default Vue.extend({
   name: 'Filterbar',
