@@ -1,6 +1,6 @@
 {
   "name": "@laomao800/vue-listview",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "author": "laomao800 <laomao800@gmail.com>",
   "publishConfig": {
     "access": "public"
