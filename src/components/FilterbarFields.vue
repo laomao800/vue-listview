@@ -1,7 +1,19 @@
 <script lang="tsx">
 import Vue, { VNode, PropType } from 'vue'
-import { FilterField } from '~/types'
+import isFunction from 'lodash/isFunction'
 import FilterbarField from './FilterbarField.vue'
+import { hasOwn, isVNode } from '@/utils'
+import { FilterField } from '~/types'
+
+function isValidFieldConfig(field: any) {
+  return (
+    field &&
+    (hasOwn(field, 'type') ||
+      isFunction(field) ||
+      isFunction(field.render) ||
+      isVNode(field))
+  )
+}
 
 let uid = 0
 
@@ -27,6 +39,8 @@ export default Vue.extend({
       ) : null
     },
     renderField(field = {} as FilterField) {
+      if (!isValidFieldConfig(field)) return null
+
       const key = field.key || field.model || `unnamed-field-${uid++}`
       return (
         <FilterbarField

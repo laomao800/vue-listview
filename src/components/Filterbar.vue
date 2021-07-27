@@ -78,7 +78,7 @@
         <FilterbarFields
           v-if="isShowFilterFields"
           ref="FilterbarFields"
-          :fields="validFilterFields"
+          :fields="filterFields"
           class="lv__filterbar-fields"
         />
       </div>
@@ -96,33 +96,11 @@
 
 <script lang="tsx">
 import Vue, { PropType } from 'vue'
-import isFunction from 'lodash/isFunction'
-
-import { FilterButton, FilterField } from '~/types'
-import { hasOwn, isVNode, error } from '@/utils'
-import storeProviderMixin from '@/mixins/storeProviderMixin'
-import { getFieldComponent } from './fields/index'
+import { hasOwn } from '@/utils'
 import FilterbarButtons from './FilterbarButtons.vue'
 import FilterbarFields from './FilterbarFields.vue'
-
-function isValidFieldConfig(field: any) {
-  if (!field) return false
-
-  if (hasOwn(field, 'type')) {
-    if (getFieldComponent(field.type)) {
-      return true
-    } else {
-      error(`invalid filter field type '${field.type}'`, field)
-      return false
-    }
-  }
-
-  return (
-    (hasOwn(field, 'render') && isFunction(field.render)) ||
-    isFunction(field) ||
-    isVNode(field)
-  )
-}
+import storeProviderMixin from '@/mixins/storeProviderMixin'
+import { FilterButton, FilterField } from '~/types'
 
 export default Vue.extend({
   name: 'Filterbar',
@@ -174,17 +152,14 @@ export default Vue.extend({
   },
 
   computed: {
-    validFilterFields(): FilterField[] {
-      return this.filterFields.filter(isValidFieldConfig)
-    },
     isNoneFields(): boolean {
-      return this.validFilterFields.length === 0
+      return this.filterFields.length === 0
     },
     isShowFilterButtons(): boolean {
       return this.filterButtons.length > 0
     },
     isShowFilterFields(): boolean {
-      return this.validFilterFields.length > 0
+      return this.filterFields.length > 0
     },
     isShowSearchButton(): boolean {
       return !!this.searchButton
@@ -243,7 +218,7 @@ export default Vue.extend({
           }
         }
       }
-      this.validFilterFields.forEach((field) => {
+      this.filterFields.forEach((field) => {
         if (Array.isArray(field)) {
           field.forEach(_resetField)
         } else {
@@ -290,8 +265,7 @@ export default Vue.extend({
         }
       }
       this.topRightItemIndex = lastFilterIndex
-      this.isNoMore =
-        this.topRightItemIndex === this.validFilterFields.length - 1
+      this.isNoMore = this.topRightItemIndex === this.filterFields.length - 1
     },
 
     updateBtnOffset() {

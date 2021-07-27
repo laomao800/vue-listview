@@ -147,15 +147,6 @@ describe('Filter fields', () => {
     expect(wrapper.findAllComponents({ name: 'FieldCascader' }).length).toBe(1)
   })
 
-  it('Invalid fields render', () => {
-    const wrapper = mount(Filterbar, {
-      propsData: {
-        filterFields: [{ type: 'text_x' }, { type: 'number_x' }],
-      },
-    })
-    expect(wrapper.findAll('.lv__field').length).toBe(0)
-  })
-
   it('Group fields render', () => {
     const lvStore: any = { filterModel: {} }
     const wrapper = mount(Filterbar, {

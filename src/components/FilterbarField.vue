@@ -1,14 +1,63 @@
 <script lang="tsx">
-import Vue, { PropType } from 'vue'
+import Vue, { Component, PropType } from 'vue'
 import hasValues from 'has-values'
 import get from 'lodash/get'
 import isFunction from 'lodash/isFunction'
 
-import { FilterField, FilterFieldHasRender } from '~/types'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
 import { isVNode, hasRenderFn } from '@/utils'
+import { FilterField, FieldType, FilterFieldHasRender } from '~/types'
+
 import vNode from './VNode'
-import { allFieldComponents, getFieldComponent } from './fields/index'
+import fieldCascader from './fields/Cascader.vue'
+import fieldDateTime from './fields/DateTime.vue'
+import fieldSelect from './fields/Select.vue'
+import fieldTimePickerRange from './fields/TimePickerRange.vue'
+import fieldDate from './fields/Date.vue'
+import fieldDateTimeRange from './fields/DateTimeRange.vue'
+import fieldMultipleSelect from './fields/MultipleSelect.vue'
+import fieldText from './fields/Text.vue'
+import fieldTimeSelect from './fields/TimeSelect.vue'
+import fieldDateRange from './fields/DateRange.vue'
+import fieldLabel from './fields/Label.vue'
+import fieldNumber from './fields/Number.vue'
+import fieldTimePicker from './fields/TimePicker.vue'
+
+const allFieldComponents = {
+  fieldCascader,
+  fieldDateTime,
+  fieldSelect,
+  fieldTimePickerRange,
+  fieldDate,
+  fieldDateTimeRange,
+  fieldMultipleSelect,
+  fieldText,
+  fieldTimeSelect,
+  fieldDateRange,
+  fieldLabel,
+  fieldNumber,
+  fieldTimePicker,
+}
+
+const fieldComponentsMap: Record<FieldType, Component> = {
+  cascader: fieldCascader,
+  dateTime: fieldDateTime,
+  select: fieldSelect,
+  timePickerRange: fieldTimePickerRange,
+  date: fieldDate,
+  dateTimeRange: fieldDateTimeRange,
+  multipleSelect: fieldMultipleSelect,
+  text: fieldText,
+  timeSelect: fieldTimeSelect,
+  dateRange: fieldDateRange,
+  label: fieldLabel,
+  number: fieldNumber,
+  timePicker: fieldTimePicker,
+}
+
+function getFieldComponent(key: FieldType) {
+  return fieldComponentsMap[key] || null
+}
 
 export default Vue.extend({
   name: 'FilterbarField',
