@@ -166,7 +166,7 @@ export default Vue.extend({
   data() {
     return {
       isFold: true,
-      isNoMore: true,
+      isNoMore: false,
       topRightItemIndex: -1,
       actionOffsetLeft: 0,
       searchBtnOffset: 0,
@@ -283,7 +283,7 @@ export default Vue.extend({
         let lastFilterTop = $action.getBoundingClientRect().top
         for (let i = 0; i < allFields.length; i++) {
           const curItemTop = allFields[i].$el.getBoundingClientRect().top
-          if (lastFilterTop < curItemTop) {
+          if (curItemTop > lastFilterTop) {
             break
           }
           lastFilterIndex = i
