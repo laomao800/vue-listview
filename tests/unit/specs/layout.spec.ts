@@ -214,7 +214,7 @@ describe('listview container', () => {
     })
     expect(wrapper.find('div.content1').exists()).toBe(true)
     expect(wrapper.find('div.lv_wrapper').exists()).toBe(false)
-    await wrapper.findAll('div.lvc__tab').at(1).element.click()
+    await (wrapper.findAll('div.lvc__tab').at(1).element as HTMLElement).click()
     expect(wrapper.find('div.content1').exists()).toBe(false)
     expect(wrapper.find('div.lv__wrapper').exists()).toBe(true)
   })

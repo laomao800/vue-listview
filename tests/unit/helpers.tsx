@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, Wrapper } from '@vue/test-utils'
 import { ListviewProps } from '~/types'
 
 export async function createListviewWrapper(
@@ -21,7 +21,7 @@ export async function createListviewWrapper(
       requestHandler: requestSpy,
       ...propsData,
     },
-  })
+  }) as Wrapper<Vue, HTMLInputElement>
   const vm = wrapper.vm as any
   const storeWrapper = wrapper.findComponent({ name: 'StoreProvider' })
   const storeVm = wrapper.findComponent({ name: 'StoreProvider' }).vm as any
