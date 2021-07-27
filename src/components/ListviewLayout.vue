@@ -55,9 +55,6 @@ export default Vue.extend({
     bottomOffset(): number {
       return getElBottomOffset(this.$el)
     },
-    footerHeight(): number {
-      return this.getSlotHeight('footer')
-    },
   },
 
   created() {
@@ -112,11 +109,12 @@ export default Vue.extend({
       }
 
       if (maxHeight && isDom(this.$refs.content)) {
+        const footerHeight = this.getSlotHeight('footer')
         const contentOffsetTop =
           this.$refs.content.getBoundingClientRect().top -
           this.$el.getBoundingClientRect().top
         const contentHeight =
-          maxHeight - contentOffsetTop - this.bottomOffset - this.footerHeight
+          maxHeight - contentOffsetTop - this.bottomOffset - footerHeight
         this.contentHeight = contentHeight
       }
     },
