@@ -1,17 +1,29 @@
 <script lang="tsx">
 import Vue, { VNode, PropType } from 'vue'
 import isFunction from 'lodash/isFunction'
-import FilterbarField from './FilterbarField.vue'
-import { hasOwn, isVNode } from '@/utils'
+
 import { FilterField } from '~/types'
+import { hasOwn, isVNode, error } from '@/utils'
+import { getFieldComponent } from './fields/index'
+import FilterbarField from './FilterbarField.vue'
 
 function isValidFieldConfig(field: any) {
+  if (!field) return false
+
+  if (hasOwn(field, 'type')) {
+    if (getFieldComponent(field.type)) {
+      return true
+    } else {
+      error(`Invalid filter field type '${field.type}'`, field)
+      return false
+    }
+  }
+
   return (
-    field &&
-    (hasOwn(field, 'type') ||
-      isFunction(field) ||
-      isFunction(field.render) ||
-      isVNode(field))
+    (hasOwn(field, 'render') && isFunction(field.render)) ||
+    isFunction(field) ||
+    isVNode(field) ||
+    Array.isArray(field)
   )
 }
 
