@@ -6,7 +6,7 @@ exports[`Filter buttons normal 1`] = `
   <div class="lv__filterbar-main">
     <!---->
     <div class="lv__filterbar-inner lv__filterbar-inner--fold">
-      <div class="lv__filterbar-action lv__filterbar-action--nomore lv__filterbar-action--onleft">
+      <div class="lv__filterbar-action lv__filterbar-action--onleft">
         <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
           <!---->
           <div class="el-form-item__content"> <button type="button" class="el-button el-button--primary el-button--small" text="搜索">
