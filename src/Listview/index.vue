@@ -90,6 +90,10 @@ export default Vue.extend({
     },
   },
 
+  mounted() {
+    this.updateLayout()
+  },
+
   methods: {
     search(keepInPage: boolean) {
       return (this.$refs.storeProvider as any).search(keepInPage)

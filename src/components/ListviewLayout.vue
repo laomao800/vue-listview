@@ -1,7 +1,6 @@
 <script lang="tsx">
 import Vue from 'vue'
 import parseSize from '@laomao800/parse-size-with-unit'
-import debounce from 'lodash/debounce'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
 
 function isDom(item: any): item is Element {
@@ -58,21 +57,20 @@ export default Vue.extend({
   },
 
   created() {
-    const _init = debounce(() => {
-      this.updateLayout()
-      if (this.fullHeight) {
-        window.addEventListener('resize', this.updateLayout)
-      }
-    }, 0)
-    const _cleanup = debounce(
-      () => window.removeEventListener('resize', this.updateLayout),
-      0
-    )
+    const _init = () =>
+      this.fullHeight && window.addEventListener('resize', this.updateLayout)
+    const _cleanup = () =>
+      window.removeEventListener('resize', this.updateLayout)
 
-    this.$on('hook:mounted', _init)
-    this.$on('hook:beforeDestroy', _cleanup)
-    this.$on('hook:activated', _init)
-    this.$on('hook:deactivated', _cleanup)
+    this.$once('hook:mounted', _init)
+    this.$once('hook:beforeDestroy', _cleanup)
+    this.$nextTick(() => {
+      this.$on('hook:activated', () => {
+        this.updateLayout()
+        _init()
+      })
+      this.$on('hook:deactivated', _cleanup)
+    })
   },
 
   methods: {
