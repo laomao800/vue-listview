@@ -145,7 +145,6 @@ export default Vue.extend({
   data() {
     return {
       isFold: true,
-      isNoMore: false,
       topRightItemIndex: -1,
       actionOffsetLeft: 0,
       searchBtnOffset: 0,
@@ -182,6 +181,9 @@ export default Vue.extend({
       } catch (error) {
         return []
       }
+    },
+    isNoMore(): boolean {
+      return this.topRightItemIndex === this.filterFields.length - 1
     },
   },
 
@@ -235,9 +237,12 @@ export default Vue.extend({
     },
 
     updateLayout() {
+      // TODO: updateTopRightItemIndex 计算流程待优化
       // updateTopRightItemIndex 影响 isNoMore 按钮显示，需计算后再执行按钮偏移量计算
       this.updateTopRightItemIndex()
       this.$nextTick().then(() => {
+        // updateTopRightItemIndex 可能受 more 按钮影响而产生变化，此处先直接重新计算作二次确认
+        this.updateTopRightItemIndex()
         this.updateActionOffset()
         this.updateBtnOffset()
       })
@@ -266,7 +271,6 @@ export default Vue.extend({
         }
       }
       this.topRightItemIndex = lastFilterIndex
-      this.isNoMore = this.topRightItemIndex === this.filterFields.length - 1
     },
 
     updateBtnOffset() {

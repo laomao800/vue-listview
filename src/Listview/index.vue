@@ -91,7 +91,7 @@ export default Vue.extend({
   },
 
   mounted() {
-    this.updateLayout()
+    this.$nextTick(() => this.updateLayout())
   },
 
   methods: {
