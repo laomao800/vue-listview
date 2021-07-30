@@ -1,3 +1,13 @@
+# [2.0.0-beta.3](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-30)
+
+
+### Bug Fixes
+
+* 修正 ci 发布 npm 丢失 dist/fonts 目录 ([c7199af](https://github.com/laomao800/vue-listview/commit/c7199af02df12c16b60db30fb17fd13dd3e17a33))
+* 修正搭配 el-tabs 使用布局计算错误问题 ([d1749cb](https://github.com/laomao800/vue-listview/commit/d1749cb1b0ff365f6d28bd0214b2e95223603966))
+
+
+
 # [2.0.0-beta.2](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-07-27)
 
 
