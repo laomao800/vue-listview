@@ -11,8 +11,6 @@ const insteadWarn = (type: string, oldName: string, newName: string) =>
 
 export default Vue.extend({
   mounted() {
-    if (process.env.NODE_ENV === 'production') return
-
     // Props
     const props = get(this, '$vnode.data.attrs', {})
     const migrationProps: Record<string, string> = {
