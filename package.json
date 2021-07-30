@@ -26,7 +26,7 @@
   "main": "dist/listview-component.common.js",
   "types": "types",
   "files": [
-    "dist",
+    "dist/*",
     "types"
   ],
   "peerDependencies": {
