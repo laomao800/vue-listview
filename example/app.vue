@@ -1,63 +1,3 @@
-<template>
-  <div id="app">
-    <ListviewContainer
-      :header-title="'演示列表容器'"
-      :header-nav="['菜单1', { text: '菜单2' }]"
-    >
-      <Listview
-        header-title="演示列表1"
-        request-url="/mock/listview"
-        request-method="post"
-        :filter-buttons="filterButtons"
-        :filter-fields="filterFields"
-        :filter-model="filterModel"
-        :table-columns="tableColumns"
-        :selection.sync="selection"
-        :page-props="{ pagerCount: 5 }"
-      />
-      <div header-title="演示列表2">123</div>
-      <Listview
-        header-title="演示列表2"
-        request-url="/mock/listview"
-        request-method="post"
-        :filter-buttons="filterButtons"
-        :filter-fields="filterFields2"
-        :filter-model="filterModel2"
-      >
-        <template slot-scope="{ contentData, contentMessage }">
-          <el-alert
-            v-if="contentMessage.text"
-            :title="contentMessage.text"
-            :type="contentMessage.type"
-            :closable="false"
-            center
-            show-icon
-          />
-          <ul v-else class="item-list">
-            <li v-for="(item, index) in contentData.items" :key="index">
-              <div class="item">
-                <div class="thumb">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIBAMAAABfdrOtAAAAG1BMVEXMzMwAAACZmZkzMzMZGRlmZmZMTEyysrJ/f3/9S/GQAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABrklEQVR4nO3UT0/CMBjH8ccx2I56IF6nkHglQoxHnX/gSKIvwBi9TyWel7gX7tP2GQpEE4revp+EluX3ZN3ariIAAAAAAAAAAAAAAAAA8JvjwrXZsb94Ldbj5HtgVdtKJuPLuXbX4xu9Gl5N5qv54GrSXwZWtbVeIdmt3qSQtwdJSsnOVvNHkcUyCFVxjiqZaTeTtBb/W5UctkGoipMW+YV2H9Jom4828tICq4rTqXtuJV7kWdtsX5tuoc17m59bYFVx9qpOrV1anburqf50DSRbTsyhhMCq4gZpdMK06xSluzp1jS7xorZYZykEVhU3yCw8Xqd2LxGeOp9+vUhaSwisKmqM7mhzEGma5c3u5A8GaarN6ZJuv43zqew+XcnUHu/bwusX+NQu8LCS3Rde11jWt7Burby0Z3D9rls491v2QtxnNpT2Y9St1RQ+b9yTh8CqItz713dbqZS0lrA8bmv5V5Cunz0LQtX2emEJhrU/IGd2QPb0pjJw/8LSWBCqtnd0oObuxHeH+GD9qE9c3G8Dq4qWnfju9ae9EwKrAgAAAAAAAAAAAAAAAPAfPgFZpkiD9I8rfAAAAABJRU5ErkJggg=="
-                  />
-                </div>
-                <div class="info">
-                  <div class="id">{{ item.id }}</div>
-                  <div class="name">{{ item.name }}</div>
-                </div>
-                <div class="action">
-                  <el-button size="mini" type="success">审核</el-button>
-                  <el-button size="mini" type="danger">删除</el-button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </template>
-      </Listview>
-    </ListviewContainer>
-  </div>
-</template>
-
 <script lang="jsx">
 import './common.less'
 import { create as createListview, ListviewContainer } from '@/'
@@ -82,6 +22,14 @@ const Listview1 = createListview({
 
 export default {
   name: 'App',
+
+  render() {
+    return (
+      <el-button size="small" on={{ click: () => console.log(123) }}>
+        button
+      </el-button>
+    )
+  },
 
   components: {
     Listview: Listview1,

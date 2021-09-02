@@ -81,7 +81,7 @@ export function nodeParents(node: Element, selector: string) {
   return find(node)
 }
 
-export function isPromise(obj: any) {
+export function isPromise(obj: any): obj is Promise<any> {
   return (
     !!obj &&
     (typeof obj === 'object' || typeof obj === 'function') &&

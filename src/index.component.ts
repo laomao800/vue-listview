@@ -1,19 +1,16 @@
-import Vue, { VueConstructor, PluginFunction } from 'vue'
+import Vue, { VueConstructor, PluginObject, PluginFunction } from 'vue'
 import { create } from '@/create'
 import _Listview from './Listview'
 import _ListviewContainer from './ListviewContainer'
 import './importElementUI'
 
-type SFCWithInstall<T> = T & { install(vue: Vue): void }
+type SFCWithInstall<T> = T & PluginObject<Vue>
 
 function bindInstall(name: string, component: VueConstructor) {
   const install: PluginFunction<Vue> = (vue) => vue.component(name, component)
-
   // @ts-ignore
   component.install = install
-
   window && window.Vue && install(window.Vue as any)
-
   return component as SFCWithInstall<typeof component>
 }
 
