@@ -8,10 +8,6 @@ module.exports = {
   setupFiles: ['<rootDir>/tests/unit/setup'],
   globalSetup: '<rootDir>/tests/unit/global-setup',
   globalTeardown: '<rootDir>/tests/unit/global-teardown',
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.(css|less)$': '<rootDir>/tests/unit/__mocks__/styleMock.js',
-  },
   coverageDirectory: '<rootDir>/tests/unit/coverage',
   collectCoverageFrom: [
     'src/**/*.{js,ts,vue}',

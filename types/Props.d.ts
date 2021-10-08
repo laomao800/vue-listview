@@ -1,4 +1,4 @@
-import Vue, { VueConstructor, VNode, Component } from 'vue'
+import Vue, { VueConstructor, VNode } from 'vue'
 import { AxiosRequestConfig } from 'axios'
 import { FilterButton } from './FilterButton'
 import { FilterField } from './FilterField'
@@ -11,9 +11,28 @@ declare class ComponentWithInstall extends Vue {
   static install(Vue: VueConstructor<Vue>, options: any): void
 }
 
+// vue-router Location
+interface Location {
+  name?: string
+  path?: string
+  hash?: string
+  query?: Dic<string>
+  params?: Dic<string>
+  append?: boolean
+  replace?: boolean
+}
+
+interface HeaderNavObjectType {
+  text: string
+  to?: Location
+}
+
 declare class ListviewProps extends ComponentWithInstall {
   /** 顶部通栏页面标题文本。 default: '' */
   headerTitle: string
+
+  /** 顶部通栏页面面包屑。 default: [] */
+  headerNav: Array<string | HeaderNavObjectType>
 
   /** 优先级最高，设置整体布局高度，包含顶部标题栏、搜索栏、正文区域、页码区域所有内容的高度，支持百分比。 default: null */
   height: string | number
