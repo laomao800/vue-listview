@@ -205,7 +205,11 @@ export default Vue.extend({
       data: AxiosRequestConfig['data'] | AxiosRequestConfig['params']
     ): AxiosRequestConfig {
       const requestConfig = merge(
-        { url: this.requestUrl, withCredentials: true },
+        {
+          url: this.requestUrl,
+          method: this.requestMethod,
+          withCredentials: true,
+        },
         this.requestConfig
       )
 
