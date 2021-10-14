@@ -1,3 +1,20 @@
+# [2.0.0-beta.4](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-10-14)
+
+
+### Bug Fixes
+
+* 补充 headerNav 类型定义 ([380a8f7](https://github.com/laomao800/vue-listview/commit/380a8f783095bc9ab50aac37b64e0222a28e685f))
+* 内置 lodash/get 方法 ([7ec778e](https://github.com/laomao800/vue-listview/commit/7ec778effa992b9cee17b50524897cd587769ff4)), closes [/github.com/lodash/babel-plugin-lodash/issues/94#issuecomment-233093079](https://github.com//github.com/lodash/babel-plugin-lodash/issues/94/issues/issuecomment-233093079)
+* 修正 requestMethod 配置无效 ([2d65c61](https://github.com/laomao800/vue-listview/commit/2d65c6146e72effad43ef1556e521333b31c719a))
+* SFCWithInstall type fix ([e52535c](https://github.com/laomao800/vue-listview/commit/e52535cefb8c2d6bd23650e6f74ac36ed79afc51))
+
+
+### Features
+
+* 新增 filterbarFold ， filterbarFoldable ([d1d158c](https://github.com/laomao800/vue-listview/commit/d1d158c6b339a36e93d1b563e5313ba9bb8317d9))
+
+
+
 # [2.0.0-beta.3](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-07-30)
 
 
