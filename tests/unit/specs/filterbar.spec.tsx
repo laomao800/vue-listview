@@ -23,7 +23,6 @@ describe('Filter buttons', () => {
     const buttons = wrapper
       .findComponent({ name: 'FilterbarButtons' })
       .findAllComponents({ name: 'ElButton' })
-    expect(wrapper.html()).toMatchSnapshot()
     expect(buttons.length).toBe(filterButtons.length)
   })
 

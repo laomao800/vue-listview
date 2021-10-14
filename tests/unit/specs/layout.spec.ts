@@ -48,11 +48,6 @@ describe('height', () => {
 })
 
 describe('listview header', () => {
-  it('empty', () => {
-    const wrapper = mount(ListviewHeader)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
   it('title', () => {
     const headerTitle = 'headerTitle'
     const wrapper = mount(ListviewHeader, {
@@ -67,20 +62,20 @@ describe('listview header', () => {
         headerNav: ['home', { text: 'list', to: '/list' }],
       },
     })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-
-  it('title & nav', async () => {
-    const wrapper = await mount(ListviewHeader, {
-      propsData: {
-        headerTitle: 'headerTitle',
-        headerNav: [
-          { text: 'home', to: '/home' },
-          { text: 'list', to: '/list' },
-        ],
-      },
-    })
-    expect(wrapper.html()).toMatchSnapshot()
+    const items = wrapper.findAll('.el-breadcrumb__item')
+    expect(items.length).toBe(2)
+    expect(
+      items
+        .at(0)
+        .vm.$el.querySelector('.el-breadcrumb__inner')!
+        .textContent!.trim()
+    ).toBe('home')
+    expect(
+      items
+        .at(1)
+        .vm.$el.querySelector('.el-breadcrumb__inner')!
+        .textContent!.trim()
+    ).toBe('list')
   })
 })
 
