@@ -95,6 +95,20 @@ sidebarDepth: 2
 
 传入 `false` 则不显示搜索栏的“重置”按钮。
 
+### filterbarFold
+
+- type: `Boolean`
+- default: `true`
+
+搜索栏默认是否折叠。
+
+### filterbarFoldable
+
+- type: `Boolean`
+- default: `true`
+
+是否开启搜索栏折叠收起功能。
+
 ## 内容区域/表格
 
 ### tableColumns

@@ -55,6 +55,7 @@
           <div class="lv__filterbar-action-ext">
             <slot name="prepend-more" />
             <el-button
+              v-if="filterbarFoldable"
               icon="el-icon-caret-top"
               type="primary"
               class="lv__filterbar-action-more"
@@ -113,6 +114,14 @@ export default Vue.extend({
   },
 
   props: {
+    filterbarFoldable: {
+      type: Boolean,
+      default: true,
+    },
+    filterbarFold: {
+      type: Boolean,
+      default: true,
+    },
     filterButtons: {
       type: Array as PropType<FilterButton[]>,
       default: /* istanbul ignore next */ () => [],
@@ -141,7 +150,7 @@ export default Vue.extend({
 
   data() {
     return {
-      isFold: true,
+      isFold: this.filterbarFold,
       topRightItemIndex: -1,
       actionOffsetLeft: 0,
       searchBtnOffset: 0,
@@ -193,6 +202,12 @@ export default Vue.extend({
     },
     isShowSearchButton: 'updateLayout',
     isShowResetButton: 'updateLayout',
+  },
+
+  created() {
+    if (!this.filterbarFoldable) {
+      this.isFold = false
+    }
   },
 
   methods: {

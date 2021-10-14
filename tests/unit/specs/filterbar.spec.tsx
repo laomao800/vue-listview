@@ -8,6 +8,30 @@ const h = new Vue().$createElement
 const DATE1 = new Date('2021/01/01 09:30:00')
 const DATE2 = new Date('2021/06/01 09:30:00')
 
+describe('Filterbar layout', () => {
+  it('filterbarFold', () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterbarFold: false,
+      },
+    })
+    expect(
+      wrapper
+        .find('.lv__filterbar')
+        .vm.$el.classList.contains('lv__filterbar--fold')
+    ).toBe(false)
+  })
+  it('filterbarFoldable', () => {
+    const wrapper = mount(Filterbar, {
+      propsData: {
+        filterbarFoldable: false,
+      },
+    })
+    expect(wrapper.find('.lv__filterbar--fold').exists()).toBe(false)
+    expect(wrapper.find('.lv__filterbar-action-more').exists()).toBe(false)
+  })
+})
+
 describe('Filter buttons', () => {
   it('normal', async () => {
     const filterButtons: any = [
