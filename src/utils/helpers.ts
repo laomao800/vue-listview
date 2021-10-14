@@ -3,7 +3,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isFunction from 'lodash/isFunction'
 import isNil from 'lodash/isNil'
-import get from 'lodash/get'
+import get from '@/utils/getValue'
 import { FilterField } from '~/types'
 
 /**

@@ -1,6 +1,6 @@
 <script lang="tsx">
 import Vue, { VNode as VNodeType } from 'vue'
-import get from 'lodash/get'
+import get from '@/utils/getValue'
 import ListviewHeader from '@/components/ListviewHeader.vue'
 
 function getListviewTitle(node: VNodeType, defaultTitle = '') {

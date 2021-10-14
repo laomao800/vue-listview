@@ -49,7 +49,7 @@
 <script lang="tsx">
 import Vue, { Component } from 'vue'
 import debounce from 'lodash/debounce'
-import get from 'lodash/get'
+import get from '@/utils/getValue'
 import isPlainObject from 'lodash/isPlainObject'
 import migrationMixin from './migrationMixin'
 import StoreProvider from '@/components/StoreProvider.vue'

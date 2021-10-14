@@ -1,6 +1,6 @@
 import Vue, { PropType } from 'vue'
 import merge from 'lodash/merge'
-import get from 'lodash/get'
+import get from '@/utils/getValue'
 import isPlainObject from 'lodash/isPlainObject'
 import { error } from '@/utils'
 import storeProviderMixin from '@/mixins/storeProviderMixin'

@@ -1,7 +1,7 @@
 <script lang="tsx">
 import Vue, { PropType } from 'vue'
 import hasValues from 'has-values'
-import get from 'lodash/get'
+import get from '@/utils/getValue'
 import isFunction from 'lodash/isFunction'
 
 import { FilterField, FilterFieldHasRender } from '~/types'

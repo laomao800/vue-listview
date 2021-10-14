@@ -1,4 +1,10 @@
-import { dataMapping, isValidFieldValue, isPromise, nodeParents } from '@/utils'
+import {
+  dataMapping,
+  isPromise,
+  isValidFieldValue,
+  nodeParents,
+  noop,
+} from '@/utils'
 
 describe('utils', () => {
   it('dataMapping', () => {
@@ -36,8 +42,8 @@ describe('utils', () => {
 
   it('isPromise', () => {
     expect(isPromise(new Promise((resolve) => resolve(1)))).toBe(true)
-    expect(isPromise(Promise.resolve())).toBe(true)
-    expect(isPromise(Promise.reject())).toBe(true)
+    expect(isPromise(Promise.resolve().catch())).toBe(true)
+    expect(isPromise(Promise.reject(1).catch(noop))).toBe(true)
   })
 })
 

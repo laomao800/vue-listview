@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import get from 'lodash/get'
+import get from '@/utils/getValue'
 import camelCase from 'lodash/camelCase'
 import { warn } from '@/utils/debug'
 import { hasOwn } from '@/utils'
