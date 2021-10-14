@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Filter buttons normal 1`] = `
-<form class="el-form lv__filterbar el-form--inline">
+<form class="el-form el-form--inline lv__filterbar lv__filterbar--fold">
   <!---->
   <div class="lv__filterbar-main">
     <!---->
-    <div class="lv__filterbar-inner lv__filterbar-inner--fold">
+    <div class="lv__filterbar-inner">
       <div class="lv__filterbar-action lv__filterbar-action--nomore lv__filterbar-action--onleft">
         <div class="el-form-item lv__filterbar-action-submit el-form-item--small" style="transform: translateX(0px);">
           <!---->

@@ -2,7 +2,7 @@
   <el-form
     :inline="true"
     size="small"
-    class="lv__filterbar"
+    :class="['lv__filterbar', { 'lv__filterbar--fold': isFold }]"
     @submit.native.prevent
     @keydown.native.enter="handleSubmit"
   >
@@ -17,10 +17,7 @@
 
       <div
         v-if="isShowFilterButtons || isShowFilterSubmit || isShowFilterFields"
-        :class="[
-          'lv__filterbar-inner',
-          { 'lv__filterbar-inner--fold': isFold },
-        ]"
+        class="lv__filterbar-inner"
       >
         <!-- 提交、重置按钮区域 -->
         <div
@@ -410,16 +407,18 @@ export default Vue.extend({
     clear: both;
     content: '';
   }
+}
 
-  &--fold {
+.lv__filterbar--fold {
+  .lv__filterbar-inner {
     box-sizing: content-box;
     height: 32px;
     overflow: hidden;
     margin-bottom: @filter-gap-size;
+  }
 
-    .lv__filterbar-action-more {
-      transform: rotate(180deg);
-    }
+  .lv__filterbar-action-more {
+    transform: rotate(180deg);
   }
 }
 </style>
