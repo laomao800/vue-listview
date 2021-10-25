@@ -1,11 +1,9 @@
 <template>
   <el-select
     v-model="value"
-    :placeholder="field.label"
-    :disabled="field.disabled"
-    :loading="loading"
     v-bind="mergedProps"
     v-on="mergedEvents"
+    :loading="loading"
   >
     <el-option
       v-for="(option, index) in internalOptions"
@@ -26,6 +24,8 @@ export default {
 
   data() {
     const defaultProps = {
+      placeholder: this.field.label,
+      disabled: this.field.disabled,
       clearable: true,
       filterable: true,
       style: { width: '180px' },

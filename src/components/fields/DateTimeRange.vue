@@ -1,11 +1,5 @@
 <template>
-  <el-date-picker
-    v-model="value"
-    :placeholder="field.label"
-    :disabled="field.disabled"
-    v-bind="mergedProps"
-    v-on="mergedEvents"
-  />
+  <el-date-picker v-model="value" v-bind="mergedProps" v-on="mergedEvents" />
 </template>
 
 <script>
@@ -19,6 +13,7 @@ export default {
   data() {
     return {
       defaultProps: {
+        disabled: this.field.disabled,
         clearable: true,
         style: { width: '360px' },
         type: 'datetimerange',

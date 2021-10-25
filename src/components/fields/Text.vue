@@ -1,8 +1,6 @@
 <template>
   <el-input
     v-model="value"
-    :placeholder="field.label"
-    :disabled="field.disabled"
     v-bind="mergedProps"
     v-on="mergedEvents"
     @blur="onBlur"
@@ -31,6 +29,8 @@ export default {
   data() {
     return {
       defaultProps: {
+        placeholder: this.field.label,
+        disabled: this.field.disabled,
         clearable: true,
         style: { width: '180px' },
       },

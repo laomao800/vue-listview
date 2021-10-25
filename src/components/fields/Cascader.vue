@@ -1,11 +1,10 @@
 <template>
   <el-cascader
     v-model="value"
-    :placeholder="field.label"
-    :disabled="field.disabled"
-    :options="internalOptions"
     v-bind="mergedProps"
     v-on="mergedEvents"
+    :options="internalOptions"
+    :loading="loading"
   />
 </template>
 
@@ -21,6 +20,8 @@ export default {
   data() {
     return {
       defaultProps: {
+        placeholder: this.field.label,
+        disabled: this.field.disabled,
         clearable: true,
         style: { width: '180px' },
         props: { expandTrigger: 'hover' },

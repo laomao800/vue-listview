@@ -1,11 +1,5 @@
 <template>
-  <el-time-picker
-    v-model="value"
-    :placeholder="field.label"
-    :disabled="field.disabled"
-    v-bind="mergedProps"
-    v-on="mergedEvents"
-  />
+  <el-time-picker v-model="value" v-bind="mergedProps" v-on="mergedEvents" />
 </template>
 
 <script>
@@ -19,6 +13,8 @@ export default {
   data() {
     return {
       defaultProps: {
+        placeholder: this.field.label,
+        disabled: this.field.disabled,
         clearable: true,
         style: { width: '120px' },
       },
