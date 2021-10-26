@@ -1,9 +1,10 @@
 <script lang="tsx">
-import Vue, { VNode as VNodeType } from 'vue'
-import get from '@/utils/getValue'
+import type { VNode } from 'vue'
+import Vue from 'vue'
 import ListviewHeader from '@/components/ListviewHeader.vue'
+import { get } from '@/utils'
 
-function getListviewTitle(node: VNodeType, defaultTitle = '') {
+function getListviewTitle(node: VNode, defaultTitle = '') {
   return (
     get(node, 'data.attrs.header-title') ||
     get(node, 'data.attrs.headerTitle') ||
@@ -32,7 +33,7 @@ export default Vue.extend({
   },
 
   computed: {
-    childViews(): VNodeType[] {
+    childViews(): VNode[] {
       return (this.$slots.default || [])
         .filter((item) => !!item.tag)
         .map((item, index) => {

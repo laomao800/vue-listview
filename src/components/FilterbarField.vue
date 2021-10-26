@@ -1,14 +1,13 @@
 <script lang="tsx">
-import Vue, { PropType } from 'vue'
+import type { FilterField, FilterFieldHasRender } from '~/types'
+import type { PropType } from 'vue'
+import Vue from 'vue'
 import hasValues from 'has-values'
-import get from '@/utils/getValue'
 import isFunction from 'lodash/isFunction'
-
-import { FilterField, FilterFieldHasRender } from '~/types'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
-import { isVNode, hasRenderFn } from '@/utils'
-import vNode from './VNode'
+import { isVNode, hasRenderFn, get } from '@/utils'
 import { allFieldComponents, getFieldComponent } from './fields/index'
+import vNode from './VNode'
 
 export default Vue.extend({
   name: 'FilterbarField',

@@ -1,5 +1,6 @@
-import { LvStore } from '~/types'
-import Vue, { VNode } from 'vue'
+import type { LvStore } from '~/types'
+import type { VNode } from 'vue'
+import Vue from 'vue'
 
 declare global {
   namespace JSX {

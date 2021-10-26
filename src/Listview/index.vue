@@ -47,9 +47,9 @@
 </template>
 
 <script lang="tsx">
-import Vue, { Component } from 'vue'
+import type { Component } from 'vue'
+import Vue from 'vue'
 import debounce from 'lodash/debounce'
-import get from '@/utils/getValue'
 import isPlainObject from 'lodash/isPlainObject'
 import migrationMixin from './migrationMixin'
 import StoreProvider from '@/components/StoreProvider.vue'
@@ -58,6 +58,7 @@ import ListviewHeader from '@/components/ListviewHeader.vue'
 import Filterbar from '@/components/Filterbar.vue'
 import ListviewContent from '@/components/ListviewContent.vue'
 import ListviewContentFooter from '@/components/ListviewContentFooter.vue'
+import { get } from '@/utils'
 
 export default Vue.extend({
   name: 'Listview',

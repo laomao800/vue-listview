@@ -1,4 +1,4 @@
-import get from '@/utils/getValue'
+import { get } from '@/utils'
 
 describe('get and result', function () {
   it('should get string keyed property values', function () {

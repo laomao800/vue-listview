@@ -1,8 +1,6 @@
 import Vue from 'vue'
-import get from '@/utils/getValue'
 import camelCase from 'lodash/camelCase'
-import { warn } from '@/utils/debug'
-import { hasOwn } from '@/utils'
+import { warn, hasOwn, get } from '@/utils'
 
 const insteadWarn = (type: string, oldName: string, newName: string) =>
   warn(

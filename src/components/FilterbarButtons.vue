@@ -1,5 +1,6 @@
 <script lang="tsx">
-import Vue, { PropType } from 'vue'
+import type { PropType } from 'vue'
+import Vue from 'vue'
 import isPlainObject from 'lodash/isPlainObject'
 import isFunction from 'lodash/isFunction'
 import vNode from './VNode'

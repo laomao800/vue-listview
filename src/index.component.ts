@@ -1,4 +1,5 @@
-import Vue, { VueConstructor, PluginObject, PluginFunction } from 'vue'
+import type { VueConstructor, PluginObject, PluginFunction } from 'vue'
+import Vue from 'vue'
 import { create } from '@/create'
 import _Listview from './Listview'
 import _ListviewContainer from './ListviewContainer'

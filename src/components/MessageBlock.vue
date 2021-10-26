@@ -1,5 +1,6 @@
 <script lang="tsx">
-import Vue, { PropType } from 'vue'
+import type { PropType } from 'vue'
+import Vue from 'vue'
 
 const iconMap = {
   warning: 'el-icon-warning',

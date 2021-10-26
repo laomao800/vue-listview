@@ -62,7 +62,8 @@
 </template>
 
 <script lang="tsx">
-import Vue, { VNodeData } from 'vue'
+import type { VNodeData } from 'vue'
+import Vue from 'vue'
 import isPlainObject from 'lodash/isPlainObject'
 import isFunction from 'lodash/isFunction'
 import mapKeys from 'lodash/mapKeys'

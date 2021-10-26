@@ -93,8 +93,8 @@
 </template>
 
 <script lang="tsx">
-import Vue, { PropType } from 'vue'
-
+import type { PropType } from 'vue'
+import Vue from 'vue'
 import { FilterButton, FilterField } from '~/types'
 import { hasOwn } from '@/utils'
 import storeProviderMixin from '@/mixins/storeProviderMixin'

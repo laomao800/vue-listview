@@ -1,5 +1,5 @@
-import { Component } from 'vue'
-import { FieldType } from '~/types'
+import type { Component } from 'vue'
+import type { FieldType } from '~/types'
 
 import fieldCascader from './Cascader.vue'
 import fieldDateTime from './DateTime.vue'

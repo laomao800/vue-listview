@@ -1,8 +1,8 @@
 <script lang="tsx">
-import Vue, { VNode, PropType } from 'vue'
+import type { FilterField } from '~/types'
+import type { VNode, PropType } from 'vue'
+import Vue from 'vue'
 import isFunction from 'lodash/isFunction'
-
-import { FilterField } from '~/types'
 import { hasOwn, isVNode, error } from '@/utils'
 import { getFieldComponent } from './fields/index'
 import FilterbarField from './FilterbarField.vue'
