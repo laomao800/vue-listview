@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { mount } from '@vue/test-utils'
-import { wait } from '../helpers'
+import { createListviewWrapper, wait } from '../helpers'
 import Filterbar from '@/components/Filterbar.vue'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -256,6 +256,37 @@ describe('Filter fields', () => {
     expect(wrapper.find('.lv__field input.object-type').exists()).toBe(true)
     expect(wrapper.find('.lv__field input.function-type').exists()).toBe(true)
     expect(wrapper.find('.lv__field input.vnode-type').exists()).toBe(true)
+  })
+
+  it('effect', async () => {
+    const bus = new Vue()
+    const { wrapper } = await createListviewWrapper({
+      filterModel: { selectField: '' },
+      filterFields: [
+        {
+          type: 'select',
+          model: 'selectField',
+          options: [],
+          effect: ({ vm, filterModel }: any) => {
+            bus.$on('custom-update-input', (value: string) => {
+              filterModel.selectField = value
+              vm.options = [
+                { label: value, value },
+                { label: 'other-label', value: 'other-value' },
+              ]
+            })
+          },
+        },
+      ],
+    })
+    const optionText = 'newOptionText'
+    bus.$emit('custom-update-input', optionText)
+    await wait(100)
+    const $filterbar = wrapper.findComponent({ name: 'Filterbar' })
+    const $options = $filterbar.findAll('.el-select-dropdown__item')
+    expect($options.length).toBe(2)
+    expect($options.at(0).element.textContent?.trim()).toBe(optionText)
+    expect($options.at(0).element.classList.contains('selected')).toBeTruthy()
   })
 })
 
