@@ -1,3 +1,19 @@
+# [2.0.0-beta.5](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-10-28)
+
+
+### Bug Fixes
+
+* filterFields 内 componentProps.placeholder 配置无效 ([36c15ea](https://github.com/laomao800/vue-listview/commit/36c15ea799851f140e6bb141f1d025f3897cb902))
+
+
+### Features
+
+* 可通过 effect 内可通过 vm.disabled 设置禁用状态 ([9e55155](https://github.com/laomao800/vue-listview/commit/9e5515534f7fef484cb100a02bf23ae5d5bae39e))
+* 可通过 effect 内可通过 vm.placeholder 设置占位符内容 ([ed09eb7](https://github.com/laomao800/vue-listview/commit/ed09eb7644ffc9eae8ad7d2c4a6c358035aec750))
+* filterFields 增加 effect 属性方法 ([65cdfac](https://github.com/laomao800/vue-listview/commit/65cdfac5fabe4a44a58554b70165d8454fcabfe9))
+
+
+
 # [2.0.0-beta.4](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-10-14)
 
 
