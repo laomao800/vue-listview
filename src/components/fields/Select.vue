@@ -24,7 +24,6 @@ export default {
 
   data() {
     const defaultProps = {
-      placeholder: this.field.label,
       clearable: true,
       filterable: true,
       style: { width: '180px' },

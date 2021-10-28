@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       defaultProps: {
-        placeholder: this.field.label,
         controlsPosition: 'right',
         style: { width: '100px' },
       },

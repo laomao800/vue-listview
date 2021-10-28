@@ -20,7 +20,6 @@ export default {
   data() {
     return {
       defaultProps: {
-        placeholder: this.field.label,
         clearable: true,
         style: { width: '180px' },
         props: { expandTrigger: 'hover' },

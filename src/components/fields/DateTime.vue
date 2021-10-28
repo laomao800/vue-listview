@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       defaultProps: {
-        placeholder: this.field.label,
         clearable: true,
         style: { width: '200px' },
         type: 'datetime',
