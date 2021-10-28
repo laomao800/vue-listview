@@ -1,4 +1,4 @@
-# lvStore <Badge text="2.0.0+" />
+# lvStore
 
 Listivew 内部以一个 Vue 实例为总线存储相关的数据，并以名称 `lvStore` 作为 provider 提供给子组件。在使用[替换区域组件](create.md#replaceComponents)时可通过该途径访问底层数据及方法。
 

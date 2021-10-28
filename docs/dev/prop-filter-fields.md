@@ -42,7 +42,7 @@
 | dateTimeRange   | 日期时间范围 | [DateTimeRange][date-time-range]     |
 | cascader        | 级联选项     | [Cascader][cascader]                 |
 
-### 私有配置 `trim` <Badge text="1.2.11+" vertical="middel" />
+### 私有配置 `trim`
 
 - type: `Boolean`
 
@@ -73,7 +73,7 @@
 
 支持属性和 [Cascader - options](http://element.eleme.io/#/zh-CN/component/cascader#attributes) 相同。
 
-#### 异步选项 <Badge text="1.1.0+" />
+#### 异步选项
 
 有时需要从其他接口选项内容，可在 `options` 传入函数来进行异步填充，支持 2 种方式：
 
@@ -160,7 +160,7 @@
 
 可传入[各自对应 Element-UI 组件](#type-字段类型可选值)的 Events 。
 
-## 组合 <Badge text="1.1.0+" />
+## 组合
 
 搜索栏每个字段组件为一个单位，默认超过屏幕宽度的组件会自动收起。
 

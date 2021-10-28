@@ -1,4 +1,4 @@
-# create() <Badge text="2.0.0+" />
+# create()
 
 通过 create 方法可对部分 props 默认值进行全局配置，并生成全新的组件。
 
