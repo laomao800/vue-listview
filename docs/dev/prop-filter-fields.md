@@ -172,22 +172,28 @@
 filterFields: [
   {
     type: 'select',
-    model: 'selectField',
-    options: [{ label: 'xxx', value: 'xxx' }],
-    effect: ({ vm, filterModel }) => {
-      this.$on('custom-update-input', (value) => {
-        filterModel.selectField = value
-        vm.options = [{ label: value, value }]
-      })
+    model: 'searchType',
+    options: [
+      { label: '类型1', value: 'type1' },
+      { label: '类型2', value: 'type2' },
+    ],
+    label: '搜索类型',
+    componentEvents: {
+      change: (val) => {
+        this.$emit('search-type-change', val)
+      },
     },
   },
   {
     type: 'text',
-    model: 'textField',
-    componentEvents: {
-      input: (val) => {
-        this.$emit('custom-update-input', val)
-      },
+    model: 'typeKeyword',
+    componentProps: { placeholder: '请先选择搜索类型' },
+    disabled: true,
+    effect: ({ vm }) => {
+      this.$on('search-type-change', (value) => {
+        vm.placeholder = value ? '请输入搜索关键字' : '请先选择搜索类型'
+        vm.disabled = !value
+      })
     },
   },
 ],

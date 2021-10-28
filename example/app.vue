@@ -158,6 +158,32 @@ export default {
       filterFields: [
         {
           type: 'select',
+          model: 'searchType',
+          options: [
+            { label: '类型1', value: 'type1' },
+            { label: '类型2', value: 'type2' },
+          ],
+          label: '搜索类型',
+          componentEvents: {
+            change: (val) => {
+              this.$emit('search-type-change', val)
+            },
+          },
+        },
+        {
+          type: 'text',
+          model: 'typeKeyword',
+          componentProps: { placeholder: '请先选择搜索类型' },
+          disabled: true,
+          effect: ({ vm }) => {
+            this.$on('search-type-change', (value) => {
+              vm.placeholder = value ? '请输入搜索关键字' : '请先选择搜索类型'
+              vm.disabled = !value
+            })
+          },
+        },
+        {
+          type: 'select',
           model: 'error',
           label: '特定数据',
           options: [
