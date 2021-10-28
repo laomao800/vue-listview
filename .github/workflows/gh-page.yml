@@ -40,19 +40,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache yarn modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-yarn-modules
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      - uses: c-hive/gha-yarn-cache@v2
 
       - name: Yarn install
         run: yarn
