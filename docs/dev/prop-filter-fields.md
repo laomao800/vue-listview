@@ -11,16 +11,17 @@
 
 以下为所有类型都共有的属性配置：
 
-| 参数            | 必须 | 类型    | 说明                                                                         |
-| --------------- | ---- | ------- | ---------------------------------------------------------------------------- |
-| type            | √    | String  | 字段类型                                                                     |
-| model           | √    | String  | 提交时字段的 key 名                                                          |
-| label           | √    | String  | 字段中文说明                                                                 |
-| disabled        |      | Boolean | 是否禁用                                                                     |
-| key             |      | String  | 同 vue 组件的 `:key` 属性，若不设置会直接使用子项的 `model` 值               |
-| componentProps  |      | Object  | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)    |
-| componentEvents |      | Object  | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents) |
-| componentSlots  |      | Object  | 可传入各自组件支持的 slots ，具体可查看 [componentSlots](#componentslots)    |
+| 参数            | 必须 | 类型     | 说明                                                                                        |
+| --------------- | ---- | -------- | ------------------------------------------------------------------------------------------- |
+| type            | √    | String   | 字段类型                                                                                    |
+| model           | √    | String   | 提交时字段的 key 名                                                                         |
+| label           | √    | String   | 字段中文说明                                                                                |
+| disabled        |      | Boolean  | 是否禁用                                                                                    |
+| key             |      | String   | 同 vue 组件的 `:key` 属性，若不设置会直接使用子项的 `model` 值                              |
+| componentProps  |      | Object   | 可传入各自组件自身的 props ，具体可查看 [componentProps](#componentprops)                   |
+| componentEvents |      | Object   | 可传入各自组件自身的 events ，具体可查看 [componentEvents](#componentevents)                |
+| componentSlots  |      | Object   | 可传入各自组件支持的 slots ，具体可查看 [componentSlots](#componentslots)                   |
+| effect          |      | Function | 参数为 `{ vm, filterModel }` 的方法，可用于配置简单的字段交互，具体可查看 [effect](#effect) |
 
 #### `type` 字段类型可选值
 
@@ -159,6 +160,38 @@
 - default: `{}`
 
 可传入[各自对应 Element-UI 组件](#type-字段类型可选值)的 Events 。
+
+### effect <Badge text="2.0.0-beta.5" />
+
+- type: `Function({ vm, setValue, setConfig })`
+  - `vm`: 搜索栏组件 vm 对象
+  - `filterModel`: 搜索栏完整数据，可直接修改属性
+
+```js
+// ...
+filterFields: [
+  {
+    type: 'select',
+    model: 'selectField',
+    options: [{ label: 'xxx', value: 'xxx' }],
+    effect: ({ vm, filterModel }) => {
+      this.$on('custom-update-input', (value) => {
+        filterModel.selectField = value
+        vm.options = [{ label: value, value }]
+      })
+    },
+  },
+  {
+    type: 'text',
+    model: 'textField',
+    componentEvents: {
+      input: (val) => {
+        this.$emit('custom-update-input', val)
+      },
+    },
+  },
+],
+```
 
 ## 组合
 

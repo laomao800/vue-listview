@@ -3,7 +3,7 @@
     v-model="value"
     v-bind="mergedProps"
     v-on="mergedEvents"
-    :options="internalOptions"
+    :options="options"
     :loading="loading"
   />
 </template>
@@ -26,25 +26,30 @@ export default {
         style: { width: '180px' },
         props: { expandTrigger: 'hover' },
       },
-      internalOptions: [],
+      options: [],
       loading: false,
     }
   },
 
-  mounted() {
-    const setOptions = (options) => {
-      if (Array.isArray(options)) {
-        this.internalOptions = options
-      }
-    }
+  watch: {
+    'field.options': {
+      immediate: true,
+      handler() {
+        const setOptions = (options) => {
+          if (Array.isArray(options)) {
+            this.options = options
+          }
+        }
 
-    const optionsPromise = resolveOptions(this.field.options, setOptions)
-    if (optionsPromise) {
-      this.loading = true
-      optionsPromise.then(setOptions).finally(() => {
-        this.loading = false
-      })
-    }
+        const optionsPromise = resolveOptions(this.field.options, setOptions)
+        if (optionsPromise) {
+          this.loading = true
+          optionsPromise.then(setOptions).finally(() => {
+            this.loading = false
+          })
+        }
+      },
+    },
   },
 }
 </script>

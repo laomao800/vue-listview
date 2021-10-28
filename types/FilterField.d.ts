@@ -22,6 +22,11 @@ export type FieldType =
   | 'dateTimeRange'
   | 'cascader'
 
+interface FieldEffectPayload {
+  vm: Vue
+  filterModel: Record<string, any>
+}
+
 export interface FilterField {
   type: FieldType
 
@@ -37,8 +42,8 @@ export interface FilterField {
 
   trim?: boolean
 
-  // /** 显示为禁用状态 */
-  // disabled?: boolean
+  /** 显示为禁用状态 */
+  disabled?: boolean
 
   /** 类型为 select 或 multipleSelect 时的选项配置 */
   options?:
@@ -54,6 +59,8 @@ export interface FilterField {
 
   /** 可传入对应控件原始的 slots */
   componentSlots?: { [k: string]: any }
+
+  effect?: (effectPayload: FieldEffectPayload) => void
 
   render?: () => VNode
 }

@@ -1,17 +1,17 @@
-import Vue, { PropType } from 'vue'
+import type { FilterField } from '~/types'
+import type { PropType } from 'vue'
+import Vue from 'vue'
 import merge from 'lodash/merge'
-import get from '@/utils/getValue'
 import isPlainObject from 'lodash/isPlainObject'
-import { error } from '@/utils'
+import isFunction from 'lodash/isFunction'
 import storeProviderMixin from '@/mixins/storeProviderMixin'
-import { FilterField } from '~/types'
+import { error, get } from '@/utils'
 
 export default Vue.extend({
   mixins: [storeProviderMixin],
 
   props: {
     field: { type: Object as PropType<FilterField> },
-    default: /* istanbul ignore next */ () => ({}),
   },
 
   computed: {
@@ -54,5 +54,14 @@ export default Vue.extend({
     componentSlots(): FilterField['componentSlots'] {
       return this.field.componentSlots || {}
     },
+  },
+
+  created() {
+    if (isFunction(this.field.effect)) {
+      this.field.effect({
+        vm: this,
+        filterModel: this.lvStore.filterModel,
+      })
+    }
   },
 })
