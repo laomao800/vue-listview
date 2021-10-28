@@ -14,6 +14,12 @@ export default Vue.extend({
     field: { type: Object as PropType<FilterField> },
   },
 
+  data() {
+    return {
+      disabled: this.field.disabled,
+    }
+  },
+
   computed: {
     value: {
       get(): any {
@@ -44,7 +50,7 @@ export default Vue.extend({
       const componentProps = isPlainObject(this.field.componentProps)
         ? this.field.componentProps
         : {}
-      return merge(defaultProps, componentProps)
+      return merge({ disabled: this.disabled }, defaultProps, componentProps)
     },
     mergedEvents(): FilterField['componentEvents'] {
       return isPlainObject(this.field.componentEvents)

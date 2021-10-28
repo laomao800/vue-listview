@@ -21,7 +21,6 @@ export default {
     return {
       defaultProps: {
         placeholder: this.field.label,
-        disabled: this.field.disabled,
         clearable: true,
         style: { width: '180px' },
         props: { expandTrigger: 'hover' },

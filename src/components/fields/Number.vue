@@ -14,7 +14,6 @@ export default {
     return {
       defaultProps: {
         placeholder: this.field.label,
-        disabled: this.field.disabled,
         controlsPosition: 'right',
         style: { width: '100px' },
       },

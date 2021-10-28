@@ -13,7 +13,6 @@ export default {
   data() {
     return {
       defaultProps: {
-        disabled: this.field.disabled,
         clearable: true,
         style: { width: '360px' },
         type: 'datetimerange',
