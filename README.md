@@ -75,7 +75,7 @@ const Listview = createListview({
 Vue.use(Listview)
 ```
 
-详细说明及支持配置可查看 [create](docs/create.md) 章节
+详细说明及支持配置可查看 [create](docs/dev/create.md) 章节
 
 ### UMD
 
