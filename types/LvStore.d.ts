@@ -8,7 +8,7 @@ export interface LvStore {
   pressEnterSearch: boolean
   filterModel: Record<string, any>
   $rootEmitProxy: (event: string, ...args: any[]) => void
-  search: (keepInPage = false) => Promise<>
+  search: (keepInPage?: boolean) => Promise<void>
 
   // layout
   contentHeight: number
