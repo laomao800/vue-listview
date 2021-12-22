@@ -59,18 +59,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Cache yarn modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-yarn-modules
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+      - uses: c-hive/gha-yarn-cache@v2
 
       - name: Build the code
-        run: yarn build
+        run: |
+          yarn
+          yarn build
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
