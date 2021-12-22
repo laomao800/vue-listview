@@ -1,4 +1,4 @@
-/*! Vue Listview v2.0.0-beta.5 */
+/*! Vue Listview v2.0.0 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

@@ -1,4 +1,4 @@
-/*! Vue Listview v2.0.0-beta.5 */
+/*! Vue Listview v2.0.0 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("vue"));

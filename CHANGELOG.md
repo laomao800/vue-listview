@@ -1,3 +1,12 @@
+# [2.0.0](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.5...v2.0.0) (2021-12-22)
+
+
+### Bug Fixes
+
+* type fix ([29ceeb0](https://github.com/laomao800/vue-listview/commit/29ceeb0d27ce63015ad2c9ac68db4b6cd435c83c))
+
+
+
 # [2.0.0-beta.5](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-10-28)
 
 
