@@ -1,4 +1,4 @@
-import { Component } from 'vue'
+import { Component, VueConstructor } from 'vue'
 import { ListviewProps } from './Props'
 
 type AllowPresetProps =
@@ -26,4 +26,4 @@ type CreateOptions = Partial<Pick<ListviewProps, AllowPresetProps>> & {
   replaceComponents?: Record<string, Component>
 }
 
-export type CreateFunction = (options?: CreateOptions) => Component
+export type CreateFunction = (options?: CreateOptions) => VueConstructor
