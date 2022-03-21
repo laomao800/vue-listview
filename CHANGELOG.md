@@ -1,3 +1,13 @@
+## [2.0.1](https://github.com/laomao800/vue-listview/compare/v2.0.0...v2.0.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* 修正导出 amd 包缺失 vue 依赖项 ([4de5caa](https://github.com/laomao800/vue-listview/commit/4de5caa55936df6aa619a9d464aabe4b010e4882))
+* type fix ([844b320](https://github.com/laomao800/vue-listview/commit/844b3209c6bd19934cc28e57b784c0fdbae31f29))
+
+
+
 # [2.0.0](https://github.com/laomao800/vue-listview/compare/v2.0.0-beta.5...v2.0.0) (2021-12-22)
 
 
