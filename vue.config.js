@@ -25,23 +25,35 @@ module.exports = {
   },
 
   configureWebpack: (config) => {
+    config.externals = config.externals || {}
+
+    config.externals = [
+      config.externals,
+      {
+        vue: {
+          root: 'Vue',
+          amd: 'vue',
+          commonjs: 'vue',
+          commonjs2: 'vue',
+        },
+      },
+    ]
+
     if (process.env.BUILD_MODE === 'component') {
       const nodeExternals = require('webpack-node-externals')
-      config.externals = config.externals || {}
-      config.externals = [
-        config.externals,
-        {
-          'element-ui': {
-            root: 'ELEMENT',
-            commonjs: 'element-ui',
-            commonjs2: 'element-ui',
-            amd: 'element-ui',
-          },
+      config.externals.push({
+        'element-ui': {
+          root: 'ELEMENT',
+          commonjs: 'element-ui',
+          commonjs2: 'element-ui',
+          amd: 'element-ui',
         },
+      })
+      config.externals.push(
         nodeExternals({
           allowlist: [/^@babel/, /current-script-polyfill/],
-        }),
-      ]
+        })
+      )
     }
 
     const version =
