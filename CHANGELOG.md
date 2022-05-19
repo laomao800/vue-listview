@@ -1,3 +1,13 @@
+## [2.0.2](https://github.com/laomao800/vue-listview/compare/v2.0.1...v2.0.2) (2022-05-19)
+
+
+### Bug Fixes
+
+* 修正 .el-table th 样式覆盖权重 ([6f0efad](https://github.com/laomao800/vue-listview/commit/6f0efadf18c8c119741c75c76fd418b45ad56346))
+* type fix ([a7c707c](https://github.com/laomao800/vue-listview/commit/a7c707c6e090d33c1308986d4d59f83a520963f7))
+
+
+
 ## [2.0.1](https://github.com/laomao800/vue-listview/compare/v2.0.0...v2.0.1) (2022-03-21)
 
 
