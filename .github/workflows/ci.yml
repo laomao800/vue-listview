@@ -15,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Yarn install
         run: yarn
@@ -57,9 +58,11 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Build the code
         run: |

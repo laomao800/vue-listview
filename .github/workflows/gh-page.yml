@@ -36,11 +36,13 @@ jobs:
       - run: echo TARGET_VERSION_PATH is ${{ env.TARGET_VERSION_PATH }}
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
 
-      - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Yarn install
         run: yarn
