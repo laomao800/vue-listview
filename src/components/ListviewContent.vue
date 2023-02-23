@@ -74,6 +74,7 @@ import storeProviderMixin from '@/mixins/storeProviderMixin'
 import { nodeParents } from '@/utils'
 import VNode from '@/components/VNode'
 import MessageBlock from '@/components/MessageBlock.vue'
+import { TableColumn } from '~/types'
 
 export default Vue.extend({
   name: 'ListviewContent',
@@ -191,10 +192,13 @@ export default Vue.extend({
     /**
      * tableColumns 转换为 el-table-column ，支持 children 属性多级列配置
      */
-    renderTableColumn(tableColumn: any) {
-      const _createColumn = (column: any) => {
+    renderTableColumn(tableColumn: TableColumn) {
+      const _createColumn = (column: TableColumn) => {
         const { render, children, ...props } = column
-        const VNodeData: VNodeData = { props }
+        const VNodeData: VNodeData = {
+          props,
+          key: props.columnKey || props.prop,
+        }
         if (render) {
           VNodeData.scopedSlots = {
             default: render,

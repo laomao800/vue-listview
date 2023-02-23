@@ -1,6 +1,8 @@
+import { ElTableColumn } from 'element-ui/types/table-column'
 import { VNode } from 'vue'
+import { TableColumn } from './TableColumn'
 
-export interface TableColumn {
+interface LvTableColumn {
   /* 显示于列头文本 */
   label?: string
 
@@ -33,3 +35,5 @@ export interface TableColumn {
   /** 子列 */
   children?: TableColumn
 }
+
+type TableColumn = LvTableColumn & Partial<ElTableColumn>
