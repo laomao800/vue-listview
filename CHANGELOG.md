@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/laomao800/vue-listview/compare/v2.0.2...v2.1.0) (2023-02-23)
+
+
+### Bug Fixes
+
+* 修正 `tableColumns` 更新时 `<el-table-column />` 无 key 导致更新错误 ([f11e671](https://github.com/laomao800/vue-listview/commit/f11e6719ba44045d79cbeb64e83cba84bbe24e41))
+
+
+
 ## [2.0.2](https://github.com/laomao800/vue-listview/compare/v2.0.1...v2.0.2) (2022-05-19)
 
 
