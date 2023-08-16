@@ -1,3 +1,12 @@
+## [2.1.1](https://github.com/laomao800/vue-listview/compare/v2.1.0...v2.1.1) (2023-08-16)
+
+
+### Bug Fixes
+
+* 入口组件暴露 content 及 footer refs ([0e3a431](https://github.com/laomao800/vue-listview/commit/0e3a431b3807b793681309b15222b7de10558140))
+
+
+
 # [2.1.0](https://github.com/laomao800/vue-listview/compare/v2.0.2...v2.1.0) (2023-02-23)
 
 

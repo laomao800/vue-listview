@@ -1,4 +1,4 @@
-/*! Vue Listview v2.1.0 */
+/*! Vue Listview v2.1.1 */
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1598,19 +1598,19 @@ var create_create = function create() {
 // EXTERNAL MODULE: ./src/Listview/style.less
 var style = __webpack_require__("c4e9");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"320d880c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/Listview/index.vue?vue&type=template&id=fcbf0c26&
-var Listviewvue_type_template_id_fcbf0c26_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"320d880c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/Listview/index.vue?vue&type=template&id=1959fb56&
+var Listviewvue_type_template_id_1959fb56_render = function () {
 var this$1 = this;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('StoreProvider',_vm._g(_vm._b({ref:"storeProvider",on:{"root-emit":function () {
 	var args = [], len = arguments.length;
 	while ( len-- ) args[ len ] = arguments[ len ];
 
 	return _vm.$emit.bind(this$1).apply(void 0, args);
-}}},'StoreProvider',_vm.mergedAttrs,false),_vm.$listeners),[_c('ListviewLayout',_vm._b({ref:"layout",on:{"update-layout":_vm._handleUpdateLayout},scopedSlots:_vm._u([{key:"header",fn:function(){return [_c(_vm._header,_vm._b({tag:"component"},'component',_vm.mergedAttrs,false))]},proxy:true},{key:"filterbar",fn:function(){return [_c(_vm._filterbar,_vm._b({ref:"filterbar",tag:"component",on:{"fold-change":_vm._handleFilterFold}},'component',_vm.mergedAttrs,false),[_vm._t("filterbar-top",null,{"slot":"filterbar-top"}),_vm._t("filterbar-bottom",null,{"slot":"filterbar-bottom"}),_vm._t("filterbar-left",null,{"slot":"filterbar-left"}),_vm._t("filterbar-right",null,{"slot":"filterbar-right"}),_vm._t("prepend-more",null,{"slot":"prepend-more"}),_vm._t("append-more",null,{"slot":"append-more"}),_vm._t("prepend-submit",null,{"slot":"prepend-submit"}),_vm._t("append-submit",null,{"slot":"append-submit"})],2)]},proxy:true},{key:"content",fn:function(props){return [_vm._t("default",[_c(_vm._content,_vm._b({tag:"component"},'component',_vm.mergedAttrs,false))],null,props)]}},{key:"footer",fn:function(){return [_c(_vm._footer,_vm._b({tag:"component"},'component',_vm.mergedAttrs,false),[_vm._t("footer-left",null,{"slot":"footer-left"}),_vm._t("footer-center",null,{"slot":"footer-center"}),_vm._t("footer-right",null,{"slot":"footer-right"})],2)]},proxy:true}],null,true)},'ListviewLayout',_vm.mergedAttrs,false))],1)}
+}}},'StoreProvider',_vm.mergedAttrs,false),_vm.$listeners),[_c('ListviewLayout',_vm._b({ref:"layout",on:{"update-layout":_vm._handleUpdateLayout},scopedSlots:_vm._u([{key:"header",fn:function(){return [_c(_vm._header,_vm._b({tag:"component"},'component',_vm.mergedAttrs,false))]},proxy:true},{key:"filterbar",fn:function(){return [_c(_vm._filterbar,_vm._b({ref:"filterbar",tag:"component",on:{"fold-change":_vm._handleFilterFold}},'component',_vm.mergedAttrs,false),[_vm._t("filterbar-top",null,{"slot":"filterbar-top"}),_vm._t("filterbar-bottom",null,{"slot":"filterbar-bottom"}),_vm._t("filterbar-left",null,{"slot":"filterbar-left"}),_vm._t("filterbar-right",null,{"slot":"filterbar-right"}),_vm._t("prepend-more",null,{"slot":"prepend-more"}),_vm._t("append-more",null,{"slot":"append-more"}),_vm._t("prepend-submit",null,{"slot":"prepend-submit"}),_vm._t("append-submit",null,{"slot":"append-submit"})],2)]},proxy:true},{key:"content",fn:function(props){return [_vm._t("default",[_c(_vm._content,_vm._b({ref:"content",tag:"component"},'component',_vm.mergedAttrs,false))],null,props)]}},{key:"footer",fn:function(){return [_c(_vm._footer,_vm._b({ref:"footer",tag:"component"},'component',_vm.mergedAttrs,false),[_vm._t("footer-left",null,{"slot":"footer-left"}),_vm._t("footer-center",null,{"slot":"footer-center"}),_vm._t("footer-right",null,{"slot":"footer-right"})],2)]},proxy:true}],null,true)},'ListviewLayout',_vm.mergedAttrs,false))],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/Listview/index.vue?vue&type=template&id=fcbf0c26&
+// CONCATENATED MODULE: ./src/Listview/index.vue?vue&type=template&id=1959fb56&
 
 // EXTERNAL MODULE: external "core-js/modules/es.array.filter.js"
 var es_array_filter_js_ = __webpack_require__("1a89");
@@ -5024,7 +5024,7 @@ var ListviewContentFooter_component = normalizeComponent(
 
 var Listview_component = normalizeComponent(
   src_Listviewvue_type_script_lang_tsx_,
-  Listviewvue_type_template_id_fcbf0c26_render,
+  Listviewvue_type_template_id_1959fb56_render,
   staticRenderFns,
   false,
   null,
