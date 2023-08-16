@@ -32,11 +32,11 @@
       </template>
       <template #content="props">
         <slot v-bind="props">
-          <component :is="_content" v-bind="mergedAttrs" />
+          <component ref="content" :is="_content" v-bind="mergedAttrs" />
         </slot>
       </template>
       <template #footer>
-        <component :is="_footer" v-bind="mergedAttrs">
+        <component ref="footer" :is="_footer" v-bind="mergedAttrs">
           <slot slot="footer-left" name="footer-left" />
           <slot slot="footer-center" name="footer-center" />
           <slot slot="footer-right" name="footer-right" />
