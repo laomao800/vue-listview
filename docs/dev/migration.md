@@ -11,6 +11,7 @@
 - `validateResponse` 默认为 `null`
 - `resolveResponseErrorMessage` 默认为 `null`
 - `filterFields` 取消 `get` 属性，建议使用 `transformRequestData` 统一管理数据转换
+- `contentDataMap` 默认值修改为 `{ items: 'result.items', total: 'result.total' }`
 
 ### Slots
 

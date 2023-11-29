@@ -247,7 +247,7 @@ sidebarDepth: 2
 ### contentDataMap
 
 - type: `Object`
-- default: `{ items: 'result.items', total: 'result.total_count' }`
+- default: `{ items: 'result.items', total: 'result.total' }`
 
 数据接口响应内容属性映射。可以直接配置各属性相对于接口响应数据的取值路径来直接映射返回值。默认会有表格视图所需的 2 个属性映射 `items` （表格数据） 和 `total` 用于分页组件。
 
